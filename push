@@ -10,3 +10,5 @@ fi
 git push
 
 rsync -avxLH ./ wstein@sage.math.washington.edu:www/books/ant/
+
+ssh wstein@sage.math.washington.edu "cd www/books/ant; latex2html ant >/dev/null&"
