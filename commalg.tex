@@ -40,7 +40,7 @@ by~$1$.
 \ithm{structure of abelian groups}
 Let $G$ be a finitely generated abelian group.  Then there is an isomorphism
 $$
-  G \isom (\Z/n_1\Z) \oplus (\Z/n_2\Z) \oplus \cdots \oplus
+  G \ncisom (\Z/n_1\Z) \oplus (\Z/n_2\Z) \oplus \cdots \oplus
     (\Z/n_s\Z) \oplus \Z^{r},
 $$
 where $n_1>1$ and $n_1\mid{}n_2\mid{}\cdots \mid{}n_s$. 
@@ -56,7 +56,7 @@ integers.  Next we describe how to use row and column operations over
 the integers to show that every matrix over the integers is equivalent
 to one in a canonical diagonal form, called the Smith normal form.  We
 obtain a proof of the theorem by reinterpreting \ii{Smith normal form} in
-terms of groups.  Finally, we observe by a simple argument that
+terms of groups.  Finally, we observe that
 the representation in the theorem is necessarily unique. 
 
 \begin{proposition}\label{prop:subfin}\iprop{subgroup of free group}
@@ -64,17 +64,17 @@ If $H$ is a subgroup of a finitely generated abelian group then $H$
 is finitely generated.
 \end{proposition}
 The key reason that this is true is that~$G$ is a finitely generated
-module over the principal ideal domain $\Z$.  We will give a complete
-proof of a beautiful generalization of Proposition~\ref{prop:subfin}
-in the context of Noetherian rings in Section~\ref{sec:noetherian},
-but will not prove this proposition here.
+module over the principal ideal domain $\Z$.  We defer the
+proof of Proposition~\ref{prop:subfin} to Section~\ref{sec:noetherian},
+where we will give a complete proof of a beautiful generalization of 
+it in the context of Noetherian rings.
 
 \begin{corollary}\label{cor:presentation}\icor{group as quotient of free
 groups}
 Suppose $G$ is a finitely generated abelian group.  Then there are
 finitely generated free abelian groups $F_1$ and $F_2$ and a homomorphism
 $\psi:F_2 \to F_1$ such that
-$G \isom F_1/\psi(F_2)$.
+$G \ncisom F_1/\psi(F_2)$.
 \end{corollary}
 \begin{proof}
   Let $x_1,\ldots, x_m$ be generators for $G$.  Let $F_1=\Z^m$ and let
@@ -87,7 +87,7 @@ $G \isom F_1/\psi(F_2)$.
 \end{proof}
 
 Suppose $G$ is a nonzero finitely generated abelian group.  By the
-corollary, there are free abelian groups $F_1$ and $F_2$ and a
+corollary, there are free abelian groups $F_1$ and $F_2$ and there is a
 homomorphism $\psi:F_2 \to F_1$ such that $G\ncisom F_1/\psi(F_2)$.
 Choosing a basis for $F_1$ and $F_2$, we obtain isomorphisms
 $F_1\ncisom \Z^n$ and $F_2\ncisom \Z^m$ for integers $n$ and $m$.  We
@@ -123,7 +123,7 @@ structure of the cokernel of $A$ will be easy to understand.
 Suppose~$A$ is an $n\times n$ integer matrix.  Then there exist
 invertible integer matrices $P$ and $Q$ such that $A'=PAQ$ is a
 diagonal matrix with entries $n_1, n_2,\ldots, n_s,0,\ldots,0$, where
-$s\geq 0$, $n_1>1$ and $n_1\mid n_2 \mid{} \ldots \mid{} n_s$.  
+$s\geq 0$, $n_1>1$ and $n_1\mid n_2 \mid{} \cdots \mid{} n_s$.  
 Here $P$ and $Q$ are invertible as integer matrices, so $\det(P)$
 and $\det(Q)$ are $\pm 1$.
 The matrix $A'$ is called

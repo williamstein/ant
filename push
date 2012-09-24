@@ -2,11 +2,6 @@
 
 
 git commit -a -v
-
-if [ $? -ne 0 ]; then
-    exit 1
-fi
-
 git push
 
 rsync -avxLH ./ wstein@sage.math.washington.edu:www/books/ant/
