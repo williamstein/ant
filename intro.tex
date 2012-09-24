@@ -1,0 +1,171 @@
+\chapter{Introduction}
+
+\section{Mathematical background}
+In addition to general mathematical maturity, 
+this book assumes you have the following background:
+\begin{itemize}\setlength{\itemsep}{-.7ex}
+\item Basics of finite group theory
+\item Commutative rings, ideals, quotient rings
+\item Some elementary number theory
+\item Basic Galois theory of fields
+\item Point set topology
+\item Basic of topological rings, groups, and measure theory
+\end{itemize}
+For example, if you have never worked with finite groups before, you
+should read another book first. If you haven't seen much elementary
+ring theory, there is still hope, but you will have to do some
+additional reading and exercises.  We will briefly review the basics of
+the Galois theory of number fields.
+
+Some of the homework problems involve using a computer, but there
+are examples which you can build on.  We will not assume that you have
+a programming background or know much about algorithms. Most
+of the book uses Sage {\tt http://sagemath.org}, which is
+free open source mathematical software.  The following is an example
+Sage session:
+\begin{verbatim}
+sage: 2 + 2
+4 
+sage: k.<a> = NumberField(x^2 + 1); k
+Number Field in a with defining polynomial x^2 + 1
+\end{verbatim}
+
+\section{What is algebraic number theory?}
+A number field $K$ is a finite degree algebraic extension of the rational
+numbers $\Q$.  The primitive element theorem from Galois theory
+asserts that every such extension can be represented as the set of all
+polynomials of degree at most $d = [K:\Q] = \dim_{\Q} K$ 
+in a single algebraic number $\alpha$:
+$$
+ K = \Q(\alpha) = \left\{ \sum_{n=0}^{m} a_n \alpha^n : a_n\in\Q \right\}.
+$$ 
+Here $\alpha$ is a root of a polynomial with coefficients in $\Q$.
+\begin{comment}
+Note that
+$\Q(\alpha)$ is non-canonically isomorphic to $\Q[x]/(f)$, where $f$
+is the minimal polynomial of~$\alpha$.  The isomorphism is induced by
+the homomorphism $\Q[x]\to\Q(\alpha)$ that sends~$x$ to~$\alpha$,
+which has kernel~$(f)$.  It is not canonical, since $\Q(\alpha)$ could
+have nontrivial automorphisms.  For example, if $\alpha=\sqrt{2}$, then
+$\Q(\sqrt{2})$ is isomorphic as a field to $\Q(-\sqrt{2})$ via
+$\sqrt{2}\mapsto -\sqrt{2}$.  There are two isomorphisms
+$\Q[x]/(x^2-2)\to \Q(\sqrt{2})$.
+\end{comment}
+
+\defn{Algebraic number theory} involves using techniques from (mostly
+commutative) algebra and finite group theory to gain a deeper
+understanding of the arithmetic of number fields and related objects
+(e.g., functions fields, elliptic curves, etc.).  The main objects that we
+study in this book are number fields, rings of integers
+of number fields, unit groups, ideal class groups, norms, traces,
+discriminants, prime ideals, Hilbert and other class fields and
+associated reciprocity laws, zeta and $L$-functions, and algorithms
+for computing each of the above.
+
+\subsection{Topics in this book}
+These are some of the main topics that are discussed in this book:
+\begin{itemize}\setlength{\itemsep}{-.7ex}
+\item Rings of integers of number fields
+\item Unique factorization of ideals in Dedekind domains
+\item Structure of the group of units of the ring of integers
+\item Finiteness of the group of equivalence classes
+of ideals of the ring of integers (the ``class group'')
+\item Decomposition and inertia groups, Frobenius elements
+\item Ramification
+\item Discriminant and different
+\item Quadratic and biquadratic fields
+\item Cyclotomic fields (and applications)
+\item How to use a computer to compute with many of the above 
+objects (both algorithms and actual use of software).
+\item Valuations on fields
+\item Completions ($p$-adic fields)
+\item Adeles and Ideles
+\end{itemize}
+Note that we will not do anything nontrivial with zeta functions or
+$L$-functions. \edit{This is for another course -- add this to the
+book later.}
+
+
+
+\section{Some applications of algebraic number theory}
+The following examples illustrate that learning algebraic number
+theory as soon as possible is an excellent investment of your time.
+
+\begin{enumerate}
+\item {\bf Integer factorization} using the number field sieve.  The
+number field sieve is the asymptotically fastest known algorithm for
+factoring general large integers (that don't have too special of a
+form).  Recently, in December 2003, the number field sieve was used to
+factor the RSA-576 \$10000 challenge:
+$$
+\begin{array}{l}
+1881988129206079638386972394616504398071635633794173827007\ldots\\
+\ldots6335642298885971523466548531906060650474304531738801130339\ldots\\
+\ldots6716199692321205734031879550656996221305168759307650257059\\
+=39807508642406493739712550055038649119906436234252670840\ldots\\
+\hspace{1em}\ldots6385189575946388957261768583317\\
+\hspace{2em}\times
+47277214610743530253622307197304822463291469530209711\ldots\\
+\hspace{3em}\ldots6459852171130520711256363590397527
+\end{array}
+$$
+(The $\ldots$ indicates that the newline should be removed, not that
+there are missing digits.)
+
+\item {\bf Primality test:} Agrawal and his students Saxena and Kayal from
+India found in 2002 the first ever deterministic
+polynomial-time (in the number of digits) primality test.  There
+methods involve arithmetic in quotients of $(\Z/n\Z)[x]$, which are
+best understood in the context of algebraic number theory.  For
+example, Lenstra, Bernstein, and others have done that and improved
+the algorithm significantly.
+
+\item {\bf Deeper point of view} on questions in number theory:
+\begin{enumerate}
+\item Pell's Equation ($x^2-dy^2=1$) $\Longrightarrow$ Units in real quadratic fields $\Longrightarrow$ Unit groups in number fields
+\item Diophantine Equations $\Longrightarrow$ For which $n$ does $x^n+y^n=z^n$ have a 
+nontrivial solution?
+\item Integer Factorization $\Longrightarrow$ Factorization of ideals
+\item Riemann Hypothesis $\Longrightarrow$ Generalized Riemann Hypothesis
+\item Deeper proof of Gauss's quadratic reciprocity law in terms of arithmetic
+of cyclotomic fields $\Q(e^{2\pi i/n})$, which leads to class field theory.
+\end{enumerate}
+\item Wiles's proof of {\bf Fermat's Last Theorem}, i.e., that the
+equation $x^n+y^n=z^n$ has no solutions with $x,y,z,n$ all positive
+integers and $n\geq 3$, uses methods from
+algebraic number theory extensively, in addition to many other deep
+techniques.  Attempts to prove Fermat's Last Theorem long ago were
+hugely influential in the development of algebraic number theory
+by Dedekind, Hilbert, Kummer, Kronecker, and others.
+\item {\bf Arithmetic geometry:} This is a huge field that studies
+solutions to polynomial equations that lie in arithmetically
+interesting rings, such as the integers or number fields.  A famous
+major triumph of arithmetic geometry is Faltings's proof of Mordell's
+Conjecture.
+\begin{theorem}[Faltings] \label{thm:faltings}\ithm{Faltings}
+Let $X$ be a nonsingular plane algebraic curve over a number
+field $K$.  Assume that the manifold $X(\C)$ of complex solutions to
+$X$ has genus at least $2$ (i.e., $X(\C)$ is topologically a donut
+with two holes).  Then the set $X(K)$ of points on $X$ with
+coordinates in~$K$ is finite.
+\end{theorem}  
+For example, Theorem~\ref{thm:faltings} implies that for any $n\geq 4$
+and any number field~$K$, there are only finitely many solutions
+in~$K$ to $x^n+y^n=1$.  
+
+A major open problem in arithmetic geometry is the {\em Birch
+  and Swinnerton-Dyer conjecture}. 
+An \defn{elliptic curves} $E$ is an algebraic curve with at least one point
+with coordinates in $K$ such that the set of complex points
+$E(\C)$ is a topological torus.
+The Birch and Swinnerton-Dyer conjecture gives a
+criterion for whether or not $E(K)$ is infinite in
+terms of analytic properties of the $L$-function $L(E,s)$.
+
+\end{enumerate}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "ant"
+%%% End: 

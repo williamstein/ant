@@ -1,0 +1,14 @@
+*.aux
+*~
+*.log
+*.toc
+*.bbl
+*.blg
+*.dvi
+*.out
+*.idx
+*.tar.bz2
+auto/
+.DS_Store
+.hg*
+sage_notebook

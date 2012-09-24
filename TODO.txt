@@ -1,0 +1,12 @@
+TYPOS and Suggestins from David Corwin:
+
+Dear William Stein,
+ 
+Thank you for providing your textbook online. I like it because it provides intuitive introductions to more advanced topics such as quadratic forms, ideal class groups, and elliptic curves (and the relation between the first two) without getting too advanced. I find that reading such a text makes it all the much easier when one actually proceeds to learn the material in a more advanced course.
+ 
+I have a couple corrections/questions/suggestions to make. First, when defining the discriminant of a number field, I notice the notation ' symbol appears next to a gamma without having been introduced. I believe this means the conjugate?
+ 
+Second, in example 9.5.11, you mention Q[sqrt(-20)], but it doesn't make sense why you don't just write Q[sqrt(-5)]. The discriminant of this field is -5 since 5=1 mod 4. And it seems like, if a field has discriminant d, then the correspondence is with the quadratic forms of discriminant d. But on Theorem 9.4.4, it says that -20, not -5, has class number 2, so I'm a bit confused?
+ 
+Finally, my main suggestion is simply to add a little more material. I think the intuitive style makes the content very understandable, so for example: What about ideal class groups for higher dimensional number fields? What is the connection to Galois theory? Maybe a little more on modular forms, such as their connection to quadratic forms (which makes a lot of sense given that you introduced the action of the modular group on quadratic forms). Also, maybe something about analytic number theory or ideal density might be nice. One other suggestion is that the "heuristic argument" be moved closer to the beginning of the chapter on computing with elliptic curves.
+ 

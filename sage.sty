@@ -1,0 +1,43 @@
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\ProvidesPackage{sage}
+             [1998/01/11 LaTeX package (SAGE markup)]
+
+% This sets up the {verbatim} environment to be indented and a minipage,
+% and to have all the other mostly nice properties that we want for
+% code samples.
+
+\let\py@OldVerbatim=\verbatim
+\let\py@OldEndVerbatim=\endverbatim
+\RequirePackage{verbatim}
+\let\py@OldVerbatimInput=\verbatiminput
+
+\RequirePackage{color}
+\definecolor{hue}{rgb}{.202, .602, .58}
+\definecolor{red}{rgb}{.902, .02, .08}
+\definecolor{green}{rgb}{.02, .902, .08}
+\definecolor{blue}{rgb}{.02, .02, .508}
+\definecolor{orange}{rgb}{.902, .502, .08}
+\definecolor{black}{rgb}{0,0, 1}
+
+
+
+% Variable used by begin code command
+\newlength{\py@codewidth}
+
+\renewcommand{\verbatim}{%
+  \setlength{\parindent}{1cm}%
+  % Calculate the text width for the minipage:
+  \setlength{\py@codewidth}{\linewidth}%
+  \addtolength{\py@codewidth}{-\parindent}%
+  %
+  \par\indent%
+  \begin{minipage}[t]{\py@codewidth}%
+    \small\color{blue}%   % not for the printed book
+    \py@OldVerbatim%
+}
+\renewcommand{\endverbatim}{%
+    \py@OldEndVerbatim%
+  \end{minipage}%
+}
+
+

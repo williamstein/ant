@@ -1,0 +1,74 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Copyright: William Stein, 2007.
+%%
+%% License: Creative Commons Attribution-Share Alike 3.0 License
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt]{book}
+
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage[all]{xy}
+\usepackage{sage}
+
+\bibliographystyle{amsalpha}
+\input{macros}
+\hoffset=-0.05\textwidth
+\textwidth=1.1\textwidth
+\voffset=-0.05\textheight
+\textheight=1.1\textheight
+\makeindex
+\renewcommand{\edit}[1]{}
+\newcommand{\zmod}[1]{{\Z/#1\Z{}}}
+
+\title{\Huge\bf\sc Algebraic Number Theory,\\a Computational Approach}
+\author{William Stein}
+
+
+\begin{document}
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+
+\include{preface}
+\include{intro}
+
+\part{Algebraic Number Fields}
+
+\include{commalg}
+\include{unique}
+%\include{computing}
+\include{factoring}
+\include{crt}
+\include{disc}
+\include{classgroup}
+\include{dirichlet}
+\include{decomp}
+\include{galrep}
+\include{cohomology}
+\include{weakmw}
+\include{bsd}
+
+\part{Adelic Viewpoint}
+
+\include{valuations}
+\include{topology}
+\include{adics}
+\include{normed}
+\include{extval}
+\include{adeles}
+\include{ideles}
+
+
+\include{ex1}
+\include{ex2}
+
+\bibliography{biblio}
+\label{page:end}
+
+\newcommand{\nn}[1]{{\bf #1}}
+%\printindex
+
+\end{document}
+

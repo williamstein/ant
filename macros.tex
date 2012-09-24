@@ -1,0 +1,488 @@
+ % macros.tex
+%\usepackage[active]{srcltx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+
+\newcommand{\absval}[1]{\left\|#1\right\|}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\absspc}{\abs{\,\cdot\,}}
+\newcommand{\norm}[1]{\left\|#1\right\|}
+\newcommand{\normspc}{\norm{\,\cdot\,}}
+\renewcommand{\P}{\mathfrak{P}}
+\DeclareMathOperator{\gc}{gc}
+\DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\Span}{Span}
+\newcommand{\kr}[2]{\left(\frac{#1}{#2}\right)}
+\usepackage{xspace}  % to allow for text macros that don't eat space 
+\newcommand{\SAGE}{{\sf SAGE}\xspace}
+\newcommand{\sage}{\SAGE}
+
+
+\newcommand{\marginalfootnote}[1]{%
+   \footnote{#1}
+   \marginpar{\hfill {\sf\thefootnote}}%
+}
+\newcommand{\edit}[1]{\marginalfootnote{#1}}
+
+\author{William~A. Stein}
+
+
+\newcommand{\myhead}[3]{
+\par\noindent
+{Version #2}
+\vspace{10ex}
+\par\noindent
+{\bf \LARGE #1}\\
+\vspace{3ex}
+\par\noindent
+{\large W.\thinspace{}A. Stein}\\
+{\small Department of Mathematics, Harvard University}\vspace{1ex}\\
+#3     
+\vspace{2ex}\par
+}
+
+\newcommand{\myheadauth}[3]{
+\par\noindent
+{Version #2}
+\vspace{10ex}
+\par\noindent
+{\bf \LARGE #1}\\
+\vspace{3ex}
+\par\noindent
+#3     
+\vspace{5ex}\par
+}
+
+
+\newcommand{\gzero}{\Gamma_0(N)}
+\newcommand{\esM}{\overline{\sM}}
+\newcommand{\sM}{\boldsymbol{\mathcal{M}}}
+\newcommand{\sS}{\boldsymbol{\mathcal{S}}}
+\newcommand{\sB}{\boldsymbol{\mathcal{B}}}       
+\newcommand{\eE}{\mathbf{E}}
+\newcommand{\Adual}{A^{\vee}}
+\newcommand{\Bdual}{B^{\vee}}
+
+%\newcommand{\defn}[1]{{\em #1}}
+\newcommand{\solution}[1]{\vspace{1em}%
+  \par\noindent{\bf Solution #1.} }
+\newcommand{\todo}[1]{\noindent$\bullet$ {\small \textsf{#1}} $\bullet$\\}
+\newcommand{\done}[1]{\noindent {\small \textsf{Done: #1}}\\}
+\newcommand{\danger}[1]{\marginpar{\small \textsl{#1}}}
+\renewcommand{\div}{\mbox{\rm div}}
+\DeclareMathOperator{\inff}{inf}
+\renewcommand{\inf}{\inff}
+\DeclareMathOperator{\chr}{char}
+\DeclareMathOperator{\Disc}{Disc}
+\DeclareMathOperator{\ind}{ind}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\oo}{\infty}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\cores}{cores}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\image}{image}
+\DeclareMathOperator{\prt}{part}
+\DeclareMathOperator{\proj}{proj}
+\DeclareMathOperator{\Br}{Br}
+\DeclareMathOperator{\Ann}{Ann}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Eis}{Eis}
+\newcommand{\unity}{\mathbf{1}}
+\DeclareMathOperator{\Pic}{Pic}
+\DeclareMathOperator{\Vol}{Vol}
+\DeclareMathOperator{\Vis}{Vis}
+\DeclareMathOperator{\Reg}{Reg}
+%\DeclareMathOperator{\myRes}{Res}
+%\newcommand{\Res}{\myRes}
+\DeclareMathOperator{\Res}{Res}
+\newcommand{\an}{{\rm an}}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Sel}{Sel}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\BSD}{BSD}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\dz}{dz}
+%\DeclareMathOperator{\Re}{Re}
+\renewcommand{\Re}{\mbox{\rm Re}}
+%\DeclareMathOperator{\Im}{Im}
+\DeclareMathOperator{\Selmer}{Selmer}
+\newcommand{\pfSel}{\widehat{\Sel}}
+\newcommand{\qe}{\stackrel{\mbox{\tiny ?}}{=}}
+\newcommand{\isog}{\simeq}
+\newcommand{\e}{\mathbf{e}}
+\newcommand{\bN}{\mathbf{N}}
+
+% ---- SHA ----
+\DeclareFontEncoding{OT2}{}{} % to enable usage of cyrillic fonts
+  \newcommand{\textcyr}[1]{%
+    {\fontencoding{OT2}\fontfamily{wncyr}\fontseries{m}\fontshape{n}%
+     \selectfont #1}}
+\newcommand{\Sha}{{\mbox{\textcyr{Sh}}}}
+
+%\font\cyr=wncyr10 scaled \magstep 1
+%\font\cyr=wncyr10
+
+%\newcommand{\Sha}{{\cyr X}}
+\newcommand{\Shaan}{\Sha_{\mbox{\tiny \rm an}}}
+\newcommand{\TS}{Shafarevich-Tate group}
+
+\newcommand{\Gam}{\Gamma}
+\renewcommand{\Im}{\text{Im}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\E}{\mathcal{E}}
+\renewcommand{\L}{\mathcal{L}}
+\newcommand{\J}{\mathcal{J}}
+\DeclareMathOperator{\new}{new}
+\DeclareMathOperator{\Morph}{Morph}
+\DeclareMathOperator{\old}{old}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\Symb}{Symb}
+%\newcommand{\Sym}{\mathcal{S}{\rm ym}}
+\newcommand{\dw}{\delta(w)} 
+\newcommand{\dwh}{\widehat{\delta(w)}}      
+\newcommand{\dlwh}{\widehat{\delta_\l(w)}} 
+\newcommand{\dash}{-\!\!\!\!-\!\!\!\!-\!\!\!\!-} 
+\DeclareMathOperator{\tor}{tor}  
+\newcommand{\Frobl}{\Frob_{\ell}}
+\newcommand{\tE}{\tilde{E}}
+\renewcommand{\l}{\ell}
+\renewcommand{\t}{\tau}
+\DeclareMathOperator{\cond}{cond}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Div}{Div}
+\DeclareMathOperator{\Jac}{Jac}
+\DeclareMathOperator{\res}{res}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Coker}{Coker}
+\DeclareMathOperator{\sep}{sep}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\unr}{unr}
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\U}{\mathcal{U}}
+\newcommand{\Kbar}{\overline{K}}
+\newcommand{\Lbar}{\overline{L}}
+\newcommand{\gammabar}{\overline{\gamma}}
+\newcommand{\q}{\mathfrak{q}}
+\renewcommand{\star}{\times}
+\newcommand{\gM}{\mathfrak{M}}
+\newcommand{\gA}{\mathfrak{A}}
+\newcommand{\gP}{\mathfrak{P}}
+\newcommand{\bmu}{\boldsymbol{\mu}}
+\newcommand{\union}{\cup}
+\newcommand{\Tl}{T_{\ell}}
+\newcommand{\into}{\rightarrow}
+\newcommand{\onto}{\rightarrow\!\!\!\!\rightarrow}
+\newcommand{\intersect}{\cap}
+\newcommand{\meet}{\cap}
+\newcommand{\cross}{\times}
+\DeclareMathOperator{\md}{mod}
+\DeclareMathOperator{\toric}{toric}
+\DeclareMathOperator{\tors}{tors}
+\DeclareMathOperator{\Frac}{Frac}
+\DeclareMathOperator{\corank}{corank}
+\newcommand{\rb}{\overline{\rho}}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\xra}[1]{\xrightarrow{#1}}
+\newcommand{\hra}{\hookrightarrow}
+\newcommand{\la}{\leftarrow}
+\newcommand{\lra}{\longrightarrow}
+\newcommand{\riso}{\xrightarrow{\sim}}
+\newcommand{\da}{\downarrow}
+\newcommand{\ua}{\uparrow}
+\newcommand{\con}{\equiv}
+\newcommand{\Gm}{\mathbf{G}_m}
+\newcommand{\pni}{\par\noindent}
+\newcommand{\set}[1]{\{#1\}}
+\newcommand{\iv}{^{-1}}
+\newcommand{\alp}{\alpha}
+\newcommand{\bq}{\mathbf{q}}
+\newcommand{\cpp}{{\tt C++}}
+\newcommand{\tensor}{\otimes}
+\newcommand{\bg}{{\tt BruceGenus}}
+\newcommand{\abcd}[4]{\left(
+        \begin{smallmatrix}#1&#2\\#3&#4\end{smallmatrix}\right)}
+\newcommand{\mthree}[9]{\left(
+        \begin{matrix}#1&#2&#3\\#4&#5&#6\\#7&#8&#9
+        \end{matrix}\right)}
+\newcommand{\mtwo}[4]{\left(
+        \begin{matrix}#1&#2\\#3&#4
+        \end{matrix}\right)}
+\newcommand{\vtwo}[2]{\left(
+        \begin{matrix}#1\\#2
+        \end{matrix}\right)}
+\newcommand{\smallmtwo}[4]{\left(
+        \begin{smallmatrix}#1&#2\\#3&#4
+        \end{smallmatrix}\right)}
+\newcommand{\twopii}{2\pi{}i{}}  
+\newcommand{\eps}{\varepsilon}
+\newcommand{\vphi}{\varphi}
+\newcommand{\gp}{\mathfrak{p}}
+\newcommand{\W}{\mathcal{W}}
+\newcommand{\oz}{\overline{z}}
+\newcommand{\Zpstar}{\Zp^{\star}}
+\newcommand{\Zhat}{\widehat{\Z}}
+\newcommand{\Zbar}{\overline{\Z}}
+\newcommand{\Zl}{\Z_{\ell}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\GQ}{G_{\Q}}
+\newcommand{\R}{\mathbf{R}}
+\newcommand{\D}{{\mathbf D}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\Sbar}{\overline{S}}
+\newcommand{\K}{{\mathbf K}}
+\newcommand{\C}{\mathbf{C}}
+\newcommand{\Cp}{{\mathbf C}_p}
+\newcommand{\Sets}{\mbox{\rm\bf Sets}}
+\newcommand{\bcC}{\boldsymbol{\mathcal{C}}}
+%\renewcommand{\P}{\mathbf{P}}
+\newcommand{\Qbar}{\overline{\Q}}
+\newcommand{\kbar}{\overline{k}}
+\newcommand{\dual}{\bot}
+\newcommand{\T}{\mathbf{T}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cbT}{\mathbf{\mathcal{T}}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\ZZ}{\mathbf{Z}}
+\newcommand{\QQ}{\mathbf{Q}}
+\newcommand{\F}{\mathbf{F}}
+\newcommand{\Fl}{\F_{\ell}}
+\newcommand{\Fell}{\Fl}
+\newcommand{\Flbar}{\overline{\F}_{\ell}}
+\newcommand{\Flnu}{\F_{\ell^{\nu}}}
+\newcommand{\Fbar}{\overline{\F}}
+\newcommand{\Fpbar}{\overline{\F}_p}
+\newcommand{\fbar}{\overline{f}}
+\newcommand{\Qp}{\Q_p}
+\newcommand{\Ql}{\Q_{\ell}}
+\newcommand{\Qell}{\Q_{\ell}}
+\newcommand{\Qlbar}{\overline{\Q}_{\ell}}
+\newcommand{\Qlnr}{\Q_{\ell}^{\text{nr}}}
+\newcommand{\Qlur}{\Q_{\ell}^{\text{ur}}}
+\newcommand{\Qltm}{\Q_{\ell}^{\text{tame}}}
+\newcommand{\Qv}{\Q_v}
+\newcommand{\Qpbar}{\Qbar_p}
+\newcommand{\Zp}{\Z_p}
+\newcommand{\Fp}{\F_p}
+\newcommand{\Fq}{\F_q}
+\newcommand{\Fqbar}{\overline{\F}_q}
+\newcommand{\Ad}{Ad}
+\newcommand{\adz}{\Ad^0}
+\renewcommand{\O}{\mathcal{O}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\Og}{O_{\gamma}}
+\newcommand{\isom}{\cong}
+\newcommand{\ncisom}{\approx}   % noncanonical isomorphism
+\DeclareMathOperator{\ab}{ab}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Frob}{Frob}
+\DeclareMathOperator{\Fr}{Fr}
+\DeclareMathOperator{\Ver}{Ver}
+\DeclareMathOperator{\Norm}{Norm}
+\DeclareMathOperator{\disc}{disc}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\PSL}{PSL}
+\DeclareMathOperator{\PGL}{PGL}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\SO}{SO}
+\newcommand{\galq}{\Gal(\Qbar/\Q)}
+\newcommand{\rhobar}{\overline{\rho}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\et}{\text{\rm\'et}}
+
+\newcommand{\sltwoz}{\SL_2(\Z)}
+\newcommand{\sltwo}{\SL_2}
+\newcommand{\gltwoz}{\GL_2(\Z)}
+\newcommand{\mtwoz}{M_2(\Z)}
+\newcommand{\gltwoq}{\GL_2(\Q)}
+\newcommand{\gltwo}{\GL_2}
+\newcommand{\gln}{\GL_n}
+\newcommand{\psltwoz}{\PSL_2(\Z)}
+\newcommand{\psltwo}{\PSL_2}
+\newcommand{\h}{\mathfrak{h}}
+\renewcommand{\a}{\mathfrak{a}}
+\newcommand{\p}{\mathfrak{p}}
+\newcommand{\m}{\mathfrak{m}}
+\newcommand{\trho}{\tilde{\rho}}
+\newcommand{\rhol}{\rho_{\ell}}
+\newcommand{\rhoss}{\rho^{\text{ss}}}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\order}{order}
+\DeclareMathOperator{\ur}{ur}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\HH}{H}
+\renewcommand{\H}{\HH}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tor}{Tor}
+\newcommand{\smallzero}{\left(\begin{smallmatrix}0&0\\0&0
+                        \end{smallmatrix}\right)}
+\newcommand{\smallone}{\left(\begin{smallmatrix}1&0\\0&1
+                        \end{smallmatrix}\right)}
+
+\newcommand{\pari}{{\sc Pari}}
+\newcommand{\hecke}{{\sc Hecke}}
+\newcommand{\lidia}{{\sc LiDIA}}
+
+%%%% Theoremstyles
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{problem}[theorem]{Problem}
+
+\theoremstyle{remark}
+\newtheorem{goal}[theorem]{Goal}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{remarks}[theorem]{Remarks}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+
+% bulleted list environment
+\newenvironment{bulletlist}
+   {
+      \begin{list}
+         {$\bullet$}
+         {
+            \setlength{\itemsep}{.5ex}
+            \setlength{\parsep}{0ex}
+            \setlength{\parskip}{0ex}
+            \setlength{\topsep}{.5ex}
+         }
+   }
+   {
+      \end{list}
+   }
+%end newenvironment
+
+% bulleted list environment
+\newenvironment{dashlist}
+   {
+      \begin{list}
+         {---}
+         {
+            \setlength{\itemsep}{.5ex}
+            \setlength{\parsep}{0ex}
+            \setlength{\parskip}{0ex}
+            \setlength{\topsep}{.5ex}
+         }
+   }
+   {
+      \end{list}
+   }
+%end newenvironment
+
+% numbered list environment
+\newcounter{listnum}
+\newenvironment{numlist}
+   {
+      \begin{list}
+            {{\em \thelistnum.}}{
+            \usecounter{listnum}
+            \setlength{\itemsep}{.5ex}
+            \setlength{\parsep}{0ex}
+            \setlength{\parskip}{0ex}
+            \setlength{\topsep}{.5ex}
+         }
+   }
+   {
+      \end{list}
+   }
+%end newenvironment
+
+\newcommand{\hd}[1]{\vspace{1ex}\noindent{\bf #1} }
+\newcommand{\nf}[1]{\underline{#1}} 
+\newcommand{\cbar}{\overline{c}}
+
+\DeclareMathOperator{\rad}{rad}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\by}{\mathbf{y}}
+\newcommand{\bw}{\mathbf{w}}
+\renewcommand{\AA}{\mathbb{A}}
+\newcommand{\II}{\mathbb{I}}
+\newcommand{\galff}{\Gal(\F_\p/\F_p)}
+\newcommand{\autff}{\Aut(\F_\p/\F_p)}
+
+\newcommand{\crtwo}{\sqrt[3]{2}}
+\newcommand{\ww}{\underline{w}}
+\newcommand{\bb}{\underline{b}}
+\newcommand{\bt}{\mathbf{t}}
+\renewcommand{\i}[1]{\index{#1}}
+\newcommand{\ii}[1]{\index*{#1}}
+%\newcommand{\defn}[1]{{\em \index*{#1}}}
+\newcommand{\defn}[1]{{\em #1}}
+\newcommand{\ithm}[1]{\index{Theorem!#1}\index{#1 theorem}}
+\newcommand{\iprop}[1]{\index{Proposition!#1}\index{#1 proposition}}
+\newcommand{\ilem}[1]{\index{Lemma!#1}\index{#1 lemma}}
+\newcommand{\icor}[1]{\index{Corollary!#1}\index{#1 corollary}}
+\newcommand{\magma}{\ii{{\sc Magma}}}
+
+
+
+
+\definecolor{dblackcolor}{rgb}{0.0,0.0,0.0}
+\definecolor{dbluecolor}{rgb}{.01,.02,0.7}
+\definecolor{dredcolor}{rgb}{0.6,0,0}
+\definecolor{dgraycolor}{rgb}{0.30,0.3,0.30}
+\definecolor{lightyellow}{rgb}{1,1,.86}
+\definecolor{gray}{rgb}{0.6,0.6,0.6}
+\newcommand{\dblue}{\color{dbluecolor}}
+\newcommand{\dred}{\color{dredcolor}}
+\newcommand{\dblack}{\color{dblackcolor}}
+\newcommand{\dr}{\dred\bf}
+\usepackage{soul}
+\usepackage{listings} 
+\lstdefinelanguage{Sage}[]{Python}
+{morekeywords={True,False,sage,singular},
+sensitive=true}
+\lstset{frame=single,
+        showtabs=False,
+        showspaces=False,
+        showstringspaces=False,
+        backgroundcolor=\color{lightyellow},
+          commentstyle={\ttfamily\color{dredcolor}},
+          keywordstyle={\ttfamily\color{dbluecolor}\bfseries},
+          stringstyle ={\ttfamily\color{dgraycolor}\bfseries},
+          language = Sage,
+	  basicstyle={\scriptsize \ttfamily},
+	  %aboveskip=.3em,
+	  %belowskip=.1em
+          }

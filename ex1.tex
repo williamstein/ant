@@ -1,0 +1,487 @@
+\chapter{Exercises}
+\label{ch:ex1}
+\begin{enumerate}
+\item 
+Let $A=\left(
+        \begin{matrix}1&2&3\\4&5&6\\7&8&9
+        \end{matrix}\right)$. 
+\begin{enumerate}
+\item Find the Smith normal form of $A$.
+\item Prove that 
+the cokernel of the map $\Z^3\to \Z^3$ given by multiplication by~$A$ 
+is isomorphic to $\Z/3\Z \oplus \Z$.
+\end{enumerate}
+
+%\item Give an example of a ring $R$ that is not noetherian. 
+
+\item Show that the minimal polynomial of an algebraic number
+  $\alpha\in\Qbar$ is unique. 
+
+\item Which of the following rings have infinitely
+many prime ideals?  
+\begin{enumerate}
+\item The integers $\Z$. 
+\item The ring $\Z[x]$ of polynomials over $\Z$.
+\item The quotient ring $\C[x]/(x^{2005}-1)$.
+\item The ring $(\Z/6\Z)[x]$ of polynomials over the ring $\Z/6\Z$.
+\item The quotient ring $\Z/n\Z$, for a fixed positive integer~$n$.
+\item The rational numbers~$\Q$.
+\item The polynomial ring $\Q[x,y,z]$ in three variables.
+\end{enumerate}
+
+\item Which of the following numbers are algebraic integers?
+\begin{enumerate}
+\item The number $(1+\sqrt{5})/2$.
+\item The number $(2+\sqrt{5})/2$.
+\item The value of the infinite sum $\sum_{n=1}^{\infty} 1/n^2$.
+\item The number $\alpha/3$, where $\alpha$ is a root of
+$x^4 + 54x + 243$.
+\end{enumerate}
+
+\item Prove that $\Zbar$ is not noetherian.
+
+
+\item Let $\alpha = \sqrt{2} + \frac{1+\sqrt{5}}{2}$. 
+\begin{enumerate}
+\item Is $\alpha$ an algebraic integer?
+\item Explicitly write down the minimal polynomial of $\alpha$
+as an element of $\QQ[x]$.
+\end{enumerate}
+
+\item Which are the following rings are orders in the given
+number field.
+\begin{enumerate}
+\item The ring $R = \ZZ[i]$ in the number field $\QQ(i)$.
+\item The ring $R = \ZZ[i/2]$ in the number field $\QQ(i)$.
+\item The ring $R = \ZZ[17i]$ in the number field $\QQ(i)$.
+\item The ring $R = \ZZ[i]$ in the number field $\QQ(\sqrt[4]{-1})$.
+\end{enumerate}
+
+
+%%%%%%%%%%%
+
+\item We showed in the text (see
+  Proposition~\ref{prop:integrallyclosed}) that $\Zbar$ is integrally
+  closed in its field of fractions.  Prove that and every nonzero
+  prime ideal of $\Zbar$ is maximal.  Thus $\Zbar$ is not a Dedekind
+  domain only because it is not noetherian.
+
+\item Let $K$ be a field.  
+\begin{enumerate}
+\item Prove that the polynomial ring $K[x]$
+is a Dedekind domain.
+\item Is $\Z[x]$ a Dedekind domain?
+\end{enumerate}
+
+\item \label{ex:finitedomain} 
+Prove that every finite integral domain is a field.
+
+\item \label{ex:idealprod} 
+\begin{enumerate}
+\item Give an example of two ideals $I, J$ in a
+commutative ring $R$ whose product is {\em not} equal to the set
+$\{ab : a \in I, b \in J\}$. 
+\item Suppose $R$ is a principal ideal domain.   
+Is it always the case that 
+$$ 
+IJ = \{ab : a \in I, b \in J\}
+$$
+for all ideals $I, J$ in $R$?
+\end{enumerate}
+
+\item Is the set $\Z[\frac{1}{2}]$ of rational numbers with
+  denominator a power of $2$ a fractional ideal?
+
+\item Suppose you had the choice of the following two jobs\footnote{From {\em The Education of T.C. MITS} (1942).}:
+\begin{itemize}
+\item[Job 1] Starting with an annual salary of \$1000,
+and a \$200 increase every year.
+\item[Job 2] Starting with a semiannual salary of \$500,
+and an increase of \$50 every 6 months.
+\end{itemize}
+In all other respects, the two jobs are exactly alike.
+Which is the better offer (after the first year)?  
+Write a Sage program that creates a table showing how
+much money you will receive at the end of each year for
+each job. (Of course you could easily do this by hand -- the
+point is to get familiar with Sage.)
+
+\item Let $\O_K$ be the ring of integers of a number field.
+Let~$F_K$ denote the abelian group of fractional ideals of $\O_K$.
+\begin{enumerate}
+\item Prove that $F_K$ is torsion free.
+\item Prove that $F_K$ is not finitely generated.
+\item Prove that $F_K$ is countable.
+\item Conclude that if $K$ and $L$ are number fields, then there
+exists some (non-canonical) isomorphism of groups $F_K\ncisom F_L$.
+\end{enumerate}
+
+\item From basic definitions, find the rings of integers of the fields
+$\Q(\sqrt{11})$ and $\Q(\sqrt{-6})$.
+
+\item In this problem, you will give an example to illustrate the
+  failure of unique factorization in the ring $\O_K$ of integers of
+  $\Q(\sqrt{-6})$.
+\begin{enumerate}
+\item Give an element $\alpha \in \O_K$ that factors in two distinct
+  ways into irreducible elements.  
+\item Observe explicitly that the $(\alpha)$ factors uniquely, i.e.,
+  the two distinct factorization in the previous part of this problem
+  do not lead to two distinct factorization of the ideal $(\alpha)$
+  into prime ideals.
+\end{enumerate}
+
+
+\item Factor the ideal $(10)$ as a product of primes
+in the ring of integers of $\Q(\sqrt{11})$.  You're allowed
+to use a computer, as long as you show the commands you use.
+
+\item Let $\O_K$ be the ring of integers of a number field $K$,
+and let $p\in\Z$ be a prime number.  What is the cardinality
+of $\O_K/(p)$ in terms of $p$ and $[K:\Q]$, 
+where $(p)$ is the ideal of $\O_K$ generated by~$p$?
+
+\item Give an example of each of the following, with proof:
+\begin{enumerate}
+\item A non-principal ideal in a ring.
+\item A module that is not finitely generated.
+\item The ring of integers of a number field of degree~$3$.
+\item An order in the ring of integers of a number field of degree~$5$.
+\item The matrix on $K$ of left multiplication by an element of~$K$,
+where~$K$ is a degree~$3$ number field.
+\item An integral domain that is not integrally closed in its field of fractions.
+\item A Dedekind domain with finite cardinality.
+\item A fractional ideal of the ring of integers of a number
+field that is not an integral ideal.
+\end{enumerate}
+
+
+%%%%%%%%%%%%
+
+\item Let $\vphi:R\to S$ be a homomorphism of (commutative) rings.
+\begin{enumerate}
+\item Prove that if $I\subset S$ is an ideal, then $\vphi^{-1}(I)$
+is an ideal of~$R$.
+\item Prove moreover that if $I$ is prime, then $\vphi^{-1}(I)$ is
+also prime. 
+\end{enumerate}
+
+\item Let $\O_K$ be the ring of integers of a number field.  
+The Zariski topology on the set $X=\Spec(\O_K)$ of all prime ideals
+of $\O_K$ has closed sets the sets of the form 
+$$
+  V(I) = \{ \p\in X : \p \mid I\},
+$$
+where~$I$ varies through {\em all} ideals of $\O_K$, and $\p\mid I$
+means that $I \subset \p$.
+\begin{enumerate}
+\item Prove that the collection of closed sets of the
+form $V(I)$ is a topology on $X$.  
+\item Let $Y$ be the subset of nonzero prime ideals of $\O_K$, with
+the induced topology.  Use
+unique factorization of ideals to prove
+that the closed subsets of~$Y$ are exactly the finite subsets
+of~$Y$ along with the set~$Y$.
+\item Prove that the conclusion of (a) is still true if $\O_K$ is replaced
+by an order in $\O_K$, i.e., a subring that has finite
+index in $\O_K$ as a $\Z$-module. 
+\end{enumerate}
+
+\item Explicitly factor the ideals generated by each of $2$, $3$, and $5$ in 
+the ring of integers of $\Q(\sqrt[3]{2})$.  (Thus you'll factor $3$ separate
+ideals as products of prime ideals.)
+You may assume that the ring of integers of $\Q(\sqrt[3]{2})$
+is $\Z[\sqrt[3]{2}]$, but do {\em not} simply
+use a computer command to do the factorizations.
+
+\item
+Let $K=\Q(\zeta_{13})$,where $\zeta_{13}$ is a primitive
+$13$th root of unity.  Note that~$K$ has ring of integers $\O_K=\Z[\zeta_{13}]$.
+\begin{enumerate}
+\item Factor $2$, $3$, $5$, $7$, $11$, and $13$ in the ring 
+of integers $\O_K$.  You may use a computer.  
+\item For $p\neq 13$, find a conjectural 
+relationship between the number of prime ideal factors of $p\O_K$
+and the order of the reduction of~$p$  in $(\Z/13\Z)^*$.
+\item Compute the minimal polynomial $f(x)\in\Z[x]$ of $\zeta_{13}$.
+Reinterpret your conjecture as a conjecture that
+relates the degrees of the irreducible factors of $f(x)\pmod{p}$ to 
+the order of $p$ modulo~$13$.  Does your conjecture 
+remind you of quadratic reciprocity?
+\end{enumerate}
+
+\item
+\begin{enumerate}
+\item Find by hand  and with proof 
+the ring of integers of each of the following two fields: 
+$\Q(\sqrt{5})$, $\Q(i)$.  
+\item Find the ring of integers of $\Q(a)$, where $a^5+7a+1=0$ 
+using a computer. 
+\end{enumerate}
+
+%%%%%%%%%%%%%%
+
+
+\item Let $p$ be a prime.  Let $\O_K$ be the ring of integers of a
+  number field~$K$, and suppose $a\in \O_K$ is such that
+  $[\O_K:\Z[a]]$ is finite and coprime to~$p$.  Let $f(x)$ be the
+  minimal polynomial of~$a$.  We proved in class 
+that if the reduction $\overline{f}\in\F_p[x]$ of $f$ factors
+as 
+$$
+ \overline{f} = \prod g_i^{e_i},
+$$
+where the $g_i$ are distinct irreducible polynomials in $\F_p[x]$, then the primes appearing
+in the factorization of $p\O_K$ are the ideals $(p,g_i(a))$.
+In class, we did not prove that the exponents of these primes in the factorization
+of $p\O_K$ are the $e_i$.  Prove this.
+
+\item Let $a_1 = 1+i$, $a_2 = 3+2i$, and $a_3 = 3+4i$ as elements of 
+$\Z[i]$. 
+\begin{enumerate}
+\item Prove that the ideals $I_1=(a_1)$, $I_2=(a_2)$, and $I_3=(a_3)$
+are coprime in pairs.
+\item Compute $\#\Z[i]/(I_1 I_2 I_3)$.
+\item Find a single element in $\Z[i]$ that is congruent to~$n$ modulo $I_n$, 
+for each $n\leq 3$.
+\end{enumerate}
+
+\item Find an example of a field $K$ of degree at least~$4$ such that the ring
+  $\O_K$ of integers of $K$ is not of the form $\Z[a]$ for any $a\in \O_K$.
+
+\item Let $\p$ be a prime ideal of $\O_K$, and suppose that $\O_K/\p$
+  is a finite field of characteristic $p\in\Z$.  Prove that there is
+  an element $\alpha\in\O_K$ such that $\p=(p,\alpha)$.  This
+  justifies why we can represent prime ideals of $\O_K$ as pairs
+  $(p,\alpha)$, as is done in \sage.  (More generally, if $I$ is an
+  ideal of $\O_K$, we can choose one of the elements of $I$ to be {\em
+    any} nonzero element of $I$.)
+
+\item (*) Give an example of an order $\O$ in the ring of integers of
+  a number field and an ideal $I$ such that~$I$ cannot be generated by
+  $2$ elements as an ideal.  Does the Chinese Remainder Theorem hold
+  in $\O$?  [The (*) means that this problem is more difficult than
+  usual.]
+
+%%%%%%%%%%%%%
+
+\item For each of the following three fields, determining if there is
+  an order of discriminant $20$ contained in its ring of integers:
+$$
+  K = \Q(\sqrt{5}), \quad K=\Q(\sqrt[3]{2}), \quad\text{and}\ldots
+$$
+$K$ any extension of $\Q$ of degree $2005$.  [Hint: for the last one,
+apply the exact form of our theorem about finiteness of class groups
+to the unit ideal to show that the discriminant of a degree $2005$
+field must be large.]
+
+\item Prove that the quantity $C_{r,s}$ in our theorem about finiteness
+of the class group can be taken to be $\left(\frac{4}{\pi}\right)^{s} \frac{n!}{n^n}$, as follows (adapted from \cite[pg.~19]{sd:brief}):
+Let $S$ be the set of elements
+$(x_1,\ldots, x_{n})\in\R^n$ such that
+$$
+  |x_1| + \cdots |x_{r}| + 2 \sum_{v=r+1}^{r+s}
+                    \sqrt{x_v^2 + x_{v+s}^2} \leq 1.
+$$
+\begin{enumerate}
+\item 
+Prove that $S$ is convex and that $M=n^{-n}$,
+where 
+$$
+  M = \max\{ |x_1\cdots x_r\cdot (x_{r+1}^2 + x_{(r+1)+s}^2)\cdots (x_{r+s}^2 + x_n^2)| : (x_1,\ldots, x_n) \in S\}.
+$$
+[Hint: For convexity, use the triangle inequality and
+that for $0\leq \lambda \leq 1$, we have
+\begin{align*}
+\lambda\sqrt{x_1^2 + y_1^2} &+ (1-\lambda)\sqrt{x_2^2+y_2^2}\\
+&\geq\sqrt{(\lambda x_1 + (1-\lambda)x_2)^2 + 
+(\lambda y_1 + (1-\lambda)y_2)^2}
+\end{align*}
+for $0\leq \lambda \leq 1$.  In polar coordinates this last inequality
+is 
+$$
+  \lambda r_1 + (1-\lambda)r_2 \geq 
+   \sqrt{\lambda^2 r_1^2 + 2\lambda(1-\lambda) r_1 r_2 \cos(\theta_1 - \theta_2) + (1-\lambda)^2 r_2^2},
+$$
+which is trivial.  That $M\leq n^{-n}$ follows from the inequality
+between the arithmetic and geometric means.
+\item Transforming pairs $x_v, x_{v+s}$ from Cartesian to polar coordinates,
+show also that $v=2^{r}(2\pi)^s D_{r,s}(1)$, where
+$$
+  D_{\ell,m}(t) = \int \cdots \int_{\mathcal{R}_{\ell,m}(t)}
+       y_1 \cdots y_m dx_1 \cdots dx_{\ell} dy_1 \cdots dy_m
+$$
+and 
+$\mathcal{R_{\ell,m}}(t)$ is given by $x_{\rho}\geq 0$
+($1\leq \rho\leq \ell$), $y_{\rho}\geq 0$
+($1\leq \rho\leq m$) and 
+$$
+  x_1 + \cdots + x_{\ell} + 2(y_1+\cdots +y_m) \leq t.
+$$
+\item Prove that
+$$
+  D_{\ell,m}(t) = \int_{0}^t D_{\ell-1,m}(t-x)dx
+     =\int_{0}^{t/2} D_{\ell,m-1}(t-2y)y dy
+$$
+and deduce by induction that 
+$$
+  D_{\ell,m}(t) = \frac{4^{-m}t^{\ell+2m}}{(\ell+2m)!}
+$$
+\end{enumerate}
+
+
+\item Let~$K$ vary through all number fields.  What torsion
+subgroups $(U_K)_{\tor}$ actually occur?
+
+\item If 
+$U_K \ncisom \Z^n \cross (U_K)_{\tor}$, we say that $U_K$
+has rank $n$.  Let~$K$ vary through all number fields.  
+What ranks actually occur?
+
+\item Let $K$ vary through all number fields such that the
+group $U_K$ of units of $K$ is a finite group.  What finite groups
+$U_K$ actually occur?
+
+\item Let $K=\Q(\zeta_5)$.
+\begin{enumerate}
+\item Show that $r=0$ and $s=2$.
+\item Find explicit generators for the group of
+units $U_K$.
+\item Draw an illustration of the log map
+$\vphi:U_K\to \R^2$, including the hyperplane
+$x_1+x_2=0$ and the lattice in the hyperplane 
+spanned by the image of $U_K$.
+\end{enumerate}
+
+
+%%%%%%%%%%%
+
+
+
+
+\item Let $K$ be a number field.  Prove that $p\mid d_K$ if and only
+  if~$p$ ramifies in $K$.  (Note: This fact is proved in many
+  books.)
+
+\item Using Zorn's lemma, show that there are homomorphisms
+  $\galq\to\{\pm 1\}$ with finite image that are not continuous, since
+  they do not factor through the Galois group of any finite Galois
+  extension.  [Hint: The extension $\Q(\sqrt{d}, d \in \Q^*/(\Q^*)^2)$
+  is an extension of~$\Q$ with Galois group $X\ncisom \prod \F_2$.
+  The index-two open subgroups of~$X$ correspond to the quadratic
+  extensions of~$\Q$. However, Zorn's lemma implies that~$X$ contains
+  many index-two subgroups that do not correspond to quadratic
+  extensions of~$\Q$.]
+
+\item 
+\begin{enumerate}
+\item Give an example of a finite nontrivial Galois extension $K$ of $\Q$
+and a prime ideal $\p$ such that $D_\p = \Gal(K/\Q)$.
+\item Give an example of a finite nontrivial Galois extension $K$ of
+  $\Q$ and a prime ideal $\p$ such that $D_\p$ has order~$1$.
+\item Give an example of a finite Galois extension~$K$ of
+  $\Q$ and a prime ideal $\p$ such that $D_\p$ is not a normal
+  subgroup of $\Gal(K/\Q)$.
+\item Give an example of a finite Galois extension~$K$ of
+  $\Q$ and a prime ideal $\p$ such that $I_\p$ is not a normal
+  subgroup of $\Gal(K/\Q)$.
+\end{enumerate}
+
+\item Let $S_3$ by the symmetric group on three symbols, which
+has order $6$.
+\begin{enumerate}
+\item \label{ex:a} Observe that $S_3\isom D_3$, where $D_3$ is the dihedral group
+of order $6$, which is the group of symmetries of an equilateral
+triangle.
+\item Use (\ref{ex:a}) to write down an explicit
+embedding $S_3\hra \GL_2(\C)$.
+\item Let $K$ be the number field $\Q(\sqrt[3]{2},\omega)$,
+where $\omega^3=1$ is a nontrivial cube root of unity.  Show
+that $K$ is a Galois extension with Galois group isomorphic to~$S_3$.
+\item We thus obtain a $2$-dimensional irreducible complex
+Galois representation
+$$
+\rho:\Gal(\Qbar/\Q) \to \Gal(K/\Q)\isom S_3 \subset \GL_2(\C).
+$$
+Compute a representative matrix of $\Frob_p$ and the characteristic polynomial
+of $\Frob_p$ for $p=5,7,11,13$.  
+\end{enumerate}
+
+
+%%%%%%%%%%%%%
+
+
+\item Look up the Riemann-Roch theorem in a book on algebraic curves.
+\begin{enumerate}
+\item Write it down in your own words.
+\item Let $E$ be an elliptic curve over a field~$K$.
+Use the Riemann-Roch theorem to deduce that the natural map
+$$E(K) \to \Pic^0(E/K)$$
+is an isomorphism.  
+\end{enumerate}
+
+%%%%%%%%%%%%%
+
+\item Suppose $G$ is a finite group and $A$ is a finite $G$-module.
+  Prove that for any~$q$, the group $\H^q(G,A)$ is a torsion abelian group of
+  exponent dividing the order $\#A$ of~$A$.
+
+\item Let $K=\Q(\sqrt{5})$ and let $A=U_K$ be the group of units of
+  $K$, which is a module over the group $G=\Gal(K/\Q)$.  Compute the
+  cohomology groups $\H^0(G,A)$ and $\H^1(G,A)$.  (You shouldn't use
+  a computer, except maybe to determine $U_K$.)
+
+\item Let $K=\Q(\sqrt{-23})$ and let~$C$ be the class group of
+$\Q(\sqrt{-23})$, which is a module over the Galois group $G=\Gal(K/\Q)$. 
+Determine $\H^0(G,C)$ and $\H^1(G,C)$.  
+
+\item{}  Let $E$ be the elliptic curve $y^2=x^3+x+1$.  Let 
+$E[2]$  be the group of points of order dividing~$2$ on~$E$.  Let 
+$$
+\rhobar_{E,2}:\Gal(\Qbar/\Q) \to \Aut(E[2])
+$$
+be the mod~$2$ Galois representation associated to~$E$.
+\begin{enumerate}
+\item Find the fixed field $K$ of $\ker(\rhobar_{E,2})$.
+\item Is $\rhobar_{E,2}$ surjective?
+\item Find the group $\Gal(K/\Q)$.
+\item Which primes are ramified in~$K$?
+\item Let $I$ be an inertia group above $2$, which is one
+of the ramified primes.   Determine $E[2]^I$ explicitly
+for your choice of~$I$.  What is the characteristic polynomial
+of $\Frob_2$ acting on $E[2]^I$.
+\item What is the characteristic polynomial of $\Frob_3$ acting
+on $E[2]$?
+
+
+
+\item Let $K$ be a number field.  Prove that there is a finite
+set $S$ of primes of~$K$ such that 
+$$
+ \O_{K,S} = \{a \in K^* :  \ord_\p(a\O_K) \geq 0 \text{ all } \p\not\in S\}
+    \union\{0\}
+$$
+is a prinicipal ideal domain.  The condition $ \ord_\p(a\O_K) \geq 0$
+means that in the prime ideal factorization of the fractional ideal
+$a\O_K$, we have that~$\p$ occurs to a nonnegative power.  
+
+\item Let $a \in K$ and $n$ a positive integer.  Prove that $L =
+  K(a^{1/n})$ is unramified outside the primes that divide~$n$ and the
+  norm of $a$.  This means that if $\p$ is a prime of $\O_K$, and $\p$
+  is coprime to $n\Norm_{L/K}(a)\O_K$, then the prime factorization of
+  $\p\O_L$ involves no primes with exponent bigger than~$1$.
+
+\item Write down a proof of Hilbert's Theorem 90, formulated
+as the statement that for any number field~$K$, we have
+$$
+ \H^1(K,\Kbar^*)=0.
+$$
+
+\end{enumerate}
+\end{enumerate}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "ant"
+%%% End: 

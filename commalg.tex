@@ -1,0 +1,1371 @@
+\chapter{Basic Commutative Algebra}
+
+The commutative algebra in this chapter provides a
+foundation for understanding the more refined number-theoretic
+structures associated to number fields.
+
+First we prove the structure theorem for finitely generated abelian
+groups.  Then we establish the standard properties of Noetherian rings
+and modules, including a proof of the Hilbert basis theorem.  We also
+observe that finitely generated abelian groups are Noetherian
+$\Z$-modules.  After establishing
+properties of Noetherian rings, we consider rings of algebraic
+integers and discuss some of their properties.
+
+\section{Finitely Generated Abelian Groups}\label{sec:fg}
+Finitely generated abelian groups arise all over algebraic number
+theory.  For example, they will appear in this book as class groups,
+unit groups, and the underlying additive groups of rings of integers,
+and as Mordell-Weil groups of elliptic curves.
+
+In this section, we prove the structure theorem for finitely generated
+abelian groups, since it will be crucial for much of what we will do
+later.  \i{abelian groups!structure theorem} \i{structure theorem}
+
+Let $\Z=\{0,\pm 1, \pm 2, \ldots\}$ denote the ring of (rational)
+integers, and for each positive integer~$n$ let $\Z/n\Z$ denote the
+ring of integers modulo~$n$, which is a cyclic abelian group of
+order~$n$ under addition.
+
+\begin{definition}[Finitely Generated]
+  A group $G$ is \defn{finitely generated} if there exists
+  $g_1,\ldots, g_n \in G$ such that every element of $G$ can be
+  expressed as a finite product of positive or negative powers of the
+  $g_i$.
+\end{definition}
+For example, the group $\Z$ is finitely generated, since it is generated
+by~$1$.
+
+\begin{theorem}[Structure Theorem for Abelian Groups]\label{thm:struc}
+\ithm{structure of abelian groups}
+Let $G$ be a finitely generated abelian group.  Then there is an isomorphism
+$$
+  G \isom (\Z/n_1\Z) \oplus (\Z/n_2\Z) \oplus \cdots \oplus
+    (\Z/n_s\Z) \oplus \Z^{r},
+$$
+where $n_1>1$ and $n_1\mid{}n_2\mid{}\cdots \mid{}n_s$. 
+Furthermore, the $n_i$ and~$r$ are uniquely determined by~$G$.
+\end{theorem}
+
+We will prove the theorem as follows.  We first remark that any
+subgroup of a finitely generated free abelian group is finitely
+generated.  Then we see that finitely generated abelian groups can be
+presented as quotients of finite rank free abelian groups, and such a
+presentation can be reinterpreted in terms of matrices over the
+integers.  Next we describe how to use row and column operations over
+the integers to show that every matrix over the integers is equivalent
+to one in a canonical diagonal form, called the Smith normal form.  We
+obtain a proof of the theorem by reinterpreting \ii{Smith normal form} in
+terms of groups.  Finally, we observe by a simple argument that
+the representation in the theorem is necessarily unique. 
+
+\begin{proposition}\label{prop:subfin}\iprop{subgroup of free group}
+If $H$ is a subgroup of a finitely generated abelian group then $H$
+is finitely generated.
+\end{proposition}
+The key reason that this is true is that~$G$ is a finitely generated
+module over the principal ideal domain $\Z$.  We will give a complete
+proof of a beautiful generalization of Proposition~\ref{prop:subfin}
+in the context of Noetherian rings in Section~\ref{sec:noetherian},
+but will not prove this proposition here.
+
+\begin{corollary}\label{cor:presentation}\icor{group as quotient of free
+groups}
+Suppose $G$ is a finitely generated abelian group.  Then there are
+finitely generated free abelian groups $F_1$ and $F_2$ and a homomorphism
+$\psi:F_2 \to F_1$ such that
+$G \isom F_1/\psi(F_2)$.
+\end{corollary}
+\begin{proof}
+  Let $x_1,\ldots, x_m$ be generators for $G$.  Let $F_1=\Z^m$ and let
+  $\vphi:F_1\to G$ be the map that sends the $i$th generator
+  $(0,0,\ldots,1,\ldots,0)$ of $\Z^m$ to $x_i$.  Then $\vphi$ is a
+  surjective homomorphism, and by Proposition~\ref{prop:subfin} the
+  kernel $\ker(\vphi)$ of $\vphi$ is a finitely generated abelian
+  group.  Let $F_2 = \Z^n$ and fix a surjective homomorphism $\psi:F_2
+  \to \ker(\vphi)$.  Then $F_1 / \psi(F_2)$ is isomorphic to $G$.
+\end{proof}
+
+Suppose $G$ is a nonzero finitely generated abelian group.  By the
+corollary, there are free abelian groups $F_1$ and $F_2$ and a
+homomorphism $\psi:F_2 \to F_1$ such that $G\ncisom F_1/\psi(F_2)$.
+Choosing a basis for $F_1$ and $F_2$, we obtain isomorphisms
+$F_1\ncisom \Z^n$ and $F_2\ncisom \Z^m$ for integers $n$ and $m$.  We
+can thus view $\psi:F_2\to F_1$ as being given by left multiplication
+by the $n\times m$ matrix $A$ whose columns are the images of the
+generators of $F_2$ in $\Z^n$.  The \defn{cokernel} of this
+homomorphism is the quotient of $\Z^n$ by the image of $A$ (the
+$\Z$-span of the columns of $A$), and this cokernel is isomorphic to
+$G$.  
+
+By augmenting $A$ with zero columns or adding (standard basis) rows to
+$A$, we may assume that $m = n$.    For example, we would replace
+$$
+  \left(\begin{matrix} 4 \\
+       2 \end{matrix}\right)
+\text{ by }
+  \left(\begin{matrix} 4 & 0\\
+       2 & 0 \end{matrix}\right)
+$$
+and would replace 
+$$
+  \left(\begin{matrix} 4 & 2 \end{matrix}\right)
+\text{ by }
+  \left(\begin{matrix} 4 & 2\\
+       1 & 0 \end{matrix}\right).
+$$
+
+The following proposition implies that we may choose a bases for $F_1$
+and $F_2$ such that the matrix of $A$ is diagonal, so that the
+structure of the cokernel of $A$ will be easy to understand.
+
+\begin{proposition}[Smith normal form]\label{prop:smith}\iprop{Smith normal form}
+Suppose~$A$ is an $n\times n$ integer matrix.  Then there exist
+invertible integer matrices $P$ and $Q$ such that $A'=PAQ$ is a
+diagonal matrix with entries $n_1, n_2,\ldots, n_s,0,\ldots,0$, where
+$s\geq 0$, $n_1>1$ and $n_1\mid n_2 \mid{} \ldots \mid{} n_s$.  
+Here $P$ and $Q$ are invertible as integer matrices, so $\det(P)$
+and $\det(Q)$ are $\pm 1$.
+The matrix $A'$ is called
+the \defn{Smith normal form} of $A$.
+\end{proposition}
+We will see in the proof of Theorem~\ref{thm:struc} that
+$A'$ is uniquely determined by $A$.
+An example of a matrix in Smith normal form is 
+$$
+A=\left(
+        \begin{matrix}2&0&0\\0&6&0\\0&0&0
+        \end{matrix}\right).
+$$
+
+\begin{proof}
+  The matrix $P$ will be a product of matrices that define elementary
+  row operations and $Q$ will be a product corresponding to elementary
+  column operations.  The elementary row and column operations over
+  $\ZZ$ are as follows:
+\begin{enumerate}
+\item{}{[\bf Add multiple]} Add an integer multiple of one row to another (or a multiple
+of one column to another).
+\item{}{[\bf Swap]} Interchange two rows or two columns.
+\item{}{[\bf Rescale]} Multiply a row by $-1$.
+\end{enumerate}
+Each of these operations is given by left or right multiplying by an
+invertible matrix~$E$ with integer entries, where~$E$ is the result of
+applying the given operation to the identity matrix, and~$E$ is
+invertible because each operation can be reversed using another row or
+column operation over the integers.
+
+To see that the proposition must be true, assume $A\neq 0$ and perform
+the following steps (compare \cite[pg. 459]{artin:algebra}):
+\begin{enumerate}
+\item By permuting rows and columns, move a nonzero entry of $A$ with
+smallest absolute value to the upper left corner of $A$.  Now attempt
+to make all other entries in the first row and column $0$ by adding
+multiples of row or column 1 to other rows (see step~2 below).  If an
+operation produces a nonzero entry in the matrix with absolute value
+smaller than $|a_{11}|$, start the process over by permuting rows and
+columns to move that entry to the upper left corner of $A$.  Since the
+integers $|a_{11}|$ are a decreasing sequence of positive integers, we
+will not have to move an entry to the upper left corner infinitely
+often.
+
+\item Suppose $a_{i1}$ is a nonzero entry in the first column, with
+$i>1$.  Using the division algorithm, write $a_{i1} = a_{11}q + r$,
+with $0\leq r < a_{11}$.  Now add $-q$ times the first row to the
+$i$th row.  If $r>0$, then go to step~1 (so that an entry with
+absolute value at most $r$ is the upper left corner).  Since we will
+only perform step 1 finitely many times, we may assume $r=0$.
+Repeating this procedure we set all entries in the first column
+(except $a_{11}$) to $0$.  A similar process using column operations
+sets each entry in the first row (except $a_{11}$) to $0$.
+
+\item We may now assume that $a_{11}$ is the only nonzero entry in the
+first row and column.  If some entry $a_{ij}$ of $A$ is not divisible
+by $a_{11}$, add the column of $A$ containing $a_{ij}$ to the first
+column, thus producing an entry in the first column that is nonzero.
+When we perform step~2, the remainder $r$ will be greater than $0$.
+Permuting rows and columns results in a smaller $|a_{11}|$.  Since
+$|a_{11}|$ can only shrink finitely many times, eventually we will get
+to a point where every $a_{ij}$ is divisible by $a_{11}$.  If $a_{11}$
+is negative, multiple the first row by $-1$.
+\end{enumerate}
+After performing the above operations, the first row and column
+of $A$ are zero except for $a_{11}$ which is positive and divides
+all other entries of $A$.  We repeat the above steps for the 
+matrix $B$ obtained from $A$ by deleting the first row and column.
+The upper left entry of the resulting matrix will be divisible by
+$a_{11}$, since every entry of $B$ is.  Repeating the argument
+inductively proves the proposition.
+\end{proof}
+
+\begin{example}
+The matrix $\mtwo{-1}{2}{-3}{4}$ has Smith normal form
+to $\mtwo{1}{0}{0}{2}$,
+and the matrix 
+$\mthree{1}{4}{9}{16}{25}{36}{49}{64}{81}$
+has Smith normal form
+$\mthree{1}{0}{0}{0}{3}{0}{0}{0}{72}.$
+As a double check, note that the determinants of a matrix and its Smith
+normal form match, up to sign. This is because
+$$\det(PAQ) = \det(P)\det(A)\det(Q) = \pm \det(A).$$
+
+We compute each of the above Smith forms using \sage,
+along with the corresponding transformation matrices.
+{\em Warning: Currently in Sage the entries down the diagonal
+are reversed from the discussion above.}
+First the $2\times 2$ matrix.
+\begin{verbatim}
+sage: A = matrix(ZZ, 2, [-1,2, -3,4])
+sage: S, U, V = A.smith_form(); S
+[2 0]
+[0 1]
+sage: U*A*V
+[2 0]
+[0 1]
+sage: U
+[ 1 -1]
+[ 0  1]
+sage: V
+[4 1]
+[3 1]
+\end{verbatim}
+The \sage{} {\tt matrix} command takes as input the base ring, the number
+of rows, and the entries.  Next we compute with a $3\times3$ matrix.
+\begin{verbatim}
+sage: A = matrix(ZZ, 3, [1,4,9,  16,25,36, 49,64,81])
+sage: S, U, V = A.smith_form(); S
+[72  0  0]
+[ 0  3  0]
+[ 0  0  1]
+sage: U*A*V
+[72  0  0]
+[ 0  3  0]
+[ 0  0  1]
+sage: U
+[  1 -20 -17]
+[  0   1  -1]
+[  0   0   1]
+sage: V
+[  93   74   47]
+[-156 -125  -79]
+[  67   54   34]
+\end{verbatim}
+
+Finally we compute the Smith form of a matrix of rank $2$:
+\begin{verbatim}
+sage: m = matrix(ZZ, 3, [2..10]); m
+[ 2  3  4]
+[ 5  6  7]
+[ 8  9 10]
+sage: m.smith_form()[0]
+[0 0 0]
+[0 3 0]
+[0 0 1]
+\end{verbatim}
+\end{example}
+
+
+\begin{proof}[Theorem~\ref{thm:struc}] 
+Suppose $G$ is a finitely generated abelian group, which we may assume
+is nonzero.  As in the paragraph before Proposition~\ref{prop:smith},
+we use Corollary~\ref{cor:presentation} to write $G$ as a the cokernel
+of an $n\times n$ integer matrix $A$.  By Proposition~\ref{prop:smith}
+there are isomorphisms $Q:\Z^n\to \Z^n$ and $P:\Z^n\to \Z^n$ such that
+$A'=PAQ$ is a diagonal matrix with entries $n_1, n_2,\ldots,
+n_s,0,\ldots,0$, where $n_1>1$ and $n_1\mid n_2 \mid{} \ldots \mid{}
+n_s$.  Then $G$ is isomorphic to the cokernel of the diagonal matrix
+$A'$, so
+\begin{equation}
+\label{eqn:gprod}
+  G \isom (\Z/n_1\Z) \oplus (\Z/n_2\Z)
+ \oplus \cdots \oplus (\Z/n_s\Z) \oplus \Z^{r},
+\end{equation}
+as claimed.  The $n_i$ are determined by $G$, because $n_i$ is the
+smallest positive integer~$n$ such that $nG$ requires at most $s+r-i$
+generators. We see from the representation (\ref{eqn:gprod}) of $G$ as
+a product that $n_i$ has this property and that no smaller positive
+integer does.
+
+\end{proof}
+
+\section{Noetherian Rings and Modules}\label{sec:noetherian}
+Let~$R$ be a commutative ring with unit element.  We will frequently
+work with $R$-modules, which are like vector spaces but over a ring.
+
+More precisely, an \defn{$R$-module} is an additive abelian
+group $M$ equipped with a map $R\times M \to M$ such that for all~$r,
+r'\in R$ and all $m, m'\in M$ we have $(r r')m = r(r' m )$, $(r + r')m
+= rm + r' m$, $r(m+m') = rm + rm'$, and $1m=m$.  A \defn{submodule}
+is a subgroup of $M$ that is preserved by the action of $R$.
+An \defn{ideal} in a ring $R$ is an $R$-submodule $I\subset R$,
+where we view $R$ as a module over itself.
+
+\begin{example}
+The set of abelian groups are in natural bijection with
+$\Z$-modules.
+\end{example}
+
+A \defn{homomorphism} of $R$-modules $\vphi:M\to N$ is a abelian group
+homomorphism such that for any $r\in R$ and $m\in M$ we have
+$\vphi(rm) = r\vphi(m)$.  A \defn{short exact sequence} of $R$-modules
+$$0 \to L \xra{f} M \xra{g} N \to 0$$
+is a specific choice of injective homomorphism $f:L\to M$ and 
+a surjective homomorphism $g:M\to N$ such that $\im(f) = \ker(g)$.
+
+\begin{example}
+The sequence
+$$
+  0 \to \Z \xra{2} \Z\ra \Z/2\Z \to 0
+$$ 
+is an exact sequence, where the first map sends $1$ to $2$, and the second
+is the natural quotient map.
+\end{example}
+
+
+\begin{definition}[Noetherian] An $R$-module~$M$ is \defn{noetherian} if every
+submodule of $M$ is finitely generated.  A ring~$R$ is \defn{noetherian} if~$R$ is
+noetherian as a module over itself, i.e., if every ideal of~$R$ is finitely generated.
+\end{definition}
+
+Notice that any submodule~$M'$ of a noetherian module~$M$ is also
+noetherian.  Indeed, if every submodule of~$M$ is finitely generated
+then so is every submodule of $M'$, since submodules of $M'$ are also
+submodules of $M$.
+
+\begin{definition}[Ascending chain condition]
+An $R$-module $M$ satisfies the \defn{ascending chain condition} if
+every sequences $M_1\subset M_2 \subset M_3 \subset \cdots$ of
+submodules of~$M$ eventually stabilizes, i.e., there is some $n$ such
+that $M_n=M_{n+1}=M_{n+2}=\cdots$.
+\end{definition}
+We will use the notion of maximal element below.  If $\mathcal{X}$ is
+a set of subsets of a set $S$, ordered by inclusion, then a
+\defn{maximal element} $A\in \mathcal{X}$ is a set so that no superset
+of $A$ is contained in $\mathcal{X}$.  Note that it is {\em not}
+necessary that $A$ contain every other element of $\mathcal{X}$, and
+that $\mathcal{X}$ could contain many maximal elements.
+
+\begin{proposition}\iprop{characterization of noetherian}
+If $M$ is an $R$-module, then the following are equivalent:
+\begin{enumerate}
+\item $M$ is noetherian,
+\item $M$ satisfies the ascending chain condition, and
+\item Every nonempty set of submodules of $M$ contains at least one
+maximal element.  
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+{\bf $1\implies 2$:} Suppose $M_1\subset M_2\subset \cdots$ is a
+sequence of submodules of $M$.  Then $M_\infty=\union_{n=1}^{\infty}
+M_n$ is a submodule of $M$.  Since $M$ is noetherian and $M_\infty$
+is a submodule of~$M$, there is a
+finite set $a_1,\ldots, a_m$ of generators for $M_{\infty}$.  Each $a_i$
+must be contained in some $M_j$, so there is an $n$ such that
+$a_1,\ldots, a_m\in M_n$.  But then $M_{k}=M_n$ for all $k\geq n$,
+which proves that the chain of $M_i$ stabilizes, 
+so the ascending chain condition holds for~$M$.
+
+\noindent{}{\bf $2\implies 3$:} Suppose 3 were false, so there exists
+a nonempty set~$S$ of submodules of~$M$ that does not contain a
+maximal element.  We will use~$S$ to construct an infinite ascending
+chain of submodules of~$M$ that does not stabilize.  Note that~$S$ is
+infinite, otherwise it would contain a maximal element.  Let $M_1$ be
+any element of~$S$.  Then there is an $M_2$ in $S$ that contains
+$M_1$, otherwise $S$ would contain the maximal element $M_1$.
+Continuing inductively in this way we find an $M_3$ in $S$ that
+properly contains $M_2$, etc., and we produce an infinite ascending
+chain of submodules of $M$, which contradicts the ascending chain
+condition.
+
+\noindent{}{\bf $3\implies 1$:} Suppose 1 is false, so there is a
+submodule $M'$ of~$M$ that is not finitely generated.  We will show
+that the set~$S$ of all finitely generated submodules of $M'$ does not
+have a maximal element, which will be a contradiction.  Suppose~$S$
+does have a maximal element~$L$.  Since~$L$ is finitely generated and
+$L\subset M'$, and $M'$ is not finitely generated, there is an $a\in
+M'$ such that $a\not\in L$.  Then $L'=L+Ra$ is an element of~$S$ that
+strictly contains the presumed maximal element~$L$, a contradiction.
+\end{proof}
+
+\begin{lemma}\label{lem:noetherianexact}\ilem{exactness and noetherian}
+If 
+$$
+ 0 \to L \xra{f} M \xra{g} N \to 0
+$$ 
+is a short exact sequence of~$R$-modules, then~$M$ is noetherian if and 
+only if both~$L$ and~$N$ are noetherian.
+\end{lemma}
+\begin{proof}
+First suppose that~$M$ is noetherian.  Then~$L$ is a submodule of~$M$, so~$L$
+is noetherian.   If $N'$ is a submodule of~$N$, then the inverse image of $N'$
+in~$M$ is a submodule of~$M$, so it is finitely generated, hence its image
+$N'$ is finitely generated.  Thus~$N$ is noetherian as well.
+
+Next assume nothing about~$M$, but suppose that both~$L$ and~$N$ are
+noetherian.  If $M'$ is a submodule of $M$, then $M_0=\vphi(L)\cap M'$
+is isomorphic to a submodule of the noetherian module $L$, so $M_0$ is
+generated by finitely many elements $a_1,\ldots, a_n$.  The quotient
+$M'/M_0$ is isomorphic (via $g$) to a submodule of the noetherian
+module~$N$, so $M'/M_0$ is generated by finitely many elements
+$b_1,\ldots, b_m$. For each $i\leq m$, let $c_i$ be a lift of $b_i$ to
+$M'$, modulo $M_0$.  Then the elements $a_1,\ldots, a_n, c_1,\ldots,
+c_m$ generate $M'$, for if $x\in M'$, then there is some element $y\in
+M_0$ such that $x-y$ is an $R$-linear combination of the $c_i$,
+and~$y$ is an $R$-linear combination of the $a_i$.
+\end{proof}
+
+
+\begin{proposition}\label{prop:noethfg}\iprop{noetherian equals finitely generated}
+Suppose~$R$ is a noetherian ring.  Then an $R$-module~$M$ is 
+noetherian if and only if it is finitely generated. 
+\end{proposition}
+\begin{proof}
+If~$M$ is noetherian then every submodule of~$M$ is finitely generated
+so~$M$ is finitely generated.  Conversely, suppose~$M$ is finitely
+generated, say by elements $a_1,\ldots, a_n$.  Then there is a
+surjective homomorphism from $R^n=R\oplus \cdots \oplus R$ to~$M$ that
+sends $(0,\ldots,0,1,0,\ldots,0)$ ($1$ in $i$th factor) to $a_i$.
+Using Lemma~\ref{lem:noetherianexact} and exact sequences of
+$R$-modules such as $0\to R\to R\oplus R\to R\to 0$, we see
+inductively that $R^n$ is noetherian.  Again by
+Lemma~\ref{lem:noetherianexact}, homomorphic images of noetherian
+modules are noetherian, so~$M$ is noetherian.
+\end{proof}
+
+\begin{lemma}\label{lem:surjnoetherian}\ilem{surjection and noetherian}
+Suppose $\vphi:R\to S$ is a surjective homomorphism of rings 
+and $R$ is noetherian.   Then $S$ is noetherian.
+\end{lemma}
+\begin{proof}
+The kernel of $\vphi$ is an ideal $I$ in $R$, and
+we have an exact sequence 
+$$ 
+  0 \to I \to R \to S \to 0
+$$
+with~$R$ noetherian.  
+This is an exact sequence of $R$-modules, where $S$ has the
+$R$-module structure induced from $\vphi$ (if $r\in R$
+and $s\in S$, then $rs = \vphi(r)s$).
+By Lemma~\ref{lem:noetherianexact}, it follows
+that~$S$ is a noetherian $R$-modules.  Suppose~$J$ is an ideal of~$S$.
+Since~$J$ is an $R$-submodule of~$S$, if we view~$J$ as an $R$-module,
+then~$J$ is finitely generated.  Since~$R$ acts on~$J$ through~$S$,
+the $R$-generators of~$J$ are also $S$-generators of~$J$, so~$J$ 
+is finitely generated as an ideal.  Thus~$S$ is noetherian.
+\end{proof}
+
+\begin{theorem}[Hilbert Basis Theorem]\label{thm:hilbert}
+\ithm{Hilbert Basis}
+If $R$ is a noetherian ring and $S$ is finitely generated as a ring
+over~$R$, then~$S$ is noetherian.  In particular, for any~$n$ the
+polynomial ring $R[x_1,\ldots, x_n]$ and any of its quotients are
+noetherian.
+\end{theorem}
+\begin{proof}
+Assume first that we have already shown that for any $n$ the
+polynomial ring $R[x_1,\ldots, x_n]$ is noetherian.  Suppose $S$ is
+finitely generated as a ring over $R$, so there are generators
+$s_1,\ldots, s_n$ for $S$.  Then the map $x_i\mapsto s_i$ extends
+uniquely to a surjective homomorphism $\pi: R[x_1,\ldots, x_n] \to S$,
+and Lemma~\ref{lem:surjnoetherian} implies that $S$ is noetherian.
+
+The rings $R[x_1,\ldots, x_n]$ and $(R[x_1,\ldots,x_{n-1}])[x_n]$ are
+isomorphic, so it suffices to prove that if~$R$ is noetherian then
+$R[x]$ is also noetherian.  (Our proof follows
+\cite[\S12.5]{artin:algebra}.)
+Thus suppose $I$ is an ideal of $R[x]$ and that~$R$ is
+noetherian.  We will show that $I$ is finitely generated.
+
+Let $A$ be the set of leading coefficients of polynomials in $I$.  
+(The leading coefficient of a polynomial is the coefficient of
+highest degree, or $0$ if the polynomial is $0$; thus 
+$3x^7 + 5x^2  - 4$ has leading coefficient $3$.)
+We will first show that~$A$ is an ideal of~$R$.
+Suppose $a,b\in A$ are nonzero with $a+b\neq 0$.  Then there are
+polynomials~$f$ and~$g$ in~$I$ with leading coefficients~$a$ and~$b$.
+If $\deg(f)\leq \deg(g)$, then $a+b$ is the leading coefficient of
+$x^{\deg(g)-\deg(f)}f + g$, so $a+b\in A$.  Suppose $r\in R$ and $a\in A$
+with $ra\neq 0$. Then $ra$ is the leading coefficient of $rf$, so
+$ra\in A$.  Thus $A$ is an ideal in $R$. 
+
+Since $R$ is noetherian and $A$ is an ideal, there exist nonzero
+$a_1,\ldots, a_n$ that generate~$A$ as an ideal.  Since~$A$ is the set
+of leading coefficients of elements of~$I$, and the $a_j$ are in~$A$,
+we can choose for each $j\leq n$ an element $f_j\in I$ with leading
+coefficient $a_j$.  By multipying the $f_j$ by some power of~$x$, we
+may assume that the $f_j$ all have the same degree $d\geq 1$.
+
+Let $S_{<d}$ be the set of elements of~$I$ that have degree strictly
+less than~$d$.  This set is closed under addition and under
+multiplication by elements of~$R$, so $S_{<d}$ is a module over~$R$.
+The module $S_{<d}$ is the submodule of the $R$-module of polynomials
+of degree less than~$n$, which is noetherian because it is generated
+by $1,x,\ldots, x^{n-1}$.  Thus $S_{<d}$ is finitely generated, and we
+may choose generators $h_1,\ldots, h_m$ for $S_{<d}$.
+
+We finish by proving using induction on the degree that every $g\in I$ is an
+$R[x]$-linear combination of $f_1,\ldots, f_n, h_1,\ldots h_m$.
+If $g\in I$ has degree $0$, then $g \in S_{<d}$, since $d\geq 1$, so
+$g$ is a linear combination of $h_1,\ldots, h_m$.  Next suppose
+$g\in I$ has degree $e$, and that we have proven the statement
+for all elements of $I$ of degree $<e$.
+If $e\leq d$, then $g\in S_{<d}$, so~$g$ is
+in the $R[x]$-ideal generated by $h_1,\ldots, h_m$.  Next suppose
+that $e\geq d$.  Then the leading coefficient~$b$
+of~$g$ lies in the ideal~$A$ of leading coefficients of elements of~$I$, so there
+exist $r_i\in R$ such that $b=r_1 a_1 + \cdots + r_n a_n$.  Since
+$f_i$ has leading coefficient $a_i$, the difference $g- x^{e-d} r_i
+f_i$ has degree less than the degree~$e$ of~$g$.  By induction $g-
+x^{e-d} r_i f_i$ is an $R[x]$ linear combination of $f_1,\ldots, f_n,
+h_1,\ldots h_m$, so $g$ is also an $R[x]$ linear combination of
+$f_1,\ldots, f_n, h_1,\ldots h_m$.  Since each $f_i$ and $h_j$ lies in
+$I$, it follows that $I$ is generated by $f_1,\ldots, f_n, h_1,\ldots
+h_m$, so $I$ is finitely generated, as required.
+\end{proof}
+
+Properties of noetherian rings and modules will be crucial in the rest
+of this course.  We have proved above that noetherian rings have many
+desirable properties.
+
+\subsection{The Ring $\Z$ is noetherian}
+The ring $\Z$ of integers is noetherian because every ideal of $\Z$ is
+generated by one element. 
+\begin{proposition}\label{prop:zpid}\iprop{$\Z$ is a PID}
+Every ideal of the ring $\Z$ of integers is principal.
+\end{proposition}
+\begin{proof}
+Suppose~$I$ is a nonzero ideal in~$\Z$.  Let~$d$ the least positive
+element of~$I$.  Suppose that $a\in I$ is any nonzero element of~$I$.
+Using the division algorithm, write  $a=dq + r$, where~$q$ is an integer
+and $0\leq r < d$.  We have $r=a-dq\in I$ and $r<d$, so our assumption
+that $d$ is minimal implies that $r=0$, so $a=dq$ is in the ideal generated
+by~$d$.   Thus~$I$ is the principal ideal generated by~$d$.
+\end{proof}
+
+\begin{example}
+Let $I=(12,18)$ be the ideal of $\Z$ generated by $12$ and $18$.
+If $n=12a+18b\in I$, with $a,b\in\Z$, 
+then $6\mid n$, since $6\mid 12$ and $6\mid 18$.
+Also, $6=18-12\in I$, so $I=(6)$.
+
+The ring $\Z$
+in \sage{} is {\tt ZZ}, which is Noetherian.
+\begin{verbatim}
+sage: ZZ.is_noetherian()
+True
+\end{verbatim}
+We create the ideal $I$ in \sage{} as follows, and note that
+it is principal:
+\begin{verbatim}
+sage: I = ideal(12,18); I
+Principal ideal (6) of Integer Ring
+sage: I.is_principal()
+True
+\end{verbatim}
+We could also create $I$ as follows:
+\begin{verbatim}
+sage: ZZ.ideal(12,18)
+Principal ideal (6) of Integer Ring
+\end{verbatim}
+\end{example}
+
+Proposition~\ref{prop:noethfg} and \ref{prop:zpid} together imply that
+any finitely generated abelian group is noetherian.  This means that
+subgroups of finitely generated abelian groups are finitely generated,
+which provides the missing step in our proof of the structure theorem
+for finitely generated abelian groups.
+
+\section{Rings of Algebraic Integers}
+In this section we will learn about rings of algebraic integers and
+discuss some of their properties.  We will prove that the ring of
+integers $\O_K$ of a number field is noetherian.
+
+Fix an algebraic closure $\Qbar$ of $\Q$.  Thus $\Qbar$ is an infinite
+field extension of $\Q$ with the property that every polynomial
+$f\in\Q[x]$ splits as a product of linear factors in $\Qbar[x]$.  One
+choice of $\Qbar$ is the subfield of the complex numbers $\C$
+generated by all roots in $\C$ of all polynomials with coefficients 
+in~$\Q$.  Note that any two choices of~$\Qbar$ are isomorphic, but there will
+be many isomorphisms between them.   
+
+An \defn{algebraic integer} is an element of $\Qbar$.
+
+\begin{definition}[Algebraic Integer]
+An element $\alpha\in\Qbar$ is an \defn{algebraic integer} if it is a
+root of some monic polynomial with coefficients in~$\Z$.
+\end{definition}
+For example, $\sqrt{2}$ is an algebraic integer, since it is a root
+of $x^2-2$, but one can prove
+$1/2$ is not an algebraic integer, since one can show that
+it is not the root of any monic polynomial over~$\Z$.
+Also $\pi$ and $e$ are {\em not} algebraic numbers (they are 
+\defn{transcendental}).    
+
+\begin{example}
+We compute some minimal polynomials in \sage.
+The minimal polynomial of $1/2$:
+\begin{verbatim}
+sage: (1/2).minpoly()
+x - 1/2
+\end{verbatim}
+We construct a root $a$ of $x^2-2$ and compute its minimal polynomial:
+\begin{verbatim}
+sage: k.<a> = NumberField(x^2 - 2)
+sage: a^2 - 2
+0
+sage: a.charpoly()
+x^2 - 2
+\end{verbatim}%link
+Finally we compute the minimal polynomial of $\sqrt{2}/2 + 3$, which
+is not integral:
+%link
+\begin{verbatim}
+sage: (a/2 + 3).charpoly()
+x^2 - 6*x + 17/2
+\end{verbatim}
+\end{example}
+
+The only elements of $\Q$ that are algebraic integers are the usual
+integers $\Z$.  However, there are elements of $\Qbar$ that have
+denominators when written down, but are still algebraic integers.  For example,
+$$
+  \alpha = \frac{1+\sqrt{5}}{2}
+$$
+is an algebraic integer, since it is a root of the monic 
+polynomial $x^2 - x - 1$.  We verify this using \sage below,
+though of course this is easy to do by hand (you should try
+much more complicated examples in \sage).
+\begin{verbatim}
+sage: k.<a> = QuadraticField(5)
+sage: a^2
+5
+sage: alpha = (1 + a)/2
+sage: alpha.charpoly()
+x^2 - x - 1
+sage: alpha.is_integral()
+True
+\end{verbatim}
+
+\begin{definition}[Minimal Polynomial]
+The \defn{minimal polynomial} of $\alpha\in\Qbar$ is the monic polynomial
+$f\in\Q[x]$ of least positive degree such that $f(\alpha)=0$.
+\end{definition}
+It is a consequence of Lemma~\ref{lem:mindiv} that
+the minimal polynomial~$\alpha$ is unique.
+The minimal polynomial of $1/2$ is $x-1/2$, and
+the minimal polynomial of $\sqrt[3]{2}$ is $x^3-2$.
+
+\begin{example}
+We compute the minimal polynomial of a number expressed
+in terms of $\sqrt[4]{2}$:
+\begin{verbatim}
+sage: k.<a> = NumberField(x^4 - 2)
+sage: a^4
+2
+sage: (a^2 + 3).minpoly()
+x^2 - 6*x + 7
+\end{verbatim}
+
+\end{example}
+
+\begin{lemma}\label{lem:mindiv}
+  Suppose $\alpha \in\Qbar$.  Then the minimal polynomial of~$\alpha$
+  divides any polynomial~$h$ such that $h(\alpha)=0$.
+\end{lemma}
+\begin{proof}
+  Let~$f$ be a minimal polynomial of~$\alpha$.  If $h(\alpha)=0$, use
+  the division algorithm to write $h=qf + r$, where $0\leq \deg(r) <
+  \deg(f)$.  We have $$r(\alpha) = h(\alpha) - q(\alpha) f(\alpha) =
+  0,$$ so $\alpha$ is a root of~$r$.  However,~$f$ is the monic
+  polynomial of least positive degree with root~$\alpha$, so $r=0$.
+\end{proof}
+
+\begin{lemma}\label{lem:minpolint}\ilem{minimal polynomial of algebraic integer}
+If~$\alpha$ is an algebraic integer, then the minimal polynomial
+of~$\alpha$ has coefficients in~$\Z$.
+\end{lemma}
+\begin{proof}
+Suppose $f\in\Q[x]$ is the minimal polynomial of $\alpha$. 
+Since $\alpha$ is an algebraic integer, there is a polynomial
+$g\in\Z[x]$ that is monic such that $g(\alpha)=0$.
+By Lemma~\ref{lem:mindiv}, we have
+$g=fh$, for some monic $h\in\Q[x]$.  If $f\not\in\Z[x]$, then some prime~$p$
+divides the denominator of some coefficient of $f$.  Let $p^i$ be the
+largest power of~$p$ that divides some denominator of some
+coefficient~$f$, and likewise let $p^j$ be the largest power of~$p$
+that divides some denominator of a coefficient of~$h$.  Then $p^{i+j}g
+= (p^if)(p^j h)$, and if we reduce both sides modulo $p$, then the
+left hand side is $0$ but the right hand side is a product of two
+nonzero polynomials in $\F_p[x]$, hence nonzero, a contradiction.
+\end{proof}
+
+\begin{proposition}\label{prop:intfg}\iprop{characterization of integrality}
+An element $\alpha\in\Qbar$ is integral if and only if $\Z[\alpha]$ is
+finitely generated as a $\Z$-module.
+\end{proposition}
+\begin{proof}
+Suppose~$\alpha$ is integral and let $f\in\Z[x]$ be the monic minimal polynomial
+of~$\alpha$ (that $f\in\Z[x]$ is Lemma~\ref{lem:minpolint}).  Then $\Z[\alpha]$
+is generated by $1,\alpha,\alpha^2,\ldots,\alpha^{d-1}$, where~$d$ is
+the degree of~$f$.   Conversely, suppose $\alpha\in\Qbar$ is such that
+$\Z[\alpha]$ is finitely generated, say by elements 
+$f_1(\alpha), \ldots, f_n(\alpha)$.  Let~$d$ be any integer bigger
+than the degrees of all~$f_i$.  Then there exist integers $a_i$ such
+that $\alpha^d = \sum_{i=1}^n a_i f_i(\alpha)$, hence~$\alpha$ satisfies
+the monic polynomial $x^d - \sum_{i=1}^n a_i f_i(x) \in \Z[x]$, so~$\alpha$
+is integral.
+\end{proof}
+
+\begin{example}\label{ex:notint}
+The rational number $\alpha=1/2$ is not integral.  Note that
+$G=\Z[1/2]$ is not a finitely generated $\Z$-module, since~$G$ is infinite
+and $G/2G=0$.  (You can see that $G/2G=0$ implies that $G$ is not finitely
+generated, by assuming that $G$ is finitely generated, using the structure
+theorem to write $G$ as a product of cyclic groups, and noting that $G$
+has nontrivial $2$-torsion.)
+\end{example}
+
+\begin{proposition}\iprop{$\Zbar$ is a ring}
+The set $\Zbar$ of all algebraic integers is a ring, i.e., the sum and
+product of two algebraic integers is again an algebraic integer.
+\end{proposition}
+\begin{proof}
+Suppose $\alpha, \beta\in \Zbar$, and let $m, n$ be the degrees of the
+minimal polynomials of $\alpha, \beta$, respectively.  Then
+$1,\alpha,\ldots,\alpha^{m-1}$ span $\Z[\alpha]$ and
+$1,\beta,\ldots,\beta^{n-1}$ span $\Z[\beta]$ as $\Z$-module.  Thus
+the elements $\alpha^i\beta^j$ for $i \leq m, j\leq n$ span
+$\Z[\alpha, \beta]$.  Since $\Z[\alpha + \beta]$ is a submodule of the
+finitely-generated module $\Z[\alpha, \beta]$, it is finitely
+generated, so $\alpha+\beta$ is integral.  Likewise, $\Z[\alpha\beta]$
+is a submodule of $\Z[\alpha, \beta]$, so it is also finitely
+generated and $\alpha\beta$ is integral.
+\end{proof}
+
+\begin{example}
+  We illustrate an example of a sum and product of two algebraic
+  integers being an algebraic integer.  We first make the relative number
+  field obtained by adjoining a root of $x^3 - 5$ to the field
+  $\Q(\sqrt{2})$:
+\begin{verbatim}
+sage: k.<a, b> = NumberField([x^2 - 2, x^3 - 5])
+sage: k
+Number Field in a with defining polynomial x^2 + -2 over its base field
+\end{verbatim}%link
+
+\noindent Here $a$ and $b$ are roots of $x^2-2$ and $x^3-5$, respectively.
+%link
+\begin{verbatim}
+sage: a^2
+2
+sage: b^3
+5
+\end{verbatim}%link
+
+\noindent We compute the minimal polynomial of the sum and product of
+$\sqrt[3]{5}$ and $\sqrt{2}$.  The command {\tt absolute\_minpoly}
+gives the minimal polynomial of the element over the rational numbers.
+%link
+\begin{verbatim}
+sage: (a+b).absolute_minpoly()
+x^6 - 6*x^4 - 10*x^3 + 12*x^2 - 60*x + 17
+sage: (a*b).absolute_minpoly()
+x^6 - 200
+\end{verbatim}
+Of course the minimal polynomial of the product is $\sqrt[3]{5}
+\sqrt{2}$ is trivial to compute by hand.  The minimal polynomial of
+$\alpha = \sqrt[3]{5} + \sqrt{2}$ could be computed by hand by
+computing the determinant of the matrix given by left multiplication
+of $\alpha$ on this basis:
+$$
+ 1,\sqrt{2}, \sqrt[3]{5}, \sqrt[3]{5}\sqrt{2}, \sqrt[3]{5}^2, \sqrt[3]{5}^2\sqrt{2}.
+$$
+
+The following is an alternative more symbolic way to compute the
+minimal polynomials above, though it is not provably correct.  We
+compute $\alpha$ to 100 bits precision (via the {\tt n} command), then
+use the LLL algorithm (via the {\tt algdep} command) to heuristically
+find a linear relation between the first $6$ powers of $\alpha$.
+\begin{verbatim}
+sage: a = 5^(1/3); b = sqrt(2)
+sage: c = a+b; c
+5^(1/3) + sqrt(2)
+sage: (a+b).n(100).algdep(6)
+x^6 - 6*x^4 - 10*x^3 + 12*x^2 - 60*x + 17
+sage: (a*b).n(100).algdep(6)
+x^6 - 200
+\end{verbatim}
+\end{example}
+
+\begin{definition}[Number field]
+  A \defn{number field} is a field~$K$ that contains the rational
+  numbers $\QQ$ such that the degree $[K:\Q] = \dim_\Q(K)$ is finite.
+\end{definition}
+
+If $K$ is a number field, then by the primitive
+element theorem there is an $\alpha \in K$ so that $K = \QQ(\alpha)$.
+Let $f(x) \in \QQ[x]$ be the minimal polynomial of $\alpha$.
+For any fixed choice of $\Qbar$, there is some $\alpha'\in\Qbar$
+such that $f(\alpha')=0$.  The map $K\to \Qbar$
+that sends $\alpha$ to $\alpha'$ defines an embedding $K\hra \Qbar$.
+Thus any number field can be embedded (in $[K:\Q]$ possible ways) 
+in any fixed choice $\Qbar$ of an algebraic closure of $\Q$.
+
+\begin{definition}[Ring of Integers]
+The \defn{ring of integers} of a number field~$K$ is the ring 
+$$
+  \O_K = \{x \in K : \text{ $x$ satisfies a monic polynomial with integer coefficients }\}.
+$$
+\end{definition}
+Note that $\O_K$ is a ring, because 
+if we fix an embedding of $K$ into $\Qbar$, then
+$$
+  \O_K = K \cap \Zbar.
+$$
+
+
+The field $\Q$ of rational numbers is a number field of degree $1$,
+and the ring of integers of $\Q$ is $\Z$.  The field $K=\Q(i)$ of
+Gaussian integers has degree $2$ and $\O_K = \Z[i]$.  The field
+$K=\Q(\sqrt{5})$ has ring of integers $\O_K = \Z[(1+\sqrt{5})/2]$.
+Note that the Golden ratio $(1+\sqrt{5})/2$ satisfies $x^2-x-1$.
+The ring of integers of $K=\Q(\sqrt[3]{9})$ is
+$\Z[\sqrt[3]{3}]$, where $\sqrt[3]{3}=\frac{1}{3}(\sqrt[3]{9})^2$.
+
+\begin{definition}[Order]\label{defn:order}
+An \defn{order} in $\O_K$ is any subring $R$ of $\O_K$ such that the
+quotient $\O_K/R$ of abelian groups is finite.  
+(Note that $R$ must contain $1$ because it is a ring, and for us
+every ring has a $1$.)
+\end{definition}
+As noted above, $\Z[i]$ is the ring of integers of $\Q(i)$.  For every
+nonzero integer~$n$, the subring $\Z+ni\Z$ of $\Z[i]$ is an order.
+The subring $\Z$ of $\Z[i]$ is not an order, because $\Z$ does not
+have finite index in $\Z[i]$.  Also the subgroup $2\Z + i\Z$ of
+$\Z[i]$ is not an order because it is not a ring.  
+
+We define the number field $\Q(i)$ and compute its
+ring of integers, which has discriminant $-4$.
+\begin{verbatim}
+sage: K.<i> = NumberField(x^2 + 1)
+sage: OK = K.ring_of_integers(); OK
+Order with module basis 1, i in Number Field in i with 
+defining polynomial x^2 + 1
+sage: OK.discriminant()
+-4
+\end{verbatim}%link
+
+\noindent Next we compute the order $\Z + 3i \Z$.
+%link
+\begin{verbatim}
+sage: O3 = K.order(3*i); O3
+Order with module basis 1, 3*i in Number Field in i with 
+defining polynomial x^2 + 1
+sage: O3.gens()
+[1, 3*i]
+\end{verbatim}%link
+
+\noindent Notice that the distriminant is $-36 = -4 \cdot 3^2$:
+%link
+\begin{verbatim}
+sage: O3.discriminant()
+-36
+\end{verbatim}%link
+
+\noindent We test whether certain elements are in the order.
+%link
+\begin{verbatim}
+sage: 5 + 9*i in O3
+True
+sage: 1 + 2*i in O3
+False
+\end{verbatim}
+
+We will frequently consider orders because they are often much easier
+to write down explicitly than $\O_K$.  For example, if $K=\Q(\alpha)$
+and $\alpha$ is an algebraic integer, then $\Z[\alpha]$ is an order in
+$\O_K$, but frequently $\Z[\alpha]\neq \O_K$.
+
+\begin{example}
+In this example $[\O_K : \Z[a]] = 2197$.  First we define
+the number field $K=\Q(a)$ where $a$ is a root of $x^3 - 15 x^2 - 94 x - 3674$,
+then we compute the order $\Z[a]$ generated by $a$.
+\begin{verbatim}
+sage: K.<a> = NumberField(x^3 - 15*x^2 - 94*x - 3674)
+sage: Oa = K.order(a); Oa
+Order with module basis 1, a, a^2 in Number Field in a with defining 
+polynomial x^3 - 15*x^2 - 94*x - 3674
+\end{verbatim}%link
+
+\noindent Next we compute the maximal order $\O_K$ of $K$ with a basis, and
+compute that the index of $\Z[a]$ in $\O_K$ is $2197=13^3$.
+%link
+\begin{verbatim}
+sage: OK = K.maximal_order()
+sage: OK.basis()
+[25/169*a^2 + 10/169*a + 1/169, 5/13*a^2 + 1/13*a, a^2]
+sage: Oa.index_in(OK)
+2197
+\end{verbatim}
+\end{example}
+
+\begin{lemma}\label{lem:intq}\ilem{$\O_K$ span and $\O_K\cap \Q=\Z$}
+Let $\O_K$ be the ring of integers of a number field.  Then 
+$\O_K\cap \Q = \Z$ and $\Q\O_K = K$.
+\end{lemma}
+\begin{proof}
+  Suppose $\alpha\in \O_K\cap\Q$ with $\alpha=a/b \in \Q$ in lowest
+  terms and $b>0$.  Since $\alpha$ is integral, $\Z[a/b]$ is finitely
+  generated as a module, so $b=1$ (see Example~\ref{ex:notint}).
+
+To prove that $\Q\O_K=K$, suppose $\alpha\in K$, and let
+$f(x)\in\Q[x]$ be the minimal monic polynomial of~$\alpha$.  For any
+positive integer~$d$, the minimal monic polynomial of $d\alpha$ is
+$d^{\deg(f)}f(x/d)$, i.e., the polynomial obtained from $f(x)$ by
+multiplying the coefficient of $x^{\deg(f)}$ by~$1$, multiplying the
+coefficient of $x^{\deg(f)-1}$ by~$d$, multiplying the coefficient of
+$x^{\deg(f)-2}$ by $d^2$, etc.  If~$d$ is the least common multiple of
+the denominators of the coefficients of~$f$, then the minimal monic
+polynomial of $d\alpha$ has integer coefficients, so $d\alpha$ is
+integral and $d\alpha\in \O_K$.  This proves that $\Q\O_K = K$.
+\end{proof}
+
+\section{Norms and Traces}
+%\setcounter{section}{1}
+In this section we develop some basic properties of norms, traces, and
+discriminants, and give more properties of rings of integers in the
+general context of Dedekind domains.
+
+Before discussing norms and traces we introduce some notation for
+field extensions.  If $K\subset L$ are number fields, we let $[L:K]$
+denote the dimension of~$L$ viewed as a $K$-vector space.  If~$K$ is a
+number field and $a\in \Qbar$, let $K(a)$ be the extension of~$K$
+generated by~$a$, which is the smallest number field that contains
+both~$K$ and~$a$.  If $a\in\Qbar$ then~$a$ has a minimal polynomial
+$f(x)\in\Q[x]$, and the \defn{Galois conjugates} of~$a$ are the roots
+of~$f$. The are called the Galois conjugates because the are the orbit
+of $a$ under the action of $\Gal(\Qbar/\Q)$.  
+
+\begin{example}
+The element $\sqrt{2}$ has minimal polynomial $x^2-2$ and the Galois
+conjugates are $\sqrt{2}$ and $-\sqrt{2}$.  The cube root $\sqrt[3]{2}$
+has minimial polynomial $x^3 - 2$ and three Galois conjugates 
+$\sqrt[3]{2}, \zeta_3\sqrt[3]{2}, \zeta_3^2\sqrt[3]{2}$, where
+$\zeta_3$ is a cube root of unity. 
+
+We create the extension $\Q(\zeta_3)(\sqrt[3]{2})$ in \sage.
+\begin{verbatim}
+sage: L.<cuberoot2> = CyclotomicField(3).extension(x^3 - 2)
+sage: cuberoot2^3
+2
+\end{verbatim}%link
+
+\noindent Then we list the Galois conjugates of $\sqrt[3]{2}$. 
+%link
+\begin{verbatim}
+sage: cuberoot2.galois_conjugates()
+[cuberoot2, (-zeta3 - 1)*cuberoot2, zeta3*cuberoot2]
+\end{verbatim}%link
+
+\noindent Note that $\zeta_3^2 = -\zeta_3 - 1$:
+
+%link
+\begin{verbatim}
+sage: zeta3 = L.base_field().0
+sage: zeta3^2
+-zeta3 - 1
+\end{verbatim}
+\end{example}
+
+Suppose $K\subset L$ is an inclusion of number fields and let $a\in
+L$.  Then left multiplication by~$a$ defines a $K$-linear
+transformation $\ell_a:L\to L$.  (The transformation $\ell_a$ is
+$K$-linear because $L$ is commutative.)
+
+\begin{definition}[Norm and Trace]
+The \defn{norm} and \defn{trace} of~$a$ from~$L$ to~$K$ are
+$$\Norm_{L/K}(a)=\det(\ell_a) \quad\text{ and }\quad
+ \tr_{L/K}(a)=\tr(\ell_a).$$
+\end{definition}
+We know from linear algebra that 
+determinants are multiplicative
+and traces are additive, so for $a,b\in L$ we have
+$$\Norm_{L/K}(ab) = \Norm_{L/K}(a)\cdot \Norm_{L/K}(b)$$
+and
+$$\tr_{L/K}(a+b) = \tr_{L/K}(a) + \tr_{L/K}(b).$$
+
+Note that if $f\in\Q[x]$ is the characteristic polynomial of~$\ell_a$,
+then the constant term of $f$ is $(-1)^{\deg(f)}\det(\ell_a)$, and the
+coefficient of $x^{\deg(f)-1}$ is $-\tr(\ell_a)$.
+
+\begin{proposition}\label{prop:normtracesigma}\iprop{norm and trace}
+Let $a\in L$ and let $\sigma_1,\ldots, \sigma_d$, where $d=[L:K]$, be
+the distinct field embeddings $L\hra \Qbar$ that fix every element
+of~$K$.  Then
+$$
+\Norm_{L/K}(a) = \prod_{i=1}^d \sigma_i(a)
+\quad\text{ and }\quad
+\tr_{L/K}(a) = \sum_{i=1}^d \sigma_i(a).
+$$
+\end{proposition}
+\begin{proof}
+  We prove the proposition by computing the characteristic
+  polynomial~$F$ of~$a$.  Let $f\in K[x]$ be the minimal polynomial
+  of~$a$ over~$K$, and note that~$f$ has distinct roots and is
+  irreducible, since it is the polynomial in $K[x]$ of least degree
+  that is satisfied by~$a$ and~$K$ has characteristic~$0$.  Since~$f$
+  is irreducible, we have $K(a) = K[x]/(f)$, so $[K(a):K]=\deg(f)$.
+  Also~$a$ satisfies a polynomial if and only if~$\ell_a$ does, so the
+  characteristic polynomial of $\ell_a$ acting on $K(a)$ is~$f$.  Let
+  $b_1,\ldots,b_n$ be a basis for $L$ over $K(a)$ and note that
+  $1,\ldots, a^m$ is a basis for $K(a)/K$, where $m=\deg(f)-1$.  Then
+  $a^i b_j$ is a basis for $L$ over $K$, and left multiplication by
+  $a$ acts the same way on the span of $b_j, a b_j, \ldots, a^m b_j$
+  as on the span of $b_k, a b_k, \ldots, a^m b_k$, for any pair $j,
+  k\leq n$.  Thus the matrix of $\ell_a$ on $L$ is a block direct sum
+  of copies of the matrix of $\ell_a$ acting on $K(a)$, so the
+  characteristic polynomial of $\ell_a$ on~$L$ is $f^{[L:K(a)]}$.  The
+  proposition follows because the roots of $f^{[L:K(a)]}$ are exactly
+  the images $\sigma_i(a)$, with multiplicity $[L:K(a)]$ (since each
+  embedding of $K(a)$ into $\Qbar$ extends in exactly $[L:K(a)]$ ways
+  to $L$).
+\end{proof}
+
+It is important in Proposition~\ref{prop:normtracesigma} that
+the product and sum be over {\em all} the images $\sigma_i(a)$,
+not over just the distinct images.  For example, if $a=1\in L$, then
+$\Tr_{L/K}(a) = [L:K]$, whereas the sum of the distinct conjugates
+of $a$ is $1$.
+
+The following corollary asserts that the norm and trace behave well in
+towers.
+\begin{corollary}\icor{norm, trace compatible with towers}
+Suppose $K\subset L \subset M$ is a tower of number fields, and
+let $a\in M$.  Then 
+$$
+\Norm_{M/K}(a) = \Norm_{L/K}(\Norm_{M/L}(a))
+\quad\text{ and }\quad
+\tr_{M/K}(a) = \tr_{L/K}(\tr_{M/L}(a)).
+$$
+\end{corollary}
+\begin{proof}
+  For the first equation, both sides are the product of $\sigma_i(a)$,
+  where $\sigma_i$ runs through the embeddings of~$M$ into $\Qbar$
+  that fix $K$.  To see this, suppose $\sigma:L\to \Qbar$ fixes $K$.
+  If $\sigma'$ is an extension of $\sigma$ to $M$, and $\tau_1,\ldots,
+  \tau_d$ are the embeddings of $M$ into $\Qbar$ that fix $L$, then
+  $\sigma'\tau_1,\ldots,\sigma'\tau_d$ are exactly the extensions
+  of~$\sigma$ to~$M$.  For the second statement, both sides are the
+  sum of the $\sigma_i(a)$.
+\end{proof}
+
+The norm and trace down to~$\Q$ of an algebraic integer~$a$ is an
+element of~$\Z$, because the minimal polynomial of~$a$ has integer
+coefficients, and the characteristic polynomial of~$a$ is a power of the
+minimal polynomial, as we saw in the proof of
+Proposition~\ref{prop:normtracesigma}.
+
+\begin{proposition}\label{prop:ok_lattice}\iprop{$\O_K$ is a lattice}
+Let~$K$ be a number field.  The ring of integers $\O_K$ is a lattice
+in~$K$, i.e., $\Q\O_K=K$ and $\O_K$ is an abelian group of rank $[K:\Q]$.
+\end{proposition}
+\begin{proof}
+We saw in Lemma~\ref{lem:intq} that $\Q\O_K=K$.  Thus there exists a
+basis $a_1,\ldots, a_n$ for~$K$, where each~$a_i$ is in $\O_K$.
+Suppose that as $x=\sum_{i=1}^n c_i a_i\in \O_K$ varies over all elements of
+$\O_K$ the denominators of the coefficients $c_i$ are arbitrarily
+large.  Then subtracting off integer multiples of the $a_i$, we see
+that as $x=\sum_{i=1}^n c_i a_i\in \O_K$ varies over elements of $\O_K$ with
+$c_i$ between $0$ and $1$, the denominators of the $c_i$ are also
+arbitrarily large.  This implies that there are infinitely many elements
+of $\O_K$ in the bounded subset
+$$S = \left\{c_1 a_1 +\cdots + c_n a_n : c_i \in \Q,\, 0\leq c_i \leq 1\right\}\subset K.$$
+Thus for any $\eps>0$, there are elements $a,b\in \O_K$ such that the
+coefficients of $a-b$ are all less than $\eps$ (otherwise the elements
+of $\O_K$ would all be a ``distance'' 
+of least~$\eps$ from each other, so only finitely
+many of them would fit in~$S$).
+
+As mentioned above, the norms of elements of $\O_K$ are integers.
+Since the norm of an element is the determinant of left multiplication
+by that element, the norm is a homogenous polynomial of degree $n$ in
+the indeterminate coefficients $c_i$, which is $0$ only on the
+element~$0$.  If the $c_i$ get arbitrarily small for elements of
+$\O_K$, then the values of the norm polynomial get arbitrarily small,
+which would imply that there are elements of $\O_K$ with positive norm
+too small to be in $\Z$, a contradiction.  So the set $S$ contains
+only finitely many elements of $\O_K$.  Thus the denominators of the
+$c_i$ are bounded, so for some $d$, we have that $\O_K$ has finite
+index in $A=\frac{1}{d}\Z a_1 + \cdots + \frac{1}{d}\Z a_n$.  Since
+$A$ is isomorphic to $\Z^n$, it follows from the structure theorem for
+finitely generated abelian groups that $\O_K$ is isomorphic as a
+$\Z$-module to $\Z^n$, as claimed.
+\end{proof}
+
+\begin{corollary}\label{prop:intnoetherian}\icor{$\O_K$
+is noetherian}
+The ring of integers $\O_K$ of a number field is noetherian.
+\end{corollary}
+\begin{proof}
+By Proposition~\ref{prop:ok_lattice}, the ring $\O_K$ is
+finitely generated as a module over $\Z$, so it is certainly
+finitely generated as a ring over $\Z$.  By Theorem~\ref{thm:hilbert},
+ $\O_K$ is noetherian.
+\end{proof}
+
+
+\section{Recognizing Algebraic Numbers using Lattice Basis Reduction (LLL)}\label{sec:LLL}
+
+Suppose you somehow compute a decimal approximation $\alpha$
+to some rational number $\beta \in \QQ$ and from this wish
+to recover $\beta$.  For concreteness, say
+$$\beta= 22/389 = 0.05655526992287917737789203084832904884318766066838046\ldots$$
+and you compute
+$$
+  \alpha = 0.056555.
+$$
+Now suppose given only $\alpha$ that you would like to recover
+$\beta$.  A standard technique is to use continued fractions, which
+yields a sequence of good rational approximations
+for $\alpha$; by truncating right before a surprisingly big
+partial quotient, we obtain $\beta$:
+\begin{verbatim}
+sage: v = continued_fraction(0.056555)
+sage: continued_fraction(0.056555)
+[0, 17, 1, 2, 6, 1, 23, 1, 1, 1, 1, 1, 2]
+sage: convergents([0, 17, 1, 2, 6, 1])
+[0, 1/17, 1/18, 3/53, 19/336, 22/389]
+\end{verbatim}
+   
+Generalizing this, suppose next that somehow you numerically approximate
+an algebraic number, e.g., by evaluating a special
+function and get a decimal approximation $\alpha \in \C$
+to an algebraic number $\beta \in \Qbar$.  For concreteness,
+suppose $\beta = \frac{1}{3} + \sqrt[4]{3}$:
+\begin{verbatim}
+sage: N(1/3 + 3^(1/4), digits=50)
+1.64940734628582579415255223513033238849340192353916
+\end{verbatim}
+Now suppose you very much want to find the (rescaled) 
+minimal polynomial $f(x) \in \ZZ[x]$
+of $\beta$ just given this numerical approximation $\alpha$.
+This is of great value even without proof, since often in practice
+once you know a potential minimal polynomial you can
+verify that it is in fact right.  Exactly this situation
+arises in the explicit construction of class fields (a
+more advanced topic in number theory) and in the construction
+of Heegner points on elliptic curves.   As we will see, the
+LLL algorithm provides a polynomial time way to solve this
+problem, assuming $\alpha$ has been computed to
+sufficient precision. 
+
+\subsection{LLL Reduced Basis}
+Given a basis $b_1,\ldots, b_n$ for $\R^n$, the \defn{Gramm-Schmidt
+orthogonalization} process produces an orthogonal basis 
+$b_1^*,\ldots, b_n^*$ for $\R^n$ as follows.  Define inductively
+$$
+   b_i^* = b_i - \sum_{j < i} \mu_{i,j} b_j^*
+$$
+where
+$$
+\mu_{i,j} = \frac{b_i \cdot b_j^*}{b_j^* \cdot b_j^*}.
+$$
+
+\begin{example}
+We compute the Gramm-Schmidt orthogonal basis of the rows
+of a matrix.  Note that no square roots are introduced
+in the process; there would be square roots if we
+constructed an orthonormal basis. 
+\begin{verbatim}
+sage: A = matrix(ZZ, 2, [1,2, 3,4]); A
+[1 2]
+[3 4]
+sage: Bstar, mu = A.gramm_schmidt()
+\end{verbatim}%link
+
+\noindent{}The rows of the matrix $B^*$ are obtained
+from the rows of $A$ by the Gramm-Schmidt procedure. 
+%link
+\begin{verbatim}
+sage: Bstar
+[   1    2]
+[ 4/5 -2/5]
+sage: mu
+[   0    0]
+[11/5    0]
+\end{verbatim}
+\end{example}
+
+A \defn{lattice} $L\subset \R^n$ is a subgroup that
+is free of rank $n$ such that $\R L = \R^n$. 
+
+\begin{definition}[LLL-reduced basis]
+The basis $b_1,\ldots, b_n$ for a lattice $L\subset \R^n$
+is \defn{LLL reduced} if for all $i,j$, 
+$$
+   |\mu_{i,j}| \leq \frac{1}{2}
+$$   
+and for each $i\geq 2$, 
+$$
+  |b_i^*|^2 \geq \left( \frac{3}{4} - \mu_{i,i-1}^2\right) | b_{i-1}^*|^2
+$$
+
+\end{definition}
+
+For example, the basis $b_1 = (1,2)$, $b_2 = (3,4)$ for a lattice $L$
+ is {\em not}
+LLL reduced because $b_1^*=b_1$ and 
+$$
+   \mu_{2,1} = \frac{b_2 \cdot b_1^*}{b_1^* \cdot b_1^*}
+       = \frac{11}{5} > \frac{1}{2}.
+$$
+However, the basis $b_1 = (1,0)$, $b_2 = (0,2)$ for $L$ is
+LLL reduced, since
+$$
+ \mu_{2,1} = \frac{b_2 \cdot b_1^*}{b_1^* \cdot b_1^*}
+       = 0,
+$$
+and
+$$
+   2^2 \geq (3/4) \cdot 1^2.
+$$
+\begin{verbatim}
+sage: A = matrix(ZZ, 2, [1,2, 3,4])
+sage: A.LLL()
+[1 0]
+[0 2]
+\end{verbatim}
+
+\subsection{What LLL really means}
+The following theorem is not too difficult to prove.
+
+Let $b_1, \ldots, b_n$ be an LLL reduced basis
+for a lattice $L\subset \R^n$.  Let $d(L)$ denote
+the absolute value of the determinant of any matrix
+whose rows are basis for $L$.   Then the vectors
+$b_i$ are ``nearly orthogonal'' and ``short'' in 
+the sense of the following theorem:
+\begin{theorem}
+We have
+\begin{enumerate}
+\item $d(L) \leq \prod_{i=1}^n |b_i| \leq 2^{n(n-1)/4} d(L)$,
+\item For $1\leq j \leq i \leq n$, we have
+$$
+ |b_j| \leq 2^{(i-1)/2} |b_i^*|.
+$$
+\item The vector $b_1$ is very short in the sense that
+$$
+  |b_1| \leq 2^{(n-1)/4} d(L)^{1/n}
+$$
+and for every nonzero $x \in L$ we have
+$$
+  |b_1| \leq 2^{(n-1)/2} |x|.
+$$
+\item More generally, for any linearly independent $x_1,\ldots, x_t \in L$, we have 
+$$
+  |b_j| \leq 2^{(n-1)/2} \max(|x_1|, \ldots, |x_t|)
+$$
+for $1\leq j \leq t$. 
+\end{enumerate}
+\end{theorem}
+
+Perhaps the most amazing thing about the idea of an LLL
+reduced basis is that there is an algorithm (in fact many)
+that given a basis for a lattice $L$ produce an LLL reduced
+basis for $L$, and do so {\em quickly}, i.e., in polynomial
+time in the number of digits of the input.   The current
+optimal implementation (and practically optimal algorithms)
+for computing LLL reduced basis are due to Damien Stehle,
+and are included standard in Magma in Sage.   Stehle's code
+is amazing -- it can LLL reduce a random lattice in $\R^{n}$
+for $n<1000$ in a matter of minutes!!
+\begin{verbatim}
+sage: A = random_matrix(ZZ, 200)
+sage: t = cputime()
+sage: B = A.LLL()     
+sage: cputime(t)     # random output
+3.0494159999999999
+\end{verbatim}%link
+
+\noindent{}There is even a very fast variant of Stehle's implementation that computes a basis for $L$ that is very likely LLL reduced but may in rare
+cases fail to be LLL reduced.
+
+%link
+\begin{verbatim}
+sage: t = cputime()
+sage: B = A.LLL(algorithm="fpLLL:fast")   # not tested
+sage: cputime(t)      # random output
+0.96842699999999837
+\end{verbatim}
+
+\subsection{Applying LLL}
+The LLL definition and algorithm has many application in 
+number theory, e.g., to cracking lattice-based cryptosystems,
+to enumerating all short vectors in a lattice, to finding relations
+between decimal approximations to complex numbers, to very
+fast univariate polynomial factorization in $\ZZ[x]$ and more
+generally in $K[x]$ where $K$ is a number fields, and to
+computation of kernels and images of integer matrices.  LLL
+can also be used to solve the problem of recognizing algebraic
+numbers mentioned at the beginning of Section~\ref{sec:LLL}.
+
+Suppose as above that $\alpha$ is a decimal approximation
+to some algebraic number $\beta$, and to for simplicity
+assume that $\alpha\in\R$ (the general case of $\alpha \in \C$
+is described in \cite{cohen:algs}). 
+We finish by explaining how to use LLL to find a polynomial 
+$f(x) \in \ZZ[x]$ such that $f(\alpha)$ is small, hence
+has a shot at being the minimal polynomial of $\beta$. 
+
+Given a real number decimal approximation $\alpha$, an
+integer $d$ (the degree), and an integer $K$ (a function
+of the precision to which $\alpha$ is known), the following
+steps produce a polynomial $f(x) \in \ZZ[x]$ of degree 
+at most $d$ such that $f(\alpha)$ is small.  
+\begin{enumerate}
+\item Form the lattice in $\R^{d+2}$ with basis the rows
+of the matrix $A$ whose first $(d+1) \times (d+1)$ part is the
+identity matrix, and whose last column has entries
+\begin{equation}\label{eqn:K}
+K, \lfloor K\alpha \rfloor, \lfloor K\alpha^2 \rfloor, 
+\ldots \lfloor K\alpha^{d} \rfloor.
+\end{equation}
+(Note this matrix is $(d+1) \times (d+2)$ so the lattice
+is not of full rank in $\R^{d+2}$, which isn't a problem,
+since the LLL definition also makes sense for less vectors.)
+\item Compute an LLL reduced basis for the $\ZZ$-span of the rows
+of $A$, and let $B$ be the corresponding matrix. 
+Let $b_1 = (a_0, a_1, \ldots, a_{d+1})$ be the first
+row of $B$ and notice that $B$ is obtained from $A$
+by left multiplication by an invertible integer matrix.
+Thus $a_0,\ldots, a_d$ are the linear combination of the
+(\ref{eqn:K}) that equals $a_{d+1}$. Moreover, since $B$
+is LLL reduced we expect that $a_{d+1}$ is relatively small. 
+
+\item Output $f(x) = a_0 + a_1 x + \cdots a_{d} x^d$.
+We have that $f(\alpha) \sim a_{d+1}/K$, which is small.
+Thus $f(x)$ may be a very good candidate for the minimal
+polynomial of $\beta$ (the algebraic number we are approximating),
+assuming $d$ was chosen minimally and $\alpha$ was computed
+to sufficient precision.
+\end{enumerate}
+
+The following is a complete implementation of the above algorithm
+in Sage:
+\begin{verbatim}
+def myalgdep(a, d, K=10^6):    aa = [floor(K*a^i) for i in range(d+1)]    A = identity_matrix(ZZ, d+1)    B = matrix(ZZ, d+1, 1, aa)    A = A.augment(B)    L = A.LLL()    v = L[0][:-1].list()    return ZZ['x'](v)
+\end{verbatim}
+
+Here is an example of using it:
+\begin{verbatim}
+sage: R.<x> = RDF[]sage: f = 2*x^3 - 3*x^2 + 10*x - 4sage: a = f.roots()[0][0]; asage: myalgdep(a, 3, 10^6)       # not tested
+2*x^3 - 3*x^2 + 10*x - 4
+\end{verbatim}
+
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "ant"
+%%% End: 

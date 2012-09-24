@@ -1,0 +1,184 @@
+%\chapter{Exercises}
+%\label{ch:ex2}
+\begin{enumerate}
+\item Let $k$ be any field. Prove that the only nontrivial valuations
+on $k(t)$ which are trivial on $k$ are equivalent to the valuation
+(\ref{eqn:ffabsp}) or (\ref{eqn:ffabsoo}) of page~\pageref{eqn:ffabsp}.
+\item A field with the topology induced by a valuation is
+a topological field, i.e., the operations sum, product, 
+and reciprocal are continuous.
+\item Give an example of a non-archimedean valuation on a field that
+is not discrete.
+\item Prove that the field $\Q_p$ of $p$-adic numbers is 
+uncountable.
+\item Prove that the polynomial $f(x)=x^3 - 3x^2 + 2x + 5$ 
+has all its roots in $\Q_5$, and find the $5$-adic valuations
+of each of these roots.  (You might need to use
+Hensel's lemma, which we don't discuss in detail
+in this book. See \cite[App.~C]{cassels:global}.)
+
+\item In this problem you will compute an example of weak
+  approximation, like I did in the Example~\ref{ex:weakapprox}.  Let
+  $K=\Q$, let $\absspc_7$ be the $7$-adic absolute value, let
+  $\absspc_{11}$ be the $11$-adic absolute value, and let
+  $\absspc_{\infty}$ be the usual archimedean absolute value.  Find an
+  element $b\in \Q$ such that $\abs{b-a_i}_i<\frac{1}{10}$, where $a_7
+  = 1$, $a_{11} = 2$, and $a_{\infty} = -2004$.
+  
+\item Prove that $-9$ has a cube root in $\Q_{10}$ using the following
+  strategy (this is a special case of Hensel's Lemma, which you can
+  read about in an appendix to Cassel's article).
+
+\begin{enumerate}
+\item Show that there is an element $\alpha\in\Z$ such that $\alpha^3\con 9\pmod{10^3}$. 
+\item Suppose $n\geq 3$. 
+Use induction to show that if $\alpha_1\in\Z$ and 
+$\alpha^3\con 9\pmod{10^n}$,  then there exists $\alpha_2\in\Z$ such 
+that $\alpha_2^3\con 9\pmod{10^{n+1}}$.
+(Hint: Show that there is an integer~$b$ such that
+$(\alpha_1 + b\cdot 10^{n})^3 \con 9\pmod{10^{n+1}}$.)
+\item Conclude that $9$ has a cube root in $\Q_{10}$.
+\end{enumerate}
+
+\item\label{ex:padic0}
+Compute the first~$5$ digits of the $10$-adic expansions of the following
+rational numbers:
+$$ 
+ \frac{13}{2}, \quad \frac{1}{389}, \quad \frac{17}{19}, 
+ \quad \text{ the 4 square roots of $41$}.
+$$
+
+\item\label{ex:padic1}
+Let $N>1$ be an integer.  Prove that the series
+$$
+  \sum_{n=1}^{\infty} (-1)^{n+1}n! = 1! - 2! + 3! - 4! + 5! - 6! + \cdots.
+$$
+converges in $\Q_N$.
+
+\item\label{ex:padic2}
+Prove that $-9$ has a cube root in $\Q_{10}$ using the following strategy (this
+is a special case of ``Hensel's Lemma''\index{Hensel's lemma}).
+
+\begin{enumerate}
+\item Show that there is $\alpha\in\Z$ such that $\alpha^3\con 9\pmod{10^3}$. 
+\item Suppose $n\geq 3$. 
+Use induction to show that if $\alpha_1\in\Z$ and 
+$\alpha^3\con 9\pmod{10^n}$,  then there exists $\alpha_2\in\Z$ such 
+that $\alpha_2^3\con 9\pmod{10^{n+1}}$.
+(Hint: Show that there is an integer~$b$ such that
+$(\alpha_1 + b10^{n})^3 \con 9\pmod{10^{n+1}}$.)
+\item Conclude that $9$ has a cube root in $\Q_{10}$.
+\end{enumerate}
+
+\item\label{ex:padic4}
+Let $N>1$ be an integer.  
+\begin{enumerate}
+\item Prove that $\Q_N$ is equipped with a natural ring structure.
+\item If $N$ is prime, prove that $\Q_N$ is a field.
+\end{enumerate}
+
+
+\item\label{ex:padic3}
+\begin{enumerate}
+\item Let $p$ and $q$ be distinct primes.  Prove that 
+$\Q_{pq} \isom \Q_p \cross \Q_q$.
+\item Is $\Q_{p^2}$ isomorphic to either of $\Q_p\cross \Q_p$ or $\Q_p$?
+\end{enumerate}
+
+
+\item\label{ques:approxfield} Prove that every finite extension of
+  $\Q_p$ ``comes from'' an extension of~$\Q$, in the following sense.
+  Given an irreducible polynomial $f\in\Q_p[x]$ there exists an
+  irreducible polynomial $g\in \Q[x]$ such that the fields
+  $\Q_p[x]/(f)$ and $\Q_p[x]/(g)$ are isomorphic.  [Hint: Choose each
+  coefficient of $g$ to be sufficiently close to the corresponding
+  coefficient of $f$, then use Hensel's lemma to show that $g$ has a
+  root in $\Q_p[x]/(f)$.]
+
+\item Find the $3$-adic expansion to precision 4 of each root of the following polynomial over $\Q_3$:
+$$
+  f = x^3 - 3x^2 + 2x + 3 \in \Q_3[x].
+$$
+Your solution should conclude with three expressions of the form 
+$$a_0 + a_1\cdot 3 + a_2\cdot 3^2 + a_3 \cdot 3^3 + O(3^4).$$
+
+\item
+\begin{enumerate}
+\item Find the normalized Haar measure of the following subset of 
+$\Q_7^+$:
+$$
+U = B\left(28,\frac{1}{50}\right) = 
+\left\lbrace x\in \Q_7 : \abs{x-28} < \frac{1}{50}\right\rbrace.
+$$
+\item
+Find the normalized Haar measure of the subset $\Z_7^*$ of
+$\Q_7^*$.
+\end{enumerate} 
+
+
+\item Suppose that $K$ is a finite extension of $\Q_p$ and $L$
+is a finite extension of $\Q_q$, with $p\neq q$ and assume
+that $K$ and $L$ have the same degree.  Prove that
+there is a polynomial $g\in \Q[x]$ such that $\Q_p[x]/(g)\isom K$
+and $\Q_q[x]/(g)\isom L$.  [Hint: Combine your solution to \ref{ques:approxfield} with the weak approximation theorem.]
+ 
+\item Prove that the ring $C$ defined in Section 9 really is the tensor
+product of $A$ and $B$, i.e., that it satisfies the defining universal
+mapping property for tensor products.  Part of this problem is for you
+to look up a functorial definition of tensor product.
+
+\item Find a zero divisor pair in $\Q(\sqrt{5})\tensor_\Q\Q(\sqrt{5})$.
+
+\item 
+\begin{enumerate}
+\item Is $\Q(\sqrt{5})\tensor_\Q\Q(\sqrt{-5})$ a field?
+\item Is $\Q(\sqrt[4]{5})\tensor_\Q\Q(\sqrt[4]{-5})\tensor_\Q\Q(\sqrt{-1})$ a field?
+\end{enumerate}
+
+\item Suppose $\zeta_5$ denotes a primitive $5$th root of unity.  For
+  any prime $p$, consider the tensor product $\Q_p \tensor_\Q
+  \Q(\zeta_5) = K_1\oplus \cdots \oplus K_{n(p)}$.  Find a simple
+  formula for the number $n(p)$ of fields appearing in the
+  decomposition of the tensor product $\Q_p \tensor_\Q \Q(\zeta_5)$.
+  To get full credit on this problem your formula must be correct, but
+  you do {\em not} have to prove that it is correct.
+
+\item Suppose $\normspc_1$ and $\normspc_2$ are 
+equivalent norms on a finite-dimensional vector space
+$V$ over a field $K$ (with valuation $\absspc$). 
+Carefully prove that the topology induced by $\normspc_1$
+is the same as that induced by $\normspc_2$.
+
+\item Suppose $K$ and $L$ are number fields (i.e., finite
+extensions of $\Q$).  Is it possible for the tensor
+product $K\tensor_\Q L$ to contain a nilpotent element? 
+(A nonzero element $a$ in a ring $R$ is \defn{nilpotent} if 
+there exists $n>1$ such that $a^n=0$.)
+
+\item  Let $K$ be the number field $\Q(\sqrt[5]{2})$.
+
+\begin{enumerate}
+\item In how many ways does the $2$-adic valuation $\absspc_2$ on $\Q$
+extend to a valuation on $K$?
+\item Let $v=\absspc$ be a valuation on $K$ that extends $\absspc_2$.
+Let $K_v$ be the completion of $K$ with respect to $v$.
+What is the residue class field $\F$ of $K_v$?
+\end{enumerate}
+
+\item Prove that the product formula holds for $\F(t)$ similar to the
+  proof we gave in class using Ostrowski's theorem for $\Q$.  You may
+  use the analogue of Ostrowski's theorem for $\F(t)$, which you had
+  on a previous homework assignment.  (Don't give a measure-theoretic
+  proof.)
+\item Prove Theorem~\ref{thm:adelequo}, that ``The global field $K$
+  is discrete in $\AA_K$ and the quotient $\AA_K^+/K^+$ of additive
+  groups is compact in the quotient topology.'' in the case when $K$
+  is a finite extension of $\F(t)$, where $\F$ is a finite field.
+
+\end{enumerate}
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "ant"
+%%% End: 

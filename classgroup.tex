@@ -1,0 +1,562 @@
+\chapter{Finiteness of the Class Group}\label{ch:classgroup}
+Frequently $\O_K$ is not a principal ideal domain.  This chapter is
+about a way to understand how badly $\O_K$ fails to be a principal
+ideal domain.  The class group of $\O_K$ measures this failure.  As
+one sees in a course on Class Field Theory, the class group and its
+generalizations also yield deep insight into the 
+extensions of~$K$ that are Galois with abelian Galois group.
+
+\section{The Class Group}
+\begin{definition}[Class Group]
+Let $\O_K$ be the ring of integers of a number field~$K$.  The 
+\defn{class group} $C_K$ of~$K$ is the group of fractional ideals
+modulo the sugroup of principal fractional ideals $(a)$, for $a\in K$.
+\end{definition}
+
+Note that if we let $\Div(\O_K)$ denote the group of  fractional
+ideals, then we have an exact sequence
+$$
+  0 \to \O_K^* \to K^* \to \Div(\O_K) \to C_K \to 0.
+$$
+That the class group $C_K$ is finite follows from the first part of
+the following theorem and the fact that there are only finitely many
+ideals of norm less than a given integer (Proposition~\ref{prop:finitewithnorm}).
+\begin{theorem}[Finiteness of the Class Group]\label{thm:finiteclassgrp}
+\ithm{finiteness of class group}
+Let $K$ be a number field.  There is a constant $C_{r,s}$ that
+depends only on the number $r$, $s$ of real and pairs
+of complex conjugate embeddings of~$K$ such that
+every ideal class of $\O_K$ contains an integral ideal
+of norm at most $C_{r,s}\sqrt{|d_K|}$, where
+$d_K=\Disc(\O_K)$.
+Thus by Proposition~\ref{prop:finitewithnorm} 
+the class group $C_K$ of~$K$ is
+finite.
+One can choose $C_{r,s}$ such that every ideal class
+in $C_K$  contains an integral ideal of norm at most 
+\[
+  \sqrt{|d_K|}\cdot \left(\frac{4}{\pi}\right)^s\frac{n!}{n^n}.
+\]
+\end{theorem}
+The explicit bound in the theorem is called the \defn{Minkowski
+  bound}.  There are other better bounds, but they depend on unproven
+conjectures.
+
+The following two examples illustrate how to apply
+Theorem~\ref{thm:finiteclassgrp} to compute $C_K$ in
+simple cases. 
+\begin{example}
+Let $K=\Q[i]$.  Then $n=2$, $s=1$, and $|d_K|=4$, so the Minkowski bound is
+$$
+\sqrt{4} \cdot \left(\frac{4}{\pi}\right)^1 \frac{2!}{2^2}
+  = \frac{4}{\pi} < 2.
+$$
+Thus every fractional ideal is equivalent to an ideal of norm~$1$.
+Since $(1)$ is the only ideal of norm $1$, every ideal is principal,
+so $C_K$ is trivial.
+\end{example}
+
+\begin{example}
+Let $K=\Q(\sqrt{10})$. 
+We have $\O_K = \Z[\sqrt{10}]$,
+so $n=2$, $s=0$, $|d_K| = 40$, and the
+Minkowski bound is
+$$
+  \sqrt{40}\cdot \left(\frac{4}{\pi}\right)^0 \cdot \frac{2!}{2^2}
+  = 2\cdot \sqrt{10} \cdot \frac{1}{2} = \sqrt{10} = 3.162277\ldots.
+$$
+We compute the Minkowski bound in \sage as follows:
+\begin{verbatim}
+sage: K = QQ[sqrt(10)]; K
+Number Field in sqrt10 with defining polynomial x^2 - 10
+sage: B = K.minkowski_bound(); B
+sqrt(10)
+sage: B.n()
+3.16227766016838
+\end{verbatim}
+Theorem~\ref{thm:finiteclassgrp} implies that every ideal class has a
+representative that is an integral ideal of norm~$1$,~$2$, or~$3$.
+The ideal $2\O_K$ is ramified in $\O_K$, so
+$$
+  2\O_K = (2,\sqrt{10}).
+$$
+If $(2,\sqrt{10})$ were principal, say $(\alpha)$, then 
+$\alpha=a+b\sqrt{10}$ would have norm $\pm 2$. 
+Then the equation
+\begin{equation}\label{eqn:norm10}
+  x^2 - 10y^2 = \pm 2,
+\end{equation}
+would have an integer solution.  But the squares mod~$5$ are 
+$0,\pm 1$, so (\ref{eqn:norm10}) has no solutions. 
+Thus $(2,\sqrt{10})$ defines a nontrivial element of the class group,
+and it has order~$2$ since its square is the principal ideal $2\O_K$.
+Thus $2\mid \#C_K$.
+
+To find the integral ideals of norm $3$, we 
+factor $x^2-10$ modulo~$3$, and see that
+$$
+  3\O_K  = (3,2+\sqrt{10}) \cdot (3,4+\sqrt{10}).
+$$
+If either of the prime divisors of $3\O_K$ were principal,
+then the equation $x^2-10y^2 = \pm 3$ would have an integer
+solution.  Since it does not have one mod~$5$, the prime divisors
+of $3\O_K$ are both nontrivial elements of the class
+group.
+Let
+$$
+  \alpha = \frac{4+\sqrt{10}}{2+\sqrt{10}} = \frac{1}{3}\cdot (1+\sqrt{10}).
+$$
+Then
+$$
+(3,2+\sqrt{10})\cdot (\alpha) =  (3\alpha, 4+\sqrt{10})
+                        =  (1+\sqrt{10}, 4+\sqrt{10})
+                        =  (3, 4+\sqrt{10}),
+$$
+so the classes over~$3$ are equal.
+
+In summary, we now know that every element of $C_K$ is equivalent to one of
+$$
+    (1),\quad (2,\sqrt{10}), \quad \text{ or } \quad (3,2+\sqrt{10}).
+$$
+Thus the class group is a group of order at most $3$ that contains an
+element of order~$2$.  Thus it must have order~$2$.  We verify this in
+\sage below, where we also check that $(3, 2+\sqrt{10})$ generates the
+class group.
+\begin{verbatim}
+sage: K.<sqrt10> = QQ[sqrt(10)]; K
+Number Field in sqrt10 with defining polynomial x^2 - 10
+sage: G = K.class_group(); G
+Class group of order 2 with structure C2 of Number Field ...
+sage: G.0
+Fractional ideal class (3, sqrt10 + 1)
+sage: G.0^2
+Trivial principal fractional ideal class
+sage: G.0 == G( (3, 2 + sqrt10) )
+True
+\end{verbatim}
+\end{example}
+
+Before proving Theorem~\ref{thm:finiteclassgrp}, we prove a few
+lemmas.  The strategy of the proof is to start with any nonzero
+ideal~$I$, and prove that there is some nonzero $a\in K$, with very
+small norm, such that $aI$ is an integral ideal. Then
+$\Norm(aI)=\Norm_{K/\Q}(a)\Norm(I)$ will be small, since
+$\Norm_{K/\Q}(a)$ is small.  The trick is to determine precisely
+how small an $a$ we can choose subject to the condition that
+$aI$ is an integral ideal, i.e., that $a\in I^{-1}$.
+
+Let $S$ be a subset of $V=\R^n$.  Then $S$ is \defn{convex} if
+whenever $x,y\in S$ then the line connecting $x$ and $y$ lies entirely
+in $S$.  We say that $S$ is \defn{symmetric about the origin} if
+whenever $x\in S$ then $-x\in S$ also.  If $L$ is a lattice in the
+real vector space $V=\R^n$, then the \defn{volume} of $V/L$ is the
+volume of the compact real manifold $V/L$, which is the same thing as
+the absolute value of the determinant of any matrix whose rows form a
+basis for~$L$.
+\begin{lemma}[Blichfeld]\label{lem:blichfeld}\ilem{Blichfeld}
+Let $L$ be a lattice in $V=\R^n$, and let $S$ be a
+bounded closed convex subset of $V$ that is symmetric about the
+origin.  If 
+$\Vol(S)\geq 2^n \Vol(V/L),$
+then~$S$ contains a nonzero element of $L$.
+\end{lemma}
+\begin{proof}
+First assume that $\Vol(S)>2^n\cdot \Vol(V/L)$.
+If the map $\pi: \frac{1}{2}S \to V/L$ is injective, then 
+$$\frac{1}{2^n}\Vol(S) = \Vol\left(\frac{1}{2} S\right)\leq \Vol(V/L),$$ 
+a contradiction.  Thus $\pi$ is not injective, so there
+exist $P_1\neq P_2\in \frac{1}{2}S$ such that $P_1-P_2\in L$.
+Because $S$ is symmetric about the origin, $-P_2\in \frac{1}{2}S$.  By convexity,
+the average $\frac{1}{2}(P_1-P_2)$ of $P_1$ and $-P_2$
+is also in $\frac{1}{2}S$.  Thus $0\neq P_1-P_2 \in S\meet L$,
+as claimed.
+
+Next assume that $\Vol(S) = 2^n\cdot \Vol(V/L)$.  Then for all
+$\eps>0$ there is $0\neq Q_\eps \in L\meet (1+\eps) S$,
+since $\Vol((1+\eps)S)>\Vol(S)=2^n\cdot \Vol(V/L)$.
+If $\eps<1$ then the $Q_\eps$ are all in $L\meet{} 2 S$,
+which is finite since $2S$ is bounded and $L$ is discrete.
+Hence there exists nonzero $Q=Q_\eps\in L\meet{} (1+\eps) S$ for arbitrarily
+small $\eps$.  Since $S$ is closed, $Q\in L\cap S$.
+\end{proof}
+
+\begin{lemma}\label{lem:latticevolchange}\ilem{lattices and volumes}
+If $L_1$ and $L_2$ are lattices in $V$, then 
+\[
+   \Vol(V/L_2) = \Vol(V/L_1) \cdot [L_1:L_2].
+\]
+\end{lemma}
+\begin{proof}
+Let $A$ be an automorphism of~$V$ such that $A(L_1)=L_2$.  Then~$A$
+defines an isomorphism of real manifolds $V/L_1\to V/L_2$ that changes
+volume by a factor of $|\det(A)|=[L_1:L_2]$.  The claimed
+formula then follows, since $[L_1:L_2] = |\det(A)|$, by definition.
+\end{proof}
+
+Fix a number field $K$ with ring of integers $\O_K$. 
+
+Let $\sigma_1,\ldots, \sigma_r$ be the real embeddings
+of $K$ and $\sigma_{r+1},\ldots, \sigma_{r+s}$ be half
+the complex embeddings of $K$, with one representative of
+each pair of complex conjugate embeddings.
+Let $\sigma:K \to V=\R^n$ be the embedding 
+\begin{align*}
+  \sigma(x) = \big(&\sigma_1(x), \sigma_2(x),\ldots, \sigma_r(x),\\
+     &\quad \Re(\sigma_{r+1}(x)), \ldots, \Re(\sigma_{r+s}(x)), 
+      \Im(\sigma_{r+1}(x)), \ldots, \Im(\sigma_{r+s}(x))\big),
+\end{align*}
+Note that this $\sigma$ is {\em not} exactly the same as the one
+at the beginning of Section~\ref{sec:disc} if $s>0$. 
+
+\begin{lemma}\label{lem:volok}\ilem{volume of rings of integers}
+\[
+  \Vol(V/\sigma(\O_K)) = 2^{-s} \sqrt{|d_K|}.
+\]
+\end{lemma}
+\begin{proof}
+Let $L=\sigma(\O_K)$.
+From a basis $w_1,\ldots, w_n$ for $\O_K$ we obtain a matrix $A$
+whose $i$th row is
+\[
+(\sigma_1(w_i), \cdots, \sigma_r(w_i), 
+\Re(\sigma_{r+1}(w_i)),\ldots, \Re(\sigma_{r+s}(w_i)), 
+\Im(\sigma_{r+1}(w_i)),\ldots, \Im(\sigma_{r+s}(w_i)))
+\]
+and whose determinant has absolute value equal to the volume
+of $V/L$.  By doing the following three column operations,
+we obtain a matrix whose rows are exactly the images of
+the $w_i$ under {\em all} embeddings of $K$ into $\C$, which
+is the matrix that came up when we defined 
+$d_K=\Disc(\O_K)$ in Section~\ref{sec:disc}.
+\begin{enumerate}
+\item Add $i=\sqrt{-1}$ times each column with entries $\Im(\sigma_{r+j}(w_i))$
+to the column with entries $\Re(\sigma_{r+j}(w_i))$.
+\item Multiply all columns with entries $\Im(\sigma_{r+j}(w_i))$
+  by $-2i$, thus changing the determinant by $(-2i)^s$.
+\item Add each columns that now has entries 
+$\Re(\sigma_{r+j}(w_i))+i\Im(\sigma_{r+j}(w_i))$
+to the the column with entries $-2i\Im(\sigma_{r+j}(w_i))$
+to obtain columns $\Re(\sigma_{r+j}(w_i))-i\Im(\sigma_{r+j}(w_i))$.
+\end{enumerate}
+Recalling the definition of discriminant, we see that if~$B$ 
+is the matrix constructed by doing the above three
+operations to $A$, then $|\det(B)^2| = |d_K|$. 
+Thus
+\[
+  \Vol(V/L) = |\det(A)| = |(-2i)^{-s}\cdot \det(B)| = 2^{-s}\sqrt{|d_K|}.
+\]
+\end{proof}
+
+\begin{lemma}\label{lem:volfracideal}\ilem{fractional ideal is lattice}
+If~$I$ is a  fractional $\O_K$-ideal, then $\sigma(I)$ is
+a lattice in~$V$ and 
+\[
+\Vol(V/\sigma(I)) = 2^{-s}\sqrt{|d_K|}\cdot \Norm(I).
+\]
+\end{lemma}
+\begin{proof}
+Since $\sigma(\O_K)$ has rank $n$ as an abelian group, and 
+Lemma~\ref{lem:volok} implies that $\sigma(\O_K)$ also spans $V$,
+it follows that $\sigma(\O_K)$ is a lattice in $V$.
+For some nonzero integer $m$ we have
+$m\O_K \subset I \subset \frac{1}{m}\O_K$,
+so $\sigma(I)$ is also a lattice in~$V$.  
+To prove the displayed volume
+formula, combine Lemmas
+\ref{lem:latticevolchange}--\ref{lem:volok} to get
+\[
+\Vol(V/\sigma(I)) = \Vol(V/\sigma(\O_K))\cdot[\O_K:I]
+         =2^{-s}\sqrt{|d_K|}\Norm(I).
+\]
+\end{proof}
+
+
+\begin{proof}[Proof of Theorem~\ref{thm:finiteclassgrp}]
+Let $K$ be a number field with ring of integers $\O_K$,
+let $\sigma:K\hra V\isom \R^n$ be as above,
+and let $f:V\to \R$ be the function defined by
+\[
+  f(x_1,\ldots, x_n) = |x_1\cdots x_r\cdot (x_{r+1}^2 + x_{(r+1)+s}^2)\cdots (x_{r+s}^2 + x_n^2)|.
+\]
+Notice that if $x\in K$ then $f(\sigma(x)) = |\Norm_{K/\Q}(x)|$,
+and for any $a\in \R$, 
+ $$
+  f(ax_1, \ldots,  ax_n) = |a|^n f(x_1,\ldots, x_n).
+$$
+
+Let $S\subset V$ be a fixed choice of closed, bounded, convex, subset with
+positive volume that is
+symmetric with respect to the origin and has positive volume.  Since~$S$ is closed
+and bounded, 
+\[
+  M = \max\{f(x) : x \in S\}
+\]
+exists. 
+
+Suppose~$I$ is any  fractional ideal of $\O_K$.  Our goal
+is to prove that there is an integral ideal $aI$ with small norm. We
+will do this by finding an appropriate $a\in I^{-1}$.
+By Lemma~\ref{lem:volfracideal}, 
+\[
+ c=\Vol(V/\sigma(I^{-1})) = 2^{-s}\sqrt{|d_K|}\cdot \Norm(I)^{-1} 
+        = \frac{2^{-s} \sqrt{|d_K|}}{\Norm(I)}.
+\]
+Let $\lambda = 2\cdot\left(\frac{c}{v}\right)^{1/n}$, where $v=\Vol(S)$.
+Then 
+\[
+   \Vol(\lambda{} S) = \lambda^n \Vol(S) = 2^n \frac{c}{v} \cdot v = 2^n\cdot c=
+  2^n \Vol(V/\sigma(I^{-1})),
+\]
+so by Lemma~\ref{lem:blichfeld} there exists 
+$0\neq b\in \sigma(I^{-1})\meet \lambda S$.
+Let $a \in I^{-1}$ be such that $\sigma(a)=b$.
+Since~$M$ is the largest norm of an element of~$S$, the largest norm
+of an element of $\sigma(I^{-1})\cap  \lambda{}S$ is at most $\lambda^n M$,
+so 
+\[
+  |\Norm_{K/\Q}(a)| \leq \lambda^n M.
+\]
+Since $a\in I^{-1}$, we have $aI \subset \O_K$, so 
+$aI$ is an integral ideal of $\O_K$ that is equivalent to $I$, and
+\begin{align*}
+  \Norm(aI) &= |\Norm_{K/\Q}(a)|\cdot \Norm(I)\\
+    &\leq \lambda^n M\cdot \Norm(I)\\
+    &\leq 2^n \frac{c}{v} M \cdot \Norm(I)\\
+    &= 2^n\cdot 2^{-s} \sqrt{|d_K|} \cdot M \cdot v^{-1}\\
+    &= 2^{r+s} \sqrt{|d_K|} \cdot M \cdot v^{-1}.
+\end{align*}
+Notice that the right hand side is independent of $I$.  It
+depends only on $r$, $s$, $|d_K|$, and our choice of~$S$.
+This completes the proof of the theorem, except for
+the assertion that $S$ can be chosen to give the claim
+at the end of the theorem, which we leave as an exercise.
+\end{proof}
+
+\begin{corollary}\icor{discrimant of number field $>1$}
+Suppose that $K\neq \Q$ is a number field.  Then $|d_K|>1$.
+\end{corollary}
+\begin{proof}
+Applying Theorem~\ref{thm:finiteclassgrp} to the unit ideal,
+we get the bound
+\[
+ 1\leq \sqrt{|d_K|}\cdot \left(\frac{4}{\pi}\right)^s\frac{n!}{n^n}.
+\]
+Thus 
+\[
+ \sqrt{|d_K|} 
+  \geq 
+\left(\frac{\pi}{4}\right)^s\frac{n^n}{n!},
+\]
+and the right hand quantity is strictly bigger than $1$ for
+any $s\leq n/2$ and any $n>1$ (exercise).
+\end{proof}
+
+A prime $p$ ramifies in $\O_K$ if and only if $d\mid d_K$,
+so the corollary implies that every nontrivial extension of $\Q$
+is ramified at some prime.
+
+\section{Class Number 1}
+The fields of class number 1 are exactly the fields for
+which $\O_K$ is a principal ideal domain.  How many such
+number fields are there?   We still don't know.
+\begin{conjecture}
+  There are infinitely many number fields~$K$ such that the class
+  group of~$K$ has order~$1$.
+\end{conjecture}
+For example, if we consider real quadratic fields $K=\Q(\sqrt{d})$,
+with $d$ positive and square free, many class numbers are probably $1$,
+as suggested by the \magma{} output below.
+It looks like 1's will keep appearing infinitely often, and indeed
+Cohen and Lenstra conjecture that they do (\cite{cohen-lenstra:heuristics}).  
+\begin{verbatim}
+sage: for d in [2..1000]:
+...       if is_fundamental_discriminant(d):
+...           h = QuadraticField(d, 'a').class_number()
+...           if h == 1:
+...               print d, 
+5 8 12 13 17 21 24 28 29 33 37 41 44 53 56 57 61 69 
+73 76 77 88 89 92 93 97 101 109 113 124 129 133 137 
+141 149 152 157 161 172 173 177 181 184 188 193 197 
+201 209 213 217 233 236 237 241 248 249 253 268 269 
+277 281 284 293 301 309 313 317 329 332 337 341 344 
+349 353 373 376 381 389 393 397 409 412 413 417 421 
+428 433 437 449 453 457 461 472 489 497 501 508 509 
+517 521 524 536 537 541 553 556 557 569 573 581 589 
+593 597 601 604 613 617 632 633 641 649 652 653 661 
+664 668 669 673 677 681 701 709 713 716 717 721 737 
+749 753 757 764 769 773 781 789 796 797 809 813 821 
+824 829 844 849 853 856 857 869 877 881 889 893 908 
+913 917 921 929 933 937 941 953 956 973 977 989 997
+\end{verbatim}
+In contrast, if we look at class numbers of quadratic imaginary fields,
+only a few at the beginning have class number~$1$.  
+\begin{verbatim}
+sage: for d in [-1,-2..-1000]:
+...       if is_fundamental_discriminant(d):
+...           h = QuadraticField(d, 'a').class_number()
+...           if h == 1:
+...               print d,
+-3 -4 -7 -8 -11 -19 -43 -67 -163
+\end{verbatim}
+It is a theorem that was proved independently and in different ways by
+Heegner, Stark, and Baker that the above list of $9$ fields is the
+complete list with class number~$1$.  More generally, it is possible,
+using deep work of Gross, Zagier, and Goldfeld involving zeta
+functions and elliptic curves, to enumerate all quadratic number
+fields with a given class number (this may however not be practical --
+see Mark Watkins Ph.D. thesis).
+
+% The function in PARI for computing the order of the class group of a
+% quadratic field in PARI is called {\tt qfbclassno}.
+% \begin{verbatim}
+% ?qfbclassno
+%  qfbclassno(x,{flag=0}): class number of discriminant x using
+%  Shanks's method by default. If (optional) flag is set to 1, 
+%  use Euler products.
+% ? for(d=2,1000, if(isfundamental(d), h=qfbclassno(d);if(h==1,print1(d,", "))))
+% 5, 8, 12, 13, 17, 21, 24, ... 977, 989, 997,
+
+% ? for(d=-1000,-1,if(isfundamental(d), h=qfbclassno(d);if(h==1,print1(d,", "))))
+% -163, -67, -43, -19, -11, -8, -7, -4, -3
+% \end{verbatim}
+% PARI does the above class number computations {\em vastly}
+% faster than MAGMA.   However, note the following ominous warning
+% in the PARI manual, which has been there in some form since 1997:
+% \begin{quote}
+% {\bf Important warning.} For $D<0$, this function may give incorrect
+% results when the class group has a low exponent (has many cyclic factors),
+% because implementing Shank's method in full generality slows it down
+% immensely.  It is therefore strongly recommended to double-check results
+% using either the version with {\em flag=1}, the fucntion {\tt qfbhclassno(-D)}
+% or the function {\tt quadclassunit}.
+% \end{quote}
+% %The documentation used to say that Shank's method was not implemented
+% %in full generality because ``the authors were too lazy''.
+  
+
+\section{More About Computing Class Groups}
+If $\p$ is a prime of $\O_K$, then the intersection $\p\cap \Z=p\Z$ is
+a prime ideal of $\Z$.  We say that $\p$ \defn{lies over} $p\in\Z$.
+Note $\p$ lies over $p\in\Z$ if and only if $\p$ is one of the prime
+factors in the factorization of the ideal $p\O_K$.  Geometrically,
+$\p$ is a point of $\Spec(\O_K)$ that lies over the point $p\Z$ of
+$\Spec(\Z)$ under the map induced by the inclusion $\Z\hra \O_K$.
+
+
+\begin{lemma}\ilem{class group generated by bounded primes}
+Let $K$ be a number field with ring of integers $\O_K$.  Then the
+class group $\Cl(K)$ is generated by the prime ideals $\p$ of $\O_K$
+lying over primes $p\in\Z$ with $p\leq B_K = \sqrt{|d_K|}\cdot
+\left(\frac{4}{\pi}\right)^s\cdot \frac{n!}{n^n}$,
+where $s$ is the number of complex conjugate pairs of embeddings
+$K\hra\C$.
+\end{lemma}
+\begin{proof}
+Theorem~\ref{thm:finiteclassgrp} 
+asserts that every ideal class in $\Cl(K)$ is represented by
+an ideal~$I$ with $\Norm(I)\leq B_K$.  Write $I=\prod_{i=1}^m
+\p_i^{e_i}$, with each $e_i\geq 1$.  Then by multiplicativity of the
+norm, each $\p_i$ also satisfies $\Norm(\p_i)\leq B_K$.  If $\p_i \cap
+\Z=p\Z$, then $p\mid \Norm(\p_i)$, since $p$ is the residue
+characteristic of $\O_K/\p$, so $p\leq B_K$. Thus~$I$ is a product of
+primes~$\p$ that satisfies the norm bound of the lemma.
+\end{proof}
+
+This is a sketch of how to compute $\Cl(K)$:
+\begin{enumerate}
+\item Use the algorithms of Chapter~\ref{ch:factoring_primes} to list all
+prime ideals $\p$ of $\O_K$ that appear in the factorization
+of a prime $p\in \Z$ with $p\leq B_K$.
+\item Find the group generated  by the ideal
+classes $[\p]$, where the $\p$ are the prime ideals
+found in step 1.  (In general, this step can become
+fairly complicated.)
+\end{enumerate}
+The following three examples illustrate computation of $\Cl(K)$
+for $K=\Q(i), \Q(\sqrt{5})$ and $\Q(\sqrt{-6})$.
+\begin{example}
+We compute the class group of $K=\Q(i)$.  We have
+$$
+  n = 2, \quad r=0, \quad s=1, \quad d_K = -4,
+$$
+so 
+$$ 
+  B_K = \sqrt{4}\cdot \left(\frac{4}{\pi}\right)^1
+   \cdot\left(\frac{2!}{2^2}\right) = \frac{8}{\pi} <3.
+$$
+Thus $\Cl(K)$ is generated by the prime divisors
+of $2$.  We have
+$$
+ 2\O_K = (1+i)^2,
+$$
+so $\Cl(K)$ is generated by the principal prime
+ideal $\p=(1+i)$. Thus $\Cl(K)=0$ is trivial.
+\end{example}
+
+\begin{example}
+We compute the class group of $K=\Q(\sqrt{5})$.
+We have
+$$
+  n = 2, \quad r = 2, \quad s=0, \quad d_K = 5,
+$$
+so $$B = \sqrt{5}\cdot \left(\frac{4}{\pi}\right)^0\cdot 
+\left(\frac{2!}{2^2}\right)  < 3.$$
+Thus $\Cl(K)$ is generated by the primes that divide $2$.
+We have $\O_K=\Z[\gamma]$, where $\gamma=\frac{1+\sqrt{5}}{2}$
+satisfies $x^2-x-1$.   The polynomial $x^2-x-1$ is irreducible
+mod $2$, so $2\O_K$ is prime.  Since it is principal, we see
+that $\Cl(K)=1$ is trivial.
+\end{example}
+
+\begin{example}
+In this example, we compute the class group of $K=\Q(\sqrt{-6})$.
+We have
+$$
+  n = 2, \quad r=0, \quad s=1, \quad d_K = -24,
+$$
+so 
+$$
+  B = \sqrt{24} \cdot \frac{4}{\pi} \cdot 
+       \left(\frac{2!}{2^2}\right)\sim 3.1.
+$$ 
+Thus $\Cl(K)$ is generated by the prime ideals lying over $2$ and $3$.
+We have $\O_K=\Z[\sqrt{-6}]$, and $\sqrt{-6}$ satisfies $x^2+6=0$.
+Factoring $x^2+6$ modulo $2$ and $3$ we see that the class group
+is generated by the prime ideals
+$$
+  \p_2 = (2,\sqrt{-6})\qquad\text{and}\qquad
+  \p_3 = (3,\sqrt{-6}).
+$$
+Also, $\p_2^2 = 2\O_K$ and $\p_3^2=3\O_K$, so 
+$\p_2$ and $\p_3$ define elements of order
+dividing $2$ in $\Cl(K)$.  
+
+Is either $\p_2$ or $\p_3$ principal?  Fortunately,
+there is an easier norm trick that allows us to decide.
+Suppose $\p_2 = (\alpha)$, where $\alpha=a+b\sqrt{-6}$.
+Then $$2=\Norm(\p_2) = |\Norm(\alpha)| = (a+b\sqrt{-6})(a-b\sqrt{-6})
+   = a^2 + 6b^2.$$
+Trying the first few values of $a, b\in \Z$, we see that this
+equation has no solutions, so $\p_2$ can not
+be principal.  By a similar argument, we see that $\p_3$
+is not principal either.  Thus $\p_2$ and $\p_3$ define
+elements of order $2$ in $\Cl(K)$.
+
+Does the class of $\p_2$ equal the class of $\p_3$?
+Since $\p_2$ and $\p_3$ define classes of order~$2$,
+we can decide this by finding the class of $\p_2\cdot \p_3$.
+We have
+$$
+ \p_2\cdot \p_3 =  (2,\sqrt{-6})\cdot (3,\sqrt{-6})
+   = (6,2\sqrt{-6}, 3\sqrt{-6}) \subset (\sqrt{-6}).$$
+The ideals on both sides of the inclusion have norm $6$,
+so by multiplicativity of the norm, they must be the
+same ideal.  Thus $\p_2\cdot \p_3=(\sqrt{-6})$ is principal,
+so $\p_2$ and $\p_3$ represent the same element of $\Cl(K)$.
+We conclude that $$\Cl(K) = \langle \p_2 \rangle = \Z/2\Z.$$
+\end{example}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "ant"
+%%% End: 

@@ -1,0 +1,462 @@
+\chapter{Dedekind Domains and Unique Factorization of Ideals}
+Unique factorization into irreducible elements frequently fails for
+rings of integers of number fields.  In this chapter we will deduce a
+central property of the ring of integers $\O_K$ of an algebraic number
+field, namely that every nonzero {\em ideal} factors uniquely as a
+products of prime ideals.  Along the way, we will introduce fractional
+ideals and prove that they form a free abelian group under
+multiplication.  Factorization of {\em elements} of $\O_K$ (and much
+more!) is governed by the class group of $\O_K$, which is the quotient
+of the group of fractional ideals by the principal fractional ideals 
+(see Chapter~\ref{ch:classgroup}).
+
+\section{Dedekind Domains}
+Recall (Corollary~\ref{prop:intnoetherian}) that we proved that the
+ring of integers $\O_K$ of a number field is noetherian, as follows.
+As we saw before using norms, the ring $\O_K$ is finitely generated as
+a module over~$\Z$, so it is certainly finitely generated as a ring
+over~$\Z$.  By the Hilbert Basis Theorem, $\O_K$ is noetherian.
+
+If $R$ is an integral domain, the \defn{field of fractions} $\Frac(R)$
+of~$R$ is the field of all equivalence classes of formal quotients
+$a/b$, where $a,b \in R$ with $b\neq 0$, and $a/b\sim c/d$ if $ad=bc$.
+For example, the field of fractions of~$\Z$ is (canonically isomorphic
+to) $\Q$ and the field of fractions of $\Z[(1+\sqrt{5})/2]$ is
+$\Q(\sqrt{5})$.  The field of fractions of the ring $\O_K$ of integers
+of a number field~$K$ is just the number field~$K$.
+
+\begin{example}
+We compute the fraction fields mentioned above. 
+\begin{verbatim}
+sage: Frac(ZZ)
+Rational Field
+\end{verbatim}
+In Sage the {\tt Frac} command usually returns a field canonically
+isomorphic to the fraction field (not a formal construction).
+\begin{verbatim}
+sage: K.<a> = QuadraticField(5)
+sage: OK = K.ring_of_integers(); OK
+Order with module basis 1/2*a + 1/2, a in Number Field 
+in a with defining polynomial x^2 - 5
+sage: Frac(OK)
+Number Field in a with defining polynomial x^2 - 5
+\end{verbatim}%link
+
+\noindent{}The fraction field of an {\em order} -- i.e., a subring of $\O_K$ of
+finite index -- is also the number field again.
+%link
+\begin{verbatim}
+sage: O2 = K.order(2*a); O2
+Order with module basis 1, 2*a in Number Field 
+in a with defining polynomial x^2 - 5
+sage: Frac(O2)
+Number Field in a with defining polynomial x^2 - 5
+\end{verbatim}
+\end{example}
+
+\begin{definition}[Integrally Closed]
+An integral domain $R$ is \defn{integrally closed in its field of
+fractions} if whenever $\alpha$ is in the field of fractions of $R$
+and $\alpha$ satisfies a monic polynomial $f\in R[x]$, then $\alpha
+\in R$.
+\end{definition}
+
+\begin{proposition}\label{prop:integrallyclosed}\iprop{$\O_K$ is integrally closed}
+If $K$ is any number field, then $\O_K$ is integrally closed.  Also,
+the ring $\Zbar$ of all algebraic integers (in a fixed choice of $\Qbar$)
+is integrally closed.
+\end{proposition}
+\begin{proof}
+We first prove that~$\Zbar$ is integrally closed.  Suppose $\alpha\in\Qbar$
+is integral over~$\Zbar$, so there is a monic polynomial $f(x)=x^n +
+a_{n-1}x^{n-1} + \cdots + a_1 x + a_0$ with $a_i\in\Zbar$ and
+$f(\alpha)=0$.  The $a_i$ all lie in the ring of integers $\O_K$ of the
+number field $K=\Q(a_0,a_1,\ldots a_{n-1})$, and $\O_K$ is finitely
+generated as a $\Z$-module, so $\Z[a_0,\ldots, a_{n-1}]$ is finitely
+generated as a $\Z$-module.  Since $f(\alpha)=0$, we can write $\alpha^n$ as a
+$\Z[a_0,\ldots, a_{n-1}]$-linear combination of $\alpha^i$ for $i<n$, so
+the ring $\Z[a_0,\ldots, a_{n-1},\alpha]$ is also finitely generated as a
+$\Z$-module.  Thus $\Z[\alpha]$ is finitely generated as $\Z$-module
+because it is a submodule of a finitely generated $\Z$-module, which
+implies that~$\alpha$ is integral over~$\Z$.
+
+Without loss we may assume that $K\subset \Qbar$, so that
+$\O_K = \Zbar \cap K$.
+Suppose $\alpha\in K$ is integral over $\O_K$.  Then since $\Zbar$ is
+integrally closed,~$\alpha$ is an element of $\Zbar$, so 
+$\alpha\in K \cap \Zbar=\O_K$, as required.
+\end{proof}
+
+\begin{definition}[Dedekind Domain]
+An integral domain~$R$ is a \defn{Dedekind domain} if it is noetherian,
+integrally closed in its field of fractions, and every nonzero prime
+ideal of $R$ is maximal.
+\end{definition}
+
+The ring $\Z\oplus \Z$ is not a Dedekind domain because it is not an
+integral domain.  The ring $\Z[\sqrt{5}]$ is not a Dedekind domain
+because it is not integrally closed in its field of fractions, as
+$(1+\sqrt{5})/2$ is integrally over $\Z$ and lies in $\Q(\sqrt{5})$,
+but not in $\Z[\sqrt{5}]$.  The ring~$\Z$ is a Dedekind domain, as is
+any ring of integers $\O_K$ of a number field, as we will see below.
+Also, any field $K$ is a Dedekind domain, since it is an integral
+domain, it is trivially integrally closed in itself, and there are no
+nonzero prime ideals so the condition that they be maximal is empty.
+The ring $\Zbar$ is not noetherian, but it is integrally closed in its
+field of fraction, and every nonzero prime ideal is maximal.
+
+\begin{proposition}\iprop{$\O_K$ is Dedekind}
+The ring of integers $\O_K$ of a number field is a Dedekind domain.
+\end{proposition}
+\begin{proof}
+By Proposition~\ref{prop:integrallyclosed}, the ring $\O_K$ is
+integrally closed, and by Proposition~\ref{prop:intnoetherian} it is
+noetherian.  Suppose that~$\p$ is a nonzero prime ideal of $\O_K$.
+Let $\alpha\in \p$ be a nonzero element, and let $f(x)\in\Z[x]$ be the
+minimal polynomial of~$\alpha$.  Then
+$$f(\alpha)=\alpha^n+a_{n-1}\alpha^{n-1}+\cdots+a_1\alpha+a_0=0,$$ so
+$a_0 = -(\alpha^n+a_{n-1}\alpha^{n-1}+\cdots+a_1\alpha)\in \p$.  Since
+$f$ is irreducible, $a_0$ is a nonzero element of $\Z$ that lies
+in~$\p$.  Every element of the finitely generated abelian group
+$\O_K/\p$ is killed by~$a_0$, so $\O_K/\p$ is a finite set.
+Since~$\p$ is prime, $\O_K/\p$ is an integral domain.  Every finite
+integral domain is a field (see Exercise~\ref{ex:finitedomain}), so
+$\p$ is maximal, which completes the proof.
+\end{proof}
+
+If $I$ and $J$ are ideals in a ring $R$, the product $IJ$ is the ideal
+generated by all products of elements in $I$ with elements in $J$:
+$$
+  IJ = (ab : a\in I, b\in J) \subset R.
+$$
+Note that the set of all products $ab$, with $a\in I$ and $b\in J$,
+need not be an ideal, so it is important to take the ideal generated
+by that set (see Exercise~\ref{ex:idealprod}).
+
+\begin{definition}[Fractional Ideal]\label{def:fracideal}
+A \defn{fractional ideal} is a nonzero $\O_K$-submodule~$I$ of~$K$ that
+is finitely generated as an $\O_K$-module. 
+\end{definition}
+We will sometimes call a genuine ideal $I\subset \O_K$ an
+\defn{integral ideal}.  The notion of fractional ideal makes
+sense for an arbitrary Dedekind domain $R$ -- it is an
+$R$-module $I\subset K=\Frac(R)$ that is finitely
+generated as an $R$-module.
+
+\begin{example}
+We multiply two fractional ideals in \sage:
+\begin{verbatim}
+sage: K.<a> = NumberField(x^2 + 23)
+sage: I = K.fractional_ideal(2, 1/2*a - 1/2)
+sage: J = I^2
+sage: I
+Fractional ideal (2, 1/2*a - 1/2) of Number Field ...
+sage: J
+Fractional ideal (4, 1/2*a + 3/2) of Number Field ...
+sage: I*J
+Fractional ideal (-1/2*a - 3/2) of Number Field ...
+\end{verbatim}
+\end{example}
+
+Since fractional ideals $I$ are finitely generated, we can clear
+denominators of a generating set to see that there is some nonzero
+$\alpha\in K$ such that
+$$
+\alpha I = J \subset \O_K
+$$
+with $J$ an integral ideal.  Thus dividing by $\alpha$, we see
+that every fractional ideal is
+of the form
+$$a J = \{a b : b \in J\}$$ 
+for some $a\in K$ and integral ideal $J\subset \O_K$.
+
+For example, the set $\frac{1}{2}\Z$ of rational numbers with
+denominator $1$ or $2$ is a fractional ideal of $\Z$.
+
+\begin{theorem}\label{thm:ddabgrp}
+\ithm{fractional ideals}
+The set of fractional ideals of a Dedekind domain~$R$ is an
+abelian group under ideal multiplication with identity element $R$.
+\end{theorem}
+Note that fractional ideals are nonzero by definition, so it is not
+necessary to write ``nonzero fractional ideals'' in the statement of
+the theorem. We will {\em only} prove Theorem~\ref{thm:ddabgrp} in the
+case when $R=\O_K$ is the ring of integers of a number field $K$.
+Before proving Theorem~\ref{thm:ddabgrp} we prove a lemma.  For the
+rest of this section $\O_K$ is the ring of integers of a number
+field~$K$.
+
+
+\begin{definition}[Divides for Ideals]
+Suppose that $I,J$ are ideals of $\O_K$. 
+Then we say that~$I$ \defn{divides}~$J$ if $I\supset J$.
+\end{definition}
+To see that this notion of divides is sensible, suppose $K=\Q$, so
+$\O_K=\Z$.  Then $I=(n)$ and $J=(m)$ for some integer $n$ and $m$, and
+$I$ divides $J$ means that $(n)\supset (m)$, i.e., that there exists
+an integer~$c$ such that $m=cn$, which exactly means that $n$ divides
+$m$, as expected.
+
+\begin{lemma}\label{lem:divprod}\ilem{$I$ divides product of primes}
+Suppose~$I$ is a nonzero ideal of $\O_K$.  Then there exist prime ideals
+$\p_1,\ldots, \p_n$ such that $\p_1\cdot \p_2\cdots \p_n \subset{}I$, 
+i.e.,~$I$ divides a product of prime ideals. 
+\end{lemma}
+\begin{proof}
+Let $S$ be the set of nonzero ideals of $\O_K$ that do not
+satisfy the conclusion
+of the lemma.  The key idea is to use that $\O_K$ is noetherian to show that 
+$S$ is the empty set.   If~$S$ is
+nonempty, then since $\O_K$ is noetherian, there is an ideal 
+$I\in S$ that is maximal as an element of~$S$.  If~$I$ were prime, then~$I$
+would trivially contain a product of primes, so we may assume that~$I$ 
+is not prime.  Thus there exists $a,b\in \O_K$ such that $ab\in
+I$ but $a\not\in I$ and $b\not\in I$.  Let $J_1 = I+(a)$ and
+$J_2=I+(b)$.  Then neither $J_1$ nor $J_2$ is in $S$, since~$I$ is
+maximal, so both $J_1$ and $J_2$ contain a product of prime ideals, 
+say $\p_1 \cdots \p_r \subset J_1$ and $\q_1\cdots \q_s \subset J_2$.
+Then 
+$$
+\p_1  \cdots \p_r \cdot \q_1\cdots \q_s \subset 
+J_1 J_2 = I^2 + I(b)+  (a)I+ (ab) \subset I,$$
+so $I$ contains a product of primes.  This is a contradiction,
+since we assumed $I\in S$.   Thus~$S$ is empty, which completes 
+the proof.
+\end{proof}
+We are now ready to prove the theorem.
+
+\begin{proof}[Proof of Theorem~\ref{thm:ddabgrp}]
+  Note that we will {\em only} prove Theorem~\ref{thm:ddabgrp} in the
+  case when $R=\O_K$ is the ring of integers of a number field $K$.
+
+The product of two fractional ideals is again finitely generated, so
+it is a fractional ideal, and $I\O_K=I$ for any ideal~$I$,
+so to prove that the set of fractional ideals under multiplication is
+a group it suffices to show the existence of inverses.  We will first
+prove that if~$\p$ is a prime ideal, then~$\p$ has an inverse, then we
+will prove that all nonzero integral ideals have inverses, and finally
+observe that every fractional ideal has an inverse.  (Note: Once we
+know that the set of fractional ideals is a group, it will follows
+that inverses are unique; until then we will be careful to write
+``an'' instead of ``the''.)
+
+Suppose $\p$ is a nonzero prime ideal of $\O_K$.   We will show that
+the $\O_K$-module
+$$
+  I = \{a \in K : a\p \subset \O_K \}
+$$ 
+is a fractional ideal of $\O_K$ such that $I\p = \O_K$, so that
+$I$ is an inverse of $\p$.
+
+For the rest of the proof, fix a nonzero element $b\in \p$.  Since~$I$
+is an $\O_K$-module, $bI\subset \O_K$ is an $\O_K$ ideal, hence~$I$ is
+a fractional ideal.  Since $\O_K \subset I$ we have $\p \subset I \p
+\subset \O_K$, hence since~$\p$ is maximal, either $\p = I\p$ or $I\p
+= \O_K$.  If $I\p=\O_K$, we are done since then~$I$ is an inverse
+of~$\p$.  Thus suppose that $I\p=\p$.  Our strategy is to show that
+there is some $d\in I$, with $d\not\in\O_K$.  Since $I\p=\p$, such
+a~$d$ would leave~$\p$ invariant, i.e., $d \p \subset \p$.  Since $\p$
+is an $\O_K$-module we will see that it will follow that $d\in \O_K$,
+a contradiction.
+
+By Lemma~\ref{lem:divprod}, we can choose a product $\p_1,\ldots, \p_m$,
+with~$m$ minimal, with
+$$
+\p_1\p_2\cdots \p_m \subset (b) \subset \p.
+$$ If no $\p_i$ is contained in $\p$, then we can choose for each $i$
+an $a_i \in \p_i$ with $a_i\not\in \p$; but then $\prod a_i\in \p$,
+which contradicts that $\p$ is a prime ideal.  Thus some $\p_i$, say
+$\p_1$, is contained in $\p$, which implies that $\p_1 = \p$ since
+every nonzero prime ideal is maximal.  Because~$m$ is minimal,
+$\p_2\cdots \p_m$ is not a subset of $(b)$, so there exists $c\in
+\p_2\cdots \p_m$ that does not lie in $(b)$. Then $\p(c) \subset (b)$,
+so by definition of $I$ we have $d=c/b\in I$.  However, $d\not\in
+\O_K$, since if it were then $c$ would be in $(b)$.  We have thus
+found our element $d\in I$ that does not lie in $\O_K$.  
+
+To finish the proof that $\p$ has an inverse, we observe that $d$
+preserves the $\O_K$-module $\p$, and is hence in $\O_K$, a
+contradiction.  More precisely, if $b_1,\ldots, b_n$ is a basis for
+$\p$ as a $\Z$-module, then the action of~$d$ on~$\p$ is given by a
+matrix with entries in~$\Z$, so the minimal polynomial of~$d$ has
+coefficients in~$\Z$ (because $d$ satisfies the minimal polynomial of
+$\ell_d$, by the Cayley-Hamilton theorem -- here we also use that
+$\QQ\tensor\p = K$, since $\O_K/\p$ is a finite set).  This implies
+that~$d$ is integral over~$\Z$, so $d\in \O_K$, since~$\O_K$ is
+integrally closed by Proposition~\ref{prop:integrallyclosed}.  (Note
+how this argument depends strongly on the fact that $\O_K$ is
+integrally closed!)
+
+So far we have proved that if $\p$ is a prime ideal of $\O_K$, then
+$$
+  \p^{-1} = \{a \in K : a\p \subset \O_K\}
+$$ 
+is the inverse of $\p$ in
+the monoid of nonzero fractional ideals of $\O_K$.  As mentioned after
+Definition~\ref{def:fracideal}, every nonzero fractional
+ideal is of the form $aI$ for $a\in K$ and $I$ an integral ideal, so
+since $(a)$ has inverse $(1/a)$, it suffices to show that every
+integral ideal~$I$ has an inverse.  If not, then there is a nonzero
+integral ideal~$I$ that is maximal among all nonzero integral ideals
+that do not have an inverse.  Every ideal is contained in a maximal
+ideal, so there is a nonzero prime ideal $\p$ such that $I\subset \p$.
+Multiplying both sides of this inclusion by $\p^{-1}$ and using that
+$\O_K\subset \p^{-1}$, we see that 
+$$
+  I \subset \p^{-1} I \subset \p^{-1}\p = \O_K.
+$$
+If $I = \p^{-1} I$, then arguing as in the proof that $\p^{-1}$ is an
+inverse of~$\p$, we see that each element of $\p^{-1}$ preserves the
+finitely generated $\Z$-module~$I$ and is hence integral.  But then
+$\p^{-1}\subset \O_K$, which, upon multiplying both sides by $\p$, 
+implies that $\O_K = \p \p^{-1} \subset \p$, a contradiction.  
+Thus $I \neq \p^{-1} I$.  Because $I$ is
+maximal among ideals that do not have an inverse, the ideal $\p^{-1}
+I$ does have an inverse~$J$.  
+Then $\p{}^{-1}J$ is an inverse of~$I$, since
+$
+(J\p^{-1})I = J(\p^{-1}I) = \O_K.
+$
+\end{proof}
+
+We can finally deduce the crucial Theorem~\ref{thm:intuniqfac}, which
+will allow us to show that any nonzero ideal of a Dedekind domain can
+be expressed uniquely as a product of primes (up to order).  Thus
+unique factorization holds for ideals in a Dedekind domain, and it is
+this unique factorization that initially motivated the introduction of
+ideals to mathematics over a century ago.
+
+\begin{theorem}\label{thm:intuniqfac}\ithm{unique ideal factorization}
+Suppose $I$ is a nonzero integral ideal of $\O_K$.  Then $I$ can
+be written as a product 
+$$
+  I = \p_1\cdots \p_n
+$$ of prime ideals of $\O_K$, and this representation is unique up to
+order. 
+\end{theorem}
+\begin{proof}
+Suppose~$I$ is an ideal that is maximal among the set of all ideals in
+$\O_K$ that can not be written as a product of primes.  Every ideal is
+contained in a maximal ideal, so $I$ is contained in a nonzero prime
+ideal $\p$.  If $I\p^{-1} = I$, then by Theorem~\ref{thm:ddabgrp} we
+can cancel $I$ from both sides of this equation to see that
+$\p^{-1}=\O_K$, a contradiction.  Since $\O_K\subset \p^{-1}$, 
+we have $I\subset I\p^{-1}$, and by the above observation~$I$ 
+is strictly contained in
+$I\p^{-1}$.  By our maximality assumption on~$I$, there are maximal
+ideals $\p_1,\ldots, \p_n$ such that $I\p^{-1} = \p_1\cdots \p_n$.
+Then $I=\p\cdot \p_1\cdots \p_n$, a contradiction.  Thus every ideal
+can be written as a product of primes.
+
+Suppose $\p_1\cdots \p_n=\q_1\cdots \q_m$. If no $\q_i$ is contained in
+$\p_1$, then for each $i$ there is an $a_i\in \q_i$ such that
+$a_i\not\in\p_1$.  But the product of the $a_i$ is in $\p_1\cdots
+\p_n$, which is a subset of $\p_1$, which contradicts that
+$\p_1$ is a prime ideal.  Thus $\q_i=\p_1$ for some~$i$.  We can thus
+cancel $\q_i$ and $\p_1$ from both sides of the equation by multiplying
+both sides by the inverse.  Repeating
+this argument finishes the proof of uniqueness.
+\end{proof}
+
+\begin{theorem}\label{thm:uniqfac}\icor{factorization
+of fractional ideals}
+If $I$ is a fractional ideal of $\O_K$ then there exists 
+prime ideals $\p_1,\ldots, \p_n$ and $\q_1,\ldots, \q_m$,
+unique up to order, such that 
+$$
+  I = (\p_1\cdots \p_n)(\q_1\cdots \q_m)^{-1}.
+$$
+\end{theorem}
+\begin{proof}
+We have $I=(a/b)J$ for some $a,b\in\O_K$ and integral ideal $J$.
+Applying Theorem~\ref{thm:intuniqfac} to $(a)$, $(b)$, and $J$ gives
+an expression as claimed.  For uniqueness, if one has two such product
+expressions, multiply through by the denominators and use the
+uniqueness part of Theorem~\ref{thm:intuniqfac}
+\end{proof}
+
+\begin{example}
+The ring of integers of $K=\Q(\sqrt{-6})$ is $\O_K=\Z[\sqrt{-6}]$.
+We have
+$$
+  6 = -\sqrt{-6}\sqrt{-6} = 2 \cdot 3.
+$$ If $ab=\sqrt{-6}$, with $a,b\in \O_K$ and neither a unit, then
+$\Norm(a)\Norm(b) = 6$, so without loss $\Norm(a)=2$ and
+$\Norm(b)=3$. If $a=c + d\sqrt{-6}$, then $\Norm(a) = c^2 + 6d^2$;
+since the equation $c^2 + 6d^2 = 2$ has no solution with $c,d\in\Z$,
+there is no element in $\O_K$ with norm~$2$, so $\sqrt{-6}$ is
+irreducible.  Also, $\sqrt{-6}$ is not a unit times~$2$ or times $3$,
+since again the norms would not match up.  Thus $6$ can not be written
+uniquely as a product of irreducibles in $\O_K$.
+Theorem~\ref{thm:uniqfac}, however, implies that the principal
+ideal $(6)$ can, however, be
+written uniquely as a product of prime ideals.  
+An explicit decomposition is 
+\begin{equation}\label{eqn:fac6}
+(6) = (2, 2+\sqrt{-6})^2 \cdot (3,3+\sqrt{-6})^2,
+\end{equation}
+where each of the ideals $(2, 2+\sqrt{-6})$ and $(3, 3+\sqrt{-6})$ is
+prime.  We will discuss algorithms for computing such a decomposition
+in detail in Chapter~\ref{ch:factoring_primes}.  The first idea is to
+write $(6)=(2)(3)$, and hence reduce to the case of writing the $(p)$,
+for $p\in\Z$ prime, as a product of primes.  Next one decomposes the
+finite (as a set) ring $\O_K/p\O_K$.
+
+The factorization (\ref{eqn:fac6}) can be compute using
+\sage{} as follows:
+\begin{verbatim}
+sage: K.<a> = NumberField(x^2 + 6); K
+Number Field in a with defining polynomial x^2 + 6
+sage: K.factor_integer(6)
+(Fractional ideal (2, a) of Number Field ...)^2 * 
+(Fractional ideal (3, a) of Number Field ...)^2
+\end{verbatim}
+
+%{\small
+%\begin{verbatim}
+%   > R<x> := PolynomialRing(RationalField());
+%   > K := NumberField(x^2+6);
+%   > OK := RingOfIntegers(K);
+%   > [K!b : b in Basis(OK)];
+%   [ 1,
+%     K.1]    // this is sqrt(-6)
+%   > Factorization(6*OK);
+%   [
+%       <Prime Ideal of OK
+%       Two element generators:
+%           [2, 0]
+%           [2, 1], 2>,
+%       <Prime Ideal of OK
+%       Two element generators:
+%           [3, 0]
+%           [3, 1], 2>
+%   ]
+%\end{verbatim}
+%}
+%
+%The factorization (\ref{eqn:fac6}) can also be computed
+%using PARI (see \cite{pari}).
+%{\small
+%\begin{verbatim}
+%   ? k=nfinit(x^2+6);
+%   ? idealfactor(k, 6)
+%   [[2, [0, 1]~, 2, 1, [0, 1]~] 2]
+%   [[3, [0, 1]~, 2, 1, [0, 1]~] 2]
+%   ? k.zk
+%   [1, x]
+%\end{verbatim}
+%}
+%The output of PARI is a list of two prime ideals with exponent $2$.
+%A prime ideal is represented by a $5$-tuple 
+%$[p,a,e,f,b]$, where the ideal is $p\O_K + \alpha\O_K$,
+%where $\alpha = \sum a_i \omega_i$, where $\omega_1,\ldots, \omega_n$
+%are a basis for $\O_K$ (as output by {\tt k.zk}).
+
+\end{example}
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "ant"
+%%% End: 

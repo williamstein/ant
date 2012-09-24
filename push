@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -e
+
+git commit -a -v
+
+git push
+
+rsync -avxLH ./ wstein@sage.math.washington.edu:www/books/ant/

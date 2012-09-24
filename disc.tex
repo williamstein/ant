@@ -1,0 +1,452 @@
+\chapter{Discrimants and Norms}
+
+%The we develop in this chapter illustrate the power of what we
+%have already proved about rings of integers, and will be used over and
+%over again to prove other deeper results.  It is essential to
+%understand everything we discuss in this chapter very well.
+
+In this chapter we give a geometric interpretation of the discriminant
+of an order in a number field. We also define norms of ideals and
+prove that the norm function is multiplicative.  Discriminants of
+orders and norms of ideals will play a crucial role in our proof of
+finiteness of the class group in the next chapter.  
+
+\section{Viewing $\O_K$ as a Lattice in a Real Vector Space}
+Let~$K$ be a number field of degree $n$.  By the primitive element
+theorem, $K=\Q(\alpha)$ for some~$\alpha$, so we can write $K\isom
+\Q[x]/(f)$, where $f\in\Q[x]$ is the minimal polynomial of~$\alpha$.
+Because $\C$ is algebraically closed and~$f$ is irreducible, it has
+exactly $n=[K:\Q]$ complex roots.  Each of these roots $z\in\C$
+induces a homomorphism $\Q[x] \to \C$ given by $x\mapsto z$, whose
+kernel is the ideal $(f)$.  Thus we obtain~$n$ embeddings of $K\isom
+\Q[x]/(f)$ into~$\C$:
+$$
+  \sigma_1,\ldots, \sigma_n:K\hra \C.
+$$
+\begin{example}
+We compute the embeddings listed above for $K=\Q(\sqrt[3]{2})$.
+\begin{verbatim}
+sage: K = QQ[2^(1/3)]; K
+Number Field in a with defining polynomial x^3 - 2
+sage: K.complex_embeddings()
+[Ring morphism: ...
+  Defn: a |--> -0.629960524947 - 1.09112363597*I,
+ Ring morphism: ...
+  Defn: a |--> -0.629960524947 + 1.09112363597*I,
+ Ring morphism: ...
+  Defn: a |--> 1.25992104989]
+\end{verbatim}
+\end{example}
+
+
+Let $\sigma:K\hra \C^n$ be the map $a\mapsto
+(\sigma_1(a),\ldots,\sigma_n(a))$, and let $V=\R\sigma(K)$ be the
+$\R$-span of the image $\sigma(K)$ of~$K$ inside $\C^n$.
+
+\begin{lemma}\label{lem:disc_finite}
+Suppose $L\subset \R^n$ is a subgroup of the vector space~$\R^n$.
+Then the induced topology on~$L$ is discrete if and only
+if for every  $H>0$ the set 
+$$
+  X_H = \{v \in L : \max\{|v_1|,\ldots, |v_n|\} \leq H \}
+$$
+is finite. 
+\end{lemma}
+\begin{proof}
+If~$L$ is not discrete, then there is a point $x \in L$ such that
+for every $\eps>0$ there is $y\in L$ such that
+$0 < |x-y|<\eps$. By choosing smaller and smaller~$\eps$,
+we find infinitely many elements $x-y\in L$
+all of whose coordinates are smaller than~$1$. 
+The set $X_1$ is thus not finite.   Thus if the sets
+$X_H$ are all finite,~$L$ must be discrete. 
+
+Next assume that~$L$ is discrete and let $H>0$ be any positive 
+number.
+Then for every $x\in X_H$ there is an open ball $B_x$
+that contains~$x$ but no other element of~$L$.
+Since $X_H$ is closed and bounded, it is compact, so 
+the open covering $\union B_x$ of $X_H$ has a finite
+subcover, which implies that $X_H$ is finite, as claimed.
+\end{proof}
+
+\begin{lemma}\label{lem:disc_rankdim}
+If~$L$ if a free abelian group that is
+discrete in a finite-dimensional
+real vector space~$V$ and $\R{}L=V$, then the rank of~$L$ 
+equals the dimension of~$V$.  
+\end{lemma}
+\begin{proof}
+  Let $x_1,\ldots, x_m \in L$ be an $\R$-vector space basis for
+  $\R{}L$, and consider the $\Z$-submodule $M=\Z x_1 + \cdots + \Z
+  x_m$ of~$L$.  If the quotient $L/M$ is infinite, then there are
+  infinitely many distinct elements of~$L$ that all lie in a
+  fundamental domain for~$M$, so Lemma~\ref{lem:disc_finite} implies
+  that $L$ is not discrete.  This is a contradiction, so $L/M$ is
+  finite, and the rank of~$L$ is $m=\dim(\R{}L)$, as claimed.
+\end{proof}
+
+\begin{proposition}\iprop{dimension of embedding of field}
+The $\R$-vector space~$V=\R\sigma(K)$ spanned by the image
+$\sigma(K)$ of $K$ has dimension~$n$.
+\end{proposition}
+\begin{proof}
+We prove this by showing that the image $\sigma(\O_K)$ is discrete. If
+$\sigma(\O_K)$ were not discrete it would contain elements all of
+whose coordinates are simultaneously arbitrarily small.  The norm of
+an element $a\in \O_K$ is the product of the entries of $\sigma(a)$,
+so the norms of nonzero elements of $\O_K$ would go to~$0$.  This is a
+contradiction, since the norms of nonzero elements of $\O_K$ are
+ nonzero integers.
+
+Since $\sigma(\O_K)$ is discrete in $\C^n$, Lemma~\ref{lem:disc_rankdim}
+implies that $\dim(V)$ equals the rank of $\sigma(\O_K)$.  Since~$\sigma$
+is injective, $\dim(V)$ is the rank of $\O_K$, which equals~$n$ by
+Proposition~\ref{prop:ok_lattice}.
+\end{proof}
+
+\subsection{The Volume of $\O_K$}
+Since $\sigma(\O_K)$ is a lattice in~$V$, the volume of
+$V/\sigma(\O_K)$ is finite.  Suppose $w_1,\ldots, w_n$ is a basis for
+$\O_K$.  Then if~$A$ is the matrix whose $i$th row is $\sigma(w_i)$,
+then we define the {\em volume} of $V/\sigma(\O_K)$ to be 
+$|\det(A)|$.
+\begin{example}
+The ring $\O_K=\Z[i]$ of integers of $K=\Q(i)$
+has $\Z$-basis $w_1=1$, $w_2=i$.
+The map $\sigma:K\to \C^2$ is given by 
+$$
+   \sigma(a+bi) = (a+bi,a-bi)\in\C^2.
+$$
+The image $\sigma(\O_K)$ is spanned by
+$(1,1)$ and $(i,-i)$.  
+The volume determinant is
+\[
+  \left|\mtwo{1}{1}{i}{-i}\right| = |-2i| = 2.
+\]
+
+Let $\O_K=\Z[\sqrt{2}]$ be the ring of integers of $K=\Q(\sqrt{2})$.
+The map $\sigma$ is
+\[
+  \sigma(a+b\sqrt{2}) = (a+b\sqrt{2},a-b\sqrt{2})\in\R^2,
+\]
+and 
+\[
+A = \mtwo{1}{1}{\sqrt{2}}{-\sqrt{2}},
+\]
+which has determinant
+$ -2\sqrt{2}$, so the volume of $V/\sigma(\O_K)$ 
+is $2\sqrt{2}$.
+\end{example}
+As the above example illustrates, the volume $V/\sigma(\O_K)$ need not
+be an integer.  
+
+\section{Discriminants}\label{sec:disc}
+Suppose $w_1,\ldots, w_n$ are a basis for $\O_K$ as a $\Z$-module,
+which we view as a $\Q$-vector space.  Let $ \sigma : K\hra \C^n $ be
+the embedding $\sigma(a)=(\sigma_1(a),\ldots,\sigma_n(a))$, where
+$\sigma_1,\ldots, \sigma_n$ are the distinct embeddings of $K$
+into~$\C$.  Let $A$ be the matrix whose rows are $\sigma(w_1), \ldots,
+\sigma(w_n)$.  The quantity $\det(A)$ depends on the ordering of the
+$w_i$, and need not be an integer.
+
+If we consider $\det(A)^2$ instead, we obtain a number that does
+not depend on ordering; moreover, as we will see, it is an integer. 
+Note that
+\begin{align*}
+\det(A)^2 &= \det(AA) = 
+\det(A)\det(A)=\det(A)\det(A^t)=
+\det(A A^t) \\
+ &= \det\left(\sum_{k=1,\ldots,n} \sigma_k(w_i)\sigma_k(w_j)\right)
+ = \det\left(\sum_{k=1,\ldots,n} \sigma_k(w_i w_j)\right)\\
+ &= \det(\Tr(w_i w_j)_{1\leq i,j\leq n}),
+\end{align*}
+so $\det(A)^2$ can be defined purely in terms of the trace without
+mentioning the embeddings $\sigma_i$.  Also, changing our choice of
+basis for $\O_K$ is the same as left multiplying~$A$ by an integer
+matrix $U$ of determinant $\pm 1$; this does not change the squared
+determinant, since $\det(UA)^2 = \det(U)^2\det(A)^2 = \det(A)^2$.
+Thus $\det(A)^2\in \ZZ$ is well defined as a quantity associated to $\O_K$.
+
+If we view~$K$ as a $\Q$-vector space, then $(x,y)\mapsto \Tr(xy)$
+defines a bilinear pairing $K\times K \to \Q$ on~$K$, which we call
+the \defn{trace pairing}.  The following lemma asserts that this
+pairing is nondegenerate, so $\det(\Tr(w_i w_j))\neq 0$ hence
+$\det(A)\neq 0$.
+\begin{lemma}\label{lem:tracenondegen}\ilem{trace pairing nondegenerate}
+The trace pairing is nondegenerate.
+\end{lemma}
+\begin{proof}
+If the trace pairing is degenerate, then there exists $a\in K$ such
+that for every $b\in K$ we have $\Tr(ab)=0$.  In particularly, taking
+$b=a^{-1}$ we see that $0=\Tr(a a^{-1})=\Tr(1)=[K:\Q]>0$, which is
+absurd.
+\end{proof}
+
+\begin{definition}[Discriminant]\label{def:disc}
+Suppose $a_1,\ldots, a_n$ is any $\Q$-basis of $K$.  The \defn{discriminant}
+of $a_1,\ldots, a_n$ is 
+$$
+  \Disc(a_1,\ldots,a_n) = \det(\Tr(a_i a_j)_{1\leq i,j\leq n})\in\Q.
+$$
+The \defn{discriminant} $\Disc(\O)$ of an order $\O$ in $\O_K$ is
+the discriminant of any basis for~$\O$.
+The \defn{discriminant} $d_K=\Disc(K)$ of the number field~$K$ 
+is the discriminant of $\O_K$. 
+Note that these discriminants are all nonzero
+by Lemma~\ref{lem:tracenondegen}.
+\end{definition}
+
+\begin{remark}
+  It is also standard to define the discriminant of a monic polynomial
+  to be the product of the differences of the roots.  If $\alpha\in
+  \O_K$ with $\Z[\alpha]$ of finite index in $\O_K$, and~$f$ is the
+  minimal polynomial of $\alpha$, then $\Disc(f)=\Disc(\Z[\alpha])$.
+  To see this, note that if we choose the basis
+  $1,\alpha,\ldots,\alpha^{n-1}$ for $\Z[\alpha]$, then both
+  discriminants are the square of the same Vandermonde determinant.
+\end{remark}
+
+\begin{example}
+In \sage, we compute the discriminant of a number field or order
+using the discriminant command:
+\begin{verbatim}
+sage: K.<a> = NumberField(x^2 - 5)
+sage: K.discriminant()
+5
+\end{verbatim}%link
+
+\noindent{}This also works for orders (notice the square factor 
+below, which will be explained
+by Proposition~\ref{prop:indsquare}):
+%link
+\begin{verbatim}
+sage: R = K.order([7*a]); R
+Order in Number Field in a with defining polynomial x^2 - 5
+sage: factor(R.discriminant())
+2^2 * 5 * 7^2
+\end{verbatim}
+
+\noindent{\bf Warning:} In \magma{} $\Disc(K)$ is defined to be the
+discriminant of the polynomial you happened to use to define~$K$.
+\begin{verbatim}
+> K := NumberField(x^2-5);
+> Discriminant(K);
+20
+\end{verbatim}
+This is an intentional choice done for efficiency reasons, since
+computing the maximal order can take a long time.  Nonetheless, it
+conflicts with standard mathematical usage, so beware. 
+\end{example}
+
+
+The following proposition asserts that the discriminant of an order
+$\O$ in $\O_K$ is bigger than $\disc(\O_K)$ by a factor of the square
+of the index.
+\begin{proposition}\iprop{discriminant of order}\label{prop:indsquare}
+Suppose $\O$ is an order in $\O_K$. Then
+$$
+  \Disc(\O) =  \Disc(\O_K)\cdot [\O_K:\O]^2.
+$$
+\end{proposition}
+\begin{proof}
+Let $A$ be a matrix whose rows are the images via $\sigma$ of a basis
+for $\O_K$, and let $B$ be a matrix whose rows are the images via
+$\sigma$ of a basis for $\O$.  Since $\O\subset \O_K$ has finite
+index, there is an integer matrix $C$ such that $CA=B$,
+and $|\det(C)|= [\O_K:\O]$.  Then
+\[\Disc(\O) = \det(B)^2 = \det(CA)^2 = \det(C)^2\det(A)^2
+  = [\O_K:\O]^2 \cdot \Disc(\O_K).
+\]
+\end{proof}
+
+\begin{example}\label{ex:exdim}
+Let $K$ be a number field and consider the quantity
+$$
+  D(K) = \gcd\{\Disc(\alpha) : \alpha \in \O_K \text{ and } [\O_K:\Z{}[\alpha]] < \infty\}.
+$$
+One might hope that $D(K)$ is equal to the discriminant $\Disc(\O_K)$
+of $K$, but this is not the case in general.  Recall
+Example~\ref{ex:dedekind}, in which we considered the field $K$ generated
+by a root of $f = x^3 + x^2 - 2x+8$.  In that example, the
+discriminant of $\O_K$ is $-503$ with $503$ prime:
+\begin{verbatim}
+sage: K.<a> = NumberField(x^3 + x^2 - 2*x + 8)
+sage: factor(K.discriminant())
+-1 * 503
+\end{verbatim}
+For every $\alpha\in\O_K$, we have $2\mid [\O_K:\Z[\alpha]]$, since 
+$\O_K$ fails to be monogenic at $2$.  By
+Proposition~\ref{prop:indsquare}, the discriminant of $\Z[\alpha]$ is
+divisible by~$4$ for all~$\alpha$, so $\Disc(\alpha)$ is also
+divisible by~$4$.  This is why $2$ is called an ``inessential
+{\em discriminant} divisor''.
+\end{example}
+
+Proposition~\ref{prop:indsquare} gives an algorithm for computing $\O_K$,
+albeit a  slow one.  Given~$K$, find some order $\O\subset
+K$, and compute $d=\Disc(\O)$.  Factor~$d$, and use the factorization
+to write $d=s\cdot f^2$, where $f^2$ is the largest square that
+divides~$d$.  Then the index of $\O$ in $\O_K$ is a divisor of~$f$,
+and we (tediously) can enumerate all rings~$R$ with $\O\subset
+R\subset K$ and $[R:\O] \mid f$, until we find the largest one all of
+whose elements are integral.  A much better algorithm is to proceed
+exactly as just described, except use the ideas
+of Section~\ref{sec:alg_pmax} to find a~$p$-maximal order for each prime
+divisor of~$f$, then add these $p$-maximal orders together.
+
+\begin{example}
+Consider the ring $\O_K = \Z[(1+\sqrt{5})/2]$ of integers of 
+$K=\Q(\sqrt{5})$.  The discriminant of the basis $1,a=(1+\sqrt{5})/2$
+is
+\[
+  \Disc(\O_K) = \left| \mtwo{2}{1}{1}{3} \right| = 5.
+\]
+Let $\O=\Z[\sqrt{5}]$ be the order generated by $\sqrt{5}$.
+Then~$\O$ has basis $1,\sqrt{5}$, so 
+\[
+  \Disc(\O) = \left| \mtwo{2}{0}{0}{10} \right| = 20 = [\O_K:\O]^2\cdot 5,
+\]
+hence~$[\O_K:\O] = 2$.
+\end{example}
+
+\begin{example}
+Consider the cubic field $K=\Q(\sqrt[3]{2})$, and
+let $\O$ be the order $\Z[\sqrt[3]{2}]$.  
+Relative to the base $1,\sqrt[3]{2}, (\sqrt[3]{2})^2$ for~$\O$,
+the matrix of the trace pairing is
+$$
+  A = \mthree{3}{0}{0}{0}{0}{6}{0}{6}{0}.
+$$
+Thus 
+$$
+ \disc(\O) = \det(A)= 108 = 2^2\cdot 3^3.
+$$
+Suppose we do not know that the ring of integers
+$\O_K$ is equal to $\O$.  By Proposition~\ref{prop:indsquare},
+we  have
+$$
+\Disc(\O_K)\cdot [\O_K:\O]^2 = 2^2\cdot 3^3,
+$$
+so $3\mid \disc(\O_K)$, and $[\O_K:\O] \mid 6$.
+Thus to prove $\O=\O_K$ it suffices to prove
+that~$\O$ is $2$-maximal and $3$-maximal, 
+which could be accomplished as described in 
+Section~\ref{sec:alg_pmax}.
+\end{example}
+
+\section{Norms of Ideals}
+In this section we extend the notion of norm to ideals.  This will be
+helpful in the next chapter, where
+we will prove that the group of fractional ideals modulo principal
+fractional ideals of a number field is finite by showing that every
+ideal is equivalent to an ideal with norm at most some bound.
+This is enough, because as we will see below there are only
+finitely many ideals of bounded norm.
+\begin{definition}[Lattice Index]
+If $L$ and $M$ are two lattices in a vector space $V$, then the 
+\defn{lattice index} $[L:M]$ is by definition the absolute value of the
+determinant of any linear automorphism $A$ of $V$ such that $A(L)=M$.
+\end{definition}
+For example, if $L=2\Z$ and $M=10\Z$, then 
+$$
+  [L:M] = [2\Z : 10\Z] = \det([5]) = 5,
+$$
+since $5$ multiplies $2\Z$ onto $10\Z$.
+
+The lattice index has the
+following properties: 
+\begin{itemize}
+\item If $M\subset L$, then $[L:M]=\#(L/M)$.
+\item If $M, L, N$ are any lattices in~$V$, 
+then $$[L:N] = [L:M]\cdot [M:N].$$
+\end{itemize}
+
+
+\begin{definition}[Norm of Fractional Ideal]
+Suppose $I$ is a fractional ideal of $\O_K$.  The \defn{norm} of~$I$ is
+the lattice index
+$$ 
+  \Norm(I) = [\O_K : I] \in \Q_{\geq 0},
+$$ 
+or $0$ if $I=0$.
+\end{definition}
+Note that if $I$ is an integral ideal, then $\Norm(I)=\#(\O_K/I)$.
+
+\begin{lemma}\label{lem:aIfrac}\ilem{$\Norm(a I)$}
+Suppose $a\in K$ and $I$ is an integral ideal.
+Then 
+\[
+  \Norm(a I) = |\Norm_{K/\Q}(a)| \Norm(I).
+\]
+\end{lemma}
+\begin{proof}
+By properties of the lattice index mentioned above we have
+\[
+ [\O_K : aI] = [\O_K : I] \cdot [I:aI]
+             = \Norm(I) \cdot |\Norm_{K/\Q}(a)|.
+\] 
+Here we have used that $[I:aI]=|\Norm_{K/\Q}(a)|$, which is because left
+multiplication $\ell_a$ by $a$ is an automorphism of $K$ that sends $I$ onto
+$aI$, so $$[I:aI]=|\det(\ell_a)|=|\Norm_{K/\Q}(a)|.$$
+\end{proof}
+
+\begin{proposition}\iprop{multiplicativity of ideal norm}
+If $I$ and $J$ are fractional ideals, then 
+$$\Norm(IJ) = \Norm(I)\cdot \Norm(J).$$
+\end{proposition}
+\begin{proof}
+By Lemma~\ref{lem:aIfrac}, it suffices to prove this when $I$ and $J$ are
+integral ideals.  If $I$ and $J$ are coprime, then
+Theorem~\ref{thm:crt} (the Chinese Remainder Theorem) implies that
+$\Norm(IJ) = \Norm(I)\cdot \Norm(J)$.  Thus we reduce to the case when
+$I=\p^m$ and $J=\p^k$ for some prime ideal $\p$ and integers $m,k$.
+By Proposition~\ref{prop:quopow}, which is
+a consequence of CRT, the filtration of $\O_K/\p^{n}$ given
+by powers of~$\p$ has successive quotients isomorphic to $\O_K/\p$.
+\edit{Write more, right after I teach this.}
+Thus  we see that $\#(\O_K/\p^{n}) = \#(\O_K/\p)^{n}$, which proves that
+$\Norm(\p^n)=\Norm(\p)^n$.
+\end{proof}
+
+\begin{example}
+We compute some ideal norms using \sage.
+\begin{verbatim}
+sage: K.<a> = NumberField(x^2 - 5)
+sage: I = K.fractional_ideal(a)
+sage: I.norm()
+5
+sage: J = K.fractional_ideal(17)
+sage: J.norm()
+289
+\end{verbatim}%link
+
+\noindent{} We can also use functional notation:
+%link
+\begin{verbatim}
+sage: norm(I*J)
+1445
+\end{verbatim}
+\end{example}
+
+We will use the following proposition in the next chapter when
+we prove finiteness of class groups.
+\begin{proposition}\label{prop:finitewithnorm}%
+\ilem{integral ideals of bounded norm}
+Fix a number field $K$.
+Let $B$ be a positive integer.  There
+are only finitely many integral ideals
+$I$ of $\O_K$ with norm at most $B$.
+\end{proposition}
+\begin{proof}
+An integral ideal $I$ is a subgroup of $\O_K$ of index equal to the
+norm of $I$.  If $G$ is any finitely generated abelian group, then
+there are only finitely many subgroups of $G$ of index at most $B$,
+since the subgroups of index dividing an integer $n$ are all subgroups
+of $G$ that contain $nG$, and the group $G/nG$ is finite.  
+\end{proof}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "ant"
+%%% End: 

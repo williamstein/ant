@@ -1,0 +1,315 @@
+\chapter{Galois Cohomology}\label{ch:gc}
+
+\section{Group Cohomology}
+\subsection{Group Rings}
+Let $G$ be a finite group.  The group ring $\Z[G]$ of $G$ is the free
+abelian group on the elements of $G$ equipped with 
+multiplication given by the group structure on~$G$.  Note that $\Z[G]$
+is a commutative ring if and only if~$G$ is commutative.  
+
+For example, the
+group ring of the cyclic group $C_n=\langle a\rangle$ of order~$n$ is
+the free $\Z$-module on $1,a,\ldots, a^{n-1}$, and the multiplication
+is induced by $a^i a^j = a^{i+j} = a^{i + j \pmod{n}}$ extended linearly.
+For example, in  $\Z[C_3]$ we have
+$$
+  (1 + 2 a)(1 - a^2) = 1 - a^2 + 2a - 2 a^3 = 1 + 2a - a^2 - 2 = -1 + 2a - a^2.
+$$
+You might think that $\Z[C_3]$ is isomorphic to the ring $\Z[\zeta_3]$
+of integers of $\Q(\zeta_3)$, but you would be wrong, since the ring
+of integers is isomorphic to $\Z^2$ as abelian group, but $\Z[C_3]$
+is isomorphic to $\Z^3$ as abelian group.  (Note that $\Q(\zeta_3)$
+is a quadratic extension of~$\Q$.)
+
+\section{Modules and Group Cohomology}
+Let~$A$ be a~$G$ module.  This means that $A$ is an abelian group
+equipped with a left action of~$G$, i.e., a group homomorphism $G\to
+\Aut(A)$, where $\Aut(A)$ denotes the group of bijections $A\to A$
+that preserve the group structure on $A$.  Alternatively,~$A$ is a
+module over the ring $\Z[G]$ in the usual sense of module.  For
+example, $\Z$ with the trivial action is a module over any group~$G$,
+as is $\Z/m\Z$ for any positive integer~$m$.  Another example
+is $G=(\Z/n\Z)^*$, which acts via multiplication on $\Z/n\Z$.
+
+For each integer $n\geq 0$ there is an abelian group $\H^n(G,A)$
+called the {\em $n$th cohomology group of~$G$ acting on~$A$}.  The
+general definition is somewhat complicated, but the definition for
+$n\leq 1$ is fairly concrete.
+For example, the {\em $0$th cohomology group}
+$$
+  \H^0(G,A) = \{x \in A : \sigma x = x \text{ for all } \sigma \in G\} = G^A
+$$
+is the subgroup of elements of $A$ that are fixed by every element
+of~$G$.  
+
+The {\em first cohomology group}
+$$
+\H^1(G,A) = C^1(G,A)/B^1(G,A)
+$$
+is the group of $1$-cocycles modulo $1$-coboundaries, where
+$$
+  C^1(G, A) = \{f : G \to A \text{ such that } f(\sigma\tau) = f(\sigma) + \sigma f(\tau)\}
+$$
+and if we let $f_a: G \to A$ denote the set-theoretic map $f_a(\sigma) = \sigma(a)-a$,
+then
+$$ 
+  B^1(G, A) = \{f_a :  a\in A\}.
+$$
+There are also explicit, and increasingly complicated, definitions of
+$\H^n(G,A)$ for each $n\geq 2$ in terms of certain maps $G \times
+\cdots \times G \to A$ modulo a subgroup, but we will not need this.
+
+For example, if $A$ has the trivial action, then $B^1(G,A)=0$, since
+$\sigma a - a = a -a =0$ for any $a\in A$.  Also, $C^1(G,A) =
+\Hom(G,A)$.  If $A=\Z$, then since $G$ is finite there are no nonzero
+homomorphisms $G\to \Z$, so $\H^1(G,\Z)=0$.  
+
+If $X$ is any abelian group, then
+$$
+  A = \Hom(\Z[G], X)
+$$
+is a $G$-module.  We call a module constructed in this way
+{\em co-induced}.    
+
+The following theorem gives three properties of group cohomology,
+which uniquely determine group cohomology.  
+\begin{theorem}
+Suppose $G$ is a finite group.  Then
+\begin{enumerate}
+\item We have $\H^0(G,A) = A^G$.
+\item If $A$ is a co-induced $G$-module, then $\H^n(G,A) = 0$ for all $n\geq 1$.
+\item If $0\to A \to B \to C \to 0$ is any exact sequence of 
+$G$-modules, then there is a long exact sequence
+$$
+ 0 \to \H^0(G,A) \to \H^0(G,B) \to \H^0(G,C) \to \H^1(G,A) \to \cdots
+$$
+$$
+   \cdots \to \H^{n}(G,A) \to \H^{n}(G,B) \to \H^{n}(G,C) \to \H^{n+1}(G,A) \to \cdots
+$$
+\end{enumerate}
+Moreover, the functor $\H^n(G,-)$ is uniquely determined by
+these three properties. 
+\end{theorem}
+We will not prove this theorem.  For proofs see
+\cite[Atiyah-Wall]{cassels-frohlich} and
+\cite[Ch.~7]{serre:localfields}. The properties of the theorem
+uniquely determine group cohomology, so one should in theory be able
+to use them to deduce anything that can be deduced about cohomology
+groups.  Indeed, in practice one frequently proves results about
+higher cohomology groups $\H^n(G,A)$ by writing down appropriate exact
+sequences, using explicit knowledge of $\H^0$, and chasing diagrams.
+
+\begin{remark}
+  Alternatively, we could view the defining properties of the theorem
+  as the definition of group cohomology, and could state a theorem
+  that asserts that group cohomology exists.
+\end{remark}
+
+\begin{remark}
+  For those familiar with commutative and homological algebra, we have
+$$
+  \H^n(G,A) = \Ext^n_{\Z[G]}(\Z, A),
+$$
+where $\Z$ is the trivial $G$-module.
+\end{remark}
+
+\begin{remark}
+  One can interpret $\H^2(G,A)$ as the group of equivalence classes of
+  extensions of $G$ by $A$, where an extension is an exact sequence
+  $$0\to A \to M \to G \to 1$$ such that the induced conjugation action
+  of $G$ on $A$ is the given action of~$G$ on~$A$.
+(Note that $G$ acts by conjugation, as $A$ is a normal
+subgroup since it is the kernel of a homomorphism.)
+\end{remark}
+
+
+\subsection{Example Application of the Theorem}
+For example, let's see what we get from the exact sequence
+$$
+ 0 \to \Z \xrightarrow{m} \Z \to \Z/m\Z \to 0,
+$$
+where $m$ is a positive integer, and $\Z$ has the structure of 
+trivial~$G$ module.  By definition we have
+$\H^0(G,\Z) = \Z$ and $\H^0(G,\Z/m\Z)=\Z/m\Z$.
+The long exact sequence begins
+$$
+  0 \to \Z \xra{m} \Z \to \Z/m\Z \to \H^1(G,\Z) \xra{m} 
+\H^1(G,\Z) \to \H^1(G,\Z/m\Z)\to
+\H^2(G,\Z) \xra{m} \H^2(G,\Z) \to \cdots
+$$
+From the first few terms of the sequence and the fact
+that $\Z$ surjects onto $\Z/m\Z$, we see that $[m]$ 
+on $\H^1(G,\Z)$ is injective.
+This is consistent with our observation above that
+$\H^1(G,\Z) = 0$. Using this vanishing and the right side of the 
+exact sequence we obtain an isomorphism
+$$
+\H^1(G,\Z/m\Z) \isom \H^2(G,\Z)[m].
+$$
+As we observed above, when a group acts trivially the $\H^1$
+is $\Hom$, so
+\begin{equation}\label{eqn:h2}
+  \H^2(G,\Z)[m] \isom \Hom(G,\Z/m\Z).
+\end{equation}
+One can prove that for any $n>0$ and any module~$A$ that the group
+$\H^n(G,A)$ has exponent dividing $\#G$ (see Remark~\ref{rmk:cores}).  
+Thus (\ref{eqn:h2}) allows
+us to understand $\H^2(G,\Z)$, and this comprehension arose
+naturally from the properties that determine $\H^n$.
+
+
+
+\section{Inflation and Restriction}
+Suppose $H$ is a subgroup of a finite group~$G$ and $A$
+is a $G$-module.  For each~$n\geq 0$, there is a natural map
+$$
+  \res_H : \H^n(G,A) \to \H^n(H,A)
+$$
+called restriction.  Elements of $\H^n(G,A)$ can be viewed as classes
+of $n$-cocycles, which are certain maps $G \times \cdots \times G \to
+A$, and the restriction maps  restricts these cocycles to $H
+\times \cdots \times H$.  
+
+If~$H$ is a normal subgroup of~$G$, there is also an inflation map
+$$
+\inf_H: \H^n(G/H, A^H) \to \H^n(G,A),
+$$
+given by taking a cocycle $f : G/H \times \cdots \times G/H \to A^H$
+and precomposing with the quotient map $G\to G/H$ to obtain a cocycle for $G$.
+
+\begin{proposition}\label{prop:infres}
+Suppose $H$ is a normal subgroup of~$G$.
+Then there is an exact sequence
+$$
+  0 \to \H^1(G/H, A^H)\xra{\inf_H}  \H^1(G,A)\xra{\res_H} \H^1(H,A).
+$$
+\end{proposition}
+\begin{proof}
+Our proof follows \cite[pg.~117]{serre:localfields} closely.
+
+We see that $\res\circ \inf = 0$ by looking at cochains.  It remains
+to prove that $\inf_H$ is injective and that the image of $\inf_H$
+is the kernel of $\res_H$.
+\begin{enumerate}
+
+\item {\em That $\inf_H$ is injective:} Suppose $f:G/H\to A^H$ is a
+  cocycle whose image in $\H^1(G,A)$ is equivalent to~$0$ modulo
+  coboundaries.  Then there is an~$a\in A$ such that $f(\sigma) =
+  \sigma a - a$, where we identify~$f$ with the map $G\to A$ that is
+  constant on the costs of~$H$.  But $f$ depends only on the costs of
+  $\sigma$ modulo~$H$, so $\sigma a - a = \sigma \tau a - a$ for all
+  $\tau \in H$, i.e., $\tau a = a$ (as we see by adding $a$ to both
+  sides and multiplying by $\sigma^{-1}$).Thus $a\in A^H$, so $f$ is
+  equivalent to~$0$ in $\H^1(H,A^H)$.
+
+\item {\em The image of $\inf_H$ contains the kernel of $\res_H$:}
+Suppose $f:G\to A$ is a cocycle whose
+restriction to $H$ is a coboundary, i.e., there is $a\in A$ such
+that $f(\tau) = \tau a - a$ for all $\tau \in H$. 
+Subtracting the coboundary $g(\sigma) = \sigma a - a$ for $\sigma\in G$ 
+from~$f$, we may assume $f(\tau) = 0$ for all $\tau \in H$.
+Examing the equation $f(\sigma\tau) = f(\sigma) + \sigma f(\tau)$ 
+with $\tau\in H$ shows that $f$ is constant on the cosets of~$H$.
+Again using this formula, but with $\sigma\in H$ and $\tau\in G$, we see
+that 
+$$
+  f(\tau) = f(\sigma \tau) = f(\sigma) + \sigma f(\tau) = \sigma f(\tau),
+$$
+so the image of~$f$ is contained in $A^H$.  Thus $f$ defines a cocycle
+$G/H \to A^H$, i.e., is in the image of $\inf_H$.
+\end{enumerate}
+
+\end{proof}
+
+This proposition will be useful when proving
+the weak Mordell-Weil theorem.
+
+\begin{example}
+The sequence of Proposition~\ref{prop:infres} need not be
+surjective on the right.  For example, suppose $H=A_3 \subset S_3$,
+and let $S_3$ act trivially on the cyclic group $C = \Z/3\Z$.
+Using the $\Hom$ interpretation of $\H^1$, we see
+that 
+$\H^1(S_3/A_3, C) = \H^1(S_3, C) = 0$, but 
+$\H^1(A_3, C)$ has order~$3$.
+\end{example}
+
+
+\begin{remark}
+On generalization of Proposition~\ref{prop:infres} is to
+a more complicated exact sequence involving the ``transgression map'' 
+tr:
+$$
+  0 \to \H^1(G/H, A^H)\xra{\inf_H} \H^1(G,A)\xra{\res_H} \H^1(H,A)^{G/H}
+\xra{{\rm tr}}  \H^2(G/H,A^H) \to \H^2(G,A).
+$$
+Another generalization of Proposition~\ref{prop:infres}
+is that if $\H^m(H,A) = 0$ for $1\leq m < n$, then
+there is an exact sequence
+$$ 
+ 0 \to \H^n(G/H, A^H)\xra{\inf_H}  \H^n(G,A)\xra{\res_H} \H^n(H,A).
+$$
+\end{remark}
+
+\begin{remark}\label{rmk:cores}
+  If $H$ is a not-necessarily-normal subgroup of~$G$, there are also
+  maps
+$$
+ \cores_H: \H^n(H,A) \to \H^n(G,A)
+$$
+for each~$n$.  For $n=0$ this is the trace map $a\mapsto \sum_{\sigma
+  \in G/H} \sigma a$, but the definition for $n\geq 1$ is more involved.
+One has $\cores_H \circ \res_H = [\#(G/H)]$. 
+Taking $H=1$ we see 
+that for each $n\geq 1$ the group
+$\H^n(G,A)$ is annihilated by $\#G$. 
+\end{remark}
+
+\section{Galois Cohomology}
+Suppose $L/K$ is a finite Galois extension of 
+fields, and $A$ is a module for $\Gal(L/K)$.
+Put
+$$
+ \H^n(L/K, A) = \H^n(\Gal(L/K), A).
+$$
+
+Next suppose~$A$ is a module for the group $\Gal(K^{\sep}/K)$
+and for any extension~$L$ of~$K$, let
+$$A(L) = \{x \in A : \sigma(x) = x \text{ all } \sigma \in\Gal(K^{\sep}/L)\}.$$
+We think of $A(L)$ as the group of elements of~$A$ that are
+``defined over~$L$''.  
+For each~$n\geq 0$, put
+ $$ 
+  \H^n(L/K, A) = \H^n(\Gal(L/K), A(L)).
+$$
+Also, put
+$$
+ \H^n(K,A) = \varinjlim_{L/K} \H^n(L/K,A(L)),
+$$
+where $L$ varies over all finite Galois extensions of $K$.
+(Recall: Galois means normal and separable.)
+%(There's much hidden in that direct limit.)
+
+\begin{example}
+The following are examples of $\Gal(\Qbar/\Q)$-modules:
+$$
+  \Qbar,\quad \Qbar^*,\quad \Zbar,\quad\Zbar^*,\quad E(\Qbar),\quad
+ E(\Qbar)[n], \quad {\rm Tate}_{\ell}(E),
+$$
+where $E$ is an elliptic curve over~$\Q$.
+\end{example}
+
+\begin{theorem}[Hilbert 90]\label{thm:h90}
+We have $\H^1(K,\Kbar^*) = 0$.
+\end{theorem}
+\begin{proof}
+See \cite{serre:localfields}.  The main input to the proof is linear
+independence of automorphism and a clever little calculation.
+%It suffices to prove for every finite Galois extension
+%$L/K$ that $\H^1(L/K,L^*) = 0$.  ... (copy from Serre.)
+\end{proof}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "ant"
+%%% End: 

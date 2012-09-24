@@ -1,0 +1,718 @@
+\chapter{Factoring Primes}\label{ch:factoring_primes}
+Let $p$ be a prime and $\O_K$ the ring of integers of a number
+field.  This chapter is about how to write $p\O_K$ as a product of
+prime ideals of $\O_K$.  Paradoxically, computing the
+explicit prime ideal factorization of $p\O_K$ is easier than
+computing~$\O_K$.
+
+%Ideals were introduced to mathematics by Kummer long ago because in
+%rings of integers of number fields, ideals factor uniquely as products
+%of primes ideals, despite the fact that algebraic integers need not
+%factor uniquely as products of irreducible algebraic integers.  This
+%failure of unique factorization for algebraic integers was used by
+%Liouville to refute Lam\'{e}'s purported 1847 proof of Fermat's
+%Last Theorem.
+
+
+
+%(Recall that by Theorem~\ref{thm:uniqfac}, 
+%such a product representation is unique.)
+
+%Then I will sketch the main results and definitions
+%that we will study in detail during the next few chapters.  We will
+%cover discriminants and norms of ideals, define the class group of
+%$\O_K$ and prove that it is finite and computable, and define the
+%group of units of $\O_K$, determine its structure, and prove that it
+%is also computable.
+
+\section{The Problem}
+\begin{center}
+\includegraphics[width=20em]{spec}\\
+A diagram from \cite{lenstras:nfs}.
+\end{center}
+
+\begin{tabular}{lr}
+{\begin{minipage}{4in}
+``The obvious mathematical breakthrough would be development of an easy
+way to factor large prime numbers.''
+\mbox{ }\\\mbox{}\hspace{3em}-- {Bill Gates, {\em The Road Ahead}, 1st ed., pg 265}
+\end{minipage}}
+&
+\begin{minipage}{2in}
+\mbox{}\vspace{3ex}
+\includegraphics[width=1in]{gates}
+\end{minipage}
+\\
+\end{tabular}
+
+Bill Gates meant\footnote{This quote is on page 265 of the first
+  edition.  In the second edition, on page 303, this sentence is
+  changed to ``The obvious mathematical breakthrough that would defeat
+  our public key encryption would be the development of an easy way to
+  factor large numbers.''  This is less nonsensical; however, fast
+  factoring is {\em not} known to break all commonly used public-key
+  cryptosystem.  For example, there are cryptosystems based on the
+  difficulty of computing discrete logarithms in $\F_p^*$ and on
+  elliptic curves over $\F_p$, which (presumably) would not be broken
+  even if one could factor large numbers quickly.}  factoring products
+of two primes, which would break the RSA cryptosystem (see
+e.g. \cite[\S 3.2]{stein:ent}).  However, perhaps Gates is an
+algebraic number theorist, and he really meant what he said: then we
+might imagine that he meant factorization of primes of~$\Z$ in rings
+of integers of number fields.  For example, $2^{16}+1 = 65537$ is a
+``large'' prime, and in $\Z[i]$ we have 
+$$ (65537) = (65537, 2^8 + i) \cdot (65537, 2^8 - i).$$
+
+\subsection{Geometric Intuition}
+Let $K=\Q(\alpha)$ be a number field, and let $\O_K$ be the ring of
+integers of $K$.  To employ our geometric intuition, as the Lenstras
+did on the cover of \cite{lenstras:nfs}, it is helpful to
+view $\O_K$ as a 1-dimensional scheme
+$$
+  X = \Spec(\O_K) = \{\text{ all prime ideals of $\O_K$ }\}
+$$
+over
+$$
+  Y=\Spec(\Z) = \{ (0) \} \union \{ p\Z : p \in\Z_{>0} \text{ is prime }\}.
+$$ 
+There is a natural map $\pi :X\ra Y$ that sends a prime ideal $\p\in X$ to
+$\p\intersect \Z\in Y$.   
+For example, if 
+$$
+ \p = (65537, 2^8 + i)\subset\Z[i],
+$$ 
+then
+$\p \intersect \Z = (65537)$. 
+For more on this viewpoint,
+see \cite{hartshorne} and \cite[Ch.~2]{eisenbud_harris:geometry}.
+
+If $p\in\Z$ is a prime number, then the ideal $p\O_K$ of $\O_K$
+factors uniquely as a product $\prod \p_i^{e_i}$, where the $\p_i$ are
+maximal ideals of $\O_K$.  We may imagine the decomposition of $p\O_K$
+into prime ideals geometrically as the fiber $\pi^{-1}(p\Z)$, where
+the exponents $e_i$ are the multiplicities of the fibers.  Notice that
+the elements of $\pi^{-1}(p\Z)$ are the prime ideals of $\O_K$ that
+contain~$p$, i.e., the primes that divide $p\O_K$.  
+This chapter is about how to compute the $\p_i$ and $e_i$.
+
+
+
+
+
+\begin{remark}
+  More technically, in algebraic geometry one defines the inverse
+  image of the point $p\Z$ to be the spectrum of the tensor product
+  $\O_K \tensor_{\Z} \Z/\p\Z$; by a generalization of the Chinese
+  Remainder Theorem, we have
+$$
+  \O_K \tensor_{\Z} \left(\Z/\p\Z\right) \isom \oplus \O_K/\p_i^{e_i}.
+$$
+\end{remark}
+
+
+
+\subsection{Examples}
+The following \sage session shows the commands needed to compute 
+the factorization of $p\O_K$ for~$K$ the number field
+defined by a root of $x^5+7x^4+3x^2-x+1$ and $p=2$ and~$5$.
+We first create an element $f\in \QQ[x]$ in \sage:
+\begin{verbatim}
+sage: R.<x> = QQ[]
+sage: f = x^5 + 7*x^4 + 3*x^2 - x + 1
+\end{verbatim}%link
+
+\par\noindent{}Then we create the corresponding number field obtained
+by adjoining a root of $f$, and find its ring of integers.
+%link
+\begin{verbatim}
+sage: K.<a> = NumberField(f)
+sage: OK = K.ring_of_integers()
+sage: OK.basis()
+[1, a, a^2, a^3, a^4]
+\end{verbatim}%link
+
+\par\noindent{}We define the ideal $2\O_K$ and factor -- it turns
+out to be prime. 
+%link
+\begin{verbatim}
+sage: I = K.fractional_ideal(2); I
+Fractional ideal (2)
+sage: I.factor()
+Fractional ideal (2)
+sage: I.is_prime()
+True
+\end{verbatim}%link
+
+\par\noindent{}Finally we factor $5\O_K$, which factors as a product of three
+primes. 
+%link
+\begin{verbatim}
+sage: I = K.fractional_ideal(5); I
+Fractional ideal (5)
+sage: I.factor()
+(Fractional ideal (5, a^2 + 9*a + 2)) * (Fractional ideal (5, a + 2)) * (Fractional ideal (5, a + 3))^2
+\end{verbatim}
+Notice that the polynomial $f$ factors in a similar way:
+\begin{verbatim}
+sage: f.factor_mod(5)
+(x + 2) * (x + 3)^2 * (x^2 + 4*x + 2)
+\end{verbatim}
+Thus $2\O_K$ is already a prime ideal, and 
+$$ 
+  5\O_K = (5,2+a)\cdot(5,3+a)^2\cdot(5,2+4a+a^2).
+$$ 
+Notice that in this example $\O_K=\Z[a]$.  (Warning: There are
+examples of $\O_K$ such that $\O_K\neq \Z[a]$ for any $a\in\O_K$, as
+Example~\ref{ex:dedekind} below illustrates.)  When $\O_K=\Z[a]$ it is
+relatively easy to factor $p\O_K$, at least assuming one can factor
+polynomials in $\F_p[x]$.  The following
+factorization gives a hint as to why:
+$$
+  x^5+7x^4+3x^2-x+1 \con (x+2)\cdot (x+3)^2 \cdot (x^2+4x+2)\pmod{5}.
+$$
+
+The exponent~$2$ of $(5,3+a)^2$ in the factorization of $5\O_K$ above
+suggests ``ramification'',
+in the sense that the cover $X\ra Y$ has less points (counting their ``size'', i.e.,
+their residue class degree) in its fiber over~$5$ than
+it has generically.
+
+%% \vfill
+
+%% \begin{center}
+%% \psfrag{p1}{$(5,2+4a+a^2)$}
+%% \psfrag{p2}{$(5,3+a)^2$}
+%% \psfrag{p3}{$(5,2+a)$}
+%% \psfrag{p}{$5\Z$}
+%% \psfrag{q1}{$2\O_K$}
+%% \psfrag{q}{$2\Z$}
+%% \psfrag{zero}{$(0)$}
+%% \psfrag{r}{$3\Z$}
+%% \psfrag{s}{$7\Z$}
+%% \psfrag{t}{$11\Z$}
+%% \includegraphics[width=30em]{cover1}\\
+%% Diagram of $\Spec(\O_K) \ra \Spec(\Z)$
+%% \end{center}
+
+
+\section{A Method for Factoring Primes that Often Works}
+Suppose $a\in\O_K$ is such that $K=\Q(a)$, and let
+$f(x)\in\Z[x]$ be the minimal polynomial of~$a$.  Then
+$\Z[a]\subset \O_K$, and we have a diagram of schemes
+$$\xymatrix{
+  {{\ds \bigcup}\Spec(\O_K/\p_i^{e_i})}\ar@{^(->}[r]\ar[d]               &{\Spec(\O_K)}\ar[d]  \\
+{{\ds \bigcup}\Spec(\F_p[x]/(\overline{f}_i^{e_i}))\,}\ar@{^(->}[r] \ar[d]
+         &{\Spec(\Z[a])}\ar[d] \\%\ar@{=}[r] & \Spec(\Z[x]/f(x))\\
+{\Spec(\F_p)\,}\ar@{^(->}[r]&{\Spec(\Z)}
+}$$
+where $\overline{f} = \prod_i \overline{f}_i^{e_i}$
+is the factorization of the image of $f$ in $\F_p[x]$,
+and $p\O_K = \prod \p_i^{e_i}$ is the factorization
+of $p\O_K$ in terms of prime ideals of $\O_K$.  
+On the level of rings, the bottom horizontal map
+is the quotient map $\Z\to\Z/p\Z\isom \F_p$.
+The middle horizontal map is induced by 
+$$
+  \Z[x] \to \bigoplus_i \F_p[x]/(\overline{f}_i^{e_i}),
+$$
+and the top horizontal map is induced by
+$$
+  \O_K \to \O_K/p\O_K \isom \bigoplus \O_K/\p_i^{e_i},
+$$
+where the isomorphism is by the Chinese Remainder Theorem,
+which we will prove in Chapter~\ref{ch:crt}.
+The left vertical maps come from the inclusions
+$$
+   \F_p \hra \F_p[x]/(\overline{f}_i^{e_i}) \hra \O_K/\p_i^{e_i},
+$$
+and the right from the inclusions $\Z\hra\Z[a]\hra\O_K$.
+
+The cover $\pi:\Spec(\Z[a])\ra \Spec(\Z)$ is easy to understand
+because it is defined by the single equation $f(x)$, in the sense
+that $\Z[a]\isom \Z[x]/(f(x))$.  To give a
+maximal ideal~$\p$ of $\Z[a]$ such that $\pi(\p) = p\Z$ is the
+same as giving a homomorphism $\vphi:\Z[x]/(f) \ra \Fbar_p$ up to
+automorphisms of the image, which is in turn the same as giving a
+root of~$f$ in $\Fbar_p$ up to automorphism, which is the same
+as giving an irreducible factor of the reduction of~$f$ modulo~$p$.
+
+\begin{lemma}\ilem{factorization of $p\O_K$}\label{lem:factpok}
+Suppose the index of $\Z[a]$ in $\O_K$ is coprime to~$p$.  Then
+the primes~$\p_i$ in the factorization of $p\Z[a]$ do not
+decompose further going from $\Z[a]$ to $\O_K$, so finding the
+prime ideals of $\Z[a]$ that contain~$p$ yields the primes
+that appear in the factorization of $p\O_K$.
+\end{lemma}
+\begin{proof}
+% {\em Low-brow argument:}
+Fix a basis for $\O_K$ and for $\Z[a]$ as $\Z$-modules.
+Form the matrix~$A$ whose columns express each basis element
+of $\Z[a]$ as a $\Z$-linear combination of the basis for $\O_K$.
+Then 
+$$
+\det(A) = \pm [\O_K:\Z[a]]
+$$ 
+is coprime to~$p$, by hypothesis.  Thus the reduction of~$A$
+modulo~$p$ is invertible, so it defines an isomorphism
+$\Z[a]/p\Z[a] \isom \O_K/p\O_K$. 
+
+Let $\Fpbar$ denote a fixed algebraic closure of $\F_p$; thus $\Fpbar$
+is an algebraically closed field of characteristic~$p$, over which
+all polynomials in $\F_p[x]$ factor into linear factors.
+Any homomorphism $\O_K\to \Fpbar$ sends~$p$ to~$0$, so is the composition of a homomorphism $\O_K \to \O_K/p\O_K$ with a homomorphism
+$\O_K/p\O_K \to \Fpbar$.  Since $\O_K/p\O_K \isom
+\Z[a]/p\Z[a]$, the homomorphisms $\O_K\to \Fpbar$ are in bijection
+with the homomorphisms $\Z[a]\to \Fpbar$.  The homomorphisms
+$\Z[a]\to\Fpbar$ are in bijection with the roots of the reduction
+modulo~$p$ of the minimal polynomial of~$a$ in $\Fpbar$.
+\end{proof}
+
+\begin{remark}
+Here is a ``high-brow'' proof of Lemma~\ref{lem:factpok}.
+By hypothesis we have an exact sequence
+of abelian groups
+$$ 0 \to \Z[a]\to \O_K \to H \to 0,$$
+where $H$ is a finite abelian group of order coprime 
+to~$p$.  Tensor product is right exact, and there is
+an exact sequence
+$$
+   \Tor_1(H,\F_p) \to \Z[a]\tensor\F_p \to \O_K\tensor\F_p \to H\tensor\F_p \to 0,
+$$
+and $\Tor_1(H,\F_p) = 0$ (since $H$ has no $p$-torsion), 
+so $\Z[a]\tensor\F_p\isom \O_K\tensor\F_p$.
+\end{remark}
+
+As suggested in the proof of the lemma, we find all homomorphisms
+$\O_K\to \Fpbar$ by finding all homomorphism $\Z[a]\to \Fpbar$.  In
+terms of ideals, if $\p=(f(a),p)\Z[a]$ is a maximal ideal of $\Z[a]$,
+then the ideal $\p'=(f(a),p)\O_K$ of $\O_K$ is also maximal, since
+$$\O_K/\p'\isom (\O_K/p\O_K)/(f(\tilde{a}))
+\isom (\Z[a]/p\Z[a]) / (f(\tilde{a})) \subset \Fpbar,$$
+where $\tilde{a}$ denotes the image of $a$ in $\O_K/p\O_K$.
+
+We formalize the above discussion in the following theorem (note: we will 
+not prove that the powers are $e_i$ here):
+\begin{theorem}\label{thm:fac1}\ithm{prime ideal factorization}
+Let $f\in\Z[x]$ be the minimal polynomial of~$a$ over~$\Z$.
+Suppose that~$p\nmid [\O_K:\Z[a]]$ is a prime.
+Let
+$$
+ \overline{f} = \prod_{i=1}^t \overline{f}_i^{e_i} \in \F_p[x]
+$$
+where the $\overline{f}_i$ are distinct monic irreducible
+polynomials.  
+Let 
+$
+  \p_i = (p,f_i(a))
+$
+where $f_i\in\Z[x]$ is a lift of $\overline{f}_i$ in $\F_p[x]$.
+Then
+$$
+  p\O_K = \prod_{i=1}^t \p_i^{e_i}.
+$$
+%Geometrically, the fiber of $\Spec(\O_K) \to p\Z$ 
+%contains the points $\{\p_1,\p_2,\ldots, \p_t\}$
+%with multiplicites $e_i$.
+\end{theorem}
+
+We return to the example from above, in which $K=\Q(a)$, where~$a$ is
+a root of $f = x^5+7x^4+3x^2-x+1$.  According to \sage, the ring
+of integers~$\O_K$ has discriminant $2945785 = 5\cdot 353\cdot 1669$:
+\begin{verbatim}
+sage: K.<a> = NumberField(x^5 + 7*x^4 + 3*x^2 - x + 1)
+sage: D = K.discriminant(); D
+2945785
+sage: factor(D)
+5 * 353 * 1669
+\end{verbatim}
+The order $\Z[a]$ has the same discriminant as $f(x)$, which
+is the same as the discriminant of $\O_K$, so
+$\Z[a]=\O_K$ and we can apply the above theorem.
+(Here we use that the index of $\Z[a]$ in $\O_K$
+is the square of the quotient of their discriminants, 
+a fact we will prove later in Section~\ref{sec:disc}.)
+\begin{verbatim}
+sage: R.<x> = QQ[]
+sage: discriminant(x^5 + 7*x^4 + 3*x^2 - x + 1)
+2945785
+\end{verbatim}
+We have
+$$
+  x^5+7x^4+3x^2-x+1 \con (x+2)\cdot (x+3)^2 \cdot (x^2+4x+2)\pmod{5},
+$$
+which yields the factorization of $5\O_K$ given before the theorem.
+
+If we replace $a$ by $b=7a$, then the index of $\Z[b]$
+in $\O_K$ will be a power of $7$, which is coprime to $5$,
+so the above method will still work.
+\begin{verbatim}
+sage: K.<a> = NumberField(x^5 + 7*x^4 + 3*x^2 - x + 1)
+sage: f = (7*a).minpoly('x')
+sage: f
+x^5 + 49*x^4 + 1029*x^2 - 2401*x + 16807
+sage: f.disc()
+235050861175510968365785
+sage: factor(f.disc() / K.disc())
+7^20
+sage: f.factor_mod(5)
+(x + 4) * (x + 1)^2 * (x^2 + 3*x + 3)
+\end{verbatim}
+Thus $5$ factors in $\O_K$ 
+as 
+$$
+  5\O_K = (5, 7a+1)^2 \cdot (5, 7a+4) \cdot (5, (7a)^2 + 3(7a) + 3).
+$$
+If we replace $a$ by $b=5a$ and try the above algorithm with $\Z[b]$,
+then the method fails because the index of $\Z[b]$ in $\O_K$ is divisible
+by~$5$.
+\begin{verbatim}
+sage: K.<a> = NumberField(x^5 + 7*x^4 + 3*x^2 - x + 1)
+sage: f = (5*a).minpoly('x')
+sage: f
+x^5 + 35*x^4 + 375*x^2 - 625*x + 3125
+sage: f.factor_mod(5)
+x^5
+\end{verbatim}
+
+\section{A General Method}
+There are numbers fields $K$ such that $\O_K$ is not of the form
+$\Z[a]$ for any $a\in K$.  Even worse, Dedekind found a
+field~$K$ such that $2\mid [\O_K : \Z[a]]$ for {\em all}
+$a\in \O_K$, so there is no choice of $a$ such that
+Theorem~\ref{thm:fac1} can be used to factor~$2$ for $K$ (see
+Example~\ref{ex:dedekind} below).
+
+\subsection{Inessential Discriminant Divisors}
+\begin{definition}
+A prime $p$ is an \defn{inessential discriminant
+divisor} if $p\mid [\O_K : \Z[a]]$ for 
+{\em every} $a\in\O_K$.  
+\end{definition}
+See Example~\ref{ex:exdim} below for
+why it is called an inessential ``discriminant divisor'' instead
+of an inessential ``index divisor''.
+
+Since $[\O_K : \Z[a]]^2$ is the absolute value of
+$\Disc(f(x))/\Disc(\O_K)$, where $f(x)$ is the characteristic
+polynomial of $f(x)$, an inessential discriminant divisor divides the
+discriminant of the characteristic polynomial of any element of
+$\O_K$.
+
+\begin{example}[Dedekind]\label{ex:dedekind}
+Let $K=\Q(a)$ be the cubic field defined by a root $a$ of the polynomial
+$f = x^3 + x^2 - 2x+8$.  We will use \sage to show that~$2$ is an inessential
+discriminant divisor for~$K$.  
+\begin{verbatim}
+sage: K.<a> = NumberField(x^3 + x^2 - 2*x + 8); K
+Number Field in a with defining polynomial x^3 + x^2 - 2*x + 8
+sage: K.factor_integer(2)
+(Fractional ideal (1/2*a^2 - 1/2*a + 1)) * 
+(Fractional ideal (a^2 - 2*a + 3)) * 
+(Fractional ideal (3/2*a^2 - 5/2*a + 4))
+\end{verbatim}
+Thus $2\O_K=\p_1\p_2\p_3$, with the $\p_i$ distinct,
+and one sees directly from the above expressions
+that 
+$\O_K/\p_i\isom \F_2$ for each $i$.  If $\O_K=\Z[a]$
+for some $a\in\O_K$ with minimal polynomial~$f$, then 
+$\overline{f}(x)\in\F_2[x]$ must be a product of three {\em distinct} 
+linear factors, which is impossible, since the only
+linear polynomials in $\F_2[x]$ are $x$ and $x+1$.
+\end{example}
+
+\subsection{Remarks on Ideal Factorization in General}
+
+Recall (from Definition~\ref{defn:order}) that an {\em order} in $\O_K$ is
+a subring $\O$ of $\O_K$ that has finite index in $\O_K$.  For
+example, if $\O_K=\Z[i]$, then $\O=\Z + 5\Z[i]$ is an order in $\O_K$,
+and as an abelian group $\O_K/\O$ is cyclic of order~$5$.
+
+Most algebraic number theory books do not describe an algorithm for
+decomposing primes in the general case.  Fortunately, Cohen's book
+\cite[Ch.~6]{cohen:course_ant} does describe how to solve the general
+problem, in more than one way.  The algorithms are nontrivial, and
+occupy a substantial part of Chapter~6 of Cohen's book.  Our goal
+for the rest of this section is to give a hint as to what goes into them.
+
+The general solutions to prime ideal factorization are somewhat surprising,
+since the algorithms are much more sophisticated than the one
+suggested by Theorem~\ref{thm:fac1}.  However, these complicated
+algorithms all run very quickly in practice, even without assuming the
+maximal order is already known.  In fact, they avoid computing~$\O_K$
+altogether, and instead compute only an order~$\O$ that is {\em
+  $p$-maximal}, i.e., is such that $p \nmid [\O_K:\O]$.
+
+For simplicity we consider the following slightly easier problem whose
+solution illustrates the key ideas needed in the general case.
+\begin{problem}\label{prob:pcontained}
+Let $\O$ be any order in $\O_K$
+and let~$p$ be a prime of $\Z$.  Find the prime ideals of $\O$ that
+contain~$p$.
+\end{problem}
+
+Given a prime~$p$
+that we wish to factor in $\O_K$, we first find a $p$-maximal order~$\O$.
+We then use a solution to Problem~\ref{prob:pcontained} to find
+the prime ideals $\p$ of $\O$ that contain $p$.  Second, we find
+the exponents $e$ such that $\p^e$ exactly divides $p\O$.
+The resulting factorization in $\O$ completely determines
+the factorization of $p\O_K$.  
+
+A $p$-maximal order can be found reasonably quickly in practice using
+algorithms called ``round 2'' and ``round 4''.  To
+compute $\O_K$, given an order $\Z[\alpha]\subset \O_K$, one takes a
+sum of $p$-maximal orders, one for every~$p$ such that $p^2$ divides
+$\Disc(\Z[\alpha])$.  The time-consuming part of this computation is 
+finding the primes~$p$ such that $p^2\mid \Disc(\Z[\alpha])$, not
+finding the $p$-maximal orders.  This example illustrates that
+a fast algorithm for factoring integers would not only break the RSA
+cryptosystems, but would massively speed up computation of the ring of
+integers of a number field.
+\begin{remark}
+The MathSciNet review of \cite{buchmann_lenstra:approx} by
+J.~Buhler contains the following:
+\begin{quote}
+    A result of Chistov says that finding the ring of integers $\O_K$
+    in an algebraic number field $K$ is equivalent, under certain
+    polynomial time reductions, to the problem of finding the largest
+    squarefree divisor of a positive integer. No feasible (i.e.,
+    polynomial time) algorithm is known for the latter problem, and it
+    is possible that it is no easier than the more general problem of
+    factoring integers.
+\end{quote}
+Thus it appears that computing the ring $\O_K$ is quite hard. 
+\end{remark}
+
+\subsection{Finding a $p$-Maximal Order}\label{sec:alg_pmax}
+Before describing the general factorization algorithm, we sketch some
+of the theory behind the general algorithms for computing a
+$p$-maximal order $\O$ in $\O_K$.  The main input is the following
+theorem:
+\begin{theorem}[Pohst-Zassenhaus]
+Let $\O$ be an order in the the ring of integers $\O_K$ of a number field, let $p\in\Z$ be a prime,
+and let 
+$$I_p = \{x \in \O : x^m \in p\O \text{ for some $m\geq 1$ }\} \subset \O$$ 
+be the radical of $p\O$, which is an ideal of $\O$.
+Let
+$$
+  \O' = \{x \in K : xI_p \subset I_p\}.
+$$
+Then $\O'$ is an order and either $\O'=\O$, in which case $\O$ is
+$p$-maximal, or $\O\subset\O'$ and $p$ divides $[\O':\O]$.
+\end{theorem}
+\begin{proof}
+  We prove here only that $[\O':\O] \mid p^n$, where $n$ is the degree
+  of $K$.  We have $p\in I_p$, so if $x \in \O'$, then $xp \in
+  I_p\subset \O$, which implies that $x\in \frac{1}{p}\O$.  Since
+  $(\frac{1}{p}\O)/\O$ is of order $p^n$, the claim follows.
+
+To complete the proof, we would show that if $\O' = \O$, then $\O$ is
+already $p$-maximal.  See \cite[\S6.1.1]{cohen:course_ant} for the
+rest if this proof.
+\end{proof}
+
+After deciding on how to represent elements of~$K$ and orders and
+ideals in~$K$, one can give an efficient algorithm to compute the
+$\O'$ of the theorem.  The algorithm mainly involves linear algebra
+over finite fields.  It is complicated to describe, but efficient in
+practice, and is conceptually simple---just compute~$\O'$.  The trick
+for reducing the computation of $\O'$ to linear algebra is the
+following lemma:
+\begin{lemma}
+  Define a homomorphism $\psi:\O \hra \End(I_p/ p I_p)$ given by
+  sending $\alpha\in\O$ to left multiplication by the reduction of
+  $\alpha$ modulo~$p$.  Then
+$$ 
+   \O'=\frac{1}{p} \Ker(\psi).
+$$
+\end{lemma}
+\begin{proof}
+If $x \in \O'$, then $x I_p \subset I_P$, so $\psi(x)$ is the $0$ 
+endomorphism.  Conversely, if $\psi(x)$ acts as $0$ on $I_p/ p I_p$,
+then clearly $x I_p \subset I_p$.
+\end{proof}
+
+Note that to give an algorithm one must also figure out how to
+explicitly compute $I_p/ p I_p$ and the kernel of this map 
+(see  the next section for more
+details).
+
+
+\subsection{General Factorization Algorithm of Buchman-Lenstra}
+We finally give an algorithm to factor $p\O_K$ in general. This is a
+summary of the algorithm described in more detail in 
+\cite[\S6.2]{cohen:course_ant}.
+
+\begin{algorithm}[Factoring a Finite Separable Algebra]\label{alg:factorsep}
+Let $A$ be a finite separable algebra over $\F_p$.  This
+algorithm either shows that $A$ is a field or finds
+a nontrivial idempotent in $A$, i.e., an $\eps\in A$
+such that $\eps^2 = \eps$ with $\eps\neq 0$ and $\eps\neq 1$.
+\begin{enumerate}
+\item The dimension of the kernel $V$ of the map $x\mapsto x^p - x$ is
+  equal to $k$.  This is because abstractly we have that $A\ncisom
+  A_1\times \cdots \times A_k$, with each $A_i$ a finite field
+  extension of $\F_p$.
+\item If $k=1$ we are done.  Terminate. 
+\item Otherwise, choose $\alpha \in V$ with $\alpha \not\in \F_p$.
+(Think of $\F_p$ as the diagonal embedding of $\F_p$ in 
+$A_1\times \cdots \times A_k$).
+Compute powers of $\alpha$ and find the minimal polynomial $m(X)$
+of $\alpha$.  
+\item Since $V\ncisom \F_p \times \cdots \times F_p$ ($k$ factors),
+the polynomial $m(X)$ is a square-free product of linear factors, that
+has degree $>1$ since $\alpha\not\in\F_p$.  Thus we can compute
+a splitting $m(X) = m_1(X) \cdot m_2(X)$, where both $m_i(X)$ have
+positive degree. 
+\item Use the Euclidean algorithm in $\F_p[X]$ to find 
+$U_1(X)$ and $U_2(X)$ such that 
+$$
+  U_1 m_1 + U_2 m_2 = 1.
+$$
+\item Let $\eps = (U_1 m_1)(\alpha)$.  Then we have
+$$
+  U_1 m_1 U_1 m_1 + U_2 m_2 U_1 m_1 = U_1 m_1,
+$$
+so since $(m_1 m_2)(\alpha) = m(\alpha)=01$, we have $\eps^2 = \eps$.
+Also, since $\gcd(U_1, m_2) = \gcd(U_2, m_1) = 1$,
+we have $\eps\neq 0$ and $\eps \neq 1$. 
+\end{enumerate}
+\end{algorithm}
+
+Given Algorithm~\ref{alg:factorsep}, we compute an idempotent
+$\eps \in A$, and observe that
+$$
+ A \isom \Ker(1 - \eps)  \oplus \Ker(\eps).
+$$
+Since $(1 - \eps) + \eps = 1$, we see that 
+$(1 - \eps)v + \eps v = v$, so that the sume
+of the two kernels equals $A$.  
+Also, if $v$ is in the intersection of the two kernels,
+then $\eps(v) = 0$ and $(1-\eps)(v) =0$, so 
+$0 = (1-\eps)(v) = v - \eps(v) = v$, so the sum is direct.
+
+\begin{remark}
+  The beginning of \cite[\S6.2.4]{cohen:course_ant} suggests that one
+  can just randomly find an $\alpha \in A$ such that $A\isom
+  \F_p[x]/(m(x))$ where $m$ is the minimal polynomial of $\alpha$.
+  This is usually the case, but is {\em wrong in general}, since there
+  need {\em not} be an $\alpha \in A$ such that $A \isom
+  \F_p[\alpha]$.  For example, let $p=2$ and $K$ be as in
+  Example~\ref{ex:dedekind}.  Then $A\isom \F_2 \times \F_2 \times
+  \F_2$, which as a ring is not generated by a single element, since
+  there are only 2 distinct linear polynomials over $\F_2[x]$.
+\end{remark}
+
+\begin{algorithm}[Factoring a General Prime Ideal]\label{alg:genfac}
+Let $K=\Q(a)$ be a number field given
+by an algebraic integer~$a$ as a root of its
+minimal monic polynomial~$f$ of degree~$n$.
+We assume that an order $\O$ has been 
+given by a basis $w_1,\ldots,w_n$
+and that~$\O$ that contains $\Z[a]$.
+For any prime $p\in\Z$, the following 
+algorithm computes the set of maximal ideals of~$\O$ that contain~$p$.
+\begin{enumerate}
+\item{} [Check if easy] If $p\nmid \disc(\Z[a]) / \disc(\O)$ (so 
+$p\nmid [\O:\Z[a]]$), then using Theorem~\ref{thm:fac1} we
+factor~$p\O$.
+\item{} [Compute radical] 
+Let $I$ be the \defn{radical} of $p\O$, which is the ideal of 
+elements $x\in\O$ such that $x^m\in p\O$ 
+for some positive integer~$m$.  Note that $p\O \subset I$, i.e.,
+$I\mid p\O$; also~$I$ is the product
+of the primes that divide $p$, without multiplicity.
+Using linear algebra over the finite field 
+$\F_p$, we compute a basis for $I/p\O$ by computing
+the abelian subgroup of $\O/p\O$ of all nilpotent
+elements.  This computes $I$, since $p\O\subset I$.
+\item{} [Compute quotient by radical] 
+Compute an $\F_p$ basis for
+$$
+  A = \O/I = (\O/p\O)/(I/p\O).
+$$
+The second equality comes from the fact that $p\O\subset I$.
+Note that $\O/p\O$
+is obtained by simply reducing the basis $w_1,\ldots, w_n$ modulo~$p$.
+Thus this step entirely involves linear algebra modulo $p$.
+
+\item{} [Decompose quotient] The ring $A$ is isomorphic to
+the quotient of $\O$ by a radical ideal, 
+so it decomposes as a product 
+$A \isom A_1 \times \cdots \times A_k$ of finite fields.  
+We find such a decomposition explicitly using Algorithm~\ref{alg:factorsep}.
+
+\item{} [Compute the maximal ideals over $p$] Each maximal ideal
+  $\p_i$ lying over~$p$ is the kernel of one of the compositions 
+$$\O \to A \ncisom A_1 \times \cdots \times A_k \to A_i.$$
+\end{enumerate}
+\end{algorithm}
+Algorithm~\ref{alg:genfac} finds all primes of $\O$ that contain the radical $I$ of
+$p\O$.  Every such prime clearly contains $p$, so to see that the
+algorithm is correct, we prove that the primes $\p$ of $\O$ that
+contain~$p$ also contain~$I$.  If $\p$ is a prime of $\O$ that
+contains~$p$, then $p\O \subset \p$.  If $x\in I$ then $x^m\in p\O$
+for some $m$, so $x^m\in \p$ which implies that $x\in \p$ by primality
+of $\p$.  Thus $\p$ contains $I$, as required.  Note that we do not find the powers of 
+primes that divide $p$ in Algorithm~\ref{alg:genfac}; that's left to another
+algorithm that we will not discuss in this book.
+
+Algorithm~\ref{alg:genfac} was invented by J.~Buchmann and
+H.\thinspace{}W. Lenstra, though their paper seems to have never been
+published; however, the algorithm is described in detail in
+\cite[\S6.2.5]{cohen:course_ant}.  Incidentally, this chapter is based
+on Chapters~4 and~6 of \cite{cohen:course_ant}, which is highly
+recommended, and goes into much more detail about these algorithms.
+
+
+%%[[Add discussion about how to compute a $p$-maximal order here.]]
+
+
+%\section{Appendix: The Calculations in PARI}\label{sec:factor_pari}
+%In this section we give PARI versions of all the \magma{} calculations 
+%in the rest of this chapter.
+%\begin{verbatim}
+%   ? K = nfinit(x^5 + 7*x^4 + 3*x^2 - x + 1);
+%   ? idealfactor(K, 2)
+%   [[2, [2, 0, 0, 0, 0]~, 1, 5, [1, 0, 0, 0, 0]~] 1]
+%   ? idealfactor(K, 5)
+%   [[5, [-3, 0, 0, 1, 0]~, 2, 1, [1, 0, 2, -2, -1]~] 2]
+%   [[5, [1, 0, 0, 1, 0]~, 1, 1, [1, 0, -2, 2, -1]~] 1]
+%   [[5, [10, 1, 0, -8, 1]~, 1, 2, [2, 1, 1, -1, 1]~] 1]
+%   
+%   ? K.disc
+%   2945785
+%   
+%   ? poldisc(x^5 + 7*x^4 + 3*x^2 - x + 1)
+%   2945785
+%   
+%   ? a = Mod(x, x^5 + 7*x^4 + 3*x^2 - x + 1);
+%   ? f = charpoly(7*a)
+%   x^5 + 49*x^4 + 1029*x^2 - 2401*x + 16807
+%   ? poldisc(f)
+%   235050861175510968365785
+%   ? poldisc(f)/K.disc
+%   79792266297612001
+%   ? factormod(f,5)
+%   [Mod(1, 5)*x + Mod(1, 5) 2]
+%   [Mod(1, 5)*x + Mod(4, 5) 1]
+%   [Mod(1, 5)*x^2 + Mod(3, 5)*x + Mod(3, 5) 1]
+%   
+%   ? f = charpoly(5*a)
+%   ? factormod(f,5)
+%   [Mod(1, 5)*x 5]
+%   
+%   ? K = nfinit(x^3 + x^2 - 2*x + 8);
+%   ? idealfactor(K,2)
+%   [[2, [1, 0, 1]~, 1, 1, [0, 0, -1]~] 1]
+%   [[2, [1, 1, 0]~, 1, 1, [0, 1, 0]~] 1]
+%   [[2, [2, 1, 1]~, 1, 1, [1, 1, 1]~] 1]
+%\end{verbatim}
+%
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "ant"
+%%% End: 
