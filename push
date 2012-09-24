@@ -1,8 +1,11 @@
 #!/bin/sh
 
-set -e
 
 git commit -a -v
+
+if [ $? -ne 0 ]; then
+    exit 1
+fi
 
 git push
 

@@ -12,3 +12,5 @@ auto/
 .DS_Store
 .hg*
 sage_notebook
+ant.pdf
+*.synctex.gz
