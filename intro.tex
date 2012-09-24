@@ -34,12 +34,11 @@ Number Field in a with defining polynomial x^2 + 1
 A number field $K$ is a finite degree algebraic extension of the rational
 numbers $\Q$.  The primitive element theorem from Galois theory
 asserts that every such extension can be represented as the set of all
-polynomials of degree at most $d = [K:\Q] = \dim_{\Q} K$ 
-in a single algebraic number $\alpha$:
+polynomials of degree at most $d = [K:\Q] = \dim_{\Q} K$ in 
+a single root $\alpha$ of some polynomial with coefficients in $\Q$:
 $$
  K = \Q(\alpha) = \left\{ \sum_{n=0}^{m} a_n \alpha^n : a_n\in\Q \right\}.
 $$ 
-Here $\alpha$ is a root of a polynomial with coefficients in $\Q$.
 \begin{comment}
 Note that
 $\Q(\alpha)$ is non-canonically isomorphic to $\Q[x]/(f)$, where $f$
@@ -60,23 +59,22 @@ study in this book are number fields, rings of integers
 of number fields, unit groups, ideal class groups, norms, traces,
 discriminants, prime ideals, Hilbert and other class fields and
 associated reciprocity laws, zeta and $L$-functions, and algorithms
-for computing each of the above.
+for computing with each of the above.
 
 \subsection{Topics in this book}
 These are some of the main topics that are discussed in this book:
 \begin{itemize}\setlength{\itemsep}{-.7ex}
 \item Rings of integers of number fields
-\item Unique factorization of ideals in Dedekind domains
+\item Unique factorization of nonzero ideals in Dedekind domains
 \item Structure of the group of units of the ring of integers
-\item Finiteness of the group of equivalence classes
-of ideals of the ring of integers (the ``class group'')
+\item Finiteness of the abelian group of equivalence classes
+of nonzero ideals of the ring of integers (the ``class group'')
 \item Decomposition and inertia groups, Frobenius elements
 \item Ramification
 \item Discriminant and different
 \item Quadratic and biquadratic fields
 \item Cyclotomic fields (and applications)
-\item How to use a computer to compute with many of the above 
-objects (both algorithms and actual use of software).
+\item How to use a computer to compute with many of the above objects
 \item Valuations on fields
 \item Completions ($p$-adic fields)
 \item Adeles and Ideles
@@ -88,31 +86,45 @@ book later.}
 
 
 \section{Some applications of algebraic number theory}
-The following examples illustrate that learning algebraic number
-theory as soon as possible is an excellent investment of your time.
+The following examples illustrate some of the power, depth and
+importance of algebraic number theory.
 
 \begin{enumerate}
 \item {\bf Integer factorization} using the number field sieve.  The
 number field sieve is the asymptotically fastest known algorithm for
 factoring general large integers (that don't have too special of a
-form).  Recently, in December 2003, the number field sieve was used to
-factor the RSA-576 \$10000 challenge:
-$$
-\begin{array}{l}
-1881988129206079638386972394616504398071635633794173827007\ldots\\
-\ldots6335642298885971523466548531906060650474304531738801130339\ldots\\
-\ldots6716199692321205734031879550656996221305168759307650257059\\
-=39807508642406493739712550055038649119906436234252670840\ldots\\
-\hspace{1em}\ldots6385189575946388957261768583317\\
-\hspace{2em}\times
-47277214610743530253622307197304822463291469530209711\ldots\\
-\hspace{3em}\ldots6459852171130520711256363590397527
-\end{array}
-$$
-(The $\ldots$ indicates that the newline should be removed, not that
-there are missing digits.)
+form).  On December 12, 2009, the number field sieve was used to
+factor the RSA-768 challenge, which is a 232 digit number that is a product of two primes:\\
+\begin{lstlisting}
+sage: rsa768 = 123018668453011775513049495838496272077285356959533479\
+219732245215172640050726365751874520219978646938995647494277406384592\
+519255732630345373154826850791702612214291346167042921431160222124047\
+9274737794080665351419597459856902143413
+sage: n = 33478071698956898786044169848212690817704794983713768568912\
+431388982883793878002287614711652531743087737814467999489
+sage: m = 36746043666799590428244633799627952632279158164343087642676\
+032283815739666511279233373417143396810270092798736308917
+sage: n*m == rsa768
+True
+\end{lstlisting}
+%% rsa768 = 1230186684530117755130494958384962720772853569595334792197322452151726400507263657518745202199786469389956474942774063845925192557326303453731548268507917026122142913461670429214311602221240479274737794080665351419597459856902143413
+%% n = 33478071698956898786044169848212690817704794983713768568912431388982883793878002287614711652531743087737814467999489
+%% m = 36746043666799590428244633799627952632279158164343087642676032283815739666511279233373417143396810270092798736308917
+%% n*m == rsa768
 
-\item {\bf Primality test:} Agrawal and his students Saxena and Kayal from
+This record integer factorization cracked a certain 768-bit public key
+cryptosystem (see \url{http://eprint.iacr.org/2010/006}), thus
+establishing a lower bound on one's choice of key size:
+\begin{verbatim}
+$ man ssh-keygen   # in ubuntu-12.04
+...
+     -b bits
+             Specifies the number of bits in the key to create.  
+             For RSA keys, the minimum size is 768 bits ...
+\end{verbatim}
+
+
+\item {\bf Primality testing:} Agrawal and his students Saxena and Kayal from
 India found in 2002 the first ever deterministic
 polynomial-time (in the number of digits) primality test.  There
 methods involve arithmetic in quotients of $(\Z/n\Z)[x]$, which are
