@@ -23,35 +23,35 @@ abelian groups, since it will be crucial for much of what we will do
 later.  \i{abelian groups!structure theorem} \i{structure theorem}
 
 Let $\Z=\{0,\pm 1, \pm 2, \ldots\}$ denote the ring of (rational)
-integers, and for each positive integer~$n$ let $\Z/n\Z$ denote the
+integers, and for each positive integer~$n$, let $\Z/n\Z$ denote the
 ring of integers modulo~$n$, which is a cyclic abelian group of
 order~$n$ under addition.
 
 \begin{definition}[Finitely Generated]
   A group $G$ is \defn{finitely generated} if there exists
   $g_1,\ldots, g_n \in G$ such that every element of $G$ can be
-  expressed as a finite product of positive or negative powers of the
-  $g_i$.
+  expressed as a finite product (or sum, if we write $G$ additively)
+  of positive or negative powers of the $g_i$.
 \end{definition}
 For example, the group $\Z$ is finitely generated, since it is generated
 by~$1$.
 
-\begin{theorem}[Structure Theorem for Abelian Groups]\label{thm:struc}
+\begin{theorem}[Structure Theorem for Finitely Generated Abelian Groups]\label{thm:struc}
 \ithm{structure of abelian groups}
 Let $G$ be a finitely generated abelian group.  Then there is an isomorphism
 $$
   G \ncisom (\Z/n_1\Z) \oplus (\Z/n_2\Z) \oplus \cdots \oplus
     (\Z/n_s\Z) \oplus \Z^{r},
 $$
-where $n_1>1$ and $n_1\mid{}n_2\mid{}\cdots \mid{}n_s$. 
+where $r, s\geq 0$, $n_1>1$ and $n_1\mid{}n_2\mid{}\cdots \mid{}n_s$. 
 Furthermore, the $n_i$ and~$r$ are uniquely determined by~$G$.
 \end{theorem}
 
 We will prove the theorem as follows.  We first remark that any
 subgroup of a finitely generated free abelian group is finitely
-generated.  Then we see that finitely generated abelian groups can be
-presented as quotients of finite rank free abelian groups, and such a
-presentation can be reinterpreted in terms of matrices over the
+generated.  Then we see how to represent finitely generated abelian groups 
+as quotients of finite rank free abelian groups, and how to
+reinterpret such a presentation in terms of matrices over the
 integers.  Next we describe how to use row and column operations over
 the integers to show that every matrix over the integers is equivalent
 to one in a canonical diagonal form, called the Smith normal form.  We
@@ -60,81 +60,82 @@ terms of groups.  Finally, we observe that
 the representation in the theorem is necessarily unique. 
 
 \begin{proposition}\label{prop:subfin}\iprop{subgroup of free group}
-If $H$ is a subgroup of a finitely generated abelian group then $H$
+If $H$ is a subgroup of a finitely generated abelian group, then $H$
 is finitely generated.
 \end{proposition}
 The key reason that this is true is that~$G$ is a finitely generated
 module over the principal ideal domain $\Z$.  We defer the
 proof of Proposition~\ref{prop:subfin} to Section~\ref{sec:noetherian},
-where we will give a complete proof of a beautiful generalization of 
-it in the context of Noetherian rings.
+where we will give a complete proof of a beautiful generalization 
+in the context of Noetherian rings (the Hilbert basis theorem).
 
 \begin{corollary}\label{cor:presentation}\icor{group as quotient of free
 groups}
 Suppose $G$ is a finitely generated abelian group.  Then there are
-finitely generated free abelian groups $F_1$ and $F_2$ and a homomorphism
+finitely generated free abelian groups $F_1$ and $F_2$ and there is
+a homomorphism
 $\psi:F_2 \to F_1$ such that
 $G \ncisom F_1/\psi(F_2)$.
 \end{corollary}
 \begin{proof}
   Let $x_1,\ldots, x_m$ be generators for $G$.  Let $F_1=\Z^m$ and let
-  $\vphi:F_1\to G$ be the map that sends the $i$th generator
-  $(0,0,\ldots,1,\ldots,0)$ of $\Z^m$ to $x_i$.  Then $\vphi$ is a
-  surjective homomorphism, and by Proposition~\ref{prop:subfin} the
+  $\vphi:F_1\to G$ be the homomorphism that sends the $i$th generator
+  $(0,0,\ldots,1,\ldots,0)$ of $\Z^m$ to $x_i$.  Then $\vphi$ is
+  surjective, and by Proposition~\ref{prop:subfin} the
   kernel $\ker(\vphi)$ of $\vphi$ is a finitely generated abelian
-  group.  Let $F_2 = \Z^n$ and fix a surjective homomorphism $\psi:F_2
+  group.
+Suppose there are $n$ generators for $\ker(\vphi)$, let 
+$F_2 = \Z^n$ and fix a surjective homomorphism $\psi:F_2
   \to \ker(\vphi)$.  Then $F_1 / \psi(F_2)$ is isomorphic to $G$.
 \end{proof}
+
+ An \defn{sequence} of homomorphisms of abelian groups
+$$H \xra{f} G \xra{g} K$$
+is exact if  $\im(f) = \ker(g)$.
+Given a finitely generated abelian group $G$, Corollary~\ref{cor:presentation} 
+provides an exact sequence
+$$
+  F_2 \xra{\psi} F_1 \to G \to 0.
+$$
 
 Suppose $G$ is a nonzero finitely generated abelian group.  By the
 corollary, there are free abelian groups $F_1$ and $F_2$ and there is a
 homomorphism $\psi:F_2 \to F_1$ such that $G\ncisom F_1/\psi(F_2)$.
-Choosing a basis for $F_1$ and $F_2$, we obtain isomorphisms
-$F_1\ncisom \Z^n$ and $F_2\ncisom \Z^m$ for integers $n$ and $m$.  We
-can thus view $\psi:F_2\to F_1$ as being given by left multiplication
+Upon choosing a basis for $F_1$ and $F_2$, we obtain isomorphisms
+$F_1\ncisom \Z^n$ and $F_2\ncisom \Z^m$ for integers $n$ and $m$.
+Just as in linear algebra, we
+ view $\psi:F_2\to F_1$ as being given by left multiplication
 by the $n\times m$ matrix $A$ whose columns are the images of the
-generators of $F_2$ in $\Z^n$.  The \defn{cokernel} of this
-homomorphism is the quotient of $\Z^n$ by the image of $A$ (the
+generators of $F_2$ in $\Z^n$.  We visualize this as follows:
+
+[TODO: add a commutative diagram]
+
+The \defn{cokernel} of the
+homomorphism defined by $A$ is the quotient of $\Z^n$ by the image of $A$ (i.e., the
 $\Z$-span of the columns of $A$), and this cokernel is isomorphic to
 $G$.  
 
-By augmenting $A$ with zero columns or adding (standard basis) rows to
-$A$, we may assume that $m = n$.    For example, we would replace
-$$
-  \left(\begin{matrix} 4 \\
-       2 \end{matrix}\right)
-\text{ by }
-  \left(\begin{matrix} 4 & 0\\
-       2 & 0 \end{matrix}\right)
-$$
-and would replace 
-$$
-  \left(\begin{matrix} 4 & 2 \end{matrix}\right)
-\text{ by }
-  \left(\begin{matrix} 4 & 2\\
-       1 & 0 \end{matrix}\right).
-$$
-
 The following proposition implies that we may choose a bases for $F_1$
-and $F_2$ such that the matrix of $A$ is diagonal, so that the
-structure of the cokernel of $A$ will be easy to understand.
+and $F_2$ such that the matrix of $A$ only has nonzero entries along
+the diagonal, so that the structure of the cokernel of $A$ is
+trivial to understand.
 
 \begin{proposition}[Smith normal form]\label{prop:smith}\iprop{Smith normal form}
-Suppose~$A$ is an $n\times n$ integer matrix.  Then there exist
-invertible integer matrices $P$ and $Q$ such that $A'=PAQ$ is a
-diagonal matrix with entries $n_1, n_2,\ldots, n_s,0,\ldots,0$, where
+Suppose~$A$ is an $n\times m$ integer matrix.  Then there exist
+invertible integer matrices $P$ and $Q$ such that $A'=PAQ$ only
+has nonzero entries along the diagonal, and these entries are
+$n_1, n_2,\ldots, n_s,0,\ldots,0$, where
 $s\geq 0$, $n_1>1$ and $n_1\mid n_2 \mid{} \cdots \mid{} n_s$.  
 Here $P$ and $Q$ are invertible as integer matrices, so $\det(P)$
 and $\det(Q)$ are $\pm 1$.
-The matrix $A'$ is called
-the \defn{Smith normal form} of $A$.
+The matrix $A'$ is called the \defn{Smith normal form} of $A$.
 \end{proposition}
 We will see in the proof of Theorem~\ref{thm:struc} that
 $A'$ is uniquely determined by $A$.
 An example of a matrix in Smith normal form is 
 $$
 A=\left(
-        \begin{matrix}2&0&0\\0&6&0\\0&0&0
+        \begin{matrix}2&0&0&0\\0&6&0&0\\0&0&0&0
         \end{matrix}\right).
 $$
 
@@ -159,25 +160,26 @@ To see that the proposition must be true, assume $A\neq 0$ and perform
 the following steps (compare \cite[pg. 459]{artin:algebra}):
 \begin{enumerate}
 \item By permuting rows and columns, move a nonzero entry of $A$ with
-smallest absolute value to the upper left corner of $A$.  Now attempt
-to make all other entries in the first row and column $0$ by adding
-multiples of row or column 1 to other rows (see step~2 below).  If an
-operation produces a nonzero entry in the matrix with absolute value
-smaller than $|a_{11}|$, start the process over by permuting rows and
-columns to move that entry to the upper left corner of $A$.  Since the
-integers $|a_{11}|$ are a decreasing sequence of positive integers, we
-will not have to move an entry to the upper left corner infinitely
-often.
-
-\item Suppose $a_{i1}$ is a nonzero entry in the first column, with
+  smallest absolute value to the upper left corner of $A$.  Now
+  ``attempt'' (as explained in detail below) to make all other entries
+  in the first row and column $0$ by adding multiples of the top row
+  or first column to other rows or columns, as follows:
+\begin{quote}
+Suppose $a_{i1}$ is a nonzero entry in the first column, with
 $i>1$.  Using the division algorithm, write $a_{i1} = a_{11}q + r$,
 with $0\leq r < a_{11}$.  Now add $-q$ times the first row to the
 $i$th row.  If $r>0$, then go to step~1 (so that an entry with
-absolute value at most $r$ is the upper left corner).  Since we will
-only perform step 1 finitely many times, we may assume $r=0$.
-Repeating this procedure we set all entries in the first column
-(except $a_{11}$) to $0$.  A similar process using column operations
-sets each entry in the first row (except $a_{11}$) to $0$.
+absolute value at most $r$ is the upper left corner).  
+\end{quote}
+  If at any point this operation produces a nonzero entry in the
+  matrix with absolute value smaller than $|a_{11}|$, start the
+  process over by permuting rows and columns to move that entry to the
+  upper left corner of $A$.  Since the integers $|a_{11}|$ are a
+  decreasing sequence of positive integers, we will not have to move
+  an entry to the upper left corner infinitely often, so when this
+  step is done the upper left entry of the matrix is nonzero, and all
+  entries in the first row and column are 0.
+
 
 \item We may now assume that $a_{11}$ is the only nonzero entry in the
 first row and column.  If some entry $a_{ij}$ of $A$ is not divisible
@@ -200,7 +202,7 @@ inductively proves the proposition.
 
 \begin{example}
 The matrix $\mtwo{-1}{2}{-3}{4}$ has Smith normal form
-to $\mtwo{1}{0}{0}{2}$,
+$\mtwo{1}{0}{0}{2}$,
 and the matrix 
 $\mthree{1}{4}{9}{16}{25}{36}{49}{64}{81}$
 has Smith normal form
@@ -211,44 +213,42 @@ $$\det(PAQ) = \det(P)\det(A)\det(Q) = \pm \det(A).$$
 
 We compute each of the above Smith forms using \sage,
 along with the corresponding transformation matrices.
-{\em Warning: Currently in Sage the entries down the diagonal
-are reversed from the discussion above.}
 First the $2\times 2$ matrix.
 \begin{verbatim}
 sage: A = matrix(ZZ, 2, [-1,2, -3,4])
 sage: S, U, V = A.smith_form(); S
-[2 0]
-[0 1]
+[1 0]
+[0 2]
 sage: U*A*V
-[2 0]
-[0 1]
+[1 0]
+[0 2]
 sage: U
-[ 1 -1]
 [ 0  1]
+[ 1 -1]
 sage: V
-[4 1]
-[3 1]
+[1 4]
+[1 3]
 \end{verbatim}
 The \sage{} {\tt matrix} command takes as input the base ring, the number
 of rows, and the entries.  Next we compute with a $3\times3$ matrix.
 \begin{verbatim}
 sage: A = matrix(ZZ, 3, [1,4,9,  16,25,36, 49,64,81])
 sage: S, U, V = A.smith_form(); S
-[72  0  0]
+[ 1  0  0]
 [ 0  3  0]
-[ 0  0  1]
+[ 0  0 72]
 sage: U*A*V
-[72  0  0]
+[ 1  0  0]
 [ 0  3  0]
-[ 0  0  1]
+[ 0  0 72]
 sage: U
-[  1 -20 -17]
-[  0   1  -1]
 [  0   0   1]
+[  0   1  -1]
+[  1 -20 -17]
 sage: V
-[  93   74   47]
-[-156 -125  -79]
-[  67   54   34]
+[  47   74   93]
+[ -79 -125 -156]
+[  34   54   67]
 \end{verbatim}
 
 Finally we compute the Smith form of a matrix of rank $2$:
@@ -258,9 +258,9 @@ sage: m = matrix(ZZ, 3, [2..10]); m
 [ 5  6  7]
 [ 8  9 10]
 sage: m.smith_form()[0]
-[0 0 0]
+[1 0 0]
 [0 3 0]
-[0 0 1]
+[0 0 0]
 \end{verbatim}
 \end{example}
 
@@ -269,9 +269,9 @@ sage: m.smith_form()[0]
 Suppose $G$ is a finitely generated abelian group, which we may assume
 is nonzero.  As in the paragraph before Proposition~\ref{prop:smith},
 we use Corollary~\ref{cor:presentation} to write $G$ as a the cokernel
-of an $n\times n$ integer matrix $A$.  By Proposition~\ref{prop:smith}
-there are isomorphisms $Q:\Z^n\to \Z^n$ and $P:\Z^n\to \Z^n$ such that
-$A'=PAQ$ is a diagonal matrix with entries $n_1, n_2,\ldots,
+of an $n\times m$ integer matrix $A$.  By Proposition~\ref{prop:smith}
+there are isomorphisms $Q:\Z^m\to \Z^m$ and $P:\Z^n\to \Z^n$ such that
+$A'=PAQ$ has diagonal entries $n_1, n_2,\ldots,
 n_s,0,\ldots,0$, where $n_1>1$ and $n_1\mid n_2 \mid{} \ldots \mid{}
 n_s$.  Then $G$ is isomorphic to the cokernel of the diagonal matrix
 $A'$, so
