@@ -699,7 +699,7 @@ is an algebraic integer.
 \end{proof}
 
 The proof of the following proposition uses repeatedly that $\Z$ is noetherian.
-\begin{proposition}\iprop{$\Zbar$ is a ring}
+\begin{proposition}\iprop{$\Zbar$ is a ring}\label{prop:zbarring}
 Suppose $K$ is a field and $\alpha, \beta\in K$ are two algebraic
 integers.  Then $\alpha\beta$ and $\alpha+\beta$ are also algebraic integers.
 \end{proposition}
@@ -713,6 +713,65 @@ finitely-generated $\Z$-module $\Z[\alpha, \beta]$, it is finitely
 generated, so $\alpha+\beta$ is integral.  Likewise, $\Z[\alpha\beta]$
 is a submodule of $\Z[\alpha, \beta]$, so it is also finitely
 generated, and $\alpha\beta$ is integral.
+\end{proof}
+
+
+
+\subsection{Minimal Polynomials}
+
+\begin{definition}[Minimal Polynomial]\label{defn:minpoly}
+The \defn{minimal polynomial} of $\alpha\in\Qbar$ is the monic polynomial
+$f\in\Q[x]$ of least positive degree such that $f(\alpha)=0$.
+\end{definition}
+It is a consequence of Lemma~\ref{lem:mindiv} below that
+``the'' minimal polynomial of~$\alpha$ is unique.
+The minimal polynomial of $1/2$ is $x-1/2$, and
+the minimal polynomial of $\sqrt[3]{2}$ is $x^3-2$.
+
+\begin{example}
+We compute the minimal polynomial of a number expressed
+in terms of $\sqrt[4]{2}$:
+\begin{verbatim}
+sage: k.<a> = NumberField(x^4 - 2)
+sage: a^4
+2
+sage: (a^2 + 3).minpoly()
+x^2 - 6*x + 7
+\end{verbatim}
+
+\end{example}
+
+\begin{lemma}\label{lem:mindiv}
+  Suppose $\alpha \in\Qbar$.  Then the minimal polynomial of~$\alpha$
+  divides any polynomial~$h$ such that $h(\alpha)=0$.
+\end{lemma}
+\begin{proof}
+  Let~$f$ be a choice of minimal polynomial of~$\alpha$, as in
+  Definition~\ref{defn:minpoly}, and let $h$ be a polynomial with
+  $h(\alpha)=0$.  Use the division algorithm to write $h=qf + r$,
+  where $0\leq \deg(r) < \deg(f)$.  We have $$r(\alpha) = h(\alpha) -
+  q(\alpha) f(\alpha) = 0,$$ so $\alpha$ is a root of~$r$.
+  However,~$f$ is a polynomial of least positive degree with
+  root~$\alpha$, so $r=0$.
+\end{proof}
+
+\begin{lemma}\label{lem:minpolint}\ilem{minimal polynomial of algebraic integer}
+If~$\alpha$ is an algebraic integer, then the minimal polynomial
+of~$\alpha$ has coefficients in~$\Z$.
+\end{lemma}
+\begin{proof}
+Let $f\in\Q[x]$ be the minimal polynomial of $\alpha$.  Since $\alpha$
+is an algebraic integer, there is some nonzero monic polynomial
+$g\in\Z[x]$ such that $g(\alpha)=0$.  By Lemma~\ref{lem:mindiv}, we
+have $g=fh$, for some $h\in\Q[x]$, and $h$ is monic because $f$ and
+$g$ are.  If $f\not\in\Z[x]$, then some prime~$p$ divides the
+denominator of some coefficient of $f$.  Let $p^i$ be the largest
+power of~$p$ that divides some denominator of some coefficient~$f$,
+and likewise let $p^j$ be the largest power of~$p$ that divides some
+denominator of a coefficient of~$h$.  Then $p^{i+j}g = (p^if)(p^j h)$,
+and if we reduce both sides modulo $p$, then the left hand side is $0$
+but the right hand side is a product of two nonzero polynomials in
+$\F_p[x]$, hence nonzero, a contradiction.
 \end{proof}
 
 
@@ -761,12 +820,26 @@ sage: k.<a> = QuadraticField(5)
 sage: a^2
 5
 sage: alpha = (1 + a)/2
-sage: alpha.charpoly()
+sage: alpha.minpoly()
 x^2 - x - 1
 sage: alpha.is_integral()
 True
 \end{verbatim}
 
+Since $\sqrt{5}$ can be expressed in terms of radicals, we can also
+compute this minimal polynomial using the symbolic functionality in
+Sage.
+\begin{verbatim}
+sage: alpha = (1+sqrt(5))/2
+sage: alpha.minpoly()
+x^2 - x - 1
+\end{verbatim}
+Here is a more complicated example using a similar approach:
+\begin{verbatim}
+sage: alpha = sqrt(2) + 3^(1/4)
+sage: alpha.minpoly()
+x^8 - 8*x^6 + 18*x^4 - 104*x^2 + 1
+\end{verbatim}
 
 \begin{example}
   We illustrate an example of a sum and product of two algebraic
@@ -798,11 +871,11 @@ x^6 - 6*x^4 - 10*x^3 + 12*x^2 - 60*x + 17
 sage: (a*b).absolute_minpoly()
 x^6 - 200
 \end{verbatim}
-Of course the minimal polynomial of the product is $\sqrt[3]{5}
-\sqrt{2}$ is trivial to compute by hand.  The minimal polynomial of
-$\alpha = \sqrt[3]{5} + \sqrt{2}$ could be computed by hand by
-computing the determinant of the matrix given by left multiplication
-of $\alpha$ on this basis:
+The minimal polynomial of the product is $\sqrt[3]{5} \sqrt{2}$ is
+trivial to compute by hand.  In light of the Cayley-Hamilton theorem,
+we can compute the minimal polynomial of $\alpha = \sqrt[3]{5} +
+\sqrt{2}$ by hand by computing the determinant of the matrix given by
+left multiplication by $\alpha$ on the basis
 $$
  1,\sqrt{2}, \sqrt[3]{5}, \sqrt[3]{5}\sqrt{2}, \sqrt[3]{5}^2, \sqrt[3]{5}^2\sqrt{2}.
 $$
@@ -811,7 +884,8 @@ The following is an alternative more symbolic way to compute the
 minimal polynomials above, though it is not provably correct.  We
 compute $\alpha$ to 100 bits precision (via the {\tt n} command), then
 use the LLL algorithm (via the {\tt algdep} command) to heuristically
-find a linear relation between the first $6$ powers of $\alpha$.
+find a linear relation between the first $6$ powers of $\alpha$ (see
+Section~\ref{sec:LLL} below for more about LLL).
 \begin{verbatim}
 sage: a = 5^(1/3); b = sqrt(2)
 sage: c = a+b; c
@@ -823,60 +897,6 @@ x^6 - 200
 \end{verbatim}
 \end{example}
 
-\subsection{Minimal Polynomials}
-
-\begin{definition}[Minimal Polynomial]
-The \defn{minimal polynomial} of $\alpha\in\Qbar$ is the monic polynomial
-$f\in\Q[x]$ of least positive degree such that $f(\alpha)=0$.
-\end{definition}
-It is a consequence of Lemma~\ref{lem:mindiv} that
-the minimal polynomial~$\alpha$ is unique.
-The minimal polynomial of $1/2$ is $x-1/2$, and
-the minimal polynomial of $\sqrt[3]{2}$ is $x^3-2$.
-
-\begin{example}
-We compute the minimal polynomial of a number expressed
-in terms of $\sqrt[4]{2}$:
-\begin{verbatim}
-sage: k.<a> = NumberField(x^4 - 2)
-sage: a^4
-2
-sage: (a^2 + 3).minpoly()
-x^2 - 6*x + 7
-\end{verbatim}
-
-\end{example}
-
-\begin{lemma}\label{lem:mindiv}
-  Suppose $\alpha \in\Qbar$.  Then the minimal polynomial of~$\alpha$
-  divides any polynomial~$h$ such that $h(\alpha)=0$.
-\end{lemma}
-\begin{proof}
-  Let~$f$ be a minimal polynomial of~$\alpha$.  If $h(\alpha)=0$, use
-  the division algorithm to write $h=qf + r$, where $0\leq \deg(r) <
-  \deg(f)$.  We have $$r(\alpha) = h(\alpha) - q(\alpha) f(\alpha) =
-  0,$$ so $\alpha$ is a root of~$r$.  However,~$f$ is the monic
-  polynomial of least positive degree with root~$\alpha$, so $r=0$.
-\end{proof}
-
-\begin{lemma}\label{lem:minpolint}\ilem{minimal polynomial of algebraic integer}
-If~$\alpha$ is an algebraic integer, then the minimal polynomial
-of~$\alpha$ has coefficients in~$\Z$.
-\end{lemma}
-\begin{proof}
-Suppose $f\in\Q[x]$ is the minimal polynomial of $\alpha$. 
-Since $\alpha$ is an algebraic integer, there is a polynomial
-$g\in\Z[x]$ that is monic such that $g(\alpha)=0$.
-By Lemma~\ref{lem:mindiv}, we have
-$g=fh$, for some monic $h\in\Q[x]$.  If $f\not\in\Z[x]$, then some prime~$p$
-divides the denominator of some coefficient of $f$.  Let $p^i$ be the
-largest power of~$p$ that divides some denominator of some
-coefficient~$f$, and likewise let $p^j$ be the largest power of~$p$
-that divides some denominator of a coefficient of~$h$.  Then $p^{i+j}g
-= (p^if)(p^j h)$, and if we reduce both sides modulo $p$, then the
-left hand side is $0$ but the right hand side is a product of two
-nonzero polynomials in $\F_p[x]$, hence nonzero, a contradiction.
-\end{proof}
 
 
 \begin{example}\label{ex:notint}
@@ -890,40 +910,38 @@ has nontrivial $2$-torsion.)
 
 
 
+\subsection{Number fields, rings of integers, and orders}
 \begin{definition}[Number field]
   A \defn{number field} is a field~$K$ that contains the rational
   numbers $\QQ$ such that the degree $[K:\Q] = \dim_\Q(K)$ is finite.
 \end{definition}
 
-If $K$ is a number field, then by the primitive
-element theorem there is an $\alpha \in K$ so that $K = \QQ(\alpha)$.
-Let $f(x) \in \QQ[x]$ be the minimal polynomial of $\alpha$.
-For any fixed choice of $\Qbar$, there is some $\alpha'\in\Qbar$
-such that $f(\alpha')=0$.  The map $K\to \Qbar$
-that sends $\alpha$ to $\alpha'$ defines an embedding $K\hra \Qbar$.
-Thus any number field can be embedded (in $[K:\Q]$ possible ways) 
-in any fixed choice $\Qbar$ of an algebraic closure of $\Q$.
+If $K$ is a number field, then by the primitive element theorem there
+is an $\alpha \in K$ so that $K = \QQ(\alpha)$.  Let $f(x) \in \QQ[x]$
+be the minimal polynomial of $\alpha$.  Fix a choice of algebraic
+closure $\Qbar$ of $\Q$.  Associated to each of the $\deg(f)$ roots
+$\alpha'\in\Qbar$ of $f$, we obtain a field embedding $K\hra \Qbar$
+that sends $\alpha$ to $\alpha'$.  Thus any number field can be
+embedded in $[K:\Q]=\deg(f)$ distinct ways in $\Qbar$.
 
 \begin{definition}[Ring of Integers]
 The \defn{ring of integers} of a number field~$K$ is the ring 
 $$
-  \O_K = \{x \in K : \text{ $x$ satisfies a monic polynomial with integer coefficients }\}.
+  \O_K = \{x \in K : \text{ $x$ satisfies a monic polynomial with integer coefficients}\}.
 $$
 \end{definition}
-Note that $\O_K$ is a ring, because 
-if we fix an embedding of $K$ into $\Qbar$, then
-$$
-  \O_K = K \cap \Zbar.
-$$
-
+Proposition~\ref{prop:zbarring} implies that $\O_K=K\cap \Zbar$ is indeed a ring.
 
 The field $\Q$ of rational numbers is a number field of degree $1$,
 and the ring of integers of $\Q$ is $\Z$.  The field $K=\Q(i)$ of
 Gaussian integers has degree $2$ and $\O_K = \Z[i]$.  The field
 $K=\Q(\sqrt{5})$ has ring of integers $\O_K = \Z[(1+\sqrt{5})/2]$.
-Note that the Golden ratio $(1+\sqrt{5})/2$ satisfies $x^2-x-1$.
-The ring of integers of $K=\Q(\sqrt[3]{9})$ is
-$\Z[\sqrt[3]{3}]$, where $\sqrt[3]{3}=\frac{1}{3}(\sqrt[3]{9})^2$.
+Note that the Golden ratio $(1+\sqrt{5})/2$ satisfies $x^2-x-1$.  The
+ring of integers of $K=\Q(\sqrt[3]{9})$ is $\Z[\sqrt[3]{3}]$, where
+$\sqrt[3]{3}=\frac{1}{3}(\sqrt[3]{9})^2 \not \in \sqrt[3]{9}$.  As we
+will see, in general the problem of computing $\O_K$ given $K$ may be
+very hard, since it requires factoring a certain potentially large
+integer.
 
 \begin{definition}[Order]\label{defn:order}
 An \defn{order} in $\O_K$ is any subring $R$ of $\O_K$ such that the
@@ -988,9 +1006,11 @@ sage: K.<a> = NumberField(x^3 - 15*x^2 - 94*x - 3674)
 sage: Oa = K.order(a); Oa
 Order with module basis 1, a, a^2 in Number Field in a with defining 
 polynomial x^3 - 15*x^2 - 94*x - 3674
+sage: Oa.basis()
+[1, a, a^2]
 \end{verbatim}%link
 
-\noindent Next we compute the maximal order $\O_K$ of $K$ with a basis, and
+\noindent Next we compute a $\Z$-basis for the maximal order $\O_K$ of $K$, and
 compute that the index of $\Z[a]$ in $\O_K$ is $2197=13^3$.
 %link
 \begin{verbatim}
@@ -1022,6 +1042,28 @@ the denominators of the coefficients of~$f$, then the minimal monic
 polynomial of $d\alpha$ has integer coefficients, so $d\alpha$ is
 integral and $d\alpha\in \O_K$.  This proves that $\Q\O_K = K$.
 \end{proof}
+
+
+\subsection{Function fields}
+Let $k$ be any field.  We can also make the same definitions with $\Q$
+replaced by the field $k(t)$ of rational functions in an indeterminate
+$t$.  The analogue of a number is called a {\em function field}; it is
+a finite algebraic extension field $K$ of $k(t)$.  Elements of $K$
+have a unique minimal polynomial as above, and the ring of integers of
+$K$ consists of those elements whose monic minimal polynomial has
+coefficients in the polynomial ring $k[t]$.  
+
+Geometrically, if $F(x,t)=0$ is an affine equation that defines (via
+projective closure) a nonsingular projective curve $C$, then
+$K=k(t)[x]/(F(x,t))$ is a function field.  We view the field $K$ as
+the field of all rational functions on the projective closure of the
+curve $C$.  The ring of integers $\O_K$ is the subring of rational
+functions that have no polls on the affine curve $F(x,t)=0$, though
+they may have polls at infinity, i.e., at the extra points we
+introduce when passing to the projective closure $C$.  The algebraic
+arguments we gave above prove that $\O_K$ is a ring.  This is also
+geometrically intuitive, since the sum and product of two functions
+with no polls also have no polls.
 
 \section{Norms and Traces}
 %\setcounter{section}{1}
@@ -1103,11 +1145,11 @@ $$
 \end{proposition}
 \begin{proof}
   We prove the proposition by computing the characteristic
-  polynomial~$F$ of~$a$.  Let $f\in K[x]$ be the minimal polynomial
+  polynomial of~$a$.  Let $f\in K[x]$ be the minimal polynomial
   of~$a$ over~$K$, and note that~$f$ has distinct roots and is
   irreducible, since it is the polynomial in $K[x]$ of least degree
   that is satisfied by~$a$ and~$K$ has characteristic~$0$.  Since~$f$
-  is irreducible, we have $K(a) = K[x]/(f)$, so $[K(a):K]=\deg(f)$.
+  is irreducible, we have $K(a) \isom K[x]/(f)$, so $[K(a):K]=\deg(f)$.
   Also~$a$ satisfies a polynomial if and only if~$\ell_a$ does, so the
   characteristic polynomial of $\ell_a$ acting on $K(a)$ is~$f$.  Let
   $b_1,\ldots,b_n$ be a basis for $L$ over $K(a)$ and note that
@@ -1132,7 +1174,7 @@ of $a$ is $1$.
 
 The following corollary asserts that the norm and trace behave well in
 towers.
-\begin{corollary}\icor{norm, trace compatible with towers}
+\begin{corollary}\icor{norm, trace compatible with towers}\label{cor:compatower}
 Suppose $K\subset L \subset M$ is a tower of number fields, and
 let $a\in M$.  Then 
 $$
@@ -1142,6 +1184,9 @@ $$
 $$
 \end{corollary}
 \begin{proof}
+  (The proof below uses the fact from Galois theory that every
+  embedding $L\hra \Qbar$ extends to an embedding $M\hra \Qbar$.)
+
   For the first equation, both sides are the product of $\sigma_i(a)$,
   where $\sigma_i$ runs through the embeddings of~$M$ into $\Qbar$
   that fix $K$.  To see this, suppose $\sigma:L\to \Qbar$ fixes $K$.
@@ -1152,11 +1197,11 @@ $$
   sum of the $\sigma_i(a)$.
 \end{proof}
 
-The norm and trace down to~$\Q$ of an algebraic integer~$a$ is an
-element of~$\Z$, because the minimal polynomial of~$a$ has integer
-coefficients, and the characteristic polynomial of~$a$ is a power of the
-minimal polynomial, as we saw in the proof of
-Proposition~\ref{prop:normtracesigma}.
+Let $K\subset L\subset M$ be as in Corollary~\ref{cor:compatower}.  If
+$\alpha\in M$, then the formula of
+Proposition~\ref{prop:normtracesigma} implies that the norm and trace
+down to~$L$ of $\alpha$ is an element of~$\O_L$, because the sum and
+product of algebraic integers is an algebraic integer.
 
 \begin{proposition}\label{prop:ok_lattice}\iprop{$\O_K$ is a lattice}
 Let~$K$ be a number field.  The ring of integers $\O_K$ is a lattice
@@ -1165,13 +1210,13 @@ in~$K$, i.e., $\Q\O_K=K$ and $\O_K$ is an abelian group of rank $[K:\Q]$.
 \begin{proof}
 We saw in Lemma~\ref{lem:intq} that $\Q\O_K=K$.  Thus there exists a
 basis $a_1,\ldots, a_n$ for~$K$, where each~$a_i$ is in $\O_K$.
-Suppose that as $x=\sum_{i=1}^n c_i a_i\in \O_K$ varies over all elements of
-$\O_K$ the denominators of the coefficients $c_i$ are arbitrarily
-large.  Then subtracting off integer multiples of the $a_i$, we see
-that as $x=\sum_{i=1}^n c_i a_i\in \O_K$ varies over elements of $\O_K$ with
-$c_i$ between $0$ and $1$, the denominators of the $c_i$ are also
-arbitrarily large.  This implies that there are infinitely many elements
-of $\O_K$ in the bounded subset
+Suppose that as $x=\sum_{i=1}^n c_i a_i\in \O_K$ varies over all
+elements of $\O_K$ the denominators of the coefficients $c_i$ are not
+all uniformly bounded.  Then subtracting off integer multiples of the
+$a_i$, we see that as $x=\sum_{i=1}^n c_i a_i\in \O_K$ varies over
+elements of $\O_K$ with $c_i$ between $0$ and $1$, the denominators of
+the $c_i$ are also arbitrarily large.  This implies that there are
+infinitely many elements of $\O_K$ in the bounded subset
 $$S = \left\{c_1 a_1 +\cdots + c_n a_n : c_i \in \Q,\, 0\leq c_i \leq 1\right\}\subset K.$$
 Thus for any $\eps>0$, there are elements $a,b\in \O_K$ such that the
 coefficients of $a-b$ are all less than $\eps$ (otherwise the elements
@@ -1209,11 +1254,11 @@ finitely generated as a ring over $\Z$.  By Theorem~\ref{thm:hilbert},
 
 \section{Recognizing Algebraic Numbers using Lattice Basis Reduction (LLL)}\label{sec:LLL}
 
-Suppose you somehow compute a decimal approximation $\alpha$
+Suppose we somehow compute a decimal approximation $\alpha$
 to some rational number $\beta \in \QQ$ and from this wish
 to recover $\beta$.  For concreteness, say
 $$\beta= 22/389 = 0.05655526992287917737789203084832904884318766066838046\ldots$$
-and you compute
+and we compute
 $$
   \alpha = 0.056555.
 $$
