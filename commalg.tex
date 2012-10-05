@@ -698,7 +698,10 @@ the monic polynomial $x^d - \sum_{i=1}^n a_i f_i(x) \in \Z[x]$, so~$\alpha$
 is an algebraic integer.
 \end{proof}
 
-The proof of the following proposition uses repeatedly that $\Z$ is noetherian.
+The proof of the following proposition uses repeatedly that any
+submodule of a finitely generated $\Z$-module is finitely generated,
+which uses that $\Z$ is noetherian and that finitely generated modules
+over a noetherian ring are noetherian.
 \begin{proposition}\iprop{$\Zbar$ is a ring}\label{prop:zbarring}
 Suppose $K$ is a field and $\alpha, \beta\in K$ are two algebraic
 integers.  Then $\alpha\beta$ and $\alpha+\beta$ are also algebraic integers.
@@ -756,22 +759,25 @@ x^2 - 6*x + 7
 \end{proof}
 
 \begin{lemma}\label{lem:minpolint}\ilem{minimal polynomial of algebraic integer}
-If~$\alpha$ is an algebraic integer, then the minimal polynomial
-of~$\alpha$ has coefficients in~$\Z$.
+Suppose~$\alpha \in\Qbar$. Then $\alpha$ is an algebraic integer if and only
+if the minimal polynomial $f$ of~$\alpha$ has coefficients in~$\Z$.
 \end{lemma}
 \begin{proof}
-Let $f\in\Q[x]$ be the minimal polynomial of $\alpha$.  Since $\alpha$
-is an algebraic integer, there is some nonzero monic polynomial
-$g\in\Z[x]$ such that $g(\alpha)=0$.  By Lemma~\ref{lem:mindiv}, we
-have $g=fh$, for some $h\in\Q[x]$, and $h$ is monic because $f$ and
-$g$ are.  If $f\not\in\Z[x]$, then some prime~$p$ divides the
-denominator of some coefficient of $f$.  Let $p^i$ be the largest
-power of~$p$ that divides some denominator of some coefficient~$f$,
-and likewise let $p^j$ be the largest power of~$p$ that divides some
-denominator of a coefficient of~$h$.  Then $p^{i+j}g = (p^if)(p^j h)$,
-and if we reduce both sides modulo $p$, then the left hand side is $0$
-but the right hand side is a product of two nonzero polynomials in
-$\F_p[x]$, hence nonzero, a contradiction.
+($\Longleftarrow$) Since $f\in \Z[x]$ is monic and $f(\alpha)=0$, we see immediately
+that $\alpha$ is an algebraic integer.
+
+($\Longrightarrow$) Since $\alpha$ is an algebraic integer, there is
+  some nonzero monic $g\in\Z[x]$ such that $g(\alpha)=0$.
+  By Lemma~\ref{lem:mindiv}, we have $g=fh$, for some $h\in\Q[x]$, and
+  $h$ is monic because $f$ and $g$ are.  If $f\not\in\Z[x]$, then some
+  prime~$p$ divides the denominator of some coefficient of $f$.  Let
+  $p^i$ be the largest power of~$p$ that divides some denominator of
+  some coefficient~$f$, and likewise let $p^j$ be the largest power
+  of~$p$ that divides some denominator of a coefficient of~$h$.  Then
+  $p^{i+j}g = (p^if)(p^j h)$, and if we reduce both sides modulo $p$,
+  then the left hand side is $0$ but the right hand side is a product
+  of two nonzero polynomials in $\F_p[x]$, hence nonzero, a
+  contradiction.
 \end{proof}
 
 
@@ -790,8 +796,9 @@ sage: a^2 - 2
 sage: a.minpoly()
 x^2 - 2
 \end{verbatim}%link
-Finally we compute the minimal polynomial of $\sqrt{2}/2 + 3$, which
-is not integral:
+Finally we compute the minimal polynomial of $\alpha=\sqrt{2}/2 + 3$, which
+is not integral, hence Proposition~\ref{prop:intfg} implies that $\alpha$
+is not an algebraic integer:
 %link
 \begin{verbatim}
 sage: (a/2 + 3).minpoly()
@@ -805,7 +812,7 @@ generated as a $\Z$-module.  Watch out since there are elements of
 $\Qbar$ that seem to {\em appear} to have denominators when written down, but are still
 algebraic integers.  
 This is an artifact of how we write them down, e.g., if we wrote
-our integers as a multiple of $\alpha=2$, then we would write $2$
+our integers as a multiple of $\alpha=2$, then we would write $1$
 as $\alpha/2$.
 For example,
 $$
@@ -899,14 +906,6 @@ x^6 - 200
 
 
 
-\begin{example}\label{ex:notint}
-The rational number $\alpha=1/2$ is not integral.  Note that
-$G=\Z[1/2]$ is not a finitely generated $\Z$-module, since~$G$ is infinite
-and $G/2G=0$.  (You can see that $G/2G=0$ implies that $G$ is not finitely
-generated, by assuming that $G$ is finitely generated, using the structure
-theorem to write $G$ as a product of cyclic groups, and noting that $G$
-has nontrivial $2$-torsion.)
-\end{example}
 
 
 
@@ -930,24 +929,45 @@ $$
   \O_K = \{x \in K : \text{ $x$ satisfies a monic polynomial with integer coefficients}\}.
 $$
 \end{definition}
-Proposition~\ref{prop:zbarring} implies that $\O_K=K\cap \Zbar$ is indeed a ring.
+Proposition~\ref{prop:zbarring} implies that $\O_K$ is a ring.
 
+\begin{example}
 The field $\Q$ of rational numbers is a number field of degree $1$,
 and the ring of integers of $\Q$ is $\Z$.  The field $K=\Q(i)$ of
-Gaussian integers has degree $2$ and $\O_K = \Z[i]$.  The field
-$K=\Q(\sqrt{5})$ has ring of integers $\O_K = \Z[(1+\sqrt{5})/2]$.
-Note that the Golden ratio $(1+\sqrt{5})/2$ satisfies $x^2-x-1$.  The
+Gaussian integers has degree $2$ and $\O_K = \Z[i]$.  
+\end{example}
+
+\begin{example}
+The golden ratio $\varphi =(1+\sqrt{5})/2$ is in the quadratic number field
+$K=\Q(\sqrt{5})=\Q(\varphi)$; notice that
+$\varphi$ satisfies $x^2-x-1$, so $\varphi\in\O_K$.
+To see that $\O_K = \Z[\varphi]$ directly, we proceed as follows.
+By Proposition~\ref{prop:intfg}, the algebraic integers $K$
+are exactly the elements $a+b\sqrt{5} \in K$, with $a,b\in\Q$
+that have integral minimal polynomial.   The matrix of $a+b\sqrt{5}$  with respect to the 
+basis $1,\sqrt{5}$ for $K$ is
+$m=\abcd{a}{5b}{b}{a}$.
+The characteristic polynomial of $m$ is $f = (x-a)^2 - 5b^2 = x^2 - 2ax + a^2 - 5b^2$,
+which is in $\Z[x]$ if and only if $2a\in\Z$ and $a^2-5b^2\in\Z$.
+Thus $a=a'/2$ with $a'\in\Z$, and 
+$(a'/2)^2 - 5b^2 \in\Z$, so $5b^2 \in \frac{1}{4}\Z$, so $b\in\frac{1}{2}\Z$ as well.
+If $a$ has a denominator of $2$, then $b$ must also have a denominator of $2$ to ensure that the difference
+$a^2-5b^2$ is an integer.  This proves that $\O_K = \Z[\varphi]$.  
+\end{example}
+
+\begin{example}
+The
 ring of integers of $K=\Q(\sqrt[3]{9})$ is $\Z[\sqrt[3]{3}]$, where
 $\sqrt[3]{3}=\frac{1}{3}(\sqrt[3]{9})^2 \not \in \sqrt[3]{9}$.  As we
 will see, in general the problem of computing $\O_K$ given $K$ may be
 very hard, since it requires factoring a certain potentially large
 integer.
+\end{example}
 
 \begin{definition}[Order]\label{defn:order}
 An \defn{order} in $\O_K$ is any subring $R$ of $\O_K$ such that the
 quotient $\O_K/R$ of abelian groups is finite.  
-(Note that $R$ must contain $1$ because it is a ring, and for us
-every ring has a $1$.)
+(By definition $R$ must contain $1$ because it is a ring.)
 \end{definition}
 As noted above, $\Z[i]$ is the ring of integers of $\Q(i)$.  For every
 nonzero integer~$n$, the subring $\Z+ni\Z$ of $\Z[i]$ is an order.
@@ -956,14 +976,12 @@ have finite index in $\Z[i]$.  Also the subgroup $2\Z + i\Z$ of
 $\Z[i]$ is not an order because it is not a ring.  
 
 We define the number field $\Q(i)$ and compute its
-ring of integers, which has discriminant $-4$.
+ring of integers.
 \begin{verbatim}
 sage: K.<i> = NumberField(x^2 + 1)
 sage: OK = K.ring_of_integers(); OK
 Order with module basis 1, i in Number Field in i with 
 defining polynomial x^2 + 1
-sage: OK.discriminant()
--4
 \end{verbatim}%link
 
 \noindent Next we compute the order $\Z + 3i \Z$.
@@ -976,12 +994,6 @@ sage: O3.gens()
 [1, 3*i]
 \end{verbatim}%link
 
-\noindent Notice that the distriminant is $-36 = -4 \cdot 3^2$:
-%link
-\begin{verbatim}
-sage: O3.discriminant()
--36
-\end{verbatim}%link
 
 \noindent We test whether certain elements are in the order.
 %link
@@ -1029,7 +1041,7 @@ $\O_K\cap \Q = \Z$ and $\Q\O_K = K$.
 \begin{proof}
   Suppose $\alpha\in \O_K\cap\Q$ with $\alpha=a/b \in \Q$ in lowest
   terms and $b>0$.  Since $\alpha$ is integral, $\Z[a/b]$ is finitely
-  generated as a module, so $b=1$ (see Example~\ref{ex:notint}).
+  generated as a module, so $b=1$.
 
 To prove that $\Q\O_K=K$, suppose $\alpha\in K$, and let
 $f(x)\in\Q[x]$ be the minimal monic polynomial of~$\alpha$.  For any
@@ -1045,9 +1057,10 @@ integral and $d\alpha\in \O_K$.  This proves that $\Q\O_K = K$.
 
 
 \subsection{Function fields}
-Let $k$ be any field.  We can also make the same definitions with $\Q$
+Let $k$ be any field.  We can also make the same definitions, but with $\Q$
 replaced by the field $k(t)$ of rational functions in an indeterminate
-$t$.  The analogue of a number is called a {\em function field}; it is
+$t$, and $\Z$ replaced by $k[t]$.
+The analogue of a number field is called a {\em function field}; it is
 a finite algebraic extension field $K$ of $k(t)$.  Elements of $K$
 have a unique minimal polynomial as above, and the ring of integers of
 $K$ consists of those elements whose monic minimal polynomial has
@@ -1078,12 +1091,12 @@ number field and $a\in \Qbar$, let $K(a)$ be the extension of~$K$
 generated by~$a$, which is the smallest number field that contains
 both~$K$ and~$a$.  If $a\in\Qbar$ then~$a$ has a minimal polynomial
 $f(x)\in\Q[x]$, and the \defn{Galois conjugates} of~$a$ are the roots
-of~$f$. The are called the Galois conjugates because the are the orbit
+of~$f$. These are called the Galois conjugates because they are the orbit
 of $a$ under the action of $\Gal(\Qbar/\Q)$.  
 
 \begin{example}
 The element $\sqrt{2}$ has minimal polynomial $x^2-2$ and the Galois
-conjugates are $\sqrt{2}$ and $-\sqrt{2}$.  The cube root $\sqrt[3]{2}$
+conjugates of $\sqrt{2}$ are $\sqrt{2}$ and $-\sqrt{2}$.  The cube root $\sqrt[3]{2}$
 has minimial polynomial $x^3 - 2$ and three Galois conjugates 
 $\sqrt[3]{2}, \zeta_3\sqrt[3]{2}, \zeta_3^2\sqrt[3]{2}$, where
 $\zeta_3$ is a cube root of unity. 
@@ -1098,7 +1111,7 @@ sage: cuberoot2^3
 \noindent Then we list the Galois conjugates of $\sqrt[3]{2}$. 
 %link
 \begin{verbatim}
-sage: cuberoot2.galois_conjugates()
+sage: cuberoot2.galois_conjugates(L)
 [cuberoot2, (-zeta3 - 1)*cuberoot2, zeta3*cuberoot2]
 \end{verbatim}%link
 
@@ -1161,9 +1174,9 @@ $$
   of copies of the matrix of $\ell_a$ acting on $K(a)$, so the
   characteristic polynomial of $\ell_a$ on~$L$ is $f^{[L:K(a)]}$.  The
   proposition follows because the roots of $f^{[L:K(a)]}$ are exactly
-  the images $\sigma_i(a)$, with multiplicity $[L:K(a)]$ (since each
+  the images $\sigma_i(a)$, with multiplicity $[L:K(a)]$, since each
   embedding of $K(a)$ into $\Qbar$ extends in exactly $[L:K(a)]$ ways
-  to $L$).
+  to $L$.
 \end{proof}
 
 It is important in Proposition~\ref{prop:normtracesigma} that
@@ -1184,8 +1197,13 @@ $$
 $$
 \end{corollary}
 \begin{proof}
-  (The proof below uses the fact from Galois theory that every
-  embedding $L\hra \Qbar$ extends to an embedding $M\hra \Qbar$.)
+The proof uses that every embedding $L\hra \Qbar$ extends in exactly
+$[M:L]$ way to an embedding $M\hra \Qbar$.  This is clear
+if we view $M$ as $L[x]/(h(x))$ for some irreducicble
+polynomial $h(x) \in L[x]$ of degree $[M:L]$, and note that 
+the extensions of $L\hra \Qbar$ to $M$ correspond to
+the roots of $h$, of which there are $\deg(h)$, since $\Qbar$
+is algebraically closed.
 
   For the first equation, both sides are the product of $\sigma_i(a)$,
   where $\sigma_i$ runs through the embeddings of~$M$ into $\Qbar$
@@ -1228,7 +1246,7 @@ As mentioned above, the norms of elements of $\O_K$ are integers.
 Since the norm of an element is the determinant of left multiplication
 by that element, the norm is a homogenous polynomial of degree $n$ in
 the indeterminate coefficients $c_i$, which is $0$ only on the
-element~$0$.  If the $c_i$ get arbitrarily small for elements of
+element~$0$, so the constant term of this polynomial is $0$.  If the $c_i$ get arbitrarily small for elements of
 $\O_K$, then the values of the norm polynomial get arbitrarily small,
 which would imply that there are elements of $\O_K$ with positive norm
 too small to be in $\Z$, a contradiction.  So the set $S$ contains

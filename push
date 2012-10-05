@@ -1,5 +1,10 @@
 #!/bin/sh
 
+pdflatex ant.tex
+pdflatex ant.tex
+bibtex  ant
+pdflatex ant.tex
+pdflatex ant.tex
 
 git commit -a -v
 git push
