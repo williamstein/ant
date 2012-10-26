@@ -61,13 +61,12 @@ all of whose coordinates are smaller than~$1$.
 The set $X_1$ is thus not finite.   Thus if the sets
 $X_H$ are all finite,~$L$ must be discrete. 
 
-Next assume that~$L$ is discrete and let $H>0$ be any positive 
-number.
-Then for every $x\in X_H$ there is an open ball $B_x$
-that contains~$x$ but no other element of~$L$.
-Since $X_H$ is closed and bounded, it is compact, so 
-the open covering $\union B_x$ of $X_H$ has a finite
-subcover, which implies that $X_H$ is finite, as claimed.
+Next assume that~$L$ is discrete and let $H>0$ be any positive number.
+Then for every $x\in X_H$ there is an open ball $B_x$ that
+contains~$x$ but no other element of~$L$.  Since $X_H$ is closed and
+bounded, the Heine-Borel theorem implies that $X_H$ is compact, so the
+open covering $\union B_x$ of $X_H$ has a finite subcover, which
+implies that $X_H$ is finite, as claimed.
 \end{proof}
 
 \begin{lemma}\label{lem:disc_rankdim}
@@ -105,12 +104,10 @@ is injective, $\dim(V)$ is the rank of $\O_K$, which equals~$n$ by
 Proposition~\ref{prop:ok_lattice}.
 \end{proof}
 
-\subsection{The Volume of $\O_K$}
-Since $\sigma(\O_K)$ is a lattice in~$V$, the volume of
-$V/\sigma(\O_K)$ is finite.  Suppose $w_1,\ldots, w_n$ is a basis for
-$\O_K$.  Then if~$A$ is the matrix whose $i$th row is $\sigma(w_i)$,
-then we define the {\em volume} of $V/\sigma(\O_K)$ to be 
-$|\det(A)|$.
+\subsection{A Determinant}
+ Suppose $w_1,\ldots, w_n$ is a basis for
+$\O_K$, and let $A$ be the matrix whose $i$th row is $\sigma(w_i)$.
+Consider the determinant $\det(A)$.
 \begin{example}
 The ring $\O_K=\Z[i]$ of integers of $K=\Q(i)$
 has $\Z$-basis $w_1=1$, $w_2=i$.
@@ -120,9 +117,9 @@ $$
 $$
 The image $\sigma(\O_K)$ is spanned by
 $(1,1)$ and $(i,-i)$.  
-The volume determinant is
+The determinant is
 \[
-  \left|\mtwo{1}{1}{i}{-i}\right| = |-2i| = 2.
+  \left|\mtwo{1}{1}{i}{-i}\right| = -2i.
 \]
 
 Let $\O_K=\Z[\sqrt{2}]$ be the ring of integers of $K=\Q(\sqrt{2})$.
@@ -135,22 +132,27 @@ and
 A = \mtwo{1}{1}{\sqrt{2}}{-\sqrt{2}},
 \]
 which has determinant
-$ -2\sqrt{2}$, so the volume of $V/\sigma(\O_K)$ 
-is $2\sqrt{2}$.
+$ -2\sqrt{2}$.
 \end{example}
-As the above example illustrates, the volume $V/\sigma(\O_K)$ need not
-be an integer.  
+As the above example illustrates, the determinant $\det(A)$ most
+certainly need not be an integer.  However, as we will see, it's
+square is an integer that does not depend on our choice of 
+basis for $\O_K$.
 
 \section{Discriminants}\label{sec:disc}
-Suppose $w_1,\ldots, w_n$ are a basis for $\O_K$ as a $\Z$-module,
+Suppose $w_1,\ldots, w_n$ is a basis for $\O_K$ as a $\Z$-module,
 which we view as a $\Q$-vector space.  Let $ \sigma : K\hra \C^n $ be
 the embedding $\sigma(a)=(\sigma_1(a),\ldots,\sigma_n(a))$, where
 $\sigma_1,\ldots, \sigma_n$ are the distinct embeddings of $K$
 into~$\C$.  Let $A$ be the matrix whose rows are $\sigma(w_1), \ldots,
-\sigma(w_n)$.  The quantity $\det(A)$ depends on the ordering of the
-$w_i$, and need not be an integer.
+\sigma(w_n)$.   
 
-If we consider $\det(A)^2$ instead, we obtain a number that does
+Changing our choice of
+basis for $\O_K$ is the same as left multiplying~$A$ by an integer
+matrix $U$ of determinant $\pm 1$, which changes
+$\det(A)$ by $\pm 1$.  
+This leads us to consider $\det(A)^2$ instead, which does not depend
+on the choice obtain a number that does
 not depend on ordering; moreover, as we will see, it is an integer. 
 Note that
 \begin{align*}
@@ -162,10 +164,9 @@ Note that
  &= \det(\Tr(w_i w_j)_{1\leq i,j\leq n}),
 \end{align*}
 so $\det(A)^2$ can be defined purely in terms of the trace without
-mentioning the embeddings $\sigma_i$.  Also, changing our choice of
-basis for $\O_K$ is the same as left multiplying~$A$ by an integer
-matrix $U$ of determinant $\pm 1$; this does not change the squared
-determinant, since $\det(UA)^2 = \det(U)^2\det(A)^2 = \det(A)^2$.
+mentioning the embeddings $\sigma_i$.  
+Moreover, if we change basis hence multiplying $A$ by some $U$ with determinant $\pm 1$, then
+$\det(UA)^2 = \det(U)^2\det(A)^2 = \det(A)^2$.
 Thus $\det(A)^2\in \ZZ$ is well defined as a quantity associated to $\O_K$.
 
 If we view~$K$ as a $\Q$-vector space, then $(x,y)\mapsto \Tr(xy)$
@@ -177,7 +178,7 @@ $\det(A)\neq 0$.
 The trace pairing is nondegenerate.
 \end{lemma}
 \begin{proof}
-If the trace pairing is degenerate, then there exists $a\in K$ such
+If the trace pairing is degenerate, then there exists $0\neq a\in K$ such
 that for every $b\in K$ we have $\Tr(ab)=0$.  In particularly, taking
 $b=a^{-1}$ we see that $0=\Tr(a a^{-1})=\Tr(1)=[K:\Q]>0$, which is
 absurd.
@@ -190,7 +191,7 @@ $$
   \Disc(a_1,\ldots,a_n) = \det(\Tr(a_i a_j)_{1\leq i,j\leq n})\in\Q.
 $$
 The \defn{discriminant} $\Disc(\O)$ of an order $\O$ in $\O_K$ is
-the discriminant of any basis for~$\O$.
+the discriminant of any $\Z$-basis for~$\O$.
 The \defn{discriminant} $d_K=\Disc(K)$ of the number field~$K$ 
 is the discriminant of $\O_K$. 
 Note that these discriminants are all nonzero
