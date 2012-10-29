@@ -152,8 +152,7 @@ basis for $\O_K$ is the same as left multiplying~$A$ by an integer
 matrix $U$ of determinant $\pm 1$, which changes
 $\det(A)$ by $\pm 1$.  
 This leads us to consider $\det(A)^2$ instead, which does not depend
-on the choice obtain a number that does
-not depend on ordering; moreover, as we will see, it is an integer. 
+on the choice of basis; moreover, as we will see, $\det(A)^2$ is an integer. 
 Note that
 \begin{align*}
 \det(A)^2 &= \det(AA) = 
@@ -206,6 +205,16 @@ by Lemma~\ref{lem:tracenondegen}.
   To see this, note that if we choose the basis
   $1,\alpha,\ldots,\alpha^{n-1}$ for $\Z[\alpha]$, then both
   discriminants are the square of the same Vandermonde determinant.
+\end{remark}
+
+\begin{remark}
+If $S/R$ is an extension of Dedekind domains, with $S$ a free $R$
+module of finite rank, then the above definition of a {\em relative}
+discriminant of $S/R$ does not make sense in general.  The problem
+is that $R$ may have more units than $\{\pm 1\}$, in which case
+$\det(A^2)$ is not well defined.   To generalize the notion of
+discriminant to arbitrary finite extensions of Dedekind domains,
+one must instead introduce a discriminant {\em ideal}. [[TODO]]
 \end{remark}
 
 \begin{example}
