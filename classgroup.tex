@@ -6,7 +6,21 @@ one sees in a course on Class Field Theory, the class group and its
 generalizations also yield deep insight into the 
 extensions of~$K$ that are Galois with abelian Galois group.
 
-\section{The Class Group}
+In Section~\ref{sec:theclassgroup}, we define the class group and
+state the main theorem of this chapter.  We then illustrate the
+implications of this theorem in detail for the field $\Q(\sqrt{10})$,
+proving that it has class group of order $2$. Next, we prove several
+geometric lemmas, building very heavily on ours results from
+Chapter~\ref{discnorm}.  Finally, we close the section by giving a
+complete proof of finiteness of the class group, but leave an explicit
+upper bound as an exercise in calculus.  In Section~\ref{sec:cn1} we
+very briefly discuss how often number fields have class number 1.
+Finally, in Section~\ref{sec:comcg} we further discuss how to compute
+class groups, though nothing we do in this book begins to approach the
+state of the art regarding such computations -- for that, see Cohen's
+books.
+
+\section{The Class Group}\label{sec:theclassgroup}
 \begin{definition}[Class Group]
 Let $\O_K$ be the ring of integers of a number field~$K$.  The 
 \defn{class group} $C_K$ of~$K$ is the group of fractional ideals
@@ -19,7 +33,7 @@ $$
   0 \to \O_K^* \to K^* \to \Div(\O_K) \to C_K \to 0.
 $$
 That the class group $C_K$ is finite follows from the first part of
-the following theorem and the fact that there are only finitely many
+the following theorem and that there are only finitely many
 ideals of norm less than a given integer (Proposition~\ref{prop:finitewithnorm}).
 \begin{theorem}[Finiteness of the Class Group]\label{thm:finiteclassgrp}
 \ithm{finiteness of class group}
@@ -32,11 +46,8 @@ $d_K=\Disc(\O_K)$.
 Thus by Proposition~\ref{prop:finitewithnorm} 
 the class group $C_K$ of~$K$ is
 finite.
-One can choose $C_{r,s}$ such that every ideal class
-in $C_K$  contains an integral ideal of norm at most 
-\[
-  \sqrt{|d_K|}\cdot \left(\frac{4}{\pi}\right)^s\frac{n!}{n^n}.
-\]
+In fact, one can take
+$$C_{r,s} = \left(\frac{4}{\pi}\right)^s\frac{n!}{n^n}.$$
 \end{theorem}
 The explicit bound in the theorem is called the \defn{Minkowski
   bound}.  There are other better bounds, but they depend on unproven
@@ -78,7 +89,7 @@ Theorem~\ref{thm:finiteclassgrp} implies that every ideal class has a
 representative that is an integral ideal of norm~$1$,~$2$, or~$3$.
 The ideal $2\O_K$ is ramified in $\O_K$, so
 $$
-  2\O_K = (2,\sqrt{10}).
+  2\O_K = (2,\sqrt{10})^2.
 $$
 If $(2,\sqrt{10})$ were principal, say $(\alpha)$, then 
 $\alpha=a+b\sqrt{10}$ would have norm $\pm 2$. 
@@ -138,7 +149,7 @@ True
 
 Before proving Theorem~\ref{thm:finiteclassgrp}, we prove a few
 lemmas.  The strategy of the proof is to start with any nonzero
-ideal~$I$, and prove that there is some nonzero $a\in K$, with very
+ideal~$I$, and prove that there is some nonzero $a\in K$ having very
 small norm, such that $aI$ is an integral ideal. Then
 $\Norm(aI)=\Norm_{K/\Q}(a)\Norm(I)$ will be small, since
 $\Norm_{K/\Q}(a)$ is small.  The trick is to determine precisely
@@ -284,7 +295,7 @@ and for any $a\in \R$,
   f(ax_1, \ldots,  ax_n) = |a|^n f(x_1,\ldots, x_n).
 $$
 
-Let $S\subset V$ be a fixed choice of closed, bounded, convex, subset with
+Let $S\subset V$ be any fixed choice of closed, bounded, convex, subset with
 positive volume that is
 symmetric with respect to the origin and has positive volume.  Since~$S$ is closed
 and bounded, 
@@ -304,7 +315,7 @@ By Lemma~\ref{lem:volfracideal},
 Let $\lambda = 2\cdot\left(\frac{c}{v}\right)^{1/n}$, where $v=\Vol(S)$.
 Then 
 \[
-   \Vol(\lambda{} S) = \lambda^n \Vol(S) = 2^n \frac{c}{v} \cdot v = 2^n\cdot c=
+   \Vol(\lambda{} S) = \lambda^n \Vol(S) = 2^n\cdot \frac{c}{v} \cdot v = 2^n\cdot c=
   2^n \Vol(V/\sigma(I^{-1})),
 \]
 so by Lemma~\ref{lem:blichfeld} there exists 
@@ -355,7 +366,7 @@ A prime $p$ ramifies in $\O_K$ if and only if $d\mid d_K$,
 so the corollary implies that every nontrivial extension of $\Q$
 is ramified at some prime.
 
-\section{Class Number 1}
+\section{Class Number 1}\label{sec:cn1}
 The fields of class number 1 are exactly the fields for
 which $\O_K$ is a principal ideal domain.  How many such
 number fields are there?   We still don't know.
@@ -403,8 +414,8 @@ Heegner, Stark, and Baker that the above list of $9$ fields is the
 complete list with class number~$1$.  More generally, it is possible,
 using deep work of Gross, Zagier, and Goldfeld involving zeta
 functions and elliptic curves, to enumerate all quadratic number
-fields with a given class number (this may however not be practical --
-see Mark Watkins Ph.D. thesis).
+fields with a given class number (Mark Watkins has done very
+substantial work in this direction).
 
 % The function in PARI for computing the order of the class group of a
 % quadratic field in PARI is called {\tt qfbclassno}.
@@ -434,7 +445,7 @@ see Mark Watkins Ph.D. thesis).
 % %in full generality because ``the authors were too lazy''.
   
 
-\section{More About Computing Class Groups}
+\section{More About Computing Class Groups}\label{sec:comcg}
 If $\p$ is a prime of $\O_K$, then the intersection $\p\cap \Z=p\Z$ is
 a prime ideal of $\Z$.  We say that $\p$ \defn{lies over} $p\in\Z$.
 Note $\p$ lies over $p\in\Z$ if and only if $\p$ is one of the prime
