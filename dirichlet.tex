@@ -12,7 +12,7 @@ where $T$ is a finite cyclic group.
 
 Many questions can be encoded as questions about the structure of the
 group of units.  For example, Dirichlet's unit theorem explains
-the structure the  integer solutions $(x,y)$ to Pell's equation $x^2-dy^2=1$
+the structure of the  integer solutions $(x,y)$ to Pell's equation $x^2-dy^2=1$
 (see Section~\ref{sec:pell}).
 
 
@@ -82,9 +82,18 @@ hence an algebraic integer.  Thus $a^{-1}\in K\cap \Zbar = \O_K$,
 which proves that~$a$ is a unit.
 \end{proof}
 
+\begin{remark}
+Proposition~\ref{prop:unitnorm} is false if we replace $\O_K$ by $K$.
+For example, if $\alpha$ is a root of $x^2-\frac{1}{2}x+1$, then
+$\alpha$ has norm $\pm 1$, but $\alpha$ is not a unit of $\O_K$, since
+$\alpha\not\in \O_K$.  To general Proposition~\ref{prop:unitnorm} to an
+arbitrary finite extension $R/S$ of Dedekind domains, we replace $\pm
+1$ by ``an element of $S^*$''.
+\end{remark}
+
 Let $r$ be the number of real and $s$ the number of complex conjugate
 embeddings of $K$ into $\C$, so $n=[K:\Q]=r+2s$.
-Define the {\em log embedding}
+Define the {\em log map}
 $$
 \vphi:U_K \to \R^{r+s}
 $$
@@ -161,9 +170,9 @@ Thus this is the embedding
 The image $\vphi:U_K\to \R^{r+s}$ is discrete.
 \end{lemma}
 \begin{proof}
-We will show that for any bounded subset~$X$ 
-of $\R^{r+s}$, the intersection $\vphi(U_K)\cap X$ is finite.
-If $X$ is bounded, then for any $u\in
+Let $X$ be a bounded subset of $\R^{r+s}$.
+We will show that the intersection $\vphi(U_K)\cap X$ is finite.
+Since $X$ is bounded, for any $u\in
 Y=\vphi^{-1}(X)\subset U_K$ the coordinates of $\sigma(u)$ are bounded, 
 since $|\log(x)|$ is bounded on bounded subsets
 of $[1,\infty)$.
@@ -242,7 +251,8 @@ and~$s$ discs, each of which has these properties.
 Viewing $S$ as a product of intervals and discs, we see that the volume of $S$ is
 $$
   \Vol(S) = \prod_{i=1}^r (2c_i) \cdot \prod_{i=1}^s (\pi c_i^2) 
-          = 2^r\cdot \pi^s \cdot A.
+          = 2^r\cdot \pi^s \cdot A
+  = 2^{r+s}\sqrt{|d_K|} = 2^n \cdot 2^{-s}\sqrt{|d_K|}.
 $$
 
 Recall Blichfeldt's Lemma~\ref{lem:blichfeld}, which asserts  
@@ -255,7 +265,7 @@ we have
 $\Vol(\R^n/L) = 2^{-s}\sqrt{|d_K|}$.  To check the hypothesis
 of Blichfeld's lemma, note that 
 $$
- \Vol(S) = 2^{r+s} \sqrt{|d_K|} = 2^n 2^{-s} \sqrt{|d_K|} = 2^n \Vol(\R^n/L).
+ \Vol(S) = 2^n \cdot 2^{-s} \sqrt{|d_K|} = 2^n \Vol(\R^n/L).
 $$
 Thus there exists a nonzero element $x$ in $S\cap \sigma(\O_K)$.
 Let $a\in \O_K$ with $\sigma(a)=x$, then $\sigma(a)\in S$, so
@@ -281,7 +291,7 @@ Rewriting this
 we have 
 \begin{equation}\label{eqn:cisigbound}
   \frac{c_i}{|\sigma_i(a)|}\leq A\quad\text{ for }i\leq r\quad\text{and}\quad
-\left(\frac{c_i}{|\sigma_i(a)|}\right)^2\geq A\quad\text{for } i=r+1,\ldots, r+s.
+\left(\frac{c_i}{|\sigma_i(a)|}\right)^2\leq A\quad\text{for } i=r+1,\ldots, r+s.
 \end{equation}
 
 Recall that our overall strategy is to use an appropriately chosen~$a$
@@ -296,25 +306,19 @@ $$
 t = t_{c_1,\ldots, c_{r+s}} = z_1\log(c_1)+\cdots +z_{r+s}\log(c_{r+s}),
 $$ 
 and recall $f:K^*\to \R$ defined in
-(\ref{eqn:f}) above.  We first show that
-$$
-  |f(u) - t| \leq B_j = 
- |f(b_j)| + \log(A)\cdot\left(\sum_{i=1}^{r}|z_i| + 
-         \frac{1}{2}\cdot \sum_{i=r+1}^s|z_i|\right).
-$$
+(\ref{eqn:f}) above.
 We have
 \begin{align*}
   |f(u) - t| &= |f(a) - f(b_j) - t|\\
    &\leq |f(b_j)| + |t - f(a)|\\
    &=|f(b_j)| + |z_1(\log(c_1) - \log(|\sigma_1(a)|)) + \cdots + z_{r+s}(\log(c_{r+s}) - \log(|\sigma_{r+s}(a)|))|\\
    &=|f(b_j)| + |z_1\cdot \log(c_1/|\sigma_1(a)|) + \cdots + \frac{z_{r+s}}{2}\cdot \log((c_{r+s}/|\sigma_{r+s}(a)|)^2)|\\
-   &\leq |f(b_j)| + \log(A)\cdot\left(\sum_{i=1}^{r}|z_i| + \frac{1}{2}\cdot \sum_{i=r+1}^s|z_i|\right).
+   &\leq |f(b_j)| + \log(A)\cdot\left(\sum_{i=1}^{r}|z_i| + \frac{1}{2}\cdot \sum_{i=r+1}^s|z_i|\right) \defeq B_j.
 \end{align*}
-In the last step we use 
-(\ref{eqn:cisigbound}).
+In the last step we use (\ref{eqn:cisigbound}).
 
 Let $B=\max_{j} B_j$, and note that $B$ does not depend on the choice
-of the $c_i$; in fact, it only depends on the field $K$.
+of the $c_i$; in fact, it only depends our {\em fixed} choice of $z$ and on the field $K$.
 Moreover, for any choice of the $c_i$ as above, we have
 $$
   |f(u) - t| \leq B.
@@ -332,9 +336,8 @@ in $\R^0=\R^{r+s-1}$, which is automatically true, so assume $r+s>1$.
 To finish the proof, we explain how to use Lemma~\ref{lem:chooseci}
 to choose $c_i$ such that $|t|>B$.  We have
 \begin{align*}
-z_1\log(c_1)&+\cdots +z_{r+s}\log(c_{r+s})
- =\\ 
-&z_1\log(c_1)+\cdots +  z_r\log(c_r)+
+t &= z_1\log(c_1)+\cdots +z_{r+s}\log(c_{r+s})\\
+&= z_1\log(c_1)+\cdots +  z_r\log(c_r)+
 \frac{1}{2}\cdot z_{r+1}\log(c_{r+1}^2) + 
 \cdots + \frac{1}{2}\cdot z_{r+s}\log(c_{r+s}^2)\\
 &=w_1\log(d_1)+\cdots +  w_r\log(d_r)+
@@ -342,7 +345,7 @@ w_{r+1}\log(d_{r+1}) +
 \cdots +\cdot w_{r+s}\log(d_{r+s}),
 \end{align*}
 where $w_i=z_i$ and $d_i=c_i$ for $i\leq r$, and
-$w_i=\frac{1}{2}z_i$ and $d_i=c_i^2$ for $r<i\leq r+s$,
+$w_i=\frac{1}{2}z_i$ and $d_i=c_i^2$ for $r<i\leq r+s$.
 The condition that $z\not\in H^{\perp}$ is that the $w_i$ are not all
 the same, 
  and in our new coordinates the lemma is equivalent to
@@ -351,8 +354,8 @@ condition that $\prod_{i=1}^{r+s} d_i = A$.
 But this is exactly what Lemma~\ref{lem:chooseci} shows.
 It is thus possible
 to find a unit~$u$ such that $|f(u)|>0$.  Thus $z\not\in
-W^{\perp}$, so $W^{\perp}\subset Z^{\perp}$, whence $Z\subset W$,
-which finishes the proof Theorem~\ref{thm:units}.
+W^{\perp}$, so $W^{\perp}\subset H^{\perp}$, whence $H\subset W$,
+which finishes the proof of Theorem~\ref{thm:units}.
 \end{proof}
 
 \section{Examples with Sage}
