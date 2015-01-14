@@ -12,7 +12,7 @@ of the group of fractional ideals by the principal fractional ideals
 
 \section{Dedekind Domains}
 Recall (Corollary~\ref{prop:intnoetherian}) that we proved that the
-ring of integers $\O_K$ of a number field is noetherian, as follows.
+ring of integers $\O_K$ of a number field is noetherian as follows.
 As we saw before using norms, the ring $\O_K$ is finitely generated as
 a module over~$\Z$, so it is certainly finitely generated as a ring
 over~$\Z$.  By the Hilbert Basis Theorem (Theorem~\ref{thm:hilbert}),
@@ -43,6 +43,7 @@ sage: Frac(OK)
 Number Field in a with defining polynomial x^2 - 5
 \end{verbatim}%link
 
+Note that in Sage {\tt 1/2 * x} means the same as {\tt (1/2)*x}.
 \noindent{}The fraction field of an {\em order} -- i.e., a subring of $\O_K$ of
 finite index -- is also the number field again.
 %link
@@ -83,7 +84,7 @@ generated as a $\Z$-module, so $\Z[a_0,\ldots, a_{n-1}]$ is finitely
 generated as a $\Z$-module.  Since $f(\alpha)=0$, we can write $\alpha^n$ as a
 $\Z[a_0,\ldots, a_{n-1}]$-linear combination of $\alpha^i$ for $i<n$, so
 the ring $\Z[a_0,\ldots, a_{n-1},\alpha]$ is also finitely generated as a
-$\Z$-module.  Thus $\Z[\alpha]$ is finitely generated as $\Z$-module
+$\Z$-module.  Thus $\Z[\alpha]$ is finitely generated as a $\Z$-module
 because it is a submodule of a finitely generated $\Z$-module, which
 implies that~$\alpha$ is integral over~$\Z$.
 
@@ -342,7 +343,7 @@ order.
 \end{theorem}
 \begin{proof}
 Suppose~$I$ is an ideal that is maximal among the set of all ideals in
-$\O_K$ that can not be written as a product of primes.  Every ideal is
+$\O_K$ that cannot be written as a product of primes.  Every ideal is
 contained in a maximal ideal, so $I$ is contained in a nonzero prime
 ideal $\p$.  If $I\p^{-1} = I$, then by Theorem~\ref{thm:ddabgrp} we
 can cancel $I$ from both sides of this equation to see that
@@ -392,7 +393,7 @@ $\Norm(b)=3$. If $a=c + d\sqrt{-6}$, then $\Norm(a) = c^2 + 6d^2$;
 since the equation $c^2 + 6d^2 = 2$ has no solution with $c,d\in\Z$,
 there is no element in $\O_K$ with norm~$2$, so $\sqrt{-6}$ is
 irreducible.  Also, $\sqrt{-6}$ is not a unit times~$2$ or times $3$,
-since again the norms would not match up.  Thus $6$ can not be written
+since again the norms would not match up.  Thus $6$ cannot be written
 uniquely as a product of irreducibles in $\O_K$.
 Theorem~\ref{thm:uniqfac}, however, implies that the principal
 ideal $(6)$ can, however, be
