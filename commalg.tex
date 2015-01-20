@@ -47,6 +47,10 @@ where $r, s\geq 0$, $n_1>1$ and $n_1\mid{}n_2\mid{}\cdots \mid{}n_s$.
 Furthermore, the $n_i$ and~$r$ are uniquely determined by~$G$.
 \end{theorem}
 
+\begin{exercise}
+	Quick! Guess how many abelian groups there are of order less than $12$. Use Theorem~\ref{thm:struc} to classify all abelian groups of order less than $12$. How many do you think there are? How many are there?
+\end{exercise}
+
 We will prove the theorem as follows.  We first remark that any
 subgroup of a finitely generated free abelian group is finitely
 generated.  Then we see how to represent finitely generated abelian groups 
@@ -200,7 +204,7 @@ inductively proves the proposition.
 \end{proof}
 
 \begin{example}
-The matrix $\mtwo{-1}{2}{-3}{4}$ has Smith normal form of
+The matrix $\mtwo{-1}{2}{-3}{4}$ has Smith normal form
 $\mtwo{1}{0}{0}{2}$,
 and the matrix 
 $\mthree{1}{4}{9}{16}{25}{36}{49}{64}{81}$
@@ -213,7 +217,7 @@ $$\det(PAQ) = \det(P)\det(A)\det(Q) = \pm \det(A).$$
 We compute each of the above Smith forms using \sage,
 along with the corresponding transformation matrices.
 First the $2\times 2$ matrix.
-\begin{verbatim}
+\begin{lstlisting}
 sage: A = matrix(ZZ, 2, [-1,2, -3,4])
 sage: S, U, V = A.smith_form(); S
 [1 0]
@@ -227,10 +231,10 @@ sage: U
 sage: V
 [1 4]
 [1 3]
-\end{verbatim}
+\end{lstlisting}
 The \sage{} {\tt matrix} command takes as input the base ring, the number
 of rows, and the entries.  Next we compute with a $3\times3$ matrix.
-\begin{verbatim}
+\begin{lstlisting}
 sage: A = matrix(ZZ, 3, [1,4,9,  16,25,36, 49,64,81])
 sage: S, U, V = A.smith_form(); S
 [ 1  0  0]
@@ -248,10 +252,10 @@ sage: V
 [  47   74   93]
 [ -79 -125 -156]
 [  34   54   67]
-\end{verbatim}
+\end{lstlisting}
 
 Finally we compute the Smith form of a matrix of rank $2$:
-\begin{verbatim}
+\begin{lstlisting}
 sage: m = matrix(ZZ, 3, [2..10]); m
 [ 2  3  4]
 [ 5  6  7]
@@ -260,7 +264,7 @@ sage: m.smith_form()[0]
 [1 0 0]
 [0 3 0]
 [0 0 0]
-\end{verbatim}
+\end{lstlisting}
 \end{example}
 
 
@@ -285,6 +289,32 @@ generators. We see from the representation (\ref{eqn:gprod}) of $G$ as
 a product that $n_i$ has this property and that no smaller positive
 integer does.
 \end{proof}
+
+\begin{exercise}
+	Recall Smith normal form defined in Proposition~\ref{prop:smith}. With only minor modifications, then the proposition and proof will work over any principle ideal domain. Find and apply these modifications then find the Smith normal form of the matrix $\begin{pmatrix} 1 & 2 & 3 \\ 0 & 1+i & 2 \\ 0 & 1 & 5 \end{pmatrix}$.
+	
+	Hint: you can use \sage{} to verify your answer. However, you will need to make explicitly construct the Gaussian integers in order to input the matrix. You can do this by the following:
+	\begin{lstlisting}
+K.<i> = QuadraticField(-1)
+R = K.maximal_order()
+M = matrix(R, 3, [1,2,3,0,1+i,2,0,1,5]); show(M)
+#show(M.smith_form()[0]) #uncomment for the answer
+	\end{lstlisting}
+\end{exercise}
+
+[\#TODO use both or leave one?]
+
+\begin{exercise}
+	Let $A=\left(
+	        \begin{matrix}1&2&3\\4&5&6\\7&8&9
+	        \end{matrix}\right)$. 
+	\begin{enumerate}
+	\item Find the Smith normal form of $A$.
+	\item Prove that 
+	the cokernel of the map $\Z^3\to \Z^3$ given by multiplication by~$A$ 
+	is isomorphic to $\Z/3\Z \oplus \Z$.
+	\end{enumerate}
+\end{exercise}
 
 \section{Noetherian Rings and Modules}\label{sec:noetherian}
 
@@ -588,23 +618,23 @@ Also, $6=18-12\in I$, so $I=(6)$.
 
 The ring $\Z$
 in \sage{} is {\tt ZZ}, which is Noetherian.
-\begin{verbatim}
+\begin{lstlisting}
 sage: ZZ.is_noetherian()
 True
-\end{verbatim}
+\end{lstlisting}
 We create the ideal $I$ in \sage{} as follows, and note that
 it is principal:
-\begin{verbatim}
+\begin{lstlisting}
 sage: I = ideal(12,18); I
 Principal ideal (6) of Integer Ring
 sage: I.is_principal()
 True
-\end{verbatim}
+\end{lstlisting}
 We could also create $I$ as follows:
-\begin{verbatim}
+\begin{lstlisting}
 sage: ZZ.ideal(12,18)
 Principal ideal (6) of Integer Ring
-\end{verbatim}
+\end{lstlisting}
 \end{example}
 
 Propositions~\ref{prop:noethfg} and \ref{prop:zpid} together imply that
@@ -612,6 +642,10 @@ any finitely generated abelian group is noetherian.  This means that
 subgroups of finitely generated abelian groups are finitely generated,
 which provides the missing step in our proof of the structure theorem
 for finitely generated abelian groups.
+
+\begin{exercise}
+	There is another way to show every principle ideal domain (for example $\Z$) is noetherian (contrast to the proof in Section~\ref{sec:Znoeth}). Let $R$ be a PID and $(a)$ an arbitrary ideal. Use the facts that $(b)\supseteq(a)$ if and only if $b \mid a$ and $R$ is a UFD to show that ascending chain of ideals starting with $(a)$ must stabilize.
+\end{exercise}
 
 \section{Rings of Algebraic Integers}
 In this section we introduce the central objects of this book, which
@@ -732,15 +766,18 @@ the minimal polynomial of $\sqrt[3]{2}$ is $x^3-2$.
 \begin{example}
 We compute the minimal polynomial of a number expressed
 in terms of $\sqrt[4]{2}$:
-\begin{verbatim}
+\begin{lstlisting}
 sage: k.<a> = NumberField(x^4 - 2)
 sage: a^4
 2
 sage: (a^2 + 3).minpoly()
 x^2 - 6*x + 7
-\end{verbatim}
-
+\end{lstlisting}
 \end{example}
+
+\begin{exercise}
+	Find the minimal polynomial of $\sqrt{2} + \sqrt{3}$ by hand. Check your result with \sage{}.
+\end{exercise}
 
 \begin{lemma}\label{lem:mindiv}
   Suppose $\alpha \in\Qbar$.  Then the minimal polynomial of~$\alpha$
@@ -755,6 +792,10 @@ x^2 - 6*x + 7
   However,~$f$ is a polynomial of least positive degree with
   root~$\alpha$, so $r=0$.
 \end{proof}
+
+\begin{exercise}
+	Show that the minimal polynomial of an algebraic number $\alpha\in\Qbar$ is unique. 
+\end{exercise}
 
 \begin{lemma}\label{lem:minpolint}\ilem{minimal polynomial of algebraic integer}
 Suppose~$\alpha \in\Qbar$. Then $\alpha$ is an algebraic integer if and only
@@ -778,30 +819,40 @@ that $\alpha$ is an algebraic integer.
   contradiction.
 \end{proof}
 
+\begin{exercise}
+	Which of the following numbers are algebraic integers?
+	\begin{enumerate}
+		\item The number $(1+\sqrt{5})/2$.
+		\item The number $(2+\sqrt{5})/2$.
+		\item The value of the infinite sum $\sum_{n=1}^{\infty} 1/n^2$.
+		\item The number $\alpha/3$, where $\alpha$ is a root of 
+		$x^4 + 54x + 243$.
+	\end{enumerate}
+\end{exercise}
 
 \begin{example}
 We compute some minimal polynomials in \sage.
 The minimal polynomial of $1/2$:
-\begin{verbatim}
+\begin{lstlisting}
 sage: (1/2).minpoly()
 x - 1/2
-\end{verbatim}
+\end{lstlisting}
 We construct a root $a$ of $x^2-2$ and compute its minimal polynomial:
-\begin{verbatim}
+\begin{lstlisting}
 sage: k.<a> = NumberField(x^2 - 2)
 sage: a^2 - 2
 0
 sage: a.minpoly()
 x^2 - 2
-\end{verbatim}%link
+\end{lstlisting}%link
 Finally we compute the minimal polynomial of $\alpha=\sqrt{2}/2 + 3$, which
 is not integral, hence Proposition~\ref{prop:intfg} implies that $\alpha$
 is not an algebraic integer:
 %link
-\begin{verbatim}
+\begin{lstlisting}
 sage: (a/2 + 3).minpoly()
 x^2 - 6*x + 17/2
-\end{verbatim}
+\end{lstlisting}
 \end{example}
 
 The only elements of $\Q$ that are algebraic
@@ -820,7 +871,7 @@ is an algebraic integer, since it is a root of the monic integral
 polynomial $x^2 - x - 1$.  We verify this using \sage below,
 though of course this is easy to do by hand (you should try
 much more complicated examples in \sage).
-\begin{verbatim}
+\begin{lstlisting}
 sage: k.<a> = QuadraticField(5)
 sage: a^2
 5
@@ -829,53 +880,53 @@ sage: alpha.minpoly()
 x^2 - x - 1
 sage: alpha.is_integral()
 True
-\end{verbatim}
+\end{lstlisting}
 
 Since $\sqrt{5}$ can be expressed in terms of radicals, we can also
 compute this minimal polynomial using the symbolic functionality in
 Sage.
-\begin{verbatim}
+\begin{lstlisting}
 sage: alpha = (1+sqrt(5))/2
 sage: alpha.minpoly()
 x^2 - x - 1
-\end{verbatim}
+\end{lstlisting}
 Here is a more complicated example using a similar approach:
-\begin{verbatim}
+\begin{lstlisting}
 sage: alpha = sqrt(2) + 3^(1/4)
 sage: alpha.minpoly()
 x^8 - 8*x^6 + 18*x^4 - 104*x^2 + 1
-\end{verbatim}
+\end{lstlisting}
 
 \begin{example}
   We illustrate an example of a sum and product of two algebraic
   integers being an algebraic integer.  We first make the relative number
   field obtained by adjoining a root of $x^3 - 5$ to the field
   $\Q(\sqrt{2})$:
-\begin{verbatim}
+\begin{lstlisting}
 sage: k.<a, b> = NumberField([x^2 - 2, x^3 - 5])
 sage: k
 Number Field in a with defining polynomial x^2 + -2 over its base field
-\end{verbatim}%link
+\end{lstlisting}%link
 
 \noindent Here $a$ and $b$ are roots of $x^2-2$ and $x^3-5$, respectively.
 %link
-\begin{verbatim}
+\begin{lstlisting}
 sage: a^2
 2
 sage: b^3
 5
-\end{verbatim}%link
+\end{lstlisting}%link
 
 \noindent We compute the minimal polynomial of the sum and product of
 $\sqrt[3]{5}$ and $\sqrt{2}$.  The command {\tt absolute\_minpoly}
 gives the minimal polynomial of the element over the rational numbers.
 %link
-\begin{verbatim}
+\begin{lstlisting}
 sage: (a+b).absolute_minpoly()
 x^6 - 6*x^4 - 10*x^3 + 12*x^2 - 60*x + 17
 sage: (a*b).absolute_minpoly()
 x^6 - 200
-\end{verbatim}
+\end{lstlisting}
 The minimal polynomial of the product is $\sqrt[3]{5} \sqrt{2}$ is
 trivial to compute by hand.  In light of the Cayley-Hamilton theorem,
 we can compute the minimal polynomial of $\alpha = \sqrt[3]{5} +
@@ -891,7 +942,7 @@ compute $\alpha$ to 100 bits precision (via the {\tt n} command), then
 use the LLL algorithm (via the {\tt algdep} command) to heuristically
 find a linear relation between the first $6$ powers of $\alpha$ (see
 Section~\ref{sec:LLL} below for more about LLL).
-\begin{verbatim}
+\begin{lstlisting}
 sage: a = 5^(1/3); b = sqrt(2)
 sage: c = a+b; c
 5^(1/3) + sqrt(2)
@@ -899,10 +950,17 @@ sage: (a+b).n(100).algdep(6)
 x^6 - 6*x^4 - 10*x^3 + 12*x^2 - 60*x + 17
 sage: (a*b).n(100).algdep(6)
 x^6 - 200
-\end{verbatim}
+\end{lstlisting}
 \end{example}
 
-
+\begin{exercise}
+	Let $\alpha = \sqrt{2} + \frac{1+\sqrt{5}}{2}$. 
+	\begin{enumerate}
+	\item Is $\alpha$ an algebraic integer?
+	\item Explicitly write down the minimal polynomial of $\alpha$
+	as an element of $\QQ[x]$.
+	\end{enumerate}
+\end{exercise}
 
 
 
@@ -962,6 +1020,11 @@ very hard, since it requires factoring a certain potentially large
 integer.
 \end{example}
 
+\begin{exercise}
+	From basic definitions, find the rings of integers of the fields
+	$\Q(\sqrt{11})$ and $\Q(\sqrt{-6})$.
+\end{exercise}
+
 \begin{definition}[Order]\label{defn:order}
 An \defn{order} in $\O_K$ is any subring $R$ of $\O_K$ such that the
 quotient $\O_K/R$ of abelian groups is finite.  
@@ -975,32 +1038,32 @@ $\Z[i]$ is not an order because it is not a ring.
 
 We define the number field $\Q(i)$ and compute its
 ring of integers.
-\begin{verbatim}
+\begin{lstlisting}
 sage: K.<i> = NumberField(x^2 + 1)
 sage: OK = K.ring_of_integers(); OK
 Order with module basis 1, i in Number Field in i with 
 defining polynomial x^2 + 1
-\end{verbatim}%link
+\end{lstlisting}%link
 
 \noindent Next we compute the order $\Z + 3i \Z$.
 %link
-\begin{verbatim}
+\begin{lstlisting}
 sage: O3 = K.order(3*i); O3
 Order with module basis 1, 3*i in Number Field in i with 
 defining polynomial x^2 + 1
 sage: O3.gens()
 [1, 3*i]
-\end{verbatim}%link
+\end{lstlisting}%link
 
 
 \noindent We test whether certain elements are in the order.
 %link
-\begin{verbatim}
+\begin{lstlisting}
 sage: 5 + 9*i in O3
 True
 sage: 1 + 2*i in O3
 False
-\end{verbatim}
+\end{lstlisting}
 
 We will frequently consider orders because they are often much easier
 to write down explicitly than $\O_K$.  For example, if $K=\Q(\alpha)$
@@ -1011,25 +1074,25 @@ $\O_K$, but frequently $\Z[\alpha]\neq \O_K$.
 In this example $[\O_K : \Z[a]] = 2197$.  First we define
 the number field $K=\Q(a)$ where $a$ is a root of $x^3 - 15 x^2 - 94 x - 3674$,
 then we compute the order $\Z[a]$ generated by $a$.
-\begin{verbatim}
+\begin{lstlisting}
 sage: K.<a> = NumberField(x^3 - 15*x^2 - 94*x - 3674)
 sage: Oa = K.order(a); Oa
 Order with module basis 1, a, a^2 in Number Field in a with defining 
 polynomial x^3 - 15*x^2 - 94*x - 3674
 sage: Oa.basis()
 [1, a, a^2]
-\end{verbatim}%link
+\end{lstlisting}%link
 
 \noindent Next we compute a $\Z$-basis for the maximal order $\O_K$ of $K$, and
 compute that the index of $\Z[a]$ in $\O_K$ is $2197=13^3$.
 %link
-\begin{verbatim}
+\begin{lstlisting}
 sage: OK = K.maximal_order()
 sage: OK.basis()
 [25/169*a^2 + 10/169*a + 1/169, 5/13*a^2 + 1/13*a, a^2]
 sage: Oa.index_in(OK)
 2197
-\end{verbatim}
+\end{lstlisting}
 \end{example}
 
 \begin{lemma}\label{lem:intq}\ilem{$\O_K$ span and $\O_K\cap \Q=\Z$}
@@ -1053,6 +1116,17 @@ polynomial of $d\alpha$ has integer coefficients, so $d\alpha$ is
 integral and $d\alpha\in \O_K$.  This proves that $\Q\O_K = K$.
 \end{proof}
 
+\begin{exercise}
+	Which are the following rings are orders in the given
+	number field, i.e. orders in the ring of integers of the
+	given number field.
+	\begin{enumerate}
+	\item The ring $R = \ZZ[i]$ in the number field $\QQ(i)$.
+	\item The ring $R = \ZZ[i/2]$ in the number field $\QQ(i)$.
+	\item The ring $R = \ZZ[17i]$ in the number field $\QQ(i)$.
+	\item The ring $R = \ZZ[i]$ in the number field $\QQ(\sqrt[4]{-1})$.
+	\end{enumerate}
+\end{exercise}
 
 \subsection{Function fields}
 Let $k$ be any field.  We can also make the same definitions, but with $\Q$
@@ -1075,6 +1149,12 @@ introduce when passing to the projective closure $C$.  The algebraic
 arguments we gave above prove that $\O_K$ is a ring.  This is also
 geometrically intuitive, since the sum and product of two functions
 with no poles also have no poles.
+
+\begin{exercise}
+	Let $k = \F_p$ be the finite field with $p$ elements where $p$ is some prime. Find all automorphisms of $k(t)$. Note that an automorphism is completely characterized by its value on $t$. How many such automorphisms are there?
+	
+	Possible hint: For some people, it is easier to think about the equivalent question: What rational functions $f\in k(t)$ is the map $k(t)\to k(t)$ given by $t\mapsto f(t)$ an automorphism?
+\end{exercise}
 
 \section{Norms and Traces}
 %\setcounter{section}{1}
@@ -1100,27 +1180,27 @@ $\sqrt[3]{2}, \zeta_3\sqrt[3]{2}, \zeta_3^2\sqrt[3]{2}$, where
 $\zeta_3$ is a cube root of unity. 
 
 We create the extension $\Q(\zeta_3)(\sqrt[3]{2})$ in \sage.
-\begin{verbatim}
+\begin{lstlisting}
 sage: L.<cuberoot2> = CyclotomicField(3).extension(x^3 - 2)
 sage: cuberoot2^3
 2
-\end{verbatim}%link
+\end{lstlisting}%link
 
 \noindent Then we list the Galois conjugates of $\sqrt[3]{2}$. 
 %link
-\begin{verbatim}
+\begin{lstlisting}
 sage: cuberoot2.galois_conjugates(L)
 [cuberoot2, (-zeta3 - 1)*cuberoot2, zeta3*cuberoot2]
-\end{verbatim}%link
+\end{lstlisting}%link
 
 \noindent Note that $\zeta_3^2 = -\zeta_3 - 1$:
 
 %link
-\begin{verbatim}
+\begin{lstlisting}
 sage: zeta3 = L.base_field().0
 sage: zeta3^2
 -zeta3 - 1
-\end{verbatim}
+\end{lstlisting}
 \end{example}
 
 Suppose $K\subset L$ is an inclusion of number fields and let $a\in
@@ -1283,23 +1363,23 @@ $\beta$.  A standard technique is to use continued fractions, which
 yields a sequence of good rational approximations
 for $\alpha$; by truncating right before a surprisingly big
 partial quotient, we obtain $\beta$:
-\begin{verbatim}
+\begin{lstlisting}
 sage: v = continued_fraction(0.056555)
 sage: continued_fraction(0.056555)
 [0, 17, 1, 2, 6, 1, 23, 1, 1, 1, 1, 1, 2]
 sage: convergents([0, 17, 1, 2, 6, 1])
 [0, 1/17, 1/18, 3/53, 19/336, 22/389]
-\end{verbatim}
+\end{lstlisting}
    
 Generalizing this, suppose next that somehow you numerically approximate
 an algebraic number, e.g., by evaluating a special
 function and get a decimal approximation $\alpha \in \C$
 to an algebraic number $\beta \in \Qbar$.  For concreteness,
 suppose $\beta = \frac{1}{3} + \sqrt[4]{3}$:
-\begin{verbatim}
+\begin{lstlisting}
 sage: N(1/3 + 3^(1/4), digits=50)
 1.64940734628582579415255223513033238849340192353916
-\end{verbatim}
+\end{lstlisting}
 Now suppose you very much want to find the (rescaled) 
 minimal polynomial $f(x) \in \ZZ[x]$
 of $\beta$ just given this numerical approximation $\alpha$.
@@ -1330,24 +1410,24 @@ We compute the Gramm-Schmidt orthogonal basis of the rows
 of a matrix.  Note that no square roots are introduced
 in the process; there would be square roots if we
 constructed an orthonormal basis. 
-\begin{verbatim}
+\begin{lstlisting}
 sage: A = matrix(ZZ, 2, [1,2, 3,4]); A
 [1 2]
 [3 4]
 sage: Bstar, mu = A.gramm_schmidt()
-\end{verbatim}%link
+\end{lstlisting}%link
 
 \noindent{}The rows of the matrix $B^*$ are obtained
 from the rows of $A$ by the Gramm-Schmidt procedure. 
 %link
-\begin{verbatim}
+\begin{lstlisting}
 sage: Bstar
 [   1    2]
 [ 4/5 -2/5]
 sage: mu
 [   0    0]
 [11/5    0]
-\end{verbatim}
+\end{lstlisting}
 \end{example}
 
 A \defn{lattice} $L\subset \R^n$ is a subgroup that
@@ -1383,12 +1463,12 @@ and
 $$
    2^2 \geq (3/4) \cdot 1^2.
 $$
-\begin{verbatim}
+\begin{lstlisting}
 sage: A = matrix(ZZ, 2, [1,2, 3,4])
 sage: A.LLL()
 [1 0]
 [0 2]
-\end{verbatim}
+\end{lstlisting}
 
 \subsection{What LLL really means}
 The following theorem is not too difficult to prove.
@@ -1433,24 +1513,24 @@ for computing LLL reduced basis are due to Damien Stehle,
 and are included standard in Magma in Sage.   Stehle's code
 is amazing -- it can LLL reduce a random lattice in $\R^{n}$
 for $n<1000$ in a matter of minutes!!
-\begin{verbatim}
+\begin{lstlisting}
 sage: A = random_matrix(ZZ, 200)
 sage: t = cputime()
 sage: B = A.LLL()     
 sage: cputime(t)     # random output
 3.0494159999999999
-\end{verbatim}%link
+\end{lstlisting}%link
 
 \noindent{}There is even a very fast variant of Stehle's implementation that computes a basis for $L$ that is very likely LLL reduced but may in rare
 cases fail to be LLL reduced.
 
 %link
-\begin{verbatim}
+\begin{lstlisting}
 sage: t = cputime()
 sage: B = A.LLL(algorithm="fpLLL:fast")   # not tested
 sage: cputime(t)      # random output
 0.96842699999999837
-\end{verbatim}
+\end{lstlisting}
 
 \subsection{Applying LLL}
 The LLL definition and algorithm has many application in 
@@ -1506,7 +1586,7 @@ to sufficient precision.
 
 The following is a complete implementation of the above algorithm
 in Sage:
-\begin{verbatim}
+\begin{lstlisting}
 def myalgdep(a, d, K=10^6):
     aa = [floor(K*a^i) for i in range(d+1)]
     A = identity_matrix(ZZ, d+1)
@@ -1515,26 +1595,34 @@ def myalgdep(a, d, K=10^6):
     L = A.LLL()
     v = L[0][:-1].list()
     return ZZ['x'](v)
-\end{verbatim}
+\end{lstlisting}
 
 Here is an example of using it:
-\begin{verbatim}
+\begin{lstlisting}
 sage: R.<x> = RDF[]
 sage: f = 2*x^3 - 3*x^2 + 10*x - 4
 sage: a = f.roots()[0][0]; a
 sage: myalgdep(a, 3, 10^6)       # not tested
 2*x^3 - 3*x^2 + 10*x - 4
-\end{verbatim}
+\end{lstlisting}
 
 
 \section{Exercises}
 
 \begin{enumerate}
-	\item Use Theorem~\ref{thm:struc} to classify all abelian groups of order less than $12$. How many do you think there are? How many are there?
+	\item Quick! Guess how many abelian groups there are of order less than $12$. Use Theorem~\ref{thm:struc} to classify all abelian groups of order less than $12$. How many do you think there are? How many are there?
 	
-	\item Recall Smith normal form defined in Proposition~\ref{prop:smith}. With only minor modifications, the proposition and proof will work over any principle ideal domain. Find and apply these modifications then find the Smith normal form of the matrix $\begin{pmatrix} 1 & 2 & 3 \\ 0 & 1+i & 2 \\ 0 & 1 & 5 \end{pmatrix}$. Hint: you can use \sage{} to verify your answer.
+	\item Recall Smith normal form defined in Proposition~\ref{prop:smith}. With only minor modifications, then the proposition and proof will work over any principle ideal domain. Find and apply these modifications then find the Smith normal form of the matrix $\begin{pmatrix} 1 & 2 & 3 \\ 0 & 1+i & 2 \\ 0 & 1 & 5 \end{pmatrix}$.
 	
-	\item There is another way to show every principle ideal domain (for example $\ZZ$) is noetherian (in contrast to Section~\ref{sec:Znoeth}). Let $R$ be a PID and $(a)$ an arbitrary ideal. Use the facts that $(b)\supseteq(a)$ if and only if $b \mid a$ and $R$ is a UFD to show that ascending chain of ideals starting with $(a)$ must stabilize.
+	Hint: you can use \sage{} to verify your answer. However, you will need to make explicitly construct the Gaussian integers in order to input the matrix. You can do this by the following:
+	\begin{lstlisting}
+K.<i> = QuadraticField(-1)
+R = K.maximal_order()
+M = matrix(R, 3, [1,2,3,0,1+i,2,0,1,5]); show(M)
+#show(M.smith_form()[0]) #uncomment for the answer
+	\end{lstlisting}
+	
+	\item There is another way to show every principle ideal domain (for example $\Z$) is noetherian (contrast to the proof in Section~\ref{sec:Znoeth}). Let $R$ be a PID and $(a)$ an arbitrary ideal. Use the facts that $(b)\supseteq(a)$ if and only if $b \mid a$ and $R$ is a UFD to show that ascending chain of ideals starting with $(a)$ must stabilize.
 	
 	\item Find the minimal polynomial of $\sqrt{2} + \sqrt{3}$ by hand. Check your result with \sage{}.
 	
