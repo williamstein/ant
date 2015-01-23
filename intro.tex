@@ -20,15 +20,15 @@ the Galois theory of number fields.
 Some of the homework problems involve using a computer, but there
 are examples which you can build on.  We will not assume that you have
 a programming background or know much about algorithms. Most
-of the book uses Sage {\tt http://sagemath.org}, which is
+of the book uses Sage (\url{http://sagemath.org}), which is
 free open source mathematical software.  The following is an example
 Sage session:
-\begin{verbatim}
+\begin{lstlisting}
 sage: 2 + 2
 4 
 sage: k.<a> = NumberField(x^2 + 1); k
 Number Field in a with defining polynomial x^2 + 1
-\end{verbatim}
+\end{lstlisting}
 
 \section{What is algebraic number theory?}
 A number field $K$ is a finite degree algebraic extension of the rational
@@ -115,18 +115,18 @@ True
 This record integer factorization cracked a certain 768-bit public key
 cryptosystem (see \url{http://eprint.iacr.org/2010/006}), thus
 establishing a lower bound on one's choice of key size:
-\begin{verbatim}
+\begin{lstlisting}
 $ man ssh-keygen   # in ubuntu-12.04
 ...
      -b bits
              Specifies the number of bits in the key to create.  
              For RSA keys, the minimum size is 768 bits ...
-\end{verbatim}
+\end{lstlisting}
 
 
 \item {\bf Primality testing:} Agrawal and his students Saxena and Kayal from
 India found in 2002 the first ever deterministic
-polynomial-time (in the number of digits) primality test.  There
+polynomial-time (in the number of digits) primality test.  Their
 methods involve arithmetic in quotients of $(\Z/n\Z)[x]$, which are
 best understood in the context of algebraic number theory.  
 
@@ -156,7 +156,7 @@ Conjecture.
 Let $X$ be a nonsingular plane algebraic curve over a number
 field $K$.  Assume that the manifold $X(\C)$ of complex solutions to
 $X$ has genus at least $2$ (i.e., $X(\C)$ is topologically a donut
-with two holes).  Then the set $X(K)$ of points on $X$ with
+with at least two holes).  Then the set $X(K)$ of points on $X$ with
 coordinates in~$K$ is finite.
 \end{theorem}  
 For example, Theorem~\ref{thm:faltings} implies that for any $n\geq 4$
