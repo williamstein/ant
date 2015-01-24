@@ -20,15 +20,15 @@ the Galois theory of number fields.
 Some of the homework problems involve using a computer, but there
 are examples which you can build on.  We will not assume that you have
 a programming background or know much about algorithms. Most
-of the book uses Sage (\href{http://sagemath.org}{\tt http://sagemath.org}), which is
+of the book uses Sage (\url{http://sagemath.org}), which is
 free open source mathematical software.  The following is an example
 Sage session:
-\begin{verbatim}
+\begin{lstlisting}
 sage: 2 + 2
 4 
 sage: k.<a> = NumberField(x^2 + 1); k
 Number Field in a with defining polynomial x^2 + 1
-\end{verbatim}
+\end{lstlisting}
 
 \section{What is algebraic number theory?}
 A number field $K$ is a finite degree algebraic extension of the rational
@@ -95,7 +95,7 @@ number field sieve is the asymptotically fastest known algorithm for
 factoring general large integers (that don't have too special of a
 form).  On December 12, 2009, the number field sieve was used to
 factor the RSA-768 challenge, which is a 232 digit number that is a product of two primes:\\
-\begin{verbatim}
+\begin{lstlisting}
 sage: rsa768 = 123018668453011775513049495838496272077285356959533479\
 219732245215172640050726365751874520219978646938995647494277406384592\
 519255732630345373154826850791702612214291346167042921431160222124047\
@@ -106,7 +106,7 @@ sage: m = 36746043666799590428244633799627952632279158164343087642676\
 032283815739666511279233373417143396810270092798736308917
 sage: n*m == rsa768
 True
-\end{verbatim}
+\end{lstlisting}
 %% rsa768 = 1230186684530117755130494958384962720772853569595334792197322452151726400507263657518745202199786469389956474942774063845925192557326303453731548268507917026122142913461670429214311602221240479274737794080665351419597459856902143413
 %% n = 33478071698956898786044169848212690817704794983713768568912431388982883793878002287614711652531743087737814467999489
 %% m = 36746043666799590428244633799627952632279158164343087642676032283815739666511279233373417143396810270092798736308917
@@ -115,13 +115,13 @@ True
 This record integer factorization cracked a certain 768-bit public key
 cryptosystem (see \url{http://eprint.iacr.org/2010/006}), thus
 establishing a lower bound on one's choice of key size:
-\begin{verbatim}
+\begin{lstlisting}
 $ man ssh-keygen   # in ubuntu-12.04
 ...
      -b bits
              Specifies the number of bits in the key to create.  
              For RSA keys, the minimum size is 768 bits ...
-\end{verbatim}
+\end{lstlisting}
 
 
 \item {\bf Primality testing:} Agrawal and his students Saxena and Kayal from
