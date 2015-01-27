@@ -217,54 +217,88 @@ $$\det(PAQ) = \det(P)\det(A)\det(Q) = \pm \det(A).$$
 We compute each of the above Smith forms using \sage,
 along with the corresponding transformation matrices.
 First the $2\times 2$ matrix.
-\begin{lstlisting}
-sage: A = matrix(ZZ, 2, [-1,2, -3,4])
-sage: S, U, V = A.smith_form(); S
+\begin{sagecell}
+A = matrix(ZZ, 2, [-1,2, -3,4])
+S, U, V = A.smith_form(); S
+\end{sagecell}
+\begin{sageout}
 [1 0]
 [0 2]
-sage: U*A*V
+\end{sageout}
+\begin{sagecell}
+U*A*V
+\end{sagecell}
+\begin{sageout}
 [1 0]
 [0 2]
-sage: U
+\end{sageout}
+\begin{sagecell}
+U
+\end{sagecell}
+\begin{sageout}
 [ 0  1]
 [ 1 -1]
-sage: V
+\end{sageout}
+\begin{sagecell}
+V
+\end{sagecell}
+\begin{sageout}
 [1 4]
 [1 3]
-\end{lstlisting}
+\end{sageout}
 The \sage{} {\tt matrix} command takes as input the base ring, the number
 of rows, and the entries.  Next we compute with a $3\times3$ matrix.
-\begin{lstlisting}
-sage: A = matrix(ZZ, 3, [1,4,9,  16,25,36, 49,64,81])
-sage: S, U, V = A.smith_form(); S
+\begin{sagecell}
+A = matrix(ZZ, 3, [1,4,9,  16,25,36, 49,64,81])
+S, U, V = A.smith_form(); S
+\end{sagecell}
+\begin{sageout}
 [ 1  0  0]
 [ 0  3  0]
 [ 0  0 72]
-sage: U*A*V
+\end{sageout}
+\begin{sagecell}
+U*A*V
+\end{sagecell}
+\begin{sageout}
 [ 1  0  0]
 [ 0  3  0]
 [ 0  0 72]
-sage: U
+\end{sageout}
+\begin{sagecell}
+U
+\end{sagecell}
+\begin{sageout}
 [  0   0   1]
 [  0   1  -1]
 [  1 -20 -17]
-sage: V
+\end{sageout}
+\begin{sagecell}
+V
+\end{sagecell}
+\begin{sageout}
 [  47   74   93]
 [ -79 -125 -156]
 [  34   54   67]
-\end{lstlisting}
+\end{sageout}
 
 Finally we compute the Smith form of a matrix of rank $2$:
-\begin{lstlisting}
-sage: m = matrix(ZZ, 3, [2..10]); m
+\begin{sagecell}
+m = matrix(ZZ, 3, [2..10]); m
+\end{sagecell}
+\begin{sageout}
 [ 2  3  4]
 [ 5  6  7]
 [ 8  9 10]
-sage: m.smith_form()[0]
+\end{sageout}
+\begin{sagecell}
+m.smith_form()[0]
+\end{sagecell}
+\begin{sageout}
 [1 0 0]
 [0 3 0]
 [0 0 0]
-\end{lstlisting}
+\end{sageout}
 \end{example}
 
 
@@ -618,23 +652,33 @@ Also, $6=18-12\in I$, so $I=(6)$.
 
 The ring $\Z$
 in \sage{} is {\tt ZZ}, which is Noetherian.
-\begin{lstlisting}
-sage: ZZ.is_noetherian()
+\begin{sagecell}
+ZZ.is_noetherian()
+\end{sagecell}
+\begin{sageout}
 True
-\end{lstlisting}
+\end{sageout}
 We create the ideal $I$ in \sage{} as follows, and note that
 it is principal:
-\begin{lstlisting}
-sage: I = ideal(12,18); I
+\begin{sagecell}
+I = ideal(12,18); I
+\end{sagecell}
+\begin{sageout}
 Principal ideal (6) of Integer Ring
-sage: I.is_principal()
+\end{sageout}
+\begin{sagecell}
+I.is_principal()
+\end{sagecell}
+\begin{sageout}
 True
-\end{lstlisting}
+\end{sageout}
 We could also create $I$ as follows:
-\begin{lstlisting}
-sage: ZZ.ideal(12,18)
+\begin{sagecell}
+ZZ.ideal(12,18)
+\end{sagecell}
+\begin{sageout}
 Principal ideal (6) of Integer Ring
-\end{lstlisting}
+\end{sageout}
 \end{example}
 
 Propositions~\ref{prop:noethfg} and \ref{prop:zpid} together imply that
@@ -766,13 +810,19 @@ the minimal polynomial of $\sqrt[3]{2}$ is $x^3-2$.
 \begin{example}
 We compute the minimal polynomial of a number expressed
 in terms of $\sqrt[4]{2}$:
-\begin{lstlisting}
-sage: k.<a> = NumberField(x^4 - 2)
-sage: a^4
+\begin{sagecell}
+k.<a> = NumberField(x^4 - 2)
+a^4
+\end{sagecell}
+\begin{sageout}
 2
-sage: (a^2 + 3).minpoly()
+\end{sageout}
+\begin{sagecell}
+(a^2 + 3).minpoly()
+\end{sagecell}
+\begin{sageout}
 x^2 - 6*x + 7
-\end{lstlisting}
+\end{sageout}
 \end{example}
 
 \begin{exercise}
@@ -833,26 +883,35 @@ that $\alpha$ is an algebraic integer.
 \begin{example}
 We compute some minimal polynomials in \sage.
 The minimal polynomial of $1/2$:
-\begin{lstlisting}
-sage: (1/2).minpoly()
+\begin{sagecell}
+(1/2).minpoly()
+\end{sagecell}
+\begin{sageout}
 x - 1/2
-\end{lstlisting}
+\end{sageout}
 We construct a root $a$ of $x^2-2$ and compute its minimal polynomial:
-\begin{lstlisting}
-sage: k.<a> = NumberField(x^2 - 2)
-sage: a^2 - 2
+\begin{sagecell}
+k.<a> = NumberField(x^2 - 2)
+a^2 - 2
+\end{sagecell}
+\begin{sageout}
 0
-sage: a.minpoly()
+\end{sageout}
+\begin{sagecell}
+a.minpoly()
+\end{sagecell}
+\begin{sageout}
 x^2 - 2
-\end{lstlisting}%link
+\end{sageout}
 Finally we compute the minimal polynomial of $\alpha=\sqrt{2}/2 + 3$, which
 is not integral, hence Proposition~\ref{prop:intfg} implies that $\alpha$
 is not an algebraic integer:
-%link
-\begin{lstlisting}
-sage: (a/2 + 3).minpoly()
+\begin{sagecell}
+(a/2 + 3).minpoly()
+\end{sagecell}
+\begin{sageout}
 x^2 - 6*x + 17/2
-\end{lstlisting}
+\end{sageout}
 \end{example}
 
 The only elements of $\Q$ that are algebraic
@@ -871,62 +930,89 @@ is an algebraic integer, since it is a root of the monic integral
 polynomial $x^2 - x - 1$.  We verify this using \sage below,
 though of course this is easy to do by hand (you should try
 much more complicated examples in \sage).
-\begin{lstlisting}
-sage: k.<a> = QuadraticField(5)
-sage: a^2
+\begin{sagecell}
+k.<a> = QuadraticField(5)
+a^2
+\end{sagecell}
+\begin{sageout}
 5
-sage: alpha = (1 + a)/2
-sage: alpha.minpoly()
+\end{sageout}
+\begin{sagecell}
+alpha = (1 + a)/2
+alpha.minpoly()
+\end{sagecell}
+\begin{sageout}
 x^2 - x - 1
-sage: alpha.is_integral()
+\end{sageout}
+\begin{sagecell}
+alpha.is_integral()
+\end{sagecell}
+\begin{sageout}
 True
-\end{lstlisting}
+\end{sageout}
 
 Since $\sqrt{5}$ can be expressed in terms of radicals, we can also
 compute this minimal polynomial using the symbolic functionality in
 Sage.
-\begin{lstlisting}
-sage: alpha = (1+sqrt(5))/2
-sage: alpha.minpoly()
+\begin{sagecell}
+alpha = (1+sqrt(5))/2
+alpha.minpoly()
+\end{sagecell}
+\begin{sageout}
 x^2 - x - 1
-\end{lstlisting}
+\end{sageout}
 Here is a more complicated example using a similar approach:
-\begin{lstlisting}
-sage: alpha = sqrt(2) + 3^(1/4)
-sage: alpha.minpoly()
+\begin{sagecell}
+alpha = sqrt(2) + 3^(1/4)
+alpha.minpoly()
+\end{sagecell}
+\begin{sageout}
 x^8 - 8*x^6 + 18*x^4 - 104*x^2 + 1
-\end{lstlisting}
+\end{sageout}
 
 \begin{example}
   We illustrate an example of a sum and product of two algebraic
   integers being an algebraic integer.  We first make the relative number
   field obtained by adjoining a root of $x^3 - 5$ to the field
   $\Q(\sqrt{2})$:
-\begin{lstlisting}
-sage: k.<a, b> = NumberField([x^2 - 2, x^3 - 5])
-sage: k
+\begin{sagecell}
+k.<a, b> = NumberField([x^2 - 2, x^3 - 5])
+k
+\end{sagecell}
+\begin{sageout}
 Number Field in a with defining polynomial x^2 + -2 over its base field
-\end{lstlisting}%link
+\end{sageout}
 
 \noindent Here $a$ and $b$ are roots of $x^2-2$ and $x^3-5$, respectively.
-%link
-\begin{lstlisting}
-sage: a^2
+\begin{sagecell}
+a^2
+\end{sagecell}
+\begin{sageout}
 2
-sage: b^3
+\end{sageout}
+\begin{sagecell}
+b^3
+\end{sagecell}
+\begin{sageout}
 5
-\end{lstlisting}%link
+\end{sageout}
 
 \noindent We compute the minimal polynomial of the sum and product of
 $\sqrt[3]{5}$ and $\sqrt{2}$.  The command {\tt absolute\_minpoly}
 gives the minimal polynomial of the element over the rational numbers.
 %link
-\begin{lstlisting}
-sage: (a+b).absolute_minpoly()
+\begin{sagecell}
+(a+b).absolute_minpoly()
+\end{sagecell}
+\begin{sageout}
 x^6 - 6*x^4 - 10*x^3 + 12*x^2 - 60*x + 17
-sage: (a*b).absolute_minpoly()
+\end{sageout}
+\begin{sagecell}
+(a*b).absolute_minpoly()
+\end{sagecell}
+\begin{sageout}
 x^6 - 200
-\end{lstlisting}
+\end{sageout}
 The minimal polynomial of the product is $\sqrt[3]{5} \sqrt{2}$ is
 trivial to compute by hand.  In light of the Cayley-Hamilton theorem,
 we can compute the minimal polynomial of $\alpha = \sqrt[3]{5} +
@@ -942,15 +1028,25 @@ compute $\alpha$ to 100 bits precision (via the {\tt n} command), then
 use the LLL algorithm (via the {\tt algdep} command) to heuristically
 find a linear relation between the first $6$ powers of $\alpha$ (see
 Section~\ref{sec:LLL} below for more about LLL).
-\begin{lstlisting}
-sage: a = 5^(1/3); b = sqrt(2)
-sage: c = a+b; c
+\begin{sagecell}
+a = 5^(1/3); b = sqrt(2)
+c = a+b; c
+\end{sagecell}
+\begin{sageout}
 5^(1/3) + sqrt(2)
-sage: (a+b).n(100).algdep(6)
+\end{sageout}
+\begin{sagecell}
+(a+b).n(100).algdep(6)
+\end{sagecell}
+\begin{sageout}
 x^6 - 6*x^4 - 10*x^3 + 12*x^2 - 60*x + 17
-sage: (a*b).n(100).algdep(6)
+\end{sageout}
+\begin{sagecell}
+(a*b).n(100).algdep(6)
+\end{sagecell}
+\begin{sageout}
 x^6 - 200
-\end{lstlisting}
+\end{sageout}
 \end{example}
 
 \begin{exercise}
@@ -1038,32 +1134,48 @@ $\Z[i]$ is not an order because it is not a ring.
 
 We define the number field $\Q(i)$ and compute its
 ring of integers.
-\begin{lstlisting}
-sage: K.<i> = NumberField(x^2 + 1)
-sage: OK = K.ring_of_integers(); OK
+\begin{sagecell}
+K.<i> = NumberField(x^2 + 1)
+OK = K.ring_of_integers(); OK
+\end{sagecell}
+\begin{sageout}
 Order with module basis 1, i in Number Field in i with 
 defining polynomial x^2 + 1
-\end{lstlisting}%link
+\end{sageout}
+%link
 
 \noindent Next we compute the order $\Z + 3i \Z$.
 %link
-\begin{lstlisting}
-sage: O3 = K.order(3*i); O3
+\begin{sagecell}
+O3 = K.order(3*i); O3
+\end{sagecell}
+\begin{sageout}
 Order with module basis 1, 3*i in Number Field in i with 
 defining polynomial x^2 + 1
-sage: O3.gens()
+\end{sageout}
+\begin{sagecell}
+O3.gens()
+\end{sagecell}
+\begin{sageout}
 [1, 3*i]
-\end{lstlisting}%link
+\end{sageout}%link
 
 
 \noindent We test whether certain elements are in the order.
 %link
-\begin{lstlisting}
-sage: 5 + 9*i in O3
+\begin{sagecell}
+5 + 9*i in O3
+\end{sagecell}
+\begin{sageout}
 True
-sage: 1 + 2*i in O3
+\end{sageout}
+\begin{sagecell}
+1 + 2*i in O3
+\end{sagecell}
+\begin{sageout}
 False
-\end{lstlisting}
+\end{sageout}
+
 
 We will frequently consider orders because they are often much easier
 to write down explicitly than $\O_K$.  For example, if $K=\Q(\alpha)$
@@ -1074,25 +1186,37 @@ $\O_K$, but frequently $\Z[\alpha]\neq \O_K$.
 In this example $[\O_K : \Z[a]] = 2197$.  First we define
 the number field $K=\Q(a)$ where $a$ is a root of $x^3 - 15 x^2 - 94 x - 3674$,
 then we compute the order $\Z[a]$ generated by $a$.
-\begin{lstlisting}
-sage: K.<a> = NumberField(x^3 - 15*x^2 - 94*x - 3674)
-sage: Oa = K.order(a); Oa
+\begin{sagecell}
+K.<a> = NumberField(x^3 - 15*x^2 - 94*x - 3674)
+Oa = K.order(a); Oa
+\end{sagecell}
+\begin{sageout}
 Order with module basis 1, a, a^2 in Number Field in a with defining 
 polynomial x^3 - 15*x^2 - 94*x - 3674
-sage: Oa.basis()
+\end{sageout}
+\begin{sagecell}
+Oa.basis()
+\end{sagecell}
+\begin{sageout}
 [1, a, a^2]
-\end{lstlisting}%link
+\end{sageout}%link
 
 \noindent Next we compute a $\Z$-basis for the maximal order $\O_K$ of $K$, and
 compute that the index of $\Z[a]$ in $\O_K$ is $2197=13^3$.
 %link
-\begin{lstlisting}
-sage: OK = K.maximal_order()
-sage: OK.basis()
+\begin{sagecell}
+OK = K.maximal_order()
+OK.basis()
+\end{sagecell}
+\begin{sageout}
 [25/169*a^2 + 10/169*a + 1/169, 5/13*a^2 + 1/13*a, a^2]
-sage: Oa.index_in(OK)
+\end{sageout}
+\begin{sagecell}
+Oa.index_in(OK)
+\end{sagecell}
+\begin{sageout}
 2197
-\end{lstlisting}
+\end{sageout}
 \end{example}
 
 \begin{lemma}\label{lem:intq}\ilem{$\O_K$ span and $\O_K\cap \Q=\Z$}
@@ -1180,27 +1304,32 @@ $\sqrt[3]{2}, \zeta_3\sqrt[3]{2}, \zeta_3^2\sqrt[3]{2}$, where
 $\zeta_3$ is a cube root of unity. 
 
 We create the extension $\Q(\zeta_3)(\sqrt[3]{2})$ in \sage.
-\begin{lstlisting}
-sage: L.<cuberoot2> = CyclotomicField(3).extension(x^3 - 2)
-sage: cuberoot2^3
+\begin{sagecell}
+L.<cuberoot2> = CyclotomicField(3).extension(x^3 - 2)
+cuberoot2^3
+\end{sagecell}
+\begin{sageout}
 2
-\end{lstlisting}%link
-
+\end{sageout}
+%link
 \noindent Then we list the Galois conjugates of $\sqrt[3]{2}$. 
 %link
-\begin{lstlisting}
-sage: cuberoot2.galois_conjugates(L)
+\begin{sagecell}
+cuberoot2.galois_conjugates(L)
+\end{sagecell}
+\begin{sageout}
 [cuberoot2, (-zeta3 - 1)*cuberoot2, zeta3*cuberoot2]
-\end{lstlisting}%link
-
-\noindent Note that $\zeta_3^2 = -\zeta_3 - 1$:
-
+\end{sageout}
 %link
-\begin{lstlisting}
-sage: zeta3 = L.base_field().0
-sage: zeta3^2
+\noindent Note that $\zeta_3^2 = -\zeta_3 - 1$:
+%link
+\begin{sagecell}
+zeta3 = L.base_field().0
+zeta3^2
+\end{sagecell}
+\begin{sageout}
 -zeta3 - 1
-\end{lstlisting}
+\end{sageout}
 \end{example}
 
 Suppose $K\subset L$ is an inclusion of number fields and let $a\in
@@ -1363,23 +1492,32 @@ $\beta$.  A standard technique is to use continued fractions, which
 yields a sequence of good rational approximations
 for $\alpha$; by truncating right before a surprisingly big
 partial quotient, we obtain $\beta$:
-\begin{lstlisting}
-sage: v = continued_fraction(0.056555)
-sage: continued_fraction(0.056555)
+\begin{sagecell}
+v = continued_fraction(0.056555)
+continued_fraction(0.056555)
+\end{sagecell}
+\begin{sageout}
 [0, 17, 1, 2, 6, 1, 23, 1, 1, 1, 1, 1, 2]
-sage: convergents([0, 17, 1, 2, 6, 1])
+\end{sageout}
+\begin{sagecell}
+convergents([0, 17, 1, 2, 6, 1])
+\end{sagecell}
+\begin{sageout}
 [0, 1/17, 1/18, 3/53, 19/336, 22/389]
-\end{lstlisting}
+\end{sageout}
+
    
 Generalizing this, suppose next that somehow you numerically approximate
 an algebraic number, e.g., by evaluating a special
 function and get a decimal approximation $\alpha \in \C$
 to an algebraic number $\beta \in \Qbar$.  For concreteness,
 suppose $\beta = \frac{1}{3} + \sqrt[4]{3}$:
-\begin{lstlisting}
-sage: N(1/3 + 3^(1/4), digits=50)
+\begin{sagecell}
+N(1/3 + 3^(1/4), digits=50)
+\end{sagecell}
+\begin{sageout}
 1.64940734628582579415255223513033238849340192353916
-\end{lstlisting}
+\end{sageout}
 Now suppose you very much want to find the (rescaled) 
 minimal polynomial $f(x) \in \ZZ[x]$
 of $\beta$ just given this numerical approximation $\alpha$.
@@ -1410,24 +1548,34 @@ We compute the Gramm-Schmidt orthogonal basis of the rows
 of a matrix.  Note that no square roots are introduced
 in the process; there would be square roots if we
 constructed an orthonormal basis. 
-\begin{lstlisting}
-sage: A = matrix(ZZ, 2, [1,2, 3,4]); A
+\begin{sagecell}
+A = matrix(ZZ, 2, [1,2, 3,4]); A
+\end{sagecell}
+\begin{sageout}
 [1 2]
 [3 4]
-sage: Bstar, mu = A.gramm_schmidt()
-\end{lstlisting}%link
+\end{sageout}
+\begin{sagecell}
+Bstar, mu = A.gramm_schmidt()
+\end{sagecell}%link
 
 \noindent{}The rows of the matrix $B^*$ are obtained
 from the rows of $A$ by the Gramm-Schmidt procedure. 
 %link
-\begin{lstlisting}
-sage: Bstar
+\begin{sagecell}
+Bstar
+\end{sagecell}
+\begin{sageout}
 [   1    2]
 [ 4/5 -2/5]
-sage: mu
+\end{sageout}
+\begin{sagecell}
+mu
+\end{sagecell}
+\begin{sageout}
 [   0    0]
 [11/5    0]
-\end{lstlisting}
+\end{sageout}
 \end{example}
 
 A \defn{lattice} $L\subset \R^n$ is a subgroup that
@@ -1463,12 +1611,14 @@ and
 $$
    2^2 \geq (3/4) \cdot 1^2.
 $$
-\begin{lstlisting}
-sage: A = matrix(ZZ, 2, [1,2, 3,4])
-sage: A.LLL()
+\begin{sagecell}
+A = matrix(ZZ, 2, [1,2, 3,4])
+A.LLL()
+\end{sagecell}
+\begin{sageout}
 [1 0]
 [0 2]
-\end{lstlisting}
+\end{sageout}
 
 \subsection{What LLL really means}
 The following theorem is not too difficult to prove.
@@ -1512,25 +1662,29 @@ optimal implementation (and practically optimal algorithms)
 for computing LLL reduced basis are due to Damien Stehle,
 and are included standard in Magma in Sage.   Stehle's code
 is amazing -- it can LLL reduce a random lattice in $\R^{n}$
-for $n<1000$ in a matter of minutes!!
-\begin{lstlisting}
-sage: A = random_matrix(ZZ, 200)
-sage: t = cputime()
-sage: B = A.LLL()     
-sage: cputime(t)     # random output
+for $n<1000$ in a matter of minutes!
+\begin{sagecell}
+A = random_matrix(ZZ, 200)
+t = cputime()
+B = A.LLL()     
+cputime(t)     # random output
+\end{sagecell}
+\begin{sageout}
 3.0494159999999999
-\end{lstlisting}%link
+\end{sageout}%link
 
 \noindent{}There is even a very fast variant of Stehle's implementation that computes a basis for $L$ that is very likely LLL reduced but may in rare
 cases fail to be LLL reduced.
 
 %link
-\begin{lstlisting}
-sage: t = cputime()
-sage: B = A.LLL(algorithm="fpLLL:fast")   # not tested
-sage: cputime(t)      # random output
+\begin{sagecell}
+t = cputime()
+B = A.LLL(algorithm="fpLLL:fast")   # not tested
+cputime(t)      # random output
+\end{sagecell}
+\begin{sageout}
 0.96842699999999837
-\end{lstlisting}
+\end{sageout}
 
 \subsection{Applying LLL}
 The LLL definition and algorithm has many application in 
@@ -1586,7 +1740,7 @@ to sufficient precision.
 
 The following is a complete implementation of the above algorithm
 in Sage:
-\begin{lstlisting}
+\begin{sagecell}
 def myalgdep(a, d, K=10^6):
     aa = [floor(K*a^i) for i in range(d+1)]
     A = identity_matrix(ZZ, d+1)
@@ -1595,38 +1749,62 @@ def myalgdep(a, d, K=10^6):
     L = A.LLL()
     v = L[0][:-1].list()
     return ZZ['x'](v)
-\end{lstlisting}
+\end{sagecell}
 
 Here is an example of using it:
-\begin{lstlisting}
-sage: R.<x> = RDF[]
-sage: f = 2*x^3 - 3*x^2 + 10*x - 4
-sage: a = f.roots()[0][0]; a
-sage: myalgdep(a, 3, 10^6)       # not tested
+\begin{sagecell}
+R.<x> = RDF[]
+f = 2*x^3 - 3*x^2 + 10*x - 4
+a = f.roots()[0][0]; a
+myalgdep(a, 3, 10^6)       # not tested
+\end{sagecell}
+\begin{sageout}
 2*x^3 - 3*x^2 + 10*x - 4
-\end{lstlisting}
+\end{sageout}
 
 
 \section{Exercises}
 
 \begin{enumerate}
-	\item Quick! Guess how many abelian groups there are of order less than $12$. Use Theorem~\ref{thm:struc} to classify all abelian groups of order less than $12$. How many do you think there are? How many are there?
-	
-	\item Recall Smith normal form defined in Proposition~\ref{prop:smith}. With only minor modifications, then the proposition and proof will work over any principle ideal domain. Find and apply these modifications then find the Smith normal form of the matrix $\begin{pmatrix} 1 & 2 & 3 \\ 0 & 1+i & 2 \\ 0 & 1 & 5 \end{pmatrix}$.
-	
-	Hint: you can use \sage{} to verify your answer. However, you will need to make explicitly construct the Gaussian integers in order to input the matrix. You can do this by the following:
-	\begin{lstlisting}
+\item Quick! Guess how many abelian groups there 
+are of order less than $12$. Use Theorem~\ref{thm:struc} 
+to classify all abelian groups of order less than $12$. 
+How many do you think there are? How many are there?
+
+\item Recall Smith normal form defined in 
+Proposition~\ref{prop:smith}. With only minor 
+modifications, then the proposition and proof 
+will work over any principle ideal domain. 
+Find and apply these modifications then find the Smith 
+normal form of the matrix 
+$\begin{pmatrix} 1 & 2 & 3 \\ 0 & 1+i & 2 \\ 0 & 1 & 5 \end{pmatrix}$.
+
+Hint: you can use \sage{} to verify your answer. 
+However, you will need to make explicitly construct 
+the Gaussian integers in order to input the matrix. 
+You can do this by the following:
+\begin{sagecell}
 K.<i> = QuadraticField(-1)
 R = K.maximal_order()
 M = matrix(R, 3, [1,2,3,0,1+i,2,0,1,5]); show(M)
 #show(M.smith_form()[0]) #uncomment for the answer
-	\end{lstlisting}
-	
-	\item There is another way to show every principle ideal domain (for example $\Z$) is noetherian (contrast to the proof in Section~\ref{sec:Znoeth}). Let $R$ be a PID and $(a)$ an arbitrary ideal. Use the facts that $(b)\supseteq(a)$ if and only if $b \mid a$ and $R$ is a UFD to show that ascending chain of ideals starting with $(a)$ must stabilize.
-	
-	\item Find the minimal polynomial of $\sqrt{2} + \sqrt{3}$ by hand. Check your result with \sage{}.
-	
-	\item Let $k = \F_p$ be the finite field with $p$ (a prime) elements. Find all automorphisms of $k(t)$. Note that an automorphism is completely characterized by its value on $t$. Equivalently, for what rational functions $f\in k(t)$ is the map $k(t)\to k(t)$ given by $t\mapsto f(t)$ an automorphism?
+\end{sagecell}
+
+\item There is another way to show every principle ideal domain
+(for example $\Z$) is noetherian (contrast to 
+the proof in Section~\ref{sec:Znoeth}). Let $R$ be a PID 
+and $(a)$ an arbitrary ideal. Use the facts that $(b)\supseteq(a)$ 
+if and only if $b \mid a$ and $R$ is a UFD to show that ascending 
+chain of ideals starting with $(a)$ must stabilize.
+
+\item Find the minimal polynomial of $\sqrt{2} + \sqrt{3}$ by hand. 
+Check your result with \sage{}.
+
+\item Let $k = \F_p$ be the finite field with $p$ (a prime) elements. 
+Find all automorphisms of $k(t)$. Note that an automorphism is 
+completely characterized by its value on $t$. Equivalently, for 
+what rational functions $f\in k(t)$ is the map $k(t)\to k(t)$ given 
+by $t\mapsto f(t)$ an automorphism?
 \end{enumerate}
 
 %%% Local Variables: 
