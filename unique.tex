@@ -7,7 +7,7 @@ products of prime ideals.  Along the way, we will introduce fractional
 ideals and prove that they form a free abelian group under
 multiplication.  Factorization of {\em elements} of $\O_K$ (and much
 more!) is governed by the class group of $\O_K$, which is the quotient
-of the group of fractional ideals by the principal fractional ideals 
+of the group of fractional ideals by the principal fractional ideals
 (see Chapter~\ref{ch:classgroup}).
 
 \section{Dedekind Domains}
@@ -27,7 +27,7 @@ $\Q(\sqrt{5})$.  The field of fractions of the ring $\O_K$ of integers
 of a number field~$K$ is just the number field~$K$ (see Lemma~\ref{lem:intq}).
 
 \begin{example}
-We compute the fraction fields mentioned above. 
+We compute the fraction fields mentioned above.
 \begin{lstlisting}
 sage: Frac(ZZ)
 Rational Field
@@ -37,19 +37,20 @@ isomorphic to the fraction field (not a formal construction).
 \begin{lstlisting}
 sage: K.<a> = QuadraticField(5)
 sage: OK = K.ring_of_integers(); OK
-Order with module basis 1/2*a + 1/2, a in Number Field 
+Order with module basis 1/2*a + 1/2, a in Number Field
 in a with defining polynomial x^2 - 5
 sage: Frac(OK)
 Number Field in a with defining polynomial x^2 - 5
 \end{lstlisting}%link
 
 Note that in Sage {\tt 1/2 * x} means the same as {\tt (1/2)*x}.
+\todo{Say "in computers" (not sage), and reference Wikipedia for order of operations.}
 \noindent{}The fraction field of an {\em order} -- i.e., a subring of $\O_K$ of
 finite index -- is also the number field again.
 %link
 \begin{lstlisting}
 sage: O2 = K.order(2*a); O2
-Order with module basis 1, 2*a in Number Field 
+Order with module basis 1, 2*a in Number Field
 in a with defining polynomial x^2 - 5
 sage: Frac(O2)
 Number Field in a with defining polynomial x^2 - 5
@@ -91,7 +92,7 @@ implies that~$\alpha$ is integral over~$\Z$.
 Without loss we may assume that $K\subset \Qbar$, so that
 $\O_K = \Zbar \cap K$.
 Suppose $\alpha\in K$ is integral over $\O_K$.  Then since $\Zbar$ is
-integrally closed,~$\alpha$ is an element of $\Zbar$, so 
+integrally closed,~$\alpha$ is an element of $\Zbar$, so
 $\alpha\in K \cap \Zbar=\O_K$, as required.
 \end{proof}
 
@@ -107,7 +108,7 @@ ideal of $R$ is maximal.
 \end{definition}
 
 \begin{exercise}
-Let $K$ be a field.  
+Let $K$ be a field.
 \begin{enumerate}
 \item[(a)] Prove that the polynomial ring $K[x]$ is a Dedekind domain.
 \item[(b)] Is $\Z[x]$ a Dedekind domain?
@@ -164,7 +165,7 @@ by that set (see Exercise~\ref{ex:idealprod}).
 
 \begin{definition}[Fractional Ideal]\label{def:fracideal}
 A \defn{fractional ideal} is a nonzero $\O_K$-submodule~$I$ of~$K$ that
-is finitely generated as an $\O_K$-module. 
+is finitely generated as an $\O_K$-module.
 \end{definition}
 We will sometimes call a genuine ideal $I\subset \O_K$ an
 \defn{integral ideal}.  The notion of fractional ideal makes
@@ -196,7 +197,7 @@ $$
 with $J$ an integral ideal.  Thus dividing by $\alpha$, we see
 that every fractional ideal is
 of the form
-$$a J = \{a b : b \in J\}$$ 
+$$a J = \{a b : b \in J\}$$
 for some $a\in K$ and integral ideal $J\subset \O_K$.
 
 For example, the set $\frac{1}{2}\Z$ of rational numbers with
@@ -219,7 +220,7 @@ field~$K$.
 
 
 \begin{definition}[Divides for Ideals]
-Suppose that $I,J$ are ideals of $\O_K$. 
+Suppose that $I,J$ are ideals of $\O_K$.
 Then we say that~$I$ \defn{divides}~$J$ if $I\supset J$.
 \end{definition}
 To see that this notion of divides is sensible, suppose $K=\Q$, so
@@ -230,28 +231,28 @@ $m$, as expected.
 
 \begin{lemma}\label{lem:divprod}\ilem{$I$ divides product of primes}
 Suppose~$I$ is a nonzero ideal of $\O_K$.  Then there exist prime ideals
-$\p_1,\ldots, \p_n$ such that $\p_1\cdot \p_2\cdots \p_n \subset{}I$, 
-i.e.,~$I$ divides a product of prime ideals. 
+$\p_1,\ldots, \p_n$ such that $\p_1\cdot \p_2\cdots \p_n \subset{}I$,
+i.e.,~$I$ divides a product of prime ideals.
 \end{lemma}
 \begin{proof}
 Let $S$ be the set of nonzero ideals of $\O_K$ that do not
 satisfy the conclusion
-of the lemma.  The key idea is to use that $\O_K$ is noetherian to show that 
+of the lemma.  The key idea is to use that $\O_K$ is noetherian to show that
 $S$ is the empty set.   If~$S$ is
-nonempty, then since $\O_K$ is noetherian, there is an ideal 
+nonempty, then since $\O_K$ is noetherian, there is an ideal
 $I\in S$ that is maximal as an element of~$S$.  If~$I$ were prime, then~$I$
-would trivially contain a product of primes, so we may assume that~$I$ 
+would trivially contain a product of primes, so we may assume that~$I$
 is not prime.  Thus there exists $a,b\in \O_K$ such that $ab\in
 I$ but $a\not\in I$ and $b\not\in I$.  Let $J_1 = I+(a)$ and
 $J_2=I+(b)$.  Then neither $J_1$ nor $J_2$ is in $S$, since~$I$ is
-maximal, so both $J_1$ and $J_2$ contain a product of prime ideals, 
+maximal, so both $J_1$ and $J_2$ contain a product of prime ideals,
 say $\p_1 \cdots \p_r \subset J_1$ and $\q_1\cdots \q_s \subset J_2$.
-Then 
+Then
 $$
-\p_1  \cdots \p_r \cdot \q_1\cdots \q_s \subset 
+\p_1  \cdots \p_r \cdot \q_1\cdots \q_s \subset
 J_1 J_2 = I^2 + I(b)+  (a)I+ (ab) \subset I,$$
 so $I$ contains a product of primes.  This is a contradiction,
-since we assumed $I\in S$.   Thus~$S$ is empty, which completes 
+since we assumed $I\in S$.   Thus~$S$ is empty, which completes
 the proof.
 \end{proof}
 We are now ready to prove the theorem.
@@ -275,7 +276,7 @@ Suppose $\p$ is a nonzero prime ideal of $\O_K$.   We will show that
 the $\O_K$-module
 $$
   I = \{a \in K : a\p \subset \O_K \}
-$$ 
+$$
 is a fractional ideal of $\O_K$ such that $I\p = \O_K$, so that
 $I$ is an inverse of $\p$.
 
@@ -303,7 +304,7 @@ $\p_2\cdots \p_m$ is not a subset of $(b)$, so there exists $c\in
 \p_2\cdots \p_m$ that does not lie in $(b)$. Then $\p(c) \subset (b)$,
 so by definition of $I$ we have $d=c/b\in I$.  However, $d\not\in
 \O_K$, since if it were then $c$ would be in $(b)$.  We have thus
-found our element $d\in I$ that does not lie in $\O_K$.  
+found our element $d\in I$ that does not lie in $\O_K$.
 
 To finish the proof that $\p$ has an inverse, we observe that $d$
 preserves the finitely generated $\O_K$-module $\p$, and is hence in $\O_K$, a
@@ -321,7 +322,7 @@ integrally closed!)
 So far we have proved that if $\p$ is a prime ideal of $\O_K$, then
 $$
   \p^{-1} = \{a \in K : a\p \subset \O_K\}
-$$ 
+$$
 is the inverse of $\p$ in
 the monoid of nonzero fractional ideals of $\O_K$.  As mentioned after
 Definition~\ref{def:fracideal}, every nonzero fractional
@@ -332,18 +333,18 @@ integral ideal~$I$ that is maximal among all nonzero integral ideals
 that do not have an inverse.  Every ideal is contained in a maximal
 ideal, so there is a nonzero prime ideal $\p$ such that $I\subset \p$.
 Multiplying both sides of this inclusion by $\p^{-1}$ and using that
-$\O_K\subset \p^{-1}$, we see that 
+$\O_K\subset \p^{-1}$, we see that
 $$
   I \subset \p^{-1} I \subset \p^{-1}\p = \O_K.
 $$
 If $I = \p^{-1} I$, then arguing as in the proof that $\p^{-1}$ is an
 inverse of~$\p$, we see that each element of $\p^{-1}$ preserves the
 finitely generated $\Z$-module~$I$ and is hence integral.  But then
-$\p^{-1}\subset \O_K$, which, upon multiplying both sides by $\p$, 
-implies that $\O_K = \p \p^{-1} \subset \p$, a contradiction.  
+$\p^{-1}\subset \O_K$, which, upon multiplying both sides by $\p$,
+implies that $\O_K = \p \p^{-1} \subset \p$, a contradiction.
 Thus $I \neq \p^{-1} I$.  Because $I$ is
 maximal among ideals that do not have an inverse, the ideal $\p^{-1}
-I$ does have an inverse~$J$.  
+I$ does have an inverse~$J$.
 Then $\p{}^{-1}J$ is an inverse of~$I$, since
 $
 (J\p^{-1})I = J(\p^{-1}I) = \O_K.
@@ -359,11 +360,11 @@ ideals to mathematics over a century ago.
 
 \begin{theorem}\label{thm:intuniqfac}\ithm{unique ideal factorization}
 Suppose $I$ is a nonzero integral ideal of $\O_K$.  Then $I$ can
-be written as a product 
+be written as a product
 $$
   I = \p_1\cdots \p_n
 $$ of prime ideals of $\O_K$, and this representation is unique up to
-order. 
+order.
 \end{theorem}
 \begin{proof}
 Suppose~$I$ is an ideal that is maximal among the set of all ideals in
@@ -371,8 +372,8 @@ $\O_K$ that cannot be written as a product of primes.  Every ideal is
 contained in a maximal ideal, so $I$ is contained in a nonzero prime
 ideal $\p$.  If $I\p^{-1} = I$, then by Theorem~\ref{thm:ddabgrp} we
 can cancel $I$ from both sides of this equation to see that
-$\p^{-1}=\O_K$, a contradiction.  Since $\O_K\subset \p^{-1}$, 
-we have $I\subset I\p^{-1}$, and by the above observation~$I$ 
+$\p^{-1}=\O_K$, a contradiction.  Since $\O_K\subset \p^{-1}$,
+we have $I\subset I\p^{-1}$, and by the above observation~$I$
 is strictly contained in
 $I\p^{-1}$.  By our maximality assumption on~$I$, there are maximal
 ideals $\p_1,\ldots, \p_n$ such that $I\p^{-1} = \p_1\cdots \p_n$.
@@ -391,9 +392,9 @@ this argument finishes the proof of uniqueness.
 
 \begin{theorem}\label{thm:uniqfac}\icor{factorization
 of fractional ideals}
-If $I$ is a fractional ideal of $\O_K$ then there exists 
+If $I$ is a fractional ideal of $\O_K$ then there exists
 prime ideals $\p_1,\ldots, \p_n$ and $\q_1,\ldots, \q_m$,
-unique up to order, such that 
+unique up to order, such that
 $$
   I = (\p_1\cdots \p_n)(\q_1\cdots \q_m)^{-1}.
 $$
@@ -421,8 +422,8 @@ since again the norms would not match up.  Thus $6$ cannot be written
 uniquely as a product of irreducibles in $\O_K$.
 Theorem~\ref{thm:uniqfac}, however, implies that the principal
 ideal $(6)$ can, however, be
-written uniquely as a product of prime ideals.  
-An explicit decomposition is 
+written uniquely as a product of prime ideals.
+An explicit decomposition is
 \begin{equation}\label{eqn:fac6}
 (6) = (2, 2+\sqrt{-6})^2 \cdot (3,3+\sqrt{-6})^2,
 \end{equation}
@@ -439,7 +440,7 @@ The factorization (\ref{eqn:fac6}) can be compute using
 sage: K.<a> = NumberField(x^2 + 6); K
 Number Field in a with defining polynomial x^2 + 6
 sage: K.factor_integer(6)
-(Fractional ideal (2, a) of Number Field ...)^2 * 
+(Fractional ideal (2, a) of Number Field ...)^2 *
 (Fractional ideal (3, a) of Number Field ...)^2
 \end{lstlisting}
 
@@ -478,7 +479,7 @@ sage: K.factor_integer(6)
 %\end{lstlisting}
 %}
 %The output of PARI is a list of two prime ideals with exponent $2$.
-%A prime ideal is represented by a $5$-tuple 
+%A prime ideal is represented by a $5$-tuple
 %$[p,a,e,f,b]$, where the ideal is $p\O_K + \alpha\O_K$,
 %where $\alpha = \sum a_i \omega_i$, where $\omega_1,\ldots, \omega_n$
 %are a basis for $\O_K$ (as output by {\tt k.zk}).
@@ -487,7 +488,7 @@ sage: K.factor_integer(6)
 
 
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "ant"
-%%% End: 
+%%% End:

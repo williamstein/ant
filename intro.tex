@@ -1,7 +1,7 @@
 \chapter{Introduction}
 
 \section{Mathematical background}
-In addition to general mathematical maturity, 
+In addition to general mathematical maturity,
 this book assumes you have the following background:
 \begin{itemize}\setlength{\itemsep}{-.7ex}
 \item Basics of finite group theory
@@ -29,7 +29,7 @@ Sage session:
 \begin{sageout}
 4
 \end{sageout}
-\begin{sagecell} 
+\begin{sagecell}
 k.<a> = NumberField(x^2 + 1); k
 \end{sagecell}
 \begin{sageout}
@@ -40,17 +40,17 @@ Number Field in a with defining polynomial x^2 + 1
 A number field $K$ is a finite degree algebraic extension of the rational
 numbers $\Q$.  The primitive element theorem from Galois theory
 asserts that every such extension can be represented as the set of all
-polynomials of degree at most $d = [K:\Q] = \dim_{\Q} K$ in 
+polynomials of degree at most $d = [K:\Q] = \dim_{\Q} K$ in
 a single root $\alpha$ of some polynomial with coefficients in $\Q$:
 $$
  K = \Q(\alpha) = \left\{ \sum_{n=0}^{m} a_n \alpha^n : a_n\in\Q \right\}.
-$$ 
+$$
 
 Note that
 $\Q(\alpha)$ is non-canonically isomorphic to $\Q[x]/(f)$, where $f$
 is the minimal polynomial of~$\alpha$.
-The homomorphism $\Q[x]\to\Q(\alpha)$ that sends~$x$ to~$\alpha$,
-which has kernel~$(f)$, hence it descends to an isomorphism between
+The homomorphism $\Q[x]\to\Q(\alpha)$ that sends~$x$ to~$\alpha$
+has kernel~$(f)$, hence it induces an isomorphism between
 $\Q[x]/(f)$ and $\Q(\alpha)$.
 It is not canonical, since $\Q(\alpha)$ could
 have nontrivial automorphisms.  For example, if $\alpha=\sqrt{2}$, then
@@ -124,7 +124,7 @@ establishing a lower bound on one's choice of key size:
 $ man ssh-keygen   # in ubuntu-12.04
 ...
      -b bits
-             Specifies the number of bits in the key to create.  
+             Specifies the number of bits in the key to create.
              For RSA keys, the minimum size is 768 bits ...
 \end{sagecell}
 
@@ -133,7 +133,7 @@ $ man ssh-keygen   # in ubuntu-12.04
 India found in 2002 the first ever deterministic
 polynomial-time (in the number of digits) primality test.  Their
 methods involve arithmetic in quotients of $(\Z/n\Z)[x]$, which are
-best understood in the context of algebraic number theory.  
+best understood in the context of algebraic number theory.
 
 \item {\bf Deeper point of view} on questions in number theory:
 \begin{enumerate}
@@ -163,13 +163,13 @@ field $K$.  Assume that the manifold $X(\C)$ of complex solutions to
 $X$ has genus at least $2$ (i.e., $X(\C)$ is topologically a donut
 with at least two holes).  Then the set $X(K)$ of points on $X$ with
 coordinates in~$K$ is finite.
-\end{theorem}  
+\end{theorem}
 For example, Theorem~\ref{thm:faltings} implies that for any $n\geq 4$
 and any number field~$K$, there are only finitely many solutions
-in~$K$ to $x^n+y^n=1$.  
+in~$K$ to $x^n+y^n=1$.
 
 A major open problem in arithmetic geometry is the {\em Birch
-  and Swinnerton-Dyer conjecture}. 
+  and Swinnerton-Dyer conjecture}.
 An \defn{elliptic curves} $E$ is an algebraic curve with at least one point
 with coordinates in $K$ such that the set of complex points
 $E(\C)$ is a topological torus.
@@ -181,7 +181,7 @@ See \url{http://www.claymath.org/millennium/Birch_and_Swinnerton-Dyer_Conjecture
 \end{enumerate}
 
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "ant"
-%%% End: 
+%%% End:
