@@ -69,11 +69,11 @@ integers of $K$.  To employ our geometric intuition, as the Lenstras
 did on the cover of \cite{lenstras:nfs}, it is helpful to
 view $\O_K$ as a 1-dimensional scheme
 $$
-  X = \Spec(\O_K) = \{\text{ all prime ideals of $\O_K$ }\}
+  X = \Spec(\O_K) = \{\text{all prime ideals of $\O_K$}\}
 $$
 over
 $$
-  Y=\Spec(\Z) = \{ (0) \} \union \{ p\Z : p \in\Z_{>0} \text{ is prime }\}.
+  Y=\Spec(\Z) = \{ (0) \} \union \{ p\Z : p \in\Z_{>0} \text{ is prime}\}.
 $$ 
 There is a natural map $\pi :X\ra Y$ that sends a prime ideal $\p\in X$ to
 $\p\intersect \Z\in Y$.   
@@ -150,7 +150,8 @@ primes.
 sage: I = K.fractional_ideal(5); I
 Fractional ideal (5)
 sage: I.factor()
-(Fractional ideal (5, a^2 + 9*a + 2)) * (Fractional ideal (5, a + 2)) * (Fractional ideal (5, a + 3))^2
+(Fractional ideal (5, a^2 + 9*a + 2)) * (Fractional ideal (5, a + 2)) \
+* (Fractional ideal (5, a + 3))^2
 \end{verbatim}
 Notice that the polynomial $f$ factors in a similar way:
 \begin{verbatim}
@@ -220,7 +221,7 @@ $$
   \O_K \to \O_K/p\O_K \isom \bigoplus \O_K/\p_i^{e_i},
 $$
 where the isomorphism is by the Chinese Remainder Theorem,
-which we will prove in Chapter~\ref{ch:crt}.
+which we will prove in Chapter~\ref{ch:crt}, see Theorem~\ref{thm:crt}.
 The left vertical maps come from the inclusions
 $$
    \F_p \hra \F_p[x]/(\overline{f}_i^{e_i}) \hra \O_K/\p_i^{e_i},
@@ -316,8 +317,8 @@ $$
 \end{theorem}
 
 We return to the example from above, in which $K=\Q(a)$, where~$a$ is
-a root of $f = x^5+7x^4+3x^2-x+1$.  According to \sage, the ring
-of integers~$\O_K$ has discriminant $2945785 = 5\cdot 353\cdot 1669$:
+a root of $f = x^5+7x^4+3x^2-x+1$.  The ring
+of integers~$\O_K$ has discriminant $2945785 = 5\cdot 353\cdot 1669$; as the following \sage code shows.
 \begin{verbatim}
 sage: K.<a> = NumberField(x^5 + 7*x^4 + 3*x^2 - x + 1)
 sage: D = K.discriminant(); D
@@ -491,7 +492,7 @@ theorem:
 \begin{theorem}[Pohst-Zassenhaus]
 Let $\O$ be an order in the the ring of integers $\O_K$ of a number field, let $p\in\Z$ be a prime,
 and let 
-$$I_p = \{x \in \O : x^m \in p\O \text{ for some $m\geq 1$ }\} \subset \O$$ 
+$$I_p = \{x \in \O : x^m \in p\O \text{ for some $m\geq 1$}\} \subset \O$$ 
 be the radical of $p\O$, which is an ideal of $\O$.
 Let
 $$
@@ -585,7 +586,7 @@ $$
  A \isom \Ker(1 - \eps)  \oplus \Ker(\eps).
 $$
 Since $(1 - \eps) + \eps = 1$, we see that 
-$(1 - \eps)v + \eps v = v$, so that the sume
+$(1 - \eps)v + \eps v = v$, so that the sum
 of the two kernels equals $A$.  
 Also, if $v$ is in the intersection of the two kernels,
 then $\eps(v) = 0$ and $(1-\eps)(v) =0$, so 
@@ -652,7 +653,7 @@ $p\O$.  Every such prime clearly contains $p$, so to see that the
 algorithm is correct, we prove that the primes $\p$ of $\O$ that
 contain~$p$ also contain~$I$.  If $\p$ is a prime of $\O$ that
 contains~$p$, then $p\O \subset \p$.  If $x\in I$ then $x^m\in p\O$
-for some $m$, so $x^m\in \p$ which implies that $x\in \p$ by primality
+for some $m$, so $x^m\in \p$ which implies that $x\in \p$ by the primality
 of $\p$.  Thus $\p$ contains $I$, as required.  Note that we do not find the powers of 
 primes that divide $p$ in Algorithm~\ref{alg:genfac}; that's left to another
 algorithm that we will not discuss in this book.

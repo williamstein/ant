@@ -364,13 +364,14 @@
 \newtheorem{algorithm}[theorem]{Algorithm}
 \newtheorem{question}[theorem]{Question}
 \newtheorem{problem}[theorem]{Problem}
+\newtheorem{exercise}[theorem]{Exercise}
 
 \theoremstyle{remark}
 \newtheorem{goal}[theorem]{Goal}
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{remarks}[theorem]{Remarks}
 \newtheorem{example}[theorem]{Example}
-\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{comment}[theorem]{Comment}
 
 \numberwithin{equation}{section}
 \numberwithin{figure}{section}
@@ -457,33 +458,3 @@
 \newcommand{\magma}{\ii{{\sc Magma}}}
 
 
-
-
-\definecolor{dblackcolor}{rgb}{0.0,0.0,0.0}
-\definecolor{dbluecolor}{rgb}{.01,.02,0.7}
-\definecolor{dredcolor}{rgb}{0.6,0,0}
-\definecolor{dgraycolor}{rgb}{0.30,0.3,0.30}
-\definecolor{lightyellow}{rgb}{1,1,.86}
-\definecolor{gray}{rgb}{0.6,0.6,0.6}
-\newcommand{\dblue}{\color{dbluecolor}}
-\newcommand{\dred}{\color{dredcolor}}
-\newcommand{\dblack}{\color{dblackcolor}}
-\newcommand{\dr}{\dred\bf}
-\usepackage{soul}
-\usepackage{listings} 
-\lstdefinelanguage{Sage}[]{Python}
-{morekeywords={True,False,sage,singular},
-sensitive=true}
-\lstset{frame=single,
-        showtabs=False,
-        showspaces=False,
-        showstringspaces=False,
-        backgroundcolor=\color{lightyellow},
-          commentstyle={\ttfamily\color{dredcolor}},
-          keywordstyle={\ttfamily\color{dbluecolor}\bfseries},
-          stringstyle ={\ttfamily\color{dgraycolor}\bfseries},
-          language = Sage,
-	  basicstyle={\scriptsize \ttfamily},
-	  %aboveskip=.3em,
-	  %belowskip=.1em
-          }
