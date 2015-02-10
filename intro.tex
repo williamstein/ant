@@ -23,6 +23,7 @@ a programming background or know much about algorithms. Most
 of the book uses Sage (\url{http://sagemath.org}), which is
 free open source mathematical software.  The following is an example
 Sage session:
+\begin{sagecode}
 \begin{sagecell}
 2 + 2
 \end{sagecell}
@@ -35,6 +36,7 @@ k.<a> = NumberField(x^2 + 1); k
 \begin{sageout}
 Number Field in a with defining polynomial x^2 + 1
 \end{sageout}
+\end{sagecode}
 
 \section{What is algebraic number theory?}
 A number field $K$ is a finite degree algebraic extension of the rational
@@ -102,12 +104,13 @@ number field sieve is the asymptotically fastest known algorithm for
 factoring general large integers (that don't have too special of a
 form).  On December 12, 2009, the number field sieve was used to
 factor the RSA-768 challenge, which is a 232 digit number that is a product of two primes:\\
+\begin{sagecode}
 \begin{sagecell}
 rsa768 = 123018668453011775513049495838496272077285356959533479\
 219732245215172640050726365751874520219978646938995647494277406384592\
 519255732630345373154826850791702612214291346167042921431160222124047\
 9274737794080665351419597459856902143413
-n = 33478071698956898786044169848212690817704794983713768568912\ %purple!
+n = 33478071698956898786044169848212690817704794983713768568912\
 431388982883793878002287614711652531743087737814467999489
 m = 36746043666799590428244633799627952632279158164343087642676\
 032283815739666511279233373417143396810270092798736308917
@@ -116,10 +119,12 @@ n*m == rsa768
 \begin{sageout}
 True
 \end{sageout}
+\end{sagecode}
 
 This record integer factorization cracked a certain 768-bit public key
 cryptosystem (see \url{http://eprint.iacr.org/2010/006}), thus
 establishing a lower bound on one's choice of key size:
+\begin{sagecode}
 \begin{sagecell}[language=bash]
 $ man ssh-keygen   # in ubuntu-12.04
 ...
@@ -127,6 +132,7 @@ $ man ssh-keygen   # in ubuntu-12.04
              Specifies the number of bits in the key to create.
              For RSA keys, the minimum size is 768 bits ...
 \end{sagecell}
+\end{sagecode}
 
 
 \item {\bf Primality testing:} Agrawal and his students Saxena and Kayal from
