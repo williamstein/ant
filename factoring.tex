@@ -116,48 +116,79 @@ The following \sage session shows the commands needed to compute
 the factorization of $p\O_K$ for~$K$ the number field
 defined by a root of $x^5+7x^4+3x^2-x+1$ and $p=2$ and~$5$.
 We first create an element $f\in \QQ[x]$ in \sage:
-\begin{verbatim}
-sage: R.<x> = QQ[]
-sage: f = x^5 + 7*x^4 + 3*x^2 - x + 1
-\end{verbatim}%link
+\begin{sagecode}
+\begin{sagecell}
+R.<x> = QQ[]
+f = x^5 + 7*x^4 + 3*x^2 - x + 1
+\end{sagecell}
+\end{sagecode} %link
 
 \par\noindent{}Then we create the corresponding number field obtained
 by adjoining a root of $f$, and find its ring of integers.
 %link
-\begin{verbatim}
-sage: K.<a> = NumberField(f)
-sage: OK = K.ring_of_integers()
-sage: OK.basis()
+\begin{sagecode}
+\begin{sagecell}
+K.<a> = NumberField(f)
+OK = K.ring_of_integers()
+OK.basis()
+\end{sagecell}
+\begin{sageout}
 [1, a, a^2, a^3, a^4]
-\end{verbatim}%link
+\end{sageout}
+\end{sagecode} %link
 
 \par\noindent{}We define the ideal $2\O_K$ and factor -- it turns
 out to be prime.
 %link
-\begin{verbatim}
-sage: I = K.fractional_ideal(2); I
+\begin{sagecode}
+\begin{sagecell}
+I = K.fractional_ideal(2); I
+\end{sagecell}
+\begin{sageout}
 Fractional ideal (2)
-sage: I.factor()
+\end{sageout}
+\begin{sagecell}
+I.factor()
+\end{sagecell}
+\begin{sageout}
 Fractional ideal (2)
-sage: I.is_prime()
+\end{sageout}
+\begin{sagecell}
+I.is_prime()
+\end{sagecell}
+\begin{sageout}
 True
-\end{verbatim}%link
+\end{sageout}
+\end{sagecode} %link
 
 \par\noindent{}Finally we factor $5\O_K$, which factors as a product of three
 primes.
 %link
-\begin{verbatim}
-sage: I = K.fractional_ideal(5); I
+\begin{sagecode}
+\begin{sagecell}
+I = K.fractional_ideal(5); I
+\end{sagecell}
+\begin{sageout}
 Fractional ideal (5)
-sage: I.factor()
-(Fractional ideal (5, a^2 + 9*a + 2)) * (Fractional ideal (5, a + 2)) \
-* (Fractional ideal (5, a + 3))^2
-\end{verbatim}
+\end{sageout}
+\begin{sagecell}
+I.factor()
+\end{sagecell}
+\begin{sageout}
+(Fractional ideal (5, -2*a^4 - 13*a^3 + 7*a^2 - 6*a + 2)) * \
+(Fractional ideal (5, a^4 + 7*a^3 + 3*a + 1)) * \
+(Fractional ideal (5, a^4 + 7*a^3 + 3*a - 3))^2
+\end{sageout}
+\end{sagecode} %link
 Notice that the polynomial $f$ factors in a similar way:
-\begin{verbatim}
-sage: f.factor_mod(5)
+\begin{sagecode} %link
+\begin{sagecell}
+f.factor_mod(5)
+\end{sagecell}
+\begin{sageout}
 (x + 2) * (x + 3)^2 * (x^2 + 4*x + 2)
-\end{verbatim}
+\end{sageout}
+\end{sagecode}
 Thus $2\O_K$ is already a prime ideal, and
 $$
   5\O_K = (5,2+a)\cdot(5,3+a)^2\cdot(5,2+4a+a^2).
@@ -177,23 +208,26 @@ suggests ``ramification'',
 in the sense that the cover $X\ra Y$ has less points (counting their ``size'', i.e.,
 their residue class degree) in its fiber over~$5$ than
 it has generically.
+See Figure~\ref{fig:O_KoverSpecZ}.
 
 %% \vfill
 
-%% \begin{center}
-%% \psfrag{p1}{$(5,2+4a+a^2)$}
-%% \psfrag{p2}{$(5,3+a)^2$}
-%% \psfrag{p3}{$(5,2+a)$}
-%% \psfrag{p}{$5\Z$}
-%% \psfrag{q1}{$2\O_K$}
-%% \psfrag{q}{$2\Z$}
-%% \psfrag{zero}{$(0)$}
-%% \psfrag{r}{$3\Z$}
-%% \psfrag{s}{$7\Z$}
-%% \psfrag{t}{$11\Z$}
-%% \includegraphics[width=30em]{cover1}\\
-%% Diagram of $\Spec(\O_K) \ra \Spec(\Z)$
-%% \end{center}
+\begin{figure}
+\centering
+%\psfrag{p1}{$(5,2+4a+a^2)$}
+%\psfrag{p2}{$(5,3+a)^2$}
+%\psfrag{p3}{$(5,2+a)$}
+%\psfrag{p}{$5\Z$}
+%\psfrag{q1}{$2\O_K$}
+%\psfrag{q}{$2\Z$}
+%\psfrag{zero}{$(0)$}
+%\psfrag{r}{$3\Z$}
+%\psfrag{s}{$7\Z$}
+%\psfrag{t}{$11\Z$}
+\includegraphics[width=25em]{cover1}
+\caption{Diagram of $\Spec(\O_K) \ra \Spec(\Z)$}
+\label{fig:O_KoverSpecZ}
+\end{figure}
 
 
 \section{A Method for Factoring Primes that Often Works}
@@ -320,24 +354,36 @@ We return to the example from above, in which $K=\Q(a)$, where~$a$ is
 a root of $f = x^5+7x^4+3x^2-x+1$.  The ring
 of integers~$\O_K$ has discriminant $2945785 = 5\cdot 353\cdot 1669$,
 as the following \sage code shows.
-\begin{verbatim}
-sage: K.<a> = NumberField(x^5 + 7*x^4 + 3*x^2 - x + 1)
-sage: D = K.discriminant(); D
+\begin{sagecode}
+\begin{sagecell}
+K.<a> = NumberField(x^5 + 7*x^4 + 3*x^2 - x + 1)
+D = K.discriminant(); D
+\end{sagecell}
+\begin{sageout}
 2945785
-sage: factor(D)
+\end{sageout}
+\begin{sagecell}
+factor(D)
+\end{sagecell}
+\begin{sageout}
 5 * 353 * 1669
-\end{verbatim}
+\end{sageout}
+\end{sagecode}
 The order $\Z[a]$ has the same discriminant as $f(x)$, which
 is the same as the discriminant of $\O_K$, so
 $\Z[a]=\O_K$ and we can apply the above theorem.
 (Here we use that the index of $\Z[a]$ in $\O_K$
 is the square of the quotient of their discriminants,
 a fact we will prove later in Section~\ref{sec:disc}.)
-\begin{verbatim}
-sage: R.<x> = QQ[]
-sage: discriminant(x^5 + 7*x^4 + 3*x^2 - x + 1)
+\begin{sagecode}
+\begin{sagecell}
+R.<x> = QQ[]
+discriminant(x^5 + 7*x^4 + 3*x^2 - x + 1)
+\end{sagecell}
+\begin{sageout}
 2945785
-\end{verbatim}
+\end{sageout}
+\end{sagecode}
 We have
 $$
   x^5+7x^4+3x^2-x+1 \con (x+2)\cdot (x+3)^2 \cdot (x^2+4x+2)\pmod{5},
@@ -347,18 +393,34 @@ which yields the factorization of $5\O_K$ given before the theorem.
 If we replace $a$ by $b=7a$, then the index of $\Z[b]$
 in $\O_K$ will be a power of $7$, which is coprime to $5$,
 so the above method will still work.
-\begin{verbatim}
-sage: K.<a> = NumberField(x^5 + 7*x^4 + 3*x^2 - x + 1)
-sage: f = (7*a).minpoly('x')
-sage: f
+\begin{sagecode}
+\begin{sagecell}
+K.<a> = NumberField(x^5 + 7*x^4 + 3*x^2 - x + 1)
+f = (7*a).minpoly('x')
+f
+\end{sagecell}
+\begin{sageout}
 x^5 + 49*x^4 + 1029*x^2 - 2401*x + 16807
-sage: f.disc()
+\end{sageout}
+\begin{sagecell}
+f.disc()
+\end{sagecell}
+\begin{sageout}
 235050861175510968365785
-sage: factor(f.disc() / K.disc())
+\end{sageout}
+\begin{sagecell}
+factor(f.disc() / K.disc())
+\end{sagecell}
+\begin{sageout}
 7^20
-sage: f.factor_mod(5)
+\end{sageout}
+\begin{sagecell}
+f.factor_mod(5)
+\end{sagecell}
+\begin{sageout}
 (x + 4) * (x + 1)^2 * (x^2 + 3*x + 3)
-\end{verbatim}
+\end{sageout}
+\end{sagecode}
 Thus $5$ factors in $\O_K$
 as
 $$
@@ -367,14 +429,22 @@ $$
 If we replace $a$ by $b=5a$ and try the above algorithm with $\Z[b]$,
 then the method fails because the index of $\Z[b]$ in $\O_K$ is divisible
 by~$5$.
-\begin{verbatim}
-sage: K.<a> = NumberField(x^5 + 7*x^4 + 3*x^2 - x + 1)
-sage: f = (5*a).minpoly('x')
-sage: f
+\begin{sagecode}
+\begin{sagecell}
+K.<a> = NumberField(x^5 + 7*x^4 + 3*x^2 - x + 1)
+f = (5*a).minpoly('x')
+f
+\end{sagecell}
+\begin{sageout}
 x^5 + 35*x^4 + 375*x^2 - 625*x + 3125
-sage: f.factor_mod(5)
+\end{sageout}
+\begin{sagecell}
+f.factor_mod(5)
+\end{sagecell}
+\begin{sageout}
 x^5
-\end{verbatim}
+\end{sageout}
+\end{sagecode}
 
 \section{A General Method}
 There are numbers fields $K$ such that $\O_K$ is not of the form
@@ -404,14 +474,22 @@ $\O_K$.
 Let $K=\Q(a)$ be the cubic field defined by a root $a$ of the polynomial
 $f = x^3 + x^2 - 2x+8$.  We will use \sage to show that~$2$ is an inessential
 discriminant divisor for~$K$.
-\begin{verbatim}
-sage: K.<a> = NumberField(x^3 + x^2 - 2*x + 8); K
+\begin{sagecode}
+\begin{sagecell}
+K.<a> = NumberField(x^3 + x^2 - 2*x + 8); K
+\end{sagecell}
+\begin{sageout}
 Number Field in a with defining polynomial x^3 + x^2 - 2*x + 8
-sage: K.factor_integer(2)
-(Fractional ideal (1/2*a^2 - 1/2*a + 1)) *
-(Fractional ideal (a^2 - 2*a + 3)) *
-(Fractional ideal (3/2*a^2 - 5/2*a + 4))
-\end{verbatim}
+\end{sageout}
+\begin{sagecell}
+K.factor(2)
+\end{sagecell}
+\begin{sageout}
+(Fractional ideal (1/2*a^2 - 1/2*a + 1)) * \
+(Fractional ideal (-a^2 + 2*a - 3)) * \
+(Fractional ideal (-3/2*a^2 + 5/2*a - 4))
+\end{sageout}
+\end{sagecode}
 Thus $2\O_K=\p_1\p_2\p_3$, with the $\p_i$ distinct,
 and one sees directly from the above expressions
 that
