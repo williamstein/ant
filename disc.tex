@@ -1,15 +1,10 @@
 \chapter{Discrimants and Norms}\label{discnorm}
 
-%The we develop in this chapter illustrate the power of what we
-%have already proved about rings of integers, and will be used over and
-%over again to prove other deeper results.  It is essential to
-%understand everything we discuss in this chapter very well.
-
 In this chapter we give a geometric interpretation of the discriminant
 of an order in a number field. We also define norms of ideals and
 prove that the norm function is multiplicative.  Discriminants of
 orders and norms of ideals will play a crucial role in our proof of
-finiteness of the class group in the next chapter.  
+finiteness of the class group in the next chapter.
 
 \section{Viewing $\O_K$ as a Lattice in a Real Vector Space}
 Let~$K$ be a number field of degree $n$.  By the primitive element
@@ -25,17 +20,25 @@ $$
 $$
 \begin{example}
 We compute the embeddings listed above for $K=\Q(\sqrt[3]{2})$.
-\begin{verbatim}
-sage: K = QQ[2^(1/3)]; K
+\begin{sagecode}
+\begin{sagecell}
+K = QQ[2^(1/3)]; K
+\end{sagecell}
+\begin{sageout}
 Number Field in a with defining polynomial x^3 - 2
-sage: K.complex_embeddings()
+\end{sageout}
+\begin{sagecell}
+K.complex_embeddings()
+\end{sagecell}
+\begin{sageout}
 [Ring morphism: ...
   Defn: a |--> -0.629960524947 - 1.09112363597*I,
  Ring morphism: ...
   Defn: a |--> -0.629960524947 + 1.09112363597*I,
  Ring morphism: ...
   Defn: a |--> 1.25992104989]
-\end{verbatim}
+\end{sageout}
+\end{sagecode}
 \end{example}
 
 
@@ -46,20 +49,20 @@ $\R$-span of the image $\sigma(K)$ of~$K$ inside $\C^n$.
 \begin{lemma}\label{lem:disc_finite}
 Suppose $L\subset \R^n$ is a subgroup of the vector space~$\R^n$.
 Then the induced topology on~$L$ is discrete if and only
-if for every  $H>0$ the set 
+if for every  $H>0$ the set
 $$
   X_H = \{v \in L : \max\{|v_1|,\ldots, |v_n|\} \leq H \}
 $$
-is finite. 
+is finite.
 \end{lemma}
 \begin{proof}
 If~$L$ is not discrete, then there is a point $x \in L$ such that
 for every $\eps>0$ there is $y\in L$ such that
 $0 < |x-y|<\eps$. By choosing smaller and smaller~$\eps$,
 we find infinitely many elements $x-y\in L$
-all of whose coordinates are smaller than~$1$. 
+all of whose coordinates are smaller than~$1$.
 The set $X_1$ is thus not finite.   Thus if the sets
-$X_H$ are all finite,~$L$ must be discrete. 
+$X_H$ are all finite,~$L$ must be discrete.
 
 Next assume that~$L$ is discrete and let $H>0$ be any positive number.
 Then for every $x\in X_H$ there is an open ball $B_x$ that
@@ -72,8 +75,8 @@ implies that $X_H$ is finite, as claimed.
 \begin{lemma}\label{lem:disc_rankdim}
 If~$L$ if a free abelian group that is
 discrete in a finite-dimensional
-real vector space~$V$ and $\R{}L=V$, then the rank of~$L$ 
-equals the dimension of~$V$.  
+real vector space~$V$ and $\R{}L=V$, then the rank of~$L$
+equals the dimension of~$V$.
 \end{lemma}
 \begin{proof}
   Let $x_1,\ldots, x_m \in L$ be an $\R$-vector space basis for
@@ -111,12 +114,12 @@ Consider the determinant $\det(A)$.
 \begin{example}
 The ring $\O_K=\Z[i]$ of integers of $K=\Q(i)$
 has $\Z$-basis $w_1=1$, $w_2=i$.
-The map $\sigma:K\to \C^2$ is given by 
+The map $\sigma:K\to \C^2$ is given by
 $$
    \sigma(a+bi) = (a+bi,a-bi)\in\C^2.
 $$
 The image $\sigma(\O_K)$ is spanned by
-$(1,1)$ and $(i,-i)$.  
+$(1,1)$ and $(i,-i)$.
 The determinant is
 \[
   \left|\mtwo{1}{1}{i}{-i}\right| = -2i.
@@ -127,7 +130,7 @@ The map $\sigma$ is
 \[
   \sigma(a+b\sqrt{2}) = (a+b\sqrt{2},a-b\sqrt{2})\in\R^2,
 \]
-and 
+and
 \[
 A = \mtwo{1}{1}{\sqrt{2}}{-\sqrt{2}},
 \]
@@ -136,7 +139,7 @@ $ -2\sqrt{2}$.
 \end{example}
 As the above example illustrates, the determinant $\det(A)$ most
 certainly need not be an integer.  However, as we will see, it's
-square is an integer that does not depend on our choice of 
+square is an integer that does not depend on our choice of
 basis for $\O_K$.
 
 \section{Discriminants}\label{sec:disc}
@@ -145,17 +148,17 @@ which we view as a $\Q$-vector space.  Let $ \sigma : K\hra \C^n $ be
 the embedding $\sigma(a)=(\sigma_1(a),\ldots,\sigma_n(a))$, where
 $\sigma_1,\ldots, \sigma_n$ are the distinct embeddings of $K$
 into~$\C$.  Let $A$ be the matrix whose rows are $\sigma(w_1), \ldots,
-\sigma(w_n)$.   
+\sigma(w_n)$.
 
 Changing our choice of
 basis for $\O_K$ is the same as left multiplying~$A$ by an integer
 matrix $U$ of determinant $\pm 1$, which changes
-$\det(A)$ by $\pm 1$.  
+$\det(A)$ by $\pm 1$.
 This leads us to consider $\det(A)^2$ instead, which does not depend
-on the choice of basis; moreover, as we will see, $\det(A)^2$ is an integer. 
+on the choice of basis; moreover, as we will see, $\det(A)^2$ is an integer.
 Note that
 \begin{align*}
-\det(A)^2 &= \det(AA) = 
+\det(A)^2 &= \det(AA) =
 \det(A)\det(A)=\det(A)\det(A^t)=
 \det(A A^t) \\
  &= \det\left(\sum_{k=1,\ldots,n} \sigma_k(w_i)\sigma_k(w_j)\right)
@@ -163,9 +166,11 @@ Note that
  &= \det(\Tr(w_i w_j)_{1\leq i,j\leq n}),
 \end{align*}
 so $\det(A)^2$ can be defined purely in terms of the trace without
-mentioning the embeddings $\sigma_i$.  
+mentioning the embeddings $\sigma_i$.
 Moreover, if we change basis hence multiplying $A$ by some $U$ with determinant $\pm 1$, then
 $\det(UA)^2 = \det(U)^2\det(A)^2 = \det(A)^2$.
+Because $\det(A)$ is an algebraic integer and $\Tr(w_iw_j)\in\QQ$, it follows
+that $\det(A)^2$ is an algebraic integer in $\QQ$.
 Thus $\det(A)^2\in \ZZ$ is well defined as a quantity associated to $\O_K$.
 
 If we view~$K$ as a $\Q$-vector space, then $(x,y)\mapsto \Tr(xy)$
@@ -185,14 +190,14 @@ absurd.
 
 \begin{definition}[Discriminant]\label{def:disc}
 Suppose $a_1,\ldots, a_n$ is any $\Q$-basis of $K$.  The \defn{discriminant}
-of $a_1,\ldots, a_n$ is 
+of $a_1,\ldots, a_n$ is
 $$
   \Disc(a_1,\ldots,a_n) = \det(\Tr(a_i a_j)_{1\leq i,j\leq n})\in\Q.
 $$
 The \defn{discriminant} $\Disc(\O)$ of an order $\O$ in $\O_K$ is
 the discriminant of any $\Z$-basis for~$\O$.
-The \defn{discriminant} $d_K=\Disc(K)$ of the number field~$K$ 
-is the discriminant of $\O_K$. 
+The \defn{discriminant} $d_K=\Disc(K)$ of the number field~$K$
+is the discriminant of $\O_K$.
 Note that these discriminants are all nonzero
 by Lemma~\ref{lem:tracenondegen}.
 \end{definition}
@@ -216,39 +221,53 @@ discriminant of $S/R$ does not make sense in general.  The problem
 is that $R$ may have more units than $\{\pm 1\}$, in which case
 $\det(A^2)$ is not well defined.   To generalize the notion of
 discriminant to arbitrary finite extensions of Dedekind domains,
-one must instead introduce a discriminant {\em ideal}...
+one must instead introduce a discriminant {\em ideal}.
 \end{remark}
 
 \begin{example}
 In \sage, we compute the discriminant of a number field or order
 using the discriminant command:
-\begin{verbatim}
-sage: K.<a> = NumberField(x^2 - 5)
-sage: K.discriminant()
+\begin{sagecode}
+\begin{sagecell}
+K.<a> = NumberField(x^2 - 5)
+K.discriminant()
+\end{sagecell}
+\begin{sageout}
 5
-\end{verbatim}%link
+\end{sageout}
+\end{sagecode} %link
 
-\noindent{}This also works for orders (notice the square factor 
+\noindent{}This also works for orders (notice the square factor
 below, which will be explained
 by Proposition~\ref{prop:indsquare}):
 %link
-\begin{verbatim}
-sage: R = K.order([7*a]); R
+\begin{sagecode}
+\begin{sagecell}
+R = K.order([7*a]); R
+\end{sagecell}
+\begin{sageout}
 Order in Number Field in a with defining polynomial x^2 - 5
-sage: factor(R.discriminant())
+\end{sageout}
+\begin{sagecell}
+factor(R.discriminant())
+\end{sagecell}
+\begin{sageout}
 2^2 * 5 * 7^2
-\end{verbatim}
+\end{sageout}
+\end{sagecode}
 
 \noindent{\bf Warning:} In \magma{} $\Disc(K)$ is defined to be the
 discriminant of the polynomial you happened to use to define~$K$.
-\begin{verbatim}
+\begin{sagecode}
+\begin{lstlisting}[language=bash]
 > K := NumberField(x^2-5);
 > Discriminant(K);
 20
-\end{verbatim}
+\end{lstlisting}
+\end{sagecode}
 This is an intentional choice done for efficiency reasons, since
 computing the maximal order can take a long time.  Nonetheless, it
-conflicts with standard mathematical usage, so beware. 
+conflicts with standard mathematical usage, so beware.
 \end{example}
 
 
@@ -266,7 +285,7 @@ Let $A$ be a matrix whose rows are the images via $\sigma$ of a basis
 for $\O_K$, and let $B$ be a matrix whose rows are the images via
 $\sigma$ of a basis for $\O$.  Since $\O\subset \O_K$ has finite
 index, there is an integer matrix $C$ such that $CA=B$,
-and $|\det(C)|= [\O_K:\O]$.  Then
+and $\left|\det(C)\right|= [\O_K:\O]$.  Then
 \[\Disc(\O) = \det(B)^2 = \det(CA)^2 = \det(C)^2\det(A)^2
   = [\O_K:\O]^2 \cdot \Disc(\O_K).
 \]
@@ -282,12 +301,16 @@ of $K$, but this is not the case in general.  Recall
 Example~\ref{ex:dedekind}, in which we considered the field $K$ generated
 by a root of $f = x^3 + x^2 - 2x+8$.  In that example, the
 discriminant of $\O_K$ is $-503$ with $503$ prime:
-\begin{verbatim}
-sage: K.<a> = NumberField(x^3 + x^2 - 2*x + 8)
-sage: factor(K.discriminant())
+\begin{sagecode}
+\begin{sagecell}
+K.<a> = NumberField(x^3 + x^2 - 2*x + 8)
+factor(K.discriminant())
+\end{sagecell}
+\begin{sageout}
 -1 * 503
-\end{verbatim}
-For every $\alpha\in\O_K$, we have $2\mid [\O_K:\Z[\alpha]]$, since 
+\end{sageout}
+\end{sagecode}
+For every $\alpha\in\O_K$, we have $2\mid [\O_K:\Z[\alpha]]$, since
 $\O_K$ fails to be monogenic at $2$.  By
 Proposition~\ref{prop:indsquare}, the discriminant of $\Z[\alpha]$ is
 divisible by~$4$ for all~$\alpha$, so $\Disc(\alpha)$ is also
@@ -308,14 +331,14 @@ of Section~\ref{sec:alg_pmax} to find a~$p$-maximal order for each prime
 divisor of~$f$, then add these $p$-maximal orders together.
 
 \begin{example}
-Consider the ring $\O_K = \Z[(1+\sqrt{5})/2]$ of integers of 
+Consider the ring $\O_K = \Z[(1+\sqrt{5})/2]$ of integers of
 $K=\Q(\sqrt{5})$.  The discriminant of the basis $1,a=(1+\sqrt{5})/2$
 is
 \[
   \Disc(\O_K) = \left| \mtwo{2}{1}{1}{3} \right| = 5.
 \]
 Let $\O=\Z[\sqrt{5}]$ be the order generated by $\sqrt{5}$.
-Then~$\O$ has basis $1,\sqrt{5}$, so 
+Then~$\O$ has basis $1,\sqrt{5}$, so
 \[
   \Disc(\O) = \left| \mtwo{2}{0}{0}{10} \right| = 20 = [\O_K:\O]^2\cdot 5,
 \]
@@ -324,13 +347,13 @@ hence~$[\O_K:\O] = 2$.
 
 \begin{example}
 Consider the cubic field $K=\Q(\sqrt[3]{2})$, and
-let $\O$ be the order $\Z[\sqrt[3]{2}]$.  
+let $\O$ be the order $\Z[\sqrt[3]{2}]$.
 Relative to the base $1,\sqrt[3]{2}, (\sqrt[3]{2})^2$ for~$\O$,
 the matrix of the trace pairing is
 $$
   A = \mthree{3}{0}{0}{0}{0}{6}{0}{6}{0}.
 $$
-Thus 
+Thus
 $$
  \disc(\O) = \det(A)= 108 = 2^2\cdot 3^3.
 $$
@@ -342,8 +365,8 @@ $$
 $$
 so $3\mid \disc(\O_K)$, and $[\O_K:\O] \mid 6$.
 Thus to prove $\O=\O_K$ it suffices to prove
-that~$\O$ is $2$-maximal and $3$-maximal, 
-which could be accomplished as described in 
+that~$\O$ is $2$-maximal and $3$-maximal,
+which could be accomplished as described in
 Section~\ref{sec:alg_pmax}.
 \end{example}
 
@@ -356,21 +379,21 @@ ideal is equivalent to an ideal with norm at most some bound.
 This is enough, because as we will see below there are only
 finitely many ideals of bounded norm.
 \begin{definition}[Lattice Index]
-If $L$ and $M$ are two lattices in a vector space $V$, then the 
+If $L$ and $M$ are two lattices in a vector space $V$, then the
 \defn{lattice index} $[L:M]$ is by definition the absolute value of the
 determinant of any linear automorphism $A$ of $V$ such that $A(L)=M$.
 \end{definition}
-For example, if $L=2\Z$ and $M=10\Z$, then 
+For example, if $L=2\Z$ and $M=10\Z$, then
 $$
   [L:M] = [2\Z : 10\Z] = \det([5]) = 5,
 $$
 since $5$ multiplies $2\Z$ onto $10\Z$.
 
 The lattice index has the
-following properties: 
+following properties:
 \begin{itemize}
 \item If $M\subset L$, then $[L:M]=\#(L/M)$.
-\item If $M, L, N$ are any lattices in~$V$, 
+\item If $M, L, N$ are any lattices in~$V$,
 then $$[L:N] = [L:M]\cdot [M:N].$$
 \end{itemize}
 
@@ -378,33 +401,33 @@ then $$[L:N] = [L:M]\cdot [M:N].$$
 \begin{definition}[Norm of Fractional Ideal]
 Suppose $I$ is a fractional ideal of $\O_K$.  The \defn{norm} of~$I$ is
 the lattice index
-$$ 
+$$
   \Norm(I) = [\O_K : I] \in \Q_{\geq 0},
-$$ 
+$$
 or $0$ if $I=0$.
 \end{definition}
 Note that if $I$ is an integral ideal, then $\Norm(I)=\#(\O_K/I)$.
 
 \begin{lemma}\label{lem:aIfrac}\ilem{$\Norm(a I)$}
 Suppose $a\in K$ and $I$ is an integral ideal.
-Then 
+Then
 \[
-  \Norm(a I) = |\Norm_{K/\Q}(a)| \Norm(I).
+  \Norm(a I) = \left|\Norm_{K/\Q}(a)\right| \Norm(I).
 \]
 \end{lemma}
 \begin{proof}
 By properties of the lattice index mentioned above we have
 \[
  [\O_K : aI] = [\O_K : I] \cdot [I:aI]
-             = \Norm(I) \cdot |\Norm_{K/\Q}(a)|.
-\] 
-Here we have used that $[I:aI]=|\Norm_{K/\Q}(a)|$, which is because left
+             = \Norm(I) \cdot \left|\Norm_{K/\Q}(a)\right|.
+\]
+Here we have used that $[I:aI]=\left|\Norm_{K/\Q}(a)\right|$, which is because left
 multiplication $\ell_a$ by $a$ is an automorphism of $K$ that sends $I$ onto
-$aI$, so $$[I:aI]=|\det(\ell_a)|=|\Norm_{K/\Q}(a)|.$$
+$aI$, so $$[I:aI]=\left|\det(\ell_a)\right|=\left|\Norm_{K/\Q}(a)\right|.$$
 \end{proof}
 
 \begin{proposition}\iprop{multiplicativity of ideal norm}
-If $I$ and $J$ are fractional ideals, then 
+If $I$ and $J$ are fractional ideals, then
 $$\Norm(IJ) = \Norm(I)\cdot \Norm(J).$$
 \end{proposition}
 \begin{proof}
@@ -423,22 +446,34 @@ $\Norm(\p^n)=\Norm(\p)^n$.
 
 \begin{example}
 We compute some ideal norms using \sage.
-\begin{verbatim}
-sage: K.<a> = NumberField(x^2 - 5)
-sage: I = K.fractional_ideal(a)
-sage: I.norm()
+\begin{sagecode}
+\begin{sagecell}
+K.<a> = NumberField(x^2 - 5)
+I = K.fractional_ideal(a)
+I.norm()
+\end{sagecell}
+\begin{sageout}
 5
-sage: J = K.fractional_ideal(17)
-sage: J.norm()
+\end{sageout}
+\begin{sagecell}
+J = K.fractional_ideal(17)
+J.norm()
+\end{sagecell}
+\begin{sageout}
 289
-\end{verbatim}%link
+\end{sageout}
+\end{sagecode} %link
 
 \noindent{} We can also use functional notation:
 %link
-\begin{verbatim}
-sage: norm(I*J)
+\begin{sagecode}
+\begin{sagecell}
+norm(I*J)
+\end{sagecell}
+\begin{sageout}
 1445
-\end{verbatim}
+\end{sageout}
+\end{sagecode}
 \end{example}
 
 We will use the following proposition in the next chapter when
@@ -453,12 +488,12 @@ $I$ of $\O_K$ with norm at most $B$.
 \begin{proof}
 An integral ideal $I$ is a subgroup of $\O_K$ of index equal to the
 norm of $I$.  If $G$ is any finitely generated abelian group, then
-there are only finitely many subgroups of $G$ of index at most $B$,
-since the subgroups of index dividing an integer $n$ are all subgroups
-of $G$ that contain $nG$, and the group $G/nG$ is finite.  
+there are only finitely many subgroups of $G$ of index at most $B$.
+This is because the subgroups of index dividing an integer $n$ are all subgroups
+of $G$ that contain $nG$, and the group $G/nG$ is finite.
 \end{proof}
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "ant"
-%%% End: 
+%%% End:
