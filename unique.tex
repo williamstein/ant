@@ -28,33 +28,57 @@ of a number field~$K$ is just the number field~$K$ (see Lemma~\ref{lem:intq}).
 
 \begin{example}
 We compute the fraction fields mentioned above.
-\begin{lstlisting}
-sage: Frac(ZZ)
+\begin{sagecode}
+\begin{sagecell}
+Frac(ZZ)
+\end{sagecell}
+\begin{sageout}
 Rational Field
-\end{lstlisting}
+\end{sageout}
+\end{sagecode}
 In Sage the {\tt Frac} command usually returns a field canonically
 isomorphic to the fraction field (not a formal construction).
-\begin{lstlisting}
-sage: K.<a> = QuadraticField(5)
-sage: OK = K.ring_of_integers(); OK
-Order with module basis 1/2*a + 1/2, a in Number Field
-in a with defining polynomial x^2 - 5
-sage: Frac(OK)
+\begin{sagecode}
+\begin{sagecell}
+K.<a> = QuadraticField(5)
+OK = K.ring_of_integers(); OK
+\end{sagecell}
+\begin{sageout}
+Maximal Order in Number Field in a with defining polynomial x^2 - 5
+\end{sageout}
+\begin{sagecell}
+OK.basis()
+\end{sagecell}
+\begin{sageout}
+[1/2*a + 1/2, a]
+\end{sageout}
+\begin{sagecell}
+Frac(OK)
+\end{sagecell}
+\begin{sageout}
 Number Field in a with defining polynomial x^2 - 5
-\end{lstlisting}%link
+\end{sageout}
+\end{sagecode} %link
 
-Note that in Sage {\tt 1/2 * x} means the same as {\tt (1/2)*x}.
-\todo{Say "in computers" (not sage), and reference Wikipedia for order of operations.}
+Note that in computers {\tt 1/2 * x} means the same as {\tt (1/2)*x}. For more information about the order of operations in programming see
+\url{https://docs.python.org/2/reference/expressions.html#operator-precedence}.
 \noindent{}The fraction field of an {\em order} -- i.e., a subring of $\O_K$ of
 finite index -- is also the number field again.
 %link
-\begin{lstlisting}
-sage: O2 = K.order(2*a); O2
-Order with module basis 1, 2*a in Number Field
-in a with defining polynomial x^2 - 5
-sage: Frac(O2)
+\begin{sagecode}
+\begin{sagecell}
+O2 = K.order(2*a); O2
+\end{sagecell}
+\begin{sageout}
+Order in Number Field in a with defining polynomial x^2 - 5
+\end{sageout}
+\begin{sagecell}
+Frac(O2)
+\end{sagecell}
+\begin{sageout}
 Number Field in a with defining polynomial x^2 - 5
-\end{lstlisting}
+\end{sageout}
+\end{sagecode}
 \end{example}
 
 \begin{definition}[Integrally Closed]
@@ -175,17 +199,29 @@ generated as an $R$-module.
 
 \begin{example}
 We multiply two fractional ideals in \sage:
-\begin{lstlisting}
-sage: K.<a> = NumberField(x^2 + 23)
-sage: I = K.fractional_ideal(2, 1/2*a - 1/2)
-sage: J = I^2
-sage: I
-Fractional ideal (2, 1/2*a - 1/2) of Number Field ...
-sage: J
-Fractional ideal (4, 1/2*a + 3/2) of Number Field ...
-sage: I*J
-Fractional ideal (-1/2*a - 3/2) of Number Field ...
-\end{lstlisting}
+\begin{sagecode}
+\begin{sagecell}
+K.<a> = NumberField(x^2 + 23)
+I = K.fractional_ideal(2, 1/2*a - 1/2)
+J = I^2
+I
+\end{sagecell}
+\begin{sageout}
+Fractional ideal (2, 1/2*a - 1/2)
+\end{sageout}
+\begin{sagecell}
+J
+\end{sagecell}
+\begin{sageout}
+Fractional ideal (4, 1/2*a + 3/2)
+\end{sageout}
+\begin{sagecell}
+I*J
+\end{sagecell}
+\begin{sageout}
+Fractional ideal (1/2*a + 3/2)
+\end{sageout}
+\end{sagecode}
 \end{example}
 
 Since fractional ideals $I$ are finitely generated, we can clear
@@ -436,13 +472,21 @@ finite (as a set) ring $\O_K/p\O_K$.
 
 The factorization (\ref{eqn:fac6}) can be compute using
 \sage{} as follows:
-\begin{lstlisting}
-sage: K.<a> = NumberField(x^2 + 6); K
+\begin{sagecode}
+\begin{sagecell}
+K.<a> = NumberField(x^2 + 6); K
+\end{sagecell}
+\begin{sageout}
 Number Field in a with defining polynomial x^2 + 6
-sage: K.factor_integer(6)
-(Fractional ideal (2, a) of Number Field ...)^2 *
-(Fractional ideal (3, a) of Number Field ...)^2
-\end{lstlisting}
+\end{sageout}
+\begin{sagecell}
+K.factor(6)
+\end{sagecell}
+\begin{sageout}
+(Fractional ideal (2, a))^2 * \
+(Fractional ideal (3, a))^2
+\end{sageout}
+\end{sagecode}
 
 %{\small
 %\begin{lstlisting}
