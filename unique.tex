@@ -60,8 +60,16 @@ Number Field in a with defining polynomial x^2 - 5
 \end{sageout}
 \end{sagecode} %link
 
-Note that in computers {\tt 1/2 * x} means the same as {\tt (1/2)*x}. For more information about the order of operations in programming see
-\url{https://docs.python.org/2/reference/expressions.html#operator-precedence}.
+\begin{remark}
+Note that in computers {\tt 1/2 * x} means the same as {\tt (1/2)*x}.
+For more information about the order of operations in programming see 
+\url{http://en.wikipedia.org/wiki/Order_of_operations}.
+In $\SAGE{}$ the {\tt \string^} symbol is replaced with python's
+exponentiation {\tt **} at execution.\footnote{
+Another source for order of operations specific to python is
+\url{https://docs.python.org/2/reference/expressions.html\#operator-precedence}.}
+\end{remark}
+
 \noindent{}The fraction field of an {\em order} -- i.e., a subring of $\O_K$ of
 finite index -- is also the number field again.
 %link
