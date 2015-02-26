@@ -22,11 +22,14 @@
 \definecolor{deepred}{rgb}{0.6,0,0}
 \definecolor{deepgreen}{rgb}{0,0.3,0}
 \definecolor{deeppurple}{HTML}{8804BD}
+\definecolor{lightgray}{HTML}{AAAAAA}
 
 \RequirePackage{listings}
 
 % Sage input environment
-\newenvironment{sagecode}{}{}
+\newenvironment{sagecode}
+{\begin{center}\begin{minipage}[c]{0.80\linewidth}}
+{\end{minipage}\end{center}}
 \lstnewenvironment{sagecell}[1][language=sage]{
 	\lstset{frame=single,
 			showtabs=False,
@@ -35,7 +38,8 @@
 			%backgroundcolor=\color{lightgreen},
 			language = Sage,
 			frame=tb,
-			framexleftmargin=1em,
+			rulecolor=\color{lightgray},
+			framexleftmargin=0.75em,
 			#1
 	}
 }{}
@@ -47,9 +51,9 @@
 			%backgroundcolor=\color{lightblue},
 			basicstyle={\scriptsize \ttfamily},
 			frame=l, %position of frame (only on left)
-			framerule=0.2em, %thickness of frame
-			framexleftmargin=1em, %between frame and code
-			xleftmargin=1em, %between edge of page and frame
+			framerule=0.3em, %thickness of frame
+			framexleftmargin=0.75em, %between frame and code
+			xleftmargin=3em, %between edge of page and frame
 			rulecolor=\color{orange},
 			#1
 	}
