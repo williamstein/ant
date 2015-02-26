@@ -3,7 +3,7 @@ Frequently $\O_K$ is not a principal ideal domain.  This chapter is
 about a way to understand how badly $\O_K$ fails to be a principal
 ideal domain.  The class group of $\O_K$ measures this failure.  As
 one sees in a course on Class Field Theory, the class group and its
-generalizations also yield deep insight into the 
+generalizations also yield deep insight into the
 extensions of~$K$ that are Galois with abelian Galois group.
 
 In Section~\ref{sec:theclassgroup}, we define the class group and
@@ -22,7 +22,7 @@ books.
 
 \section{The Class Group}\label{sec:theclassgroup}
 \begin{definition}[Class Group]
-Let $\O_K$ be the ring of integers of a number field~$K$.  The 
+Let $\O_K$ be the ring of integers of a number field~$K$.  The
 \defn{class group} $C_K$ of~$K$ is the group of fractional ideals
 modulo the sugroup of principal fractional ideals $(a)$, for $a\in K$.
 \end{definition}
@@ -43,13 +43,13 @@ of complex conjugate embeddings of~$K$ such that
 every ideal class of $\O_K$ contains an integral ideal
 of norm at most $C_{r,s}\sqrt{|d_K|}$, where
 $d_K=\Disc(\O_K)$.
-Thus by Proposition~\ref{prop:finitewithnorm} 
+Thus by Proposition~\ref{prop:finitewithnorm}
 the class group $C_K$ of~$K$ is
 finite.
 In fact, one can take
 $$C_{r,s} = \left(\frac{4}{\pi}\right)^s\frac{n!}{n^n}.$$
 \end{theorem}
-The explicit bound in the theorem 
+The explicit bound in the theorem
 $$M_K = \left(\frac{4}{\pi}\right)^s\frac{n!}{n^n} \cdot \sqrt{|d_K|}$$
 is called the \defn{Minkowski
   bound}.  There are other better bounds, but they depend on unproven
@@ -57,7 +57,7 @@ conjectures.
 
 The following two examples illustrate how to apply
 Theorem~\ref{thm:finiteclassgrp} to compute $C_K$ in
-simple cases. 
+simple cases.
 \begin{example}
 Let $K=\Q[i]$.  Then $n=2$, $s=1$, and $|d_K|=4$, so the Minkowski bound is
 $$
@@ -70,7 +70,7 @@ so $C_K$ is trivial.
 \end{example}
 
 \begin{example}
-Let $K=\Q(\sqrt{10})$. 
+Let $K=\Q(\sqrt{10})$.
 We have $\O_K = \Z[\sqrt{10}]$,
 so $n=2$, $s=0$, $|d_K| = 40$, and the
 Minkowski bound is
@@ -79,33 +79,45 @@ $$
   = 2\cdot \sqrt{10} \cdot \frac{1}{2} = \sqrt{10} = 3.162277\ldots.
 $$
 We compute the Minkowski bound in \sage as follows:
-\begin{verbatim}
-sage: K = QQ[sqrt(10)]; K
+\begin{sagecode}
+\begin{sagecell}
+K = QQ[sqrt(10)]; K
+\end{sagecell}
+\begin{sageout}
 Number Field in sqrt10 with defining polynomial x^2 - 10
-sage: B = K.minkowski_bound(); B
+\end{sageout}
+\begin{sagecell}
+B = K.minkowski_bound(); B
+\end{sagecell}
+\begin{sageout}
 sqrt(10)
-sage: B.n()
+\end{sageout}
+\begin{sagecell}
+B.n()
+\end{sagecell}
+\begin{sageout}
 3.16227766016838
-\end{verbatim}
+\end{sageout}
+\end{sagecode}
 Theorem~\ref{thm:finiteclassgrp} implies that every ideal class has a
 representative that is an integral ideal of norm~$1$,~$2$, or~$3$.
 The ideal $2\O_K$ is ramified in $\O_K$, so
 $$
   2\O_K = (2,\sqrt{10})^2.
 $$
-If $(2,\sqrt{10})$ were principal, say $(\alpha)$, then 
-$\alpha=a+b\sqrt{10}$ would have norm $\pm 2$. 
+If $(2,\sqrt{10})$ were principal, say $(\alpha)$, then
+$\alpha=a+b\sqrt{10}$ would have norm $\pm 2$.
 Then the equation
 \begin{equation}\label{eqn:norm10}
   x^2 - 10y^2 = \pm 2,
 \end{equation}
-would have an integer solution.  But the squares mod~$5$ are 
-$0,\pm 1$, so (\ref{eqn:norm10}) has no solutions. 
+would have an integer solution.  But the squares mod~$5$ are
+$0,\pm 1$, so (\ref{eqn:norm10}) has no solutions.
 Thus $(2,\sqrt{10})$ defines a nontrivial element of the class group,
 and it has order~$2$ since its square is the principal ideal $2\O_K$.
 Thus $2\mid \#C_K$.
 
-To find the integral ideals of norm $3$, we 
+To find the integral ideals of norm $3$, we
 factor $x^2-10$ modulo~$3$, and see that
 $$
   3\O_K  = (3,2+\sqrt{10}) \cdot (3,4+\sqrt{10}).
@@ -135,18 +147,38 @@ Thus the class group is a group of order at most $3$ that contains an
 element of order~$2$.  Thus it must have order~$2$.  We verify this in
 \sage below, where we also check that $(3, 2+\sqrt{10})$ generates the
 class group.
-\begin{verbatim}
-sage: K.<sqrt10> = QQ[sqrt(10)]; K
+\begin{sagecode}
+\begin{sagecell}
+K.<sqrt10> = QQ[sqrt(10)]; K
+\end{sagecell}
+\begin{sageout}
 Number Field in sqrt10 with defining polynomial x^2 - 10
-sage: G = K.class_group(); G
+\end{sageout}
+\begin{sagecell}
+G = K.class_group(); G
+\end{sagecell}
+\begin{sageout}
 Class group of order 2 with structure C2 of Number Field ...
-sage: G.0
+\end{sageout}
+\begin{sagecell}
+G.0
+\end{sagecell}
+\begin{sageout}
 Fractional ideal class (3, sqrt10 + 1)
-sage: G.0^2
+\end{sageout}
+\begin{sagecell}
+G.0^2
+\end{sagecell}
+\begin{sageout}
 Trivial principal fractional ideal class
-sage: G.0 == G( (3, 2 + sqrt10) )
+\end{sageout}
+\begin{sagecell}
+G.0 == G( (3, 2 + sqrt10) )
+\end{sagecell}
+\begin{sageout}
 True
-\end{verbatim}
+\end{sageout}
+\end{sagecode}
 \end{example}
 
 Before proving Theorem~\ref{thm:finiteclassgrp}, we prove a few
@@ -169,14 +201,14 @@ basis for~$L$.
 \begin{lemma}[Blichfeld]\label{lem:blichfeld}\ilem{Blichfeld}
 Let $L$ be a lattice in $V=\R^n$, and let $S$ be a
 bounded closed convex subset of $V$ that is symmetric about the
-origin.  If 
+origin.  If
 $\Vol(S)\geq 2^n \Vol(V/L),$
 then~$S$ contains a nonzero element of $L$.
 \end{lemma}
 \begin{proof}
-First assume that $\Vol(S)>2^n\cdot \Vol(V/L)$.
-If the map $\pi: \frac{1}{2}S \to V/L$ is injective, then 
-$$\frac{1}{2^n}\Vol(S) = \Vol\left(\frac{1}{2} S\right)\leq \Vol(V/L),$$ 
+First assume that $\Vol(S)>2^n \Vol(V/L)$.
+If the map $\pi: \frac{1}{2}S \to V/L$ is injective, then
+$$\frac{1}{2^n}\Vol(S) = \Vol\left(\frac{1}{2} S\right)\leq \Vol(V/L),$$
 a contradiction.  Thus $\pi$ is not injective, so there
 exist $P_1\neq P_2\in \frac{1}{2}S$ such that $P_1-P_2\in L$.
 Because $S$ is symmetric about the origin, $-P_2\in \frac{1}{2}S$.  By convexity,
@@ -194,7 +226,7 @@ small $\eps$.  Since $S$ is closed, $Q\in L\cap S$.
 \end{proof}
 
 \begin{lemma}\label{lem:latticevolchange}\ilem{lattices and volumes}
-If $L_1$ and $L_2$ are lattices in $V$, then 
+If $L_1$ and $L_2$ are lattices in $V$, then
 \[
    \Vol(V/L_2) = \Vol(V/L_1) \cdot [L_1:L_2].
 \]
@@ -202,28 +234,29 @@ If $L_1$ and $L_2$ are lattices in $V$, then
 \begin{proof}
 Let $A$ be an automorphism of~$V$ such that $A(L_1)=L_2$.  Then~$A$
 defines an isomorphism of real manifolds $V/L_1\to V/L_2$ that changes
-volume by a factor of $|\det(A)|=[L_1:L_2]$.  The claimed
-formula then follows, since $[L_1:L_2] = |\det(A)|$, by definition.
+volume by a factor of $\left|\det(A)\right|=[L_1:L_2]$.  The claimed
+formula then follows, since $[L_1:L_2] = \left|\det(A)\right|$, by definition.
 \end{proof}
 
-Fix a number field $K$ with ring of integers $\O_K$. 
-
+Fix a number field $K$ with ring of integers $\O_K$.
 Let $\sigma_1,\ldots, \sigma_r$ be the real embeddings
 of $K$ and $\sigma_{r+1},\ldots, \sigma_{r+s}$ be half
 the complex embeddings of $K$, with one representative of
 each pair of complex conjugate embeddings.
-Let $\sigma:K \to V=\R^n$ be the embedding 
+Let $\sigma:K \to V=\R^n$ be the embedding
 \begin{align*}
   \sigma(x) = \big(&\sigma_1(x), \sigma_2(x),\ldots, \sigma_r(x),\\
-     &\quad \Re(\sigma_{r+1}(x)), \ldots, \Re(\sigma_{r+s}(x)), 
+     &\quad \Re(\sigma_{r+1}(x)), \ldots, \Re(\sigma_{r+s}(x)),
       \Im(\sigma_{r+1}(x)), \ldots, \Im(\sigma_{r+s}(x))\big),
 \end{align*}
+\begin{warning}
 Note that this $\sigma$ is {\em not} exactly the same as the one
-at the beginning of Section~\ref{sec:disc} if $s>0$. 
-
+at the beginning of Section~\ref{sec:disc} if $s>0$.
+\end{warning}
 \begin{lemma}\label{lem:volok}\ilem{volume of rings of integers}
+Let $\sigma$ be the map described above. Then
 \[
-  \Vol(V/\sigma(\O_K)) = 2^{-s} \sqrt{|d_K|}.
+  \Vol(V/\sigma(\O_K)) = 2^{-s} \sqrt{\left|d_K\right|}.
 \]
 \end{lemma}
 \begin{proof}
@@ -231,52 +264,52 @@ Let $L=\sigma(\O_K)$.
 From a basis $w_1,\ldots, w_n$ for $\O_K$ we obtain a matrix $A$
 whose $i$th row is
 \[
-(\sigma_1(w_i), \cdots, \sigma_r(w_i), 
-\Re(\sigma_{r+1}(w_i)),\ldots, \Re(\sigma_{r+s}(w_i)), 
+(\sigma_1(w_i), \cdots, \sigma_r(w_i),
+\Re(\sigma_{r+1}(w_i)),\ldots, \Re(\sigma_{r+s}(w_i)),
 \Im(\sigma_{r+1}(w_i)),\ldots, \Im(\sigma_{r+s}(w_i)))
 \]
 and whose determinant has absolute value equal to the volume
 of $V/L$.  By doing the following three column operations,
 we obtain a matrix whose rows are exactly the images of
 the $w_i$ under {\em all} embeddings of $K$ into $\C$, which
-is the matrix that came up when we defined 
+is the matrix that came up when we defined
 $d_K=\Disc(\O_K)$ in Section~\ref{sec:disc}.
 \begin{enumerate}
 \item Add $i=\sqrt{-1}$ times each column with entries $\Im(\sigma_{r+j}(w_i))$
 to the column with entries $\Re(\sigma_{r+j}(w_i))$.
 \item Multiply all columns with entries $\Im(\sigma_{r+j}(w_i))$
   by $-2i$, thus changing the determinant by $(-2i)^s$.
-\item Add each columns that now has entries 
+\item Add each columns that now has entries
 $\Re(\sigma_{r+j}(w_i))+i\Im(\sigma_{r+j}(w_i))$
 to the the column with entries $-2i\Im(\sigma_{r+j}(w_i))$
 to obtain columns $\Re(\sigma_{r+j}(w_i))-i\Im(\sigma_{r+j}(w_i))$.
 \end{enumerate}
-Recalling the definition of discriminant, we see that if~$B$ 
+Recalling the definition of discriminant, we see that if~$B$
 is the matrix constructed by doing the above three
-operations to $A$, then $|\det(B)^2| = |d_K|$. 
+operations to $A$, then $\left|\det(B)^2\right| = \left|d_K\right|$.
 Thus
 \[
-  \Vol(V/L) = |\det(A)| = |(-2i)^{-s}\cdot \det(B)| = 2^{-s}\sqrt{|d_K|}.
+  \Vol(V/L) = \left|\det(A)\right| = \left|(-2i)^{-s}\cdot \det(B)\right| = 2^{-s}\sqrt{\left|d_K\right|}.
 \]
 \end{proof}
 
 \begin{lemma}\label{lem:volfracideal}\ilem{fractional ideal is lattice}
 If~$I$ is a  fractional $\O_K$-ideal, then $\sigma(I)$ is
-a lattice in~$V$ and 
+a lattice in~$V$ and
 \[
 \Vol(V/\sigma(I)) = 2^{-s}\sqrt{|d_K|}\cdot \Norm(I).
 \]
 \end{lemma}
 \begin{proof}
-Since $\sigma(\O_K)$ has rank $n$ as an abelian group, and 
+Since $\sigma(\O_K)$ has rank $n$ as an abelian group, and
 Lemma~\ref{lem:volok} implies that $\sigma(\O_K)$ also spans $V$,
 it follows that $\sigma(\O_K)$ is a lattice in $V$.
 For some nonzero integer $m$ we have
 $m\O_K \subset I \subset \frac{1}{m}\O_K$,
-so $\sigma(I)$ is also a lattice in~$V$.  
+so $\sigma(I)$ is also a lattice in~$V$.
 To prove the displayed volume
 formula, combine Lemmas
-\ref{lem:latticevolchange}--\ref{lem:volok} to get
+\ref{lem:latticevolchange} and \ref{lem:volok} to get
 \[
 \Vol(V/\sigma(I)) = \Vol(V/\sigma(\O_K))\cdot[\O_K:I]
          =2^{-s}\sqrt{|d_K|}\Norm(I).
@@ -292,47 +325,46 @@ and let $f:V\to \R$ be the function defined by
   f(x_1,\ldots, x_n) = |x_1\cdots x_r\cdot (x_{r+1}^2 + x_{(r+1)+s}^2)\cdots (x_{r+s}^2 + x_n^2)|.
 \]
 Notice that if $x\in K$ then $f(\sigma(x)) = |\Norm_{K/\Q}(x)|$,
-and for any $a\in \R$, 
+and for any $a\in \R$,
  $$
   f(ax_1, \ldots,  ax_n) = |a|^n f(x_1,\ldots, x_n).
 $$
 
 Let $S\subset V$ be any fixed choice of closed, bounded, convex, subset with
-positive volume that is
-symmetric with respect to the origin and has positive volume.  Since~$S$ is closed
-and bounded, 
+positive volume that is symmetric with respect to the origin.
+Since~$S$ is closed and bounded,
 \[
   M = \max\{f(x) : x \in S\}
 \]
-exists. 
+exists.
 
 Suppose~$I$ is any  fractional ideal of $\O_K$.  Our goal
 is to prove that there is an integral ideal $aI$ with small norm. We
 will do this by finding an appropriate $a\in I^{-1}$.
-By Lemma~\ref{lem:volfracideal}, 
+By Lemma~\ref{lem:volfracideal},
 \[
- c=\Vol(V/\sigma(I^{-1})) = 2^{-s}\sqrt{|d_K|}\cdot \Norm(I)^{-1} 
+ c=\Vol(V/\sigma(I^{-1})) = 2^{-s}\sqrt{|d_K|}\cdot \Norm(I)^{-1}
         = \frac{2^{-s} \sqrt{|d_K|}}{\Norm(I)}.
 \]
 Let $\lambda = 2\cdot\left(\frac{c}{v}\right)^{1/n}$, where $v=\Vol(S)$.
-Then 
+Then
 \[
    \Vol(\lambda{} S) = \lambda^n \Vol(S) = 2^n\cdot \frac{c}{v} \cdot v = 2^n\cdot c=
   2^n \Vol(V/\sigma(I^{-1})),
 \]
-so by Lemma~\ref{lem:blichfeld} there exists 
+so by Lemma~\ref{lem:blichfeld} there exists
 $0\neq b\in \sigma(I^{-1})\meet \lambda S$.
 Let $a \in I^{-1}$ be such that $\sigma(a)=b$.
 Since~$M$ is the largest norm of an element of~$S$, the largest norm
 of an element of $\sigma(I^{-1})\cap  \lambda{}S$ is at most $\lambda^n M$,
-so 
+so
 \[
-  |\Norm_{K/\Q}(a)| \leq \lambda^n M.
+  \left|\Norm_{K/\Q}(a)\right| \leq \lambda^n M.
 \]
-Since $a\in I^{-1}$, we have $aI \subset \O_K$, so 
+Since $a\in I^{-1}$, we have $aI \subset \O_K$, so
 $aI$ is an integral ideal of $\O_K$ that is equivalent to $I$, and
 \begin{align*}
-  \Norm(aI) &= |\Norm_{K/\Q}(a)|\cdot \Norm(I)\\
+  \Norm(aI) &= \left|\Norm_{K/\Q}(a)\right|\cdot \Norm(I)\\
     &\leq \lambda^n M\cdot \Norm(I)\\
     &\leq 2^n \frac{c}{v} M \cdot \Norm(I)\\
     &= 2^n\cdot 2^{-s} \sqrt{|d_K|} \cdot M \cdot v^{-1}\\
@@ -342,10 +374,27 @@ Notice that the right hand side is independent of $I$.  It
 depends only on $r$, $s$, $|d_K|$, and our choice of~$S$.
 This completes the proof of the theorem, except for
 the assertion that $S$ can be chosen to give the claim
-at the end of the theorem, which we leave as an exercise.
+at the end of the theorem which is shown in Exercise~\ref{ex:canchooseSright}.
 \end{proof}
 
-\begin{corollary}\icor{discrimant of number field $>1$}
+\begin{exercise}\label{ex:canchooseSright}
+Show that in the proof of Theorem~\ref{thm:finiteclassgrp},
+$S$ can be chosen so that the final bound matches the statement
+of the theorem. This means $S$ can be chosen so that
+$$
+\Norm(aI) \leq \left(\frac{4}{\pi}\right)^s \frac{n!}{n^n}\sqrt{\left|d_K\right|}.
+$$
+Hint: Consider the subset $S$ of $\R^n$ defined by
+$$
+|x_1| + \cdots + |x_r| + 2\left(\sqrt{
+x_{r+1}^2+x_{(r+1)+s}^2} + \cdots + \sqrt{
+x_{r+s}^2+x_{(r+s)+s}^2}\right) \leq 1.
+$$
+Suppose $a\in\O_K$ such that $\sigma(a)\in S$. What can you say about $\Norm_{K/\Q}(a)$?
+What is $\Vol(S)$?
+\end{exercise}
+
+\begin{corollary}\icor{discrimant of number field $>1$}\label{co:disc>1}
 Suppose that $K\neq \Q$ is a number field.  Then $|d_K|>1$.
 \end{corollary}
 \begin{proof}
@@ -354,15 +403,22 @@ we get the bound
 \[
  1\leq \sqrt{|d_K|}\cdot \left(\frac{4}{\pi}\right)^s\frac{n!}{n^n}.
 \]
-Thus 
+Thus
 \[
- \sqrt{|d_K|} 
-  \geq 
+ \sqrt{|d_K|}
+  \geq
 \left(\frac{\pi}{4}\right)^s\frac{n^n}{n!},
 \]
 and the right hand quantity is strictly bigger than $1$ for
-any $s\leq n/2$ and any $n>1$ (exercise).
+any $s\leq n/2$ and any $n>1$, see Exercise~\ref{ex:basicKbound}.
 \end{proof}
+
+\begin{exercise}\label{ex:basicKbound}
+Prove the statement at the end of the proof for Corollary~\ref{co:disc>1}, i.e. suppose $n>1$ and $s\leq \frac{n}{2}$ as above. Show that
+$
+\left(\frac{\pi}{4}\right)^s\frac{n^n}{n!} > 1.
+$
+\end{exercise}
 
 A prime $p$ ramifies in $\O_K$ if and only if $d\mid d_K$,
 so the corollary implies that every nontrivial extension of $\Q$
@@ -378,39 +434,47 @@ number fields are there?   We still don't know.
 \end{conjecture}
 For example, if we consider real quadratic fields $K=\Q(\sqrt{d})$,
 with $d$ positive and square free, many class numbers are probably $1$,
-as suggested by the \magma{} output below.
+as suggested by the \sage{} output below.
 It looks like 1's will keep appearing infinitely often, and indeed
-Cohen and Lenstra conjecture that they do (\cite{cohen-lenstra:heuristics}).  
-\begin{verbatim}
-sage: for d in [2..1000]:
-...       if is_fundamental_discriminant(d):
-...           h = QuadraticField(d, 'a').class_number()
-...           if h == 1:
-...               print d, 
-5 8 12 13 17 21 24 28 29 33 37 41 44 53 56 57 61 69 
-73 76 77 88 89 92 93 97 101 109 113 124 129 133 137 
-141 149 152 157 161 172 173 177 181 184 188 193 197 
-201 209 213 217 233 236 237 241 248 249 253 268 269 
-277 281 284 293 301 309 313 317 329 332 337 341 344 
-349 353 373 376 381 389 393 397 409 412 413 417 421 
-428 433 437 449 453 457 461 472 489 497 501 508 509 
-517 521 524 536 537 541 553 556 557 569 573 581 589 
-593 597 601 604 613 617 632 633 641 649 652 653 661 
-664 668 669 673 677 681 701 709 713 716 717 721 737 
-749 753 757 764 769 773 781 789 796 797 809 813 821 
-824 829 844 849 853 856 857 869 877 881 889 893 908 
+Cohen and Lenstra conjecture that they do (\cite{cohen-lenstra:heuristics}).
+\begin{sagecode}
+\begin{sagecell}
+for d in [2..1000]:
+    if is_fundamental_discriminant(d):
+        h = QuadraticField(d, 'a').class_number()
+        if h == 1:
+            print d,
+\end{sagecell}
+\begin{sageout}
+5 8 12 13 17 21 24 28 29 33 37 41 44 53 56 57 61 69
+73 76 77 88 89 92 93 97 101 109 113 124 129 133 137
+141 149 152 157 161 172 173 177 181 184 188 193 197
+201 209 213 217 233 236 237 241 248 249 253 268 269
+277 281 284 293 301 309 313 317 329 332 337 341 344
+349 353 373 376 381 389 393 397 409 412 413 417 421
+428 433 437 449 453 457 461 472 489 497 501 508 509
+517 521 524 536 537 541 553 556 557 569 573 581 589
+593 597 601 604 613 617 632 633 641 649 652 653 661
+664 668 669 673 677 681 701 709 713 716 717 721 737
+749 753 757 764 769 773 781 789 796 797 809 813 821
+824 829 844 849 853 856 857 869 877 881 889 893 908
 913 917 921 929 933 937 941 953 956 973 977 989 997
-\end{verbatim}
+\end{sageout}
+\end{sagecode}
 In contrast, if we look at class numbers of quadratic imaginary fields,
-only a few at the beginning have class number~$1$.  
-\begin{verbatim}
-sage: for d in [-1,-2..-1000]:
-...       if is_fundamental_discriminant(d):
-...           h = QuadraticField(d, 'a').class_number()
-...           if h == 1:
-...               print d,
+only a few at the beginning have class number~$1$.
+\begin{sagecode}
+\begin{sagecell}
+for d in [-1,-2..-1000]:
+    if is_fundamental_discriminant(d):
+        h = QuadraticField(d, 'a').class_number()
+        if h == 1:
+            print d
+\end{sagecell}
+\begin{sageout}
 -3 -4 -7 -8 -11 -19 -43 -67 -163
-\end{verbatim}
+\end{sageout}
+\end{sagecode}
 It is a theorem that was proved independently and in different ways by
 Heegner, Stark, and Baker that the above list of $9$ fields is the
 complete list with class number~$1$.  More generally, it is possible,
@@ -424,7 +488,7 @@ substantial work in this direction).
 % \begin{verbatim}
 % ?qfbclassno
 %  qfbclassno(x,{flag=0}): class number of discriminant x using
-%  Shanks's method by default. If (optional) flag is set to 1, 
+%  Shanks's method by default. If (optional) flag is set to 1,
 %  use Euler products.
 % ? for(d=2,1000, if(isfundamental(d), h=qfbclassno(d);if(h==1,print1(d,", "))))
 % 5, 8, 12, 13, 17, 21, 24, ... 977, 989, 997,
@@ -445,7 +509,7 @@ substantial work in this direction).
 % \end{quote}
 % %The documentation used to say that Shank's method was not implemented
 % %in full generality because ``the authors were too lazy''.
-  
+
 
 \section{More About Computing Class Groups}\label{sec:comcg}
 If $\p$ is a prime of $\O_K$, then the intersection $\p\cap \Z=p\Z$ is
@@ -453,7 +517,8 @@ a prime ideal of $\Z$.  We say that $\p$ \defn{lies over} $p\in\Z$.
 Note $\p$ lies over $p\in\Z$ if and only if $\p$ is one of the prime
 factors in the factorization of the ideal $p\O_K$.  Geometrically,
 $\p$ is a point of $\Spec(\O_K)$ that lies over the point $p\Z$ of
-$\Spec(\Z)$ under the map induced by the inclusion $\Z\hra \O_K$.
+$\Spec(\Z)$ under the map induced by the inclusion $\Z\hra \O_K$
+as described in the Section~\ref{sec:geom_intuition}.
 
 
 \begin{lemma}\ilem{class group generated by bounded primes}
@@ -465,7 +530,7 @@ where $s$ is the number of complex conjugate pairs of embeddings
 $K\hra\C$.
 \end{lemma}
 \begin{proof}
-Theorem~\ref{thm:finiteclassgrp} 
+Theorem~\ref{thm:finiteclassgrp}
 asserts that every ideal class in $\Cl(K)$ is represented by
 an ideal~$I$ with $\Norm(I)\leq B_K$.  Write $I=\prod_{i=1}^m
 \p_i^{e_i}$, with each $e_i\geq 1$.  Then by multiplicativity of the
@@ -492,8 +557,8 @@ We compute the class group of $K=\Q(i)$.  We have
 $$
   n = 2, \quad r=0, \quad s=1, \quad d_K = -4,
 $$
-so 
-$$ 
+so
+$$
   B_K = \sqrt{4}\cdot \left(\frac{4}{\pi}\right)^1
    \cdot\left(\frac{2!}{2^2}\right) = \frac{8}{\pi} <3.
 $$
@@ -512,7 +577,7 @@ We have
 $$
   n = 2, \quad r = 2, \quad s=0, \quad d_K = 5,
 $$
-so $$B = \sqrt{5}\cdot \left(\frac{4}{\pi}\right)^0\cdot 
+so $$B = \sqrt{5}\cdot \left(\frac{4}{\pi}\right)^0\cdot
 \left(\frac{2!}{2^2}\right)  < 3.$$
 Thus $\Cl(K)$ is generated by the primes that divide $2$.
 We have $\O_K=\Z[\gamma]$, where $\gamma=\frac{1+\sqrt{5}}{2}$
@@ -527,11 +592,11 @@ We have
 $$
   n = 2, \quad r=0, \quad s=1, \quad d_K = -24,
 $$
-so 
+so
 $$
-  B = \sqrt{24} \cdot \frac{4}{\pi} \cdot 
+  B = \sqrt{24} \cdot \frac{4}{\pi} \cdot
        \left(\frac{2!}{2^2}\right)\sim 3.1.
-$$ 
+$$
 Thus $\Cl(K)$ is generated by the prime ideals lying over $2$ and $3$.
 We have $\O_K=\Z[\sqrt{-6}]$, and $\sqrt{-6}$ satisfies $x^2+6=0$.
 Factoring $x^2+6$ modulo $2$ and $3$ we see that the class group
@@ -540,14 +605,14 @@ $$
   \p_2 = (2,\sqrt{-6})\qquad\text{and}\qquad
   \p_3 = (3,\sqrt{-6}).
 $$
-Also, $\p_2^2 = 2\O_K$ and $\p_3^2=3\O_K$, so 
+Also, $\p_2^2 = 2\O_K$ and $\p_3^2=3\O_K$, so
 $\p_2$ and $\p_3$ define elements of order
-dividing $2$ in $\Cl(K)$.  
+dividing $2$ in $\Cl(K)$.
 
 Is either $\p_2$ or $\p_3$ principal?  Fortunately,
 there is an easier norm trick that allows us to decide.
 Suppose $\p_2 = (\alpha)$, where $\alpha=a+b\sqrt{-6}$.
-Then $$2=\Norm(\p_2) = |\Norm(\alpha)| = (a+b\sqrt{-6})(a-b\sqrt{-6})
+Then $$2=\Norm(\p_2) = \left|\Norm(\alpha)\right| = (a+b\sqrt{-6})(a-b\sqrt{-6})
    = a^2 + 6b^2.$$
 Trying the first few values of $a, b\in \Z$, we see that this
 equation has no solutions, so $\p_2$ can not
@@ -565,11 +630,13 @@ $$
 The ideals on both sides of the inclusion have norm $6$,
 so by multiplicativity of the norm, they must be the
 same ideal.  Thus $\p_2\cdot \p_3=(\sqrt{-6})$ is principal,
+which shows $\p_3$ is the inverse of $\p_2$ in $\Cl(K)$. But
+$\p_2$ had order $2$,
 so $\p_2$ and $\p_3$ represent the same element of $\Cl(K)$.
 We conclude that $$\Cl(K) = \langle \p_2 \rangle = \Z/2\Z.$$
 \end{example}
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "ant"
-%%% End: 
+%%% End:
