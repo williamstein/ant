@@ -102,11 +102,12 @@ $$
  \vphi(a) = (\log|\sigma_1(a)|,\ldots, \log|\sigma_{r+s}(a)|).
 $$
 Here $|z|$ is the usual absolute value of $z=x+iy\in\C$
-(so $|z|=\sqrt{x^2+y^2}$) and the maps $\sigma_i$ are
-the same as those described in Lemma~\ref{lem:volok}. So in particular
+(so $|z|=\sqrt{x^2+y^2}$), and the maps $\sigma_i$ are
+the same as those described in Lemma~\ref{lem:volok}.
+In particular,
 $\sigma_1,\dots,\sigma_r$ represent all real embeddings
-$K\to\R$ and $\sigma{r+1},\dots,\sigma_{r+s}$ represent
-half of the complex embeddings $K\to\C$, one representative
+$K\to\R$ and $\sigma_{r+1},\dots,\sigma_{r+s}$ represent
+half of the complex embeddings $K\to\C$, with one representative
 for each pair of complex conjugate embeddings.
 
 \begin{lemma}\label{lem:inh}\ilem{hyperplane embedding}
@@ -386,7 +387,7 @@ number theory (for example, using continued fractions).
 
 We first solve Pell's equation $x^2 - 5y^2 = 1$ with $d=5$ by finding
 the units of the ring of integers of $\Q(\sqrt{5})$ using Sage.
-Recall form Example~\ref{example:Qsqrt5ringofints} that the
+Recall from Example~\ref{example:Qsqrt5ringofints} that the
 ring of integers of $\Q(\sqrt{5})$ is $\Z[\frac{1+\sqrt{5}}{2}]$
 
 \begin{sagecode}
@@ -399,7 +400,7 @@ Unit group with structure C2 x Z of Number Field in sqrt5 with
 defining polynomial x^2 - 5
 \end{sageout}
 \begin{sagecell}
-u,v = G.1.value(), G.0.value(); u,v
+u = G.1.value(); v = G.0.value(); (u, v)
 \end{sagecell}
 \begin{sageout}
 (1/2*sqrt5 + 1/2, -1)
@@ -419,9 +420,9 @@ The subgroup of cubes of $u$ gives us the units with integer $x,y$ (not both neg
 \end{sageout}
 \end{sagecode} %link
 
-However the norm of $u = \frac{1+\sqrt{5}}{2}$ is $-1$.
+However, the norm of $u = \frac{1+\sqrt{5}}{2}$ is $-1$.
 So the $6$th powers of $u$ will generate solutions to Pell's Equation.
-We can also list out the coefficients for these powers as follows.
+We can also list the coefficients for these powers as follows.
 
 \begin{sagecode} %link
 \begin{sagecell}
@@ -807,7 +808,7 @@ CPU time: 0.26 s, Wall time: 0.31 s
 \begin{sagecell}
 %time U = CyclotomicField(29).unit_group()
 \end{sagecell}
-\begin{sageout} %TODO check these results aren't being cached?
+\begin{sageout}
 CPU time: 0.60 s, Wall time: 0.62 s
 \end{sageout}
 \end{sagecode}
