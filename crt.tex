@@ -303,6 +303,23 @@ $d/b\in R$.   Finally
 so $\vphi$ is surjective.
 \end{proof}
 
+\begin{exercise}\label{ex:residuefieldofpower}
+	Let $R$ be a Dedekind domain and $\p$ a prime ideal in $R$.
+	Then by definition $\p$ is maximal and $R/\p$ is a field.
+	
+	Show that $\#(R/p^m) = \#(R/p)^m$.
+	
+	Note: $\#(R/p)$ may not necessarily be finite in general!
+	The ring of formal power series $k[[T]]$ for some field $k$
+	is a Dedeking domain and the residue field at the prime $T$
+	is just $k$.
+	
+	Hint: Consider the exact sequence
+	$$
+	0\to p/p^{m-1} \to R/p^{m-1} \to R/p^m \to 0
+	$$
+\end{exercise}
+
 \section{Computing Using the CRT}
 In order to explicitly compute an $a$ as given by Theorem~\ref{thm:crt},
 usually one first precomputes elements $v_1, \ldots, v_r \in R$ such that
