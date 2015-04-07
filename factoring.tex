@@ -210,21 +210,50 @@ their residue class degree) in its fiber over~$5$ than
 it has generically.
 See Figure~\ref{fig:O_KoverSpecZ}.
 
-%% \vfill
-
 \begin{figure}
 \centering
-%\psfrag{p1}{$(5,2+4a+a^2)$}
-%\psfrag{p2}{$(5,3+a)^2$}
-%\psfrag{p3}{$(5,2+a)$}
-%\psfrag{p}{$5\Z$}
-%\psfrag{q1}{$2\O_K$}
-%\psfrag{q}{$2\Z$}
-%\psfrag{zero}{$(0)$}
-%\psfrag{r}{$3\Z$}
-%\psfrag{s}{$7\Z$}
-%\psfrag{t}{$11\Z$}
-\includegraphics[width=25em]{cover1}
+$$
+\begin{tikzpicture}[scale = 1.5]
+
+\draw[thick] (0, 0) to (0, 8);
+
+\node at (-3, 1) {zero};
+
+\node at (0, 1) {\huge $\bullet$};
+\node at (.2, 1.2) {$p$};
+
+\node at (-1, 1.3) {\huge $\bullet$};
+\node at (-.9, 1.5) {$q$};
+
+\node at (-2, 2.5) {zero};
+
+\draw [fill] (-.85, 3.15) circle [radius = .17];
+\node at (-.5, 3.35) {$q_1$};
+
+\node at (-.5, 1.1) {\huge $\bullet$};
+\node at (-.6, .9) {$r$};
+
+\node at (.5, .95) {\huge $\bullet$};
+\node at (.4, .75) {$s$};
+
+\node at (1.2, 1.08) {\huge $\bullet$};
+\node at (1.15, .9) {$t$};
+
+\node at (0, 3) {\huge $\bullet$};
+\node at (.25, 3.2) {$p_3$};
+
+\node at (0, 5) {\huge $\bullet$};
+\node at (.3, 5) {$p_2$};
+
+\node at (0, 7) {\Huge $\bullet$};
+\node at (.25, 7.2) {$p_1$};
+
+\draw[ultra thick] (-3, 1.25) to [out = 30, in = 180] (-2, 1.5) to [out = 0, in = 180] (.5, .95) to [out = 0, in = 180] (2.5, 1.55) to [out = 0, in = 170] (5, .95);
+
+\draw[ultra thick] (-2, 2.75) to [out = 40, in = 165] (0, 3) to [out = -15, in = 180] (1.5, 2.75) to [out = 0, in = -90] (2.5, 3.5) to [out = 90, in = -10] (1.5, 4.5) to [out = 170, in = -90] (0, 5) to [out = 90, in = 190] (2, 5.5) to [out = 10, in = -90] (3, 6) to [out = 90, in = 0] (2.25, 6.75) to [out = 180, in = -15] (0, 7) to [out = 165, in = -30] (-1, 7.5);
+
+\end{tikzpicture}
+$$
 \caption{Diagram of $\Spec(\O_K) \ra \Spec(\Z)$}
 \label{fig:O_KoverSpecZ}
 \end{figure}
