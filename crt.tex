@@ -304,21 +304,27 @@ so $\vphi$ is surjective.
 \end{proof}
 
 \begin{exercise}\label{ex:residuefieldofpower}
-	Let $R$ be a Dedekind domain and $\p$ a prime ideal in $R$.
-	Then by definition $\p$ is maximal and $R/\p$ is a field.
+	Let $R$ be a Dedekind domain and $\p$ a nonzero prime ideal in $R$.
+	Show that $\#(R/\p^m) = \#(R/\p)^m$.
 	
-	Show that $\#(R/p^m) = \#(R/p)^m$.
-	
-	Note: $\#(R/p)$ may not necessarily be finite in general!
+	Note: $\#(R/\p)$ is not finite in general! For example,
 	The ring of formal power series $k[[T]]$ for some field $k$
-	is a Dedeking domain and the residue field at the prime $T$
-	is just $k$.
+	is a Dedekind domain and the residue field at the prime $T$
+	is $k$.
 	
 	Hint: Consider the exact sequence
 	$$
-	0\to p/p^{m-1} \to R/p^{m-1} \to R/p^m \to 0
+	0\to \p/\p^{m-1} \to R/\p^{m-1} \to R/\p^m \to 0.
 	$$
 \end{exercise}
+
+\begin{remark}
+	There is one special case of the previous exercise that you probably
+	have seen before: the size of $\Z/4\Z$ is the same as
+	$(\Z/2\Z)^2$. In fact you might have seen a proof of
+	the fact that $\Z/n^m\Z$ has the same cardinality as $\left(\Z/n\Z\right)^m$
+	in a standard group theory or abstract algebra course.
+\end{remark}
 
 \section{Computing Using the CRT}
 In order to explicitly compute an $a$ as given by Theorem~\ref{thm:crt},
