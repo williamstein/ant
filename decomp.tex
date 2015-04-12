@@ -213,7 +213,10 @@ which completes the proof.
 
 The rest of this section illustrates the theorem for quadratic fields
 and a cubic field and its Galois closure.
-\subsection{Quadratic Extensions}
+
+\subsection{Special Cases}
+
+\subsubsection*{Quadratic Extensions}
 
 Suppose $K/\Q$ is a quadratic field.  Then $K$ is Galois, so for each prime $p\in\Z$ we have
 $2=efg$. There are exactly three possibilities:
@@ -238,7 +241,7 @@ which means $p\O_K = \p_1\p_2$ with $\p_1\neq \p_2$.  This happens the other
 half of the time.
 \end{itemize}
 
-\begin{example}
+\begin{example}\label{exam:decompQsqrt5}
 Let $K=\Q(\sqrt{5})$, so $\O_K=\Z[\gamma]$, where
 $\gamma=(1+\sqrt{5})/2$.  Then $p=5$ is ramified, since $5\O_K =
 (\sqrt{5})^2$.  More generally, the order $\Z[\sqrt{5}]$ has index $2$
@@ -263,7 +266,8 @@ For a technical statement and proof of this theorem,
 see \cite{neukirch1999} Theorem~VII.13.4.}
 \end{example}
 
-\subsection{The Cube Root of Two}
+\subsubsection*{The Cube Root of Two}
+
 Suppose $K/\Q$ is not Galois.
 Then $e_i$, $f_i$, and~$g$ are defined for each prime $p\in\Z$,
 but we need not have $e_1=\cdots=e_g$ or $f_1=\cdots =f_g$.  We do still have that
@@ -286,9 +290,7 @@ Thus here $g=2$, $e_1=e_2=1$, $f_1=1$, and $f_2=2$.
 Thus when $K$ is not Galois we need not have that the $f_i$
 are all equal.
 
-%TODO Add more material to this subsection? An exercise?
-
-\subsection{Definitions}
+\subsection{Definitions and Terminology}
 
 In the previous sections we used words like ``ramify'',
 ``inert'', and ``split'' to describe the decomposition
@@ -298,25 +300,25 @@ in later sections.
 
 Let $K/L$ be an extension of number fields. Let 
 $\O_K,\O_L$ denote the respective ring of integers
-and $\p$ a prime in $\O_K$. By Theorem~\ref{thm:intuniqfac} we
-know that the ideal $\p\O_L$ factors uniquely into a product
-of primes in $\O_L$ given by
+and $\q$ a prime in $\O_L$. By Theorem~\ref{thm:intuniqfac} we
+know that the ideal $\q\O_K$ factors uniquely into a product
+of primes $\p_i$ in $\O_K$ given by
 $$
-\p\O_L = \q_1^{e_1}\cdots\q_g^{e_g}.
+\q\O_K = \p_1^{e_1}\cdots\p_g^{e_g}.
 $$
 Let $f_i$ be the degree of the extension of
-reside fields, i.e.
+residue fields, i.e.
 $$
-f_i = [\O_L/\q_i : \O_K/\p].
+f_i = [\O_K/\p_i : \O_L/\q].
 $$
 
 \begin{definition}\label{def:ramify}
-	The prime $\p$ \emph{ramifies} in $L$
+	The prime $\q$ \emph{ramifies} in $L$
 	if $e_i>1$ for some $1\leq i\leq g$.
-	Otherwise $\p$ is \emph{unramified}.
+	Otherwise $\q$ is \emph{unramified}.
 	%in geneal, residue fields should be separable, neukrich 49
-	If $\p$ is ramified and moreover $f_i=1$
-	for all $i$, then $\p$ is \emph{totally ramified}.
+	If $\q$ is ramified and moreover $f_i=1$
+	for all $i$, then $\q$ is \emph{totally ramified}.
 \end{definition}
 
 \begin{definition}\label{def:inert}
@@ -332,20 +334,47 @@ $$
 	\emph{totally split}.
 \end{definition}
 
-The following are some exercises to work out
-some properties basic properties of decompositions.
-With each one, check that the result matches the previous
-examples.
+It will sometimes be helpful to emphasize which prime we are
+referring to. To do this we will use the notation $e(\p/\q)$
+to represent the power of $\p$ appearing in the
+factorization of $\q\O_K$. The number $e(\p/\q)$ is called the
+\emph{ramification index} of $\p$ over $\q$.
+In this notation we could write $\q\O_K = \prod \p^{e(\p/\q)}$
+where the product ranges over all primes $\p$ in $\O_K$.
+We will similarly denote $f(\p/\q)$ to be the extension
+of the residue fields $[\O_K/\p:\O_L/\q]$, which is called
+the \emph{inertia degree}. Because the number of primes over $\q$
+depends on the field $K$, we sometimes denote $g$ by $g_K(\q)$.
 
-\begin{exercise}
+\begin{exercise}\label{ex:ramificationmultiplicative}
+The following are some basic properties of decompositions.
+For each one, compare the result with previous examples
+we have seen such as Example~\ref{exam:decompQsqrt5}.
+
 Let $K/L/\Q$ be a tower of number fields. Let $p$ be a prime
-in $\Z$, $\p$ a prime in $\O_L$ lying over $p$, and $\q$ a prime
-in $\O_K$ lying over $\p$.
+in $\Z$, $\q$ a prime in $\O_L$ lying over $p$, and $\p$ a prime
+in $\O_K$ lying over $\q$.
 \begin{enumerate}
-	\item[(a)] Show that $e$ and $f$ are multiplicative.
-	%TODO write out w.r.t a certain prime, should
-	%TODO say something like e(Q/p)=e(Q/q)e(q/p)
+	\item[(a)] Show that $e$ is multiplicative, i.e. $e(\p/p)=e(\p/\q) \cdot e(\q/p)$.
+	\item[(b)] Show that $f$ is multiplicative, i.e. $f(\p/p)=f(\p/\q) \cdot f(\q/p)$.
+	\item[(c)] Let $g_L(p)$ be the number of primes of $\O_L$ lying over $p$.
+	Show that $g_K(p) = \sum\limits_{\q \text{ lies over } p} g_L(\q)$.
 \end{enumerate}
+\end{exercise}
+
+\begin{exercise}[See \cite{marcus1977number}, Chapter 4 problem 24]
+Continue the notation from the previous exercise.
+\begin{enumerate}
+	\item[(a)]
+	If $p$ it totally ramified in $K$
+	then it is totally ramified in $L$.
+	
+	\item[(b)]
+	Let $K'$ be another extension of $L$.
+	If $\p$ is totally ramified in $K$ and unramified in $K'$
+	then $K\cap K' = L$.
+\end{enumerate}
+
 \end{exercise}
 
 \section{The Decomposition Group}
@@ -371,7 +400,7 @@ $$
   1\to I_\p \to D_\p \to \Gal(k_{\p}/\F_p)\to 1,
 $$
 where $I_\p$ is the \defn{inertia subgroup} of $D_\p$, and
-$\#I_\p=e$, where $e$ is the exponent of $\p$ in the factorization of $p\O_K$.
+$\#I_\p=e = e(\p/p)$.
 The most interesting part of the proof is
 showing that the natural map $D_\p\to  \Gal(k_{\p}/\F_p)$
 is surjective. We will also discuss the structure of $D_\p$ and introduce
@@ -427,68 +456,77 @@ Recall the correspondence between subgroups of the Galois group
 $G$ and subfields of $K$. The fixed fields corresponding to the
 decomposition and inertia subgroups have an important description
 in terms of the splitting behavior of the prime $\p$.
-
 We characterize the fixed field of $D=D_\p$ as follows.
+
 \begin{proposition}\label{prop:nosplit}\iprop{fixed field characterization}
 The fixed field
 $$K^D=\{a \in K : \sigma(a) = a\text{ for all }
 \sigma \in D\}$$
 of $D$
 is the smallest subfield $L\subset K$ such that
-the prime ideal $\p\cap\O_L$
-has $g(K/L)=1$, i.e., there is a unique
-prime of $\O_K$ over $\p\cap\O_L$.
+the prime ideal $\q = \p\cap\O_L$
+has $g_K(\q)=1$, i.e., there is a unique
+prime of $\O_K$ lying over $\q$.
 \end{proposition}
 \begin{proof}
 First suppose $L=K^D$, and note that by Galois theory $\Gal(K/L)\isom
 D$, and by Theorem~\ref{thm:transitive}, the group $D$
-acts transitively on the primes of $K$ lying over $\p\cap\O_L$.  One of
+acts transitively on the primes of $K$ lying over $\q$.  One of
 these primes is $\p$, and $D$ fixes $\p$ by definition, so there is
-only one prime of $K$ lying over $\p\cap\O_L$, i.e., $g=1$.
-Conversely, if $L\subset K$ is such that $\p\cap\O_L$
+only one prime of $K$ lying over $\q$, that is $g=1$.
+Conversely, if $L\subset K$ is such that $\q$
 has $g=1$, then $\Gal(K/L)$ fixes $\p$ (since it is the only
-prime over $\p\cap\O_L$), so $\Gal(K/L)\subset D$, hence $K^D\subset L$.
+prime over $\q$), so $\Gal(K/L)\subset D$, hence $K^D\subset L$.
 \end{proof}
+
 Thus $p$ does not split in going from $K^D$ to $K$---it does some
 combination of ramifying and staying inert.  To fill in more of
 the picture, the following proposition asserts that $p$ splits
 completely and does not ramify in $K^D/\Q$.
+
 \begin{proposition}\label{prop:noresidue}\iprop{$e$, $f$, $g$}
 Fix a finite Galois extension~$K$ of~$\Q$,
 let~$\p$ be a prime lying over~$p$ with decomposition group~$D$,
-and set $L=K^D$.
-Then $e(L/\Q)=f(L/Q)=1$, $g=[L : \Q]$, $e(K/\Q)=e(K/L)$ and $f(K/\Q)=f(K/L)$.
+and set $L=K^D$ and $\q = \p \cap \O_L$.
+Then $e(\q/p)=f(\q/p)=1$, $g_L(p)=[L : \Q]$, $e(\p/p)=e(\p/\q)$ and $f(\p/p)=f(\p/\q)$.
 \end{proposition}
 \begin{proof}
 As mentioned right after Definition~\ref{def:decomp}, the
-orbit-stabilizer theorem implies that $g(K/\Q)=[G:D]$, and
-by Galois theory $[G:D]=[L:\Q]$, so $g(K/\Q) = [L:\Q]$.
-Proposition~\ref{prop:nosplit}, $g(K/L)=1$ so
+orbit-stabilizer theorem implies that $g_K(p)=[G:D]$, and
+by Galois theory $[G:D]=[L:\Q]$, so $g_K(p) = [L:\Q]$. By
+Proposition~\ref{prop:nosplit}, we have $g_K(\q)=1$ so
 by Theorem~\ref{thm:transitive},
 \begin{align*}
- e(K/L)\cdot f(K/L) &= [K:L]
-   =[K:\Q]/[L:\Q] \\
-&= \frac{e(K/\Q)\cdot f(K/\Q) \cdot g(K/\Q)}{[L:\Q]}
-   = e(K/\Q)\cdot f(K/\Q).
+	e(\p/\q) \cdot f(\p/\q) = [K:L]
+	&=\frac{[K:\Q]}{[L:\Q]} \\
+	&= \frac{e(\p/p)\cdot f(\p/p) \cdot g_K(p)}{[L:\Q]}
+	\\
+	&= e(\p/p)\cdot f(\p/p).
 \end{align*}
-Now $e(K/L)\leq e(K/\Q)$ and $f(K/L)\leq f(K/\Q)$, so
-we must have $e(K/L)=e(K/\Q)$ and $f(K/L)=f(K/\Q)$.
-Since $e(K/\Q)=e(K/L)\cdot e(L/\Q)$ and $f(K/\Q)=f(K/L)\cdot f(L/\Q)$,
-it follows that $e(L/\Q)=f(L/\Q) = 1$.
+Now $e(\p/\q)\leq e(\p/p)$ and $f(\p/\q)\leq f(\p/p)$, so
+we must have $e(\p/\q)=e(\p/p)$ and $f(\p/\q)=f(\p/p)$.
+Since from Exercise~\ref{ex:ramificationmultiplicative} we have
+$e(\p/p)=e(\p/\q)\cdot e(\q/p)$ and $f(\p/q)=f(\p/\q)\cdot f(\q/p)$,
+it follows that $e(\q/p)=f(\q/p) = 1$.
 \end{proof}
-\noindent
-This result is summarized in Table~\ref{tbl:decompfield}.
 
-\begin{table}
+\noindent
+We summarize the results of the decomposition of a prime
+in the tower $K \supseteq L = K^D \supseteq \Q$ in
+Table~\ref{tbl:decompfield}. This table shows the ramification
+indices, inertia degrees, and the number of primes at each step
+of the tower.
+
+\begin{table}[h!]
 \centering
-\begin{tabular}{ >{$}c<{$} >{$}c<{$} >{$}c<{$} | >{$}c<{$} }
-	e & f & g & \\
+\begin{tabular}{ >{$}c<{$} >{$}c<{$} >{$}c<{$} | >{$}c<{$} >{$}c<{$} }
+	\text{Ramification ($e$)} & \text{Inertia ($f$)} & g  & \text{Primes} & \text{Tower} \\
 	\hline
-	 &  &  & K \\
-	e(K/L) & f(K/L) & 1 & \vert \\
-	 &  &  & L \\
-	1 & 1 & [L:\Q] & \vert \\
-	 &  &  & \Q
+	 &  &  & \p & K \\
+	e(\p/p) & f(\p/p) & 1 & \vert & \vert \\
+	 &  &  & \q & L \\
+	1 & 1 & [L:\Q] & \vert & \vert \\
+	 &  &  & p &  \Q
 \end{tabular}
 \caption{Decomposition in the fixed field $L=K^D$.}
 \label{tbl:decompfield}
@@ -516,7 +554,8 @@ $ k_{\p}^*$ is cyclic (see proof of Lemma~\ref{lem:kerfcg}),
 so there is an element $a\in k_{\p}^*$ of order
 $p^f-1$, and $ k_{\p}=\F_p(a)$.  Then $\Frob_p^n(a) = a^{p^n} = a$ if
 and only if $(p^f-1)\mid p^n-1$ which is the case precisely when
-$f\mid n$, so the order of $\Frob_p$ is~$f$.  Since the order of the
+$f\mid n$ (this is a straight forward exercise in algebra),
+so the order of $\Frob_p$ is~$f$.  Since the order of the
 automorphism group of a field extension is at most the degree of the
 extension, we conclude that $\Aut(k_{\p}/\F_p)$ is generated by $\Frob_p$.  Also,
 since $\Aut(k_{\p}/\F_p)$ has order equal to the degree, we conclude that
@@ -539,25 +578,11 @@ $$
 The homomorphism $\vphi$ is surjective.
 \end{theorem}
 \begin{proof}
-%Let $\tilde{a} \in  k_{\p}$ be an element such that $ k_{\p} = \F_p(\tilde{a})$.
-%Lift $\tilde{a}$ to an algebraic integer $a\in \O_K$, and let
-%$h=\prod_{\sigma\in D_p}(x-\sigma(a))\in K^D[x]$ be the characteristic polynomial of~$a$ over $K^D$.
-%Using Proposition~\ref{prop:noresidue} we see that~$h$
-%reduces to a multiple of the minimal polynomial $\tilde{h}=\prod (x-\widetilde{\sigma(a)})\in \F_p[x]$
-%of $\tilde{a}$ (by the Proposition the coefficients of $\tilde{h}$
-%are in $\F_p$, and $\tilde{a}$ satisfies $\tilde{h}$).
-%The roots of $\tilde{h}$ are of the form
-%$\widetilde{\sigma(a)}$, and
-%the element $\Frob_p(a)$ is also a root of
-%$\tilde{h}$, so it is of the form $\widetilde{\sigma(a)}$.
-%We conclude that the generator $\Frob_p$ of $\Gal(k_{\p}/\F_p)$ is
-%in the image of $\vphi$, which proves the theorem.
-%\vspace*{3cm}
-
 Let $D = D_\p$ and $\tilde{a} \in  k_{\p}$ be an element such that $ k_{\p} = \F_p(\tilde{a})$.
 Lift $\tilde{a}$ to an algebraic integer $a\in \O_K$, and let
 $h=\prod_{\sigma\in {D}}(x-\sigma(a))\in K^D[x]$.
 Let $\tilde{h}$ be the reduction of $h$ modulo~$\p$.
+Note that $h(a) = 0$ so $\tilde{h}(\tilde{a}) = 0$.
 
 Note that the coefficients of $h$ lie in $\O_{K^D}$.
 By Proposition~\ref{prop:noresidue}, the residue field of $\O_{K^D}$
@@ -568,8 +593,11 @@ must also be a root of $\tilde{h}$.
 Since the roots of $\tilde{h}$ are of the form
 $\widetilde{\sigma(a)}$ this shows that
 $\widetilde{\sigma(a)} = \Frob(\tilde{a})$ for some $\sigma\in D$.
-This implies $\vphi(\sigma) = \Frob$ and hence $\varphi$ is
-surjective because $\Frob_p$ generates $\Gal(k_\p/\F_p)$.
+Hence $\varphi(\sigma)(\tilde{a}) = \Frob(\tilde{a})$. Since elements
+of $\Gal(K_\p/\F_p)$ are determined by their action on $\tilde{a}$
+by choice of $\tilde{a}$, it follows that $\vphi(\sigma) = \Frob$
+and hence $\varphi$ is surjective because $\Frob_p$
+generates $\Gal(k_\p/\F_p)$.
 \end{proof}
 
 \begin{definition}[Inertia Group]
@@ -582,13 +610,14 @@ We have an exact sequence of groups
 \end{equation}
 The inertia group is a measure of how $p$ ramifies in $K$.
 \begin{corollary}\icor{order of inertia group}
-We have $\# I_\p= e(\p/p)$, where $\p$ is a prime of $K$ over $p$.
+We have $\# I_\p = e = e(\p/p)$.
 \end{corollary}
 \begin{proof}
-The sequence (\ref{eqn:exact}) implies that
-$\#I_\p = (\#D_\p)/f(K/\Q)$.  Applying Propositions~\ref{prop:nosplit} and \ref{prop:noresidue}, we have
+The exact sequence (\ref{eqn:exact}) implies that
+$\#I_\p = \#D_\p / f$ where $f = f(\p/p) = [k_\p : \F_p]$.
+Applying Propositions~\ref{prop:nosplit} and \ref{prop:noresidue}, we have
 $$\#D_\p = [K:L] = \frac{[K:\Q]}{g} = \frac{efg}{g} = ef.$$
-Dividing both sides by $f=f(K/\Q)$ proves the corollary.
+Dividing both sides by $f$ proves the corollary.
 \end{proof}
 
 We have the following characterization of $I_\p$.
@@ -618,6 +647,7 @@ $$
 
 
 \section{Frobenius Elements}
+
 Suppose that $K/\Q$ is a finite Galois extension with group $G$ and
 $p$ is a prime such that $e=1$ (i.e., an unramified prime).  Then
 $I=I_\p=1$ for any $\p\mid p$, so the map $\vphi$ of
@@ -627,16 +657,32 @@ By Section~\ref{sec:galoisfinite},
 the group $\Gal( k_{\p}/\F_p)$ is
 cyclic with canonical generator $\Frob_p$.
 The \defn{Frobenius element} corresponding to $\p$ is
-$\Frob_\p\in D_\p$. It is the unique element of $G$ such that for all
+$\Frob_\p\in D_\p$. It is the unique %(see Exercise~\ref{ex:frobunique})
+element of $G$ such that for all
 $a\in\O_K$ we have
 $$
   \Frob_\p(a)\con a^p\pmod{\p}.
 $$
-(To see this, argue as in the proof of Proposition~\ref{prop:charip}.)
-%TODO convert to exercise
+
+
+%\begin{exercise}\label{ex:frobunique}
+%	With the notation above, prove that $\Frob_\p$ is
+%	unique. That is, if $\sigma$ satisfies
+%	$\sigma(a) \equiv a^p \pmod{\p}$ for all $a\in\O_K$
+%	then $\sigma = \Frob_\p$.
+%	
+%	Hint: argue as in the proof of Proposition~\ref{prop:charip}.
+%\end{exercise}
+
+%TODO What does uniqueness here mean? Is it obvious since
+%TODO to even talk about frob mod \p it must fix \p and hence
+%TODO be in D and then use iso?
+
+
 Just as the primes $\p$ and decomposition groups $D_\p$ are all
 conjugate, the Frobenius elements corresponding to primes
 $\p\mid p$ are all conjugate as elements of~$G$.
+
 \begin{proposition}\iprop{conjugation of Frobenius}
 For each $\sigma \in G$, we have
 $$
@@ -661,7 +707,9 @@ symbol}.  It extends to a homomorphism from the free abelian
 group on unramified primes~$p$ to~$G$.
 Class field theory (for~$\Q$) sets up a natural bijection
 between abelian Galois extensions of $\Q$ and certain maps from
-certain subgroups of the group of fractional ideals for~$\Z$.  We have
+certain subgroups of the group of fractional ideals for~$\Z$.
+%TODO is the fractional ideals of Z just Q?
+  We have
 just described one direction of this bijection, which associates to an
 abelian extension the Artin symbol (which is a homomorphism).
 The Kronecker-Weber theorem asserts that the abelian extensions of
@@ -671,24 +719,33 @@ correspondence between the subfields of the field $\Q(\zeta_n)$,
 which has
 Galois group $(\Z/n\Z)^*$, and the subgroups of $(\Z/n\Z)^*$, so giving
 an abelian extension~$K$ of~$\Q$ is {\em exactly the same} as giving an
+%TODO why is `exactly the same` emphasized? Could different n/subgroups
+%TODO correspond to the same field? Is there some kind of lurking exercise here?
 integer~$n$ and a subgroup of $H\subset (\Z/n\Z)^*$. The
 Artin reciprocity map $p\mapsto \kr{K/\Q}{p}$ is then $p\mapsto
 [p]\in (\Z/n\Z)^*/H$.
 
-\section{Galois Representations, $L$-series and a Conjecture of
-  Artin}\label{sec:artin}
+\section{A conjecture of Artin}\label{sec:artin}
 The Galois group $\Gal(\Qbar/\Q)$ is an object of central importance
-in number theory, and we can interpreted much of number theory as the
+in number theory, and we can interprete much of number theory as the
 study of this group.  A good way to study a group is to study how it
 acts on various objects, that is, to study its representations.
 
 Endow $\galq$ with the topology which has as a basis of open neighborhoods
 of the origin the subgroups $\Gal(\Qbar/K)$, where~{$K$ varies
-over finite Galois extensions of~$\Q$. (Note: This is {\bf not} the
-topology got by taking as a basis of open neighborhoods the collection
-of finite-index normal subgroups of $\galq$.)
+over finite Galois extensions of~$\Q$.
 Fix a positive integer~$n$ and let $\GL_n(\C)$ be the group of
 $n\times n$ invertible matrices over~$\C$ with the discrete topology.
+
+\begin{warning}
+	The topology on $\galq$ is {\bf not} the topology induced
+	by taking as a basis of open neighborhoods around the origin
+	the collection of finite-index normal subgroups of $\galq$,
+	see the end of Chapter 7 of \cite{milne:FT}. In particular,
+	there exist nonopen normal subgroups of finite index which
+	do not correspond to subgroups $\Gal(\Qbar/K)$ for some
+	finite Galois extension $K/\Q$.
+\end{warning}
 
 \begin{definition}
 A \defn{complex  $n$-dimensional representation} of $\galq$
