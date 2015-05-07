@@ -169,7 +169,7 @@ to prove the general Mordell-Weil theorem, see
 	Show that the points of order two are exactly
 	the points on $E$ with $y$-coordinate equal to
 	$0$.
-	
+
 	Hint: Recall that a point $P$ has order $2$ if
 	$P + P + \O = \O$, which means the tangent line
 	at $P$ goes through the point at infinity.
@@ -293,12 +293,12 @@ $$
 $$
 
 \begin{remark}
-	Elliptic curves are not the only object which induces
-	a functor from schemes to groups. One can study
-	\emph{abelian varieties} which is a special class of
-	schemes which always induce such a functor.
-	Elliptic curves are an example of an abelian
-	variety.
+	Elliptic curves are not the only objects that induce
+	a functor from schemes to groups.
+	\emph{Abelian varieties} are a larger class of
+	schemes, which includes elliptic curves,
+    that also induce such a functor.
+    %%TODO: reference Milne
 \end{remark}
 
 \subsection{A Formula for Adding Points}
@@ -427,7 +427,7 @@ F = E.change_ring(M)
 T = F.torsion_subgroup(); T
 \end{sagecell}
 \begin{sageout}
-Torsion Subgroup isomorphic to Z/2 + Z/2 associated 
+Torsion Subgroup isomorphic to Z/2 + Z/2 associated
     to the Elliptic Curve defined by y^2 = x^3 + x + 1
     over Number Field in b with defining polynomial
     x^6 + 6*x^4 + 9*x^2 + 31
