@@ -150,12 +150,27 @@ The kernel of~$\vphi$ is a finite cyclic group.
 \begin{proof}
   Lemma~\ref{lem:vphifinitekernel} implies that $\ker(\vphi)$ is a
   finite group.  It is a general fact that any finite subgroup $G$ of
-  the multiplicative group $K^*$ of a field is cyclic.  (Proof: If~$n$
-  is the exponent of~$G$, then every element of~$G$ is a root of the
-  polynomial $x^n-1$.  A polynomial of degree~$n$ over a field has at
-  most~$n$ roots, so $G$ has order at most~$n$, hence~$G$ is cyclic of
-  order~$n$.) %TODO change to excercise?
+  the multiplicative group $K^*$ of a field is cyclic (see
+  Exercise~\ref{ex:finitesubgroupoffieldcyclic}).
 \end{proof}
+
+\begin{exercise}\label{ex:finitesubgroupoffieldcyclic}
+	Finish the proof of Lemma~\ref{lem:kerfcg}
+	by showing that for a field $K$, every finite
+	subgroup $G$ of the multiplicative group $K^*$
+	is cyclic.
+	
+	Hint: Every element in $G$ satisfies a polynomial
+	of the form $x^n-1$. Recall that a polynomial
+	of degree $n$ over a field has at most $n$
+	distinct roots. Now consider the orders
+	of the elements of $G$.
+\end{exercise}
+%Proof:
+%	If~$n$ is the exponent of~$G$, then every element of~$G$
+%	is a root of the polynomial $x^n-1$. A polynomial of
+%	degree~$n$ over a field has at most~$n$ roots, so $G$
+%	has order at most~$n$, hence~$G$ is cyclic of order~$n$.
 
 To prove Theorem~\ref{thm:units}, it suffices to prove that
 $\Im(\vphi)$ is a lattice in the hyperplane~$H$ of
