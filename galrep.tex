@@ -84,23 +84,25 @@ infinity.
 
 \begin{remark}
 The command {\tt{EllipticCurve}} in \Sage
-can take as input a vector {\tt{[a4,a6]}}
-of coefficients and returns the elliptic curve defined
-by the Weirstrass equation seen in Equation~\ref{weq}
-with $a_1=a_2=a_3=0$.
+can take as input a list {\tt{[a4,a6]}}
+of coefficients and returns an elliptic curve given
+by a Weirstrass equation with $a_1=a_2=a_3=0$ and
+$a_4,a_6$ as specified.
 \end{remark}
 
 \subsection{Abelian Groups Attached to Elliptic Curves}
 If $E$ is an elliptic curve over~$K$, then we give the set
 $E(K)$ of all $K$-rational points on~$E$ the structure of abelian
-group with identity element~$\O$.  If we embed $E$ in the projective
+group with identity element~$\O$.\footnote{
+As a reminder, we will not give rigorous proofs of any facts in
+this section. For a more detailed and technical explanation of
+the group structure for elliptic curves
+see \cite[Ch.~III.2]{silverman:aec}.
+}
+If we embed $E$ in the projective
 plane, then this group is determined by the condition that three
 points sum to the zero element $\O$ if and only if they lie on a
-common line.
-%TODO how to talk about tangent line. Expand section
-%TODO to bring up Bezout's theorem (Silverman III.2 p 51)
-%TODO or easy way to see use tangent line for point with itself?
-%TODO avoid writing down formulas?
+common line (some care needs to be taken when .
 In our affine picture, a line will intersect the point at infinity
 if it is vertical, or equivalently if it of the form $x=a$ for
 some fixed $a\in K$.
@@ -170,7 +172,7 @@ to prove the general Mordell-Weil theorem, see
 	the points on $E$ with $y$-coordinate equal to
 	$0$.
 
-	Hint: Recall that a point $P$ has order $2$ if
+	Hint: A point $P$ has order $2$ if
 	$P + P + \O = \O$, which means the tangent line
 	at $P$ goes through the point at infinity.
 \end{exercise}
@@ -298,7 +300,8 @@ $$
 	\emph{Abelian varieties} are a larger class of
 	schemes, which includes elliptic curves,
     that also induce such a functor.
-    %%TODO: reference Milne
+    For more on Abelian varieties see
+    \cite{milne:abvars}.
 \end{remark}
 
 \subsection{A Formula for Adding Points}
@@ -341,10 +344,11 @@ cohomology, so we wait until Chapter~\ref{ch:gc} to define it.  There
 are also component groups attached to~$E$, one for each prime of
 $\O_K$.  These groups all come together in the Birch and
 Swinnerton-Dyer conjecture (see \url{http://wstein.org/books/bsd/}).
+
 %TODO change this reference please
+%TODO is there another book on bsd?
 
-
-\section{Galois Representations Attached to Elliptic Curves}
+\section[Galois Representations]{Galois Representations Attached to Elliptic Curves}
 Let~$E$ be an elliptic curve over a number field~$K$.
 In this section we attach representations of
 $G_K = \Gal(\Kbar/K)$ to~$E$, and use them to define an $L$-function
@@ -353,16 +357,29 @@ Riemann Zeta function, that is different from the $L$-functions
 attached to complex representations $\Gal(\Qbar/\Q)\to \GL_n(\C)$,
 which we encountered before in Section~\ref{sec:artin}.
 
-Fix an integer~$n$.  The group structure on~$E$ is defined by
-algebraic formulas with coefficients that are elements of~$K$, so the subgroup
+There is a natural action of $G_K$ on the points of $E(\overline{K})$.
+Given a point $P=(a,b)\in E(\overline{K})$ we define $\sigma(P)$ to be
+the point $(\sigma(a),\sigma(b))$. Since~$E$ is defined over~$K$ the
+point~$\sigma(P)$ will again lie on~$E$ so the action is well
+defined. Since the group structure on~$E$ is defined by
+algebraic formulas with coefficients in~$K$ it follows that the
+action commutes with point addition meaning that
+$\sigma(P+Q) = \sigma(P)+\sigma(Q)$. Now fix an integer $n$.
+From what we have seen, it is easy to show the subgroup
 $$
- E[n] = \{P \in E(\Kbar) : nP = \O\}
+E[n] = \{P \in E(\Kbar) : nP = \O\}
 $$
-is invariant under the action of $G_K$ (but the action may act non-trivially on individual elements!).  We thus obtain a homomorphism
+is invariant under the action of $G_K$.
+We thus obtain a homomorphism
 $$
-  \rhobar_{E,n} : G_K \to \Aut(E[n]).
+\rhobar_{E,n} : G_K \to \Aut(E[n]).
 $$
 
+\begin{warning}
+Though the action of $G_K$ leaves the group $E[n]$ fixed,
+it may act non-trivially on individual elements! Otherwise
+$\rhobar_{E,n}$ would not be very interesting.
+\end{warning}
 
 For any positive integer~$n$, the group $E[n]$ is isomorphic as an
 abstract abelian group to $(\Z/n\Z)^2$.  There are various
@@ -374,10 +391,10 @@ lattice in $\C$ and the isomorphism is given by $z\mapsto
 on $E(\C)$.  It is then an easy exercise to verify that
 $(\C/\Lambda)[n]\isom (\Z/n\Z)^2$.
 For a detailed and rigorous walk through of this method see
-\cite[Ch. 1.4]{diamond-shurman}.
+\cite[Ch.~1.4]{diamond-shurman}.
 
-Another way to understand $E[n]$ is to use that $E(\C)_{\tor}$ is isomorphic
-%TODO do you mean \Qbar here?
+Another way to understand $E[n]$ is to use the fact
+that $E(\C)_{\tor}$ is isomorphic
 to the quotient
 $$\H_1(E(\C),\Q)/\H_1(E(\C),\Z)$$
 of homology groups and that the homology of a curve
@@ -385,6 +402,22 @@ of genus~$g$ is isomorphic to $\Z^{2g}$.  Then
 $$
  E[n]\isom (\Q/\Z)^2[n] = (\Z/n\Z)^2.
 $$
+
+\begin{exercise}\label{QE[p]finitegaloisext}
+	Let $E$ be an elliptic curve defined over a number
+	field~$K$. Fix an integer $n$ and consider the
+	extension of $K$ given by
+	$$
+	K(E[n]) = K(\{a,b : (a,b) \in E[n]\}).
+	$$
+	Show that $K(E[n])/K$ is a finite Galois extension.
+	
+	Hint: By the arguments above $\#E[n] = n^2$ which shows
+	the extension is finite. Next recall that $E[n]$ is left
+	invariant by the action of $\Gal(\overline{K}/K)$. What
+	can you say about the embeddings from $K(E[n])$ into
+	$\overline{K}$ which leave $K$ fixed?
+\end{exercise}
 
 \begin{example}
 Consider the case when $n=2$. From Exercise~\ref{ex:ec2torsion}
@@ -456,14 +489,9 @@ $$
  \rhobar_{E,p} : G_K \to \GL_2(\F_p).
 $$
 This representation $\rhobar_{E,p}$ is continuous if $\GL_2(\F_p)$ is endowed with the
-discrete topology, because the field
-$$
- K(E[p]) = K(\{a,b : (a,b) \in E[p]\})
-$$
-is a Galois extension of~$K$ of finite degree.
-%TODO is this hard to prove? is it an easy exercise?
-%TODO can you do it with division polynomials similar
-%TODO to the previous example somehow?
+discrete topology, because the field $K(E[p])$
+is a Galois extension of~$K$ of finite degree
+by Exercise~\ref{QE[p]finitegaloisext}.
 
 In order to attach an $L$-function to $E$, one could try to embed
 $\GL_2(\F_p)$ into $\GL_2(\C)$ and use the construction of Artin
@@ -473,28 +501,29 @@ $\GL_2(\F_p)$ frequently does not embed in $\GL_2(\C)$.
 The following Sage session shows that for $p=5,7$, there are
 no 2-dimensional irreducible representations of $\GL_2(\F_p)$,
 so $\GL_2(\F_p)$ does not embed in $\GL_2(\C)$.
-(The notation in the output below is {\tt [degree of rep, number of times it occurs]}.)
+The notation in the output below is
+{\tt [degree of rep, number of times it occurs]}.
 \begin{sagecode}
-\begin{sagecell} %TODO this doesn't work this way
-gap(GL(2,GF(2))).CharacterTable().CharacterDegrees()
+\begin{sagecell}
+GL(2,GF(2)).gap().CharacterTable().CharacterDegrees()
 \end{sagecell}
 \begin{sageout}
 [ [ 1, 2 ], [ 2, 1 ] ]
 \end{sageout}
-\begin{sagecell} %TODO this doesn't work this way
-gap(GL(2,GF(3))).CharacterTable().CharacterDegrees()
+\begin{sagecell}
+GL(2,GF(3)).gap().CharacterTable().CharacterDegrees()
 \end{sagecell}
 \begin{sageout}
 [ [ 1, 2 ], [ 2, 3 ], [ 3, 2 ], [ 4, 1 ] ]
 \end{sageout}
-\begin{sagecell} %TODO this doesn't work this way
-gap(GL(2,GF(5))).CharacterTable().CharacterDegrees()
+\begin{sagecell}
+GL(2,GF(5)).gap().CharacterTable().CharacterDegrees()
 \end{sagecell}
 \begin{sageout}
 [ [ 1, 4 ], [ 4, 10 ], [ 5, 4 ], [ 6, 6 ] ]
 \end{sageout}
-\begin{sagecell} %TODO this doesn't work this way
-gap(GL(2,GF(7))).CharacterTable().CharacterDegrees()
+\begin{sagecell}
+GL(2,GF(7)).gap().CharacterTable().CharacterDegrees()
 \end{sagecell}
 \begin{sageout}
 [ [ 1, 6 ], [ 6, 21 ], [ 7, 6 ], [ 8, 15 ] ]
@@ -536,8 +565,10 @@ $$
 Let $M$ be the fixed field of $\ker(\rho_{E,p})$. The image of
 $\rho_{E,p}$ is infinite, so $M$ is an infinite extension of~$K$.
 Fortunately, one can prove that~$M$ is ramified at only finitely many
-primes (the primes of bad reduction for $E$ and $p$---see \cite{serre-tate}).  If~$\ell$ is a
-prime of $K$, let $D_{\ell}$ be a choice of decomposition group for
+primes (the primes of \emph{bad reduction} for $E$ and $p$---see
+\cite{serre-tate}).
+If~$\ell$ is a prime of $K$, let $D_{\ell}$ be a choice of
+decomposition group for
 some prime~$\p$ of~$M$ lying over~$\ell$, and let $I_{\ell}$ be the
 inertia group.  We haven't defined inertia and decomposition groups
 for infinite Galois extensions, but the definitions are almost the
@@ -576,11 +607,29 @@ One can prove using fairly general techniques that the product
 expression for $L(E,s)$ defines a holomorphic function in some right
 half plane of~$\C$, i.e., the product converges for all~$s$ with
 $\Re(s)>\alpha$, for some real number~$\alpha$.
-\begin{conjecture}\label{conj:holo}
+
+Recall that the Artin $L$-function from Section~\ref{sec:artin}
+(see Equation~\ref{eqn:artin}) extended to meromorphic function
+on the entire complex plane and it was conjectured that the $L$-function
+of any continuous representation of $\Gal(\Qbar/\Q) \to \GL_n(\C)$ also
+extends to a meromorphic function on $\C$. We could ask the same
+question for the $L$-functions attached to elliptic curves. However,
+we will instead ask for something stronger:
+\begin{center}
+\emph{Does the $L$-function $L(E,s)$ attached to an
+elliptic curve $E$ extends to a holomorphic function on $\C$?}
+\end{center}
+This question was one of the central topics
+in number theory in the late 1990s and early 2000s.
+An amazing fact is that the question has been answered
+in the affirmative.
+\begin{theorem}\label{conj:holo}
 The function $L(E,s)$ extends to a holomorphic
 function on all~$\C$.
-\end{conjecture}
-%TODO proven by corollary(Hecke)?
+\end{theorem}
+This is a corollary to the modularity theorem described
+in the next section, see Corollary~\ref{cor:hecke}.
+
 
 \subsection{Modularity of Elliptic Curves over $\Q$}
 Fix an elliptic curve $E$ over~$\Q$.  In this section we will explain
@@ -636,7 +685,7 @@ Every elliptic curve over $\Q$ is modular, i.e, the function
 $f_E(z)$  is a cuspidal modular form.
 \end{theorem}
 
-\begin{corollary}[Hecke]
+\begin{corollary}[Hecke]\label{cor:hecke}
   If $E$ is an elliptic curve over~$\Q$, then the $L$-function
   $L(E,s)$ has an analytic continuous to the whole complex plane.
 %and
