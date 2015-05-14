@@ -1,6 +1,23 @@
 \chapter{Galois Cohomology}\label{ch:gc}
 
+Let $G$ be a group and suppose $G$ acts on
+another group $A$ (defined below).
+In this chapter we will study group a
+collection of groups $H^n(G,A)$ attached to this
+action. This is Group cohomology and the groups $H^n(G,A)$
+are useful tools to study the structure of $G$.
+In the later sections we will replace $G$
+with the Galois group of a field extension,
+which is Galois cohomology. Studying Galois cohomology
+gives us new insight into the structure of
+Galois groups such as $\Gal(\Qbar/\Q)$.
+
+
 \section{Group Rings and Modules}
+
+Recall the definition of a module over a ring.
+In this section we will develop the analogous
+definition for a module over a group.
 
 \begin{definition}\label{def:groupring}
 	Let $G$ be a finite group. The \emph{group ring} $\Z[G]$ of $G$
@@ -9,6 +26,8 @@
 	Note that $\Z[G]$ is a commutative ring if and only if~$G$ is
 	commutative.
 \end{definition}
+
+%TODO Why is G always finite?
 
 \begin{example}
 	For example, the group ring of the cyclic group
@@ -33,7 +52,7 @@
 	
 	Hint: Note that the rank of the group ring as an
 	abelian group is equal to the size of the group.
-	So if $\Z[\zeta_3]$ was a group ring then it would
+	If $\Z[\zeta_3]$ was a group ring then it would
 	have to be isomorphic to $\Z[C_2]$.
 \end{exercise}
 %Solution: no. Suppose you had an isomorphism and derive a
@@ -41,9 +60,8 @@
 
 \begin{exercise}
 	Write down an two elements of $\Z[\Z]$ and multiply them.
-	and try to multiply two numbers. This is not hard,
-	but is good practice with the concept of a group
-	ring.
+	This is not hard, but is good practice with the concept
+	of a group ring.
 \end{exercise}
 
 \begin{definition}
@@ -55,9 +73,11 @@
 	%TODO does this sound awkward?
 \end{definition}
 
-\begin{exercise}
+\begin{exercise}\label{ex:equivalentdata}
 	Fix an abelian group $A$.
 	Show the following are equivalent sets of data.
+	Specifically, given any one of the following objects,
+	there is a natural way to construct another.
 	\begin{enumerate}
 		\item[(a)] A group homomorphism $G\to \Aut(A)$.
 		\item[(b)] A map $\rho:G\times A \to A$ such that
@@ -85,6 +105,19 @@
 	integer~$m$. Another example is $G=(\Z/n\Z)^*$, which acts
 	via multiplication on $A = \Z/n\Z$.
 \end{example}
+
+\begin{remark}
+	The construction $\Z[G]$ from $G$ is natural, in the
+	sense that it defines a functor between categories.
+	Moreover, $\Z[G]$ is the most natural way to construct
+	a ring from a group in the sense that the group ring
+	functor is a left adjoint to the forgetful functor from
+	rings to groups. These types of functors are sometimes
+	called ``free'' functors. If you are interested in
+	free objects, see if you can come up with a natural way
+	to add structure to other objects. Could you make a set
+	into a group? How about an abelian group?
+\end{remark}
 
 \section{Group Cohomology}
 
@@ -132,6 +165,26 @@ $\H^n(G,A)$ for each $n\geq 2$ in terms of certain maps $G \times
 	\Hom(G,A)$.  If $A=\Z$, then since $G$ is finite there are no nonzero
 	homomorphisms $G\to \Z$, so $\H^1(G,\Z)=0$.
 \end{exercise}
+
+\begin{example}
+	The groups $H^n(G,\Z)$ and $H^n(G,\Z/p\Z)$ are computable
+	in \sage. For example we can compute $H^10(A_5,\Z)$
+	where $A_5$ is the alternating group of order $120$.
+\begin{sagecode}
+\begin{sagecell}
+G = AlternatingGroup(5); G
+\end{sagecell}
+\begin{sageout}
+Alternating group of order 5!/2 as a permutation group
+\end{sageout}
+\begin{sagecell}
+G = AlternatingGroup(5); G
+\end{sagecell}
+\begin{sageout}
+Multiplicative Abelian group isomorphic to C2 x C2
+\end{sageout}
+\end{sagecode}
+\end{example}
 
 If $X$ is any abelian group, then
 $$
