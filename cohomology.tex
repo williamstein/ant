@@ -1,17 +1,13 @@
 \chapter{Galois Cohomology}\label{ch:gc}
 
-Let $G$ be a group and suppose $G$ acts on
-another group $A$ (defined below).
-In this chapter we will study group a
-collection of groups $H^n(G,A)$ attached to this
-action. This is Group cohomology and the groups $H^n(G,A)$
-are useful tools to study the structure of $G$.
-In the later sections we will replace $G$
-with the Galois group of a field extension,
-which is Galois cohomology. Studying Galois cohomology
-gives us new insight into the structure of
-Galois groups such as $\Gal(\Qbar/\Q)$.
-
+Let $G$ be a group and suppose $G$ acts on another group $A$
+(defined below). In this chapter we will study groups attached
+to the action of $G$ on $A$. These are called \emph{cohomology~groups}
+and denoted by $H^n(G,A)$. The theory of these groups is referred
+to as \emph{group cohomology}. In the later sections $G$ will represent
+the Galois group of a field extension. This is called
+\emph{Galois~cohomology}. Studying Galois cohomology helps us
+understand the structure of Galois groups such as $\Gal(\Qbar/\Q)$.
 
 \section{Group Rings and Modules}
 
@@ -59,9 +55,15 @@ definition for a module over a group.
 %contradiction
 
 \begin{exercise}
-	Write down an two elements of $\Z[\Z]$ and multiply them.
-	This is not hard, but is good practice with the concept
-	of a group ring.
+	\hfill
+	\begin{enumerate}
+		\item[(a)]
+			Write down an two elements of $\Z[\Z]$ and multiply them.
+			This is not hard, but is good practice with the concept
+			of a group ring.
+		\item[(b)]
+			Show $\Z[\Z]$ is isomorphic to $\Z\left[x,\frac{1}{x}\right]$.
+	\end{enumerate}
 \end{exercise}
 
 \begin{definition}
@@ -70,7 +72,6 @@ definition for a module over a group.
 	i.e., a group homomorphism $G\to\Aut(A)$, where $\Aut(A)$
 	denotes the group of group isomorphisms $A\to A$ with
 	the operation of function composition.
-	%TODO does this sound awkward?
 \end{definition}
 
 \begin{exercise}\label{ex:equivalentdata}
@@ -123,21 +124,25 @@ definition for a module over a group.
 
 Let $G$ be a finite group and $A$ a $G$-module.
 For each integer $n\geq 0$ there is an abelian group $\H^n(G,A)$
-called the {\em $n$th cohomology group of~$G$ acting on~$A$}.  The
+called the \emph{$n$th cohomology group of~$G$ acting on~$A$}.  The
 general definition is somewhat complicated, but the definition for
 $n\leq 1$ is fairly concrete.
-For example, the {\em $0$th cohomology group}
+For example, the \emph{$0$th cohomology group}
 $$
 	\H^0(G,A) = \{x \in A : \sigma x = x \text{ for all } \sigma \in G\} = G^A
 $$
 is the subgroup of elements of $A$ that are fixed by every element
 of~$G$.
+%TODO exercise to show H^0 can also be described as
+%TODO maps from 0-copies of G with some restriction on
+%TODO the action?
 
-The {\em first cohomology group}
+The \emph{first cohomology group}
 $$
 	\H^1(G,A) = C^1(G,A)/B^1(G,A)
 $$
-is the group of $1$-cocycles modulo $1$-coboundaries, where
+is the group $C^1$ of \emph{$1$-cocycles} modulo the group $B^1$ of
+\emph{$1$-coboundaries}, where
 $$
 	C^1(G, A) = \{f : G \to A \text{ such that } f(\sigma\tau)
 	= f(\sigma) + \sigma f(\tau)\}
@@ -151,25 +156,29 @@ $$
 There are also explicit, and increasingly complicated, definitions of
 $\H^n(G,A)$ for each $n\geq 2$ in terms of certain maps $G \times
 \cdots \times G \to A$ modulo a subgroup, but we will not need this.
-%TODO reference crossed homomorphisms? Weibel? not sure...
+%TODO reference for crossed homomorphisms?
 
-\begin{exercise}
-	Suppose $G$ acts trivially on $A$. Show that $B^1(G,A)=0$
-	and $C^1(G,A) = \Hom(G,A)$.
-	Suppose further that $A = \Z$ and deduce $H^1(G,\Z) = 0$.
+\begin{exercise}\label{ex:H1hom}
+	Suppose $G$ acts trivially on $A$.
+	Show that $B^1(G,A)=0$ and $C^1(G,A) = \Hom(G,A)$.
+	In particular, this shows $H^1(G,\Z) = \Hom(G,A)$.
+	Deduce that if $A = \Z$ then $H^1(G,\Z) = 0$.
 	
 	Hint: For any $\sigma\in G$ we have
 	$f_a(\sigma) = \sigma(a) - a = a - a = 0$.
+	Also for any finite group $G$, show that $\Hom(G,\Z) = 0$.
 		
-	$\sigma a - a = a -a =0$ for any $a\in A$.  Also, $C^1(G,A) =
-	\Hom(G,A)$.  If $A=\Z$, then since $G$ is finite there are no nonzero
-	homomorphisms $G\to \Z$, so $\H^1(G,\Z)=0$.
+%$\sigma a - a = a -a =0$ for any $a\in A$.
+%Also, $C^1(G,A) = \Hom(G,A)$.
+%If $A=\Z$, then since $G$ is finite there are no nonzero
+%homomorphisms $G\to \Z$, so $\H^1(G,\Z)=0$.
 \end{exercise}
 
 \begin{example}
-	The groups $H^n(G,\Z)$ and $H^n(G,\Z/p\Z)$ are computable
-	in \sage. For example we can compute $H^10(A_5,\Z)$
-	where $A_5$ is the alternating group of order $120$.
+	The groups $H^n(G,\Z)$ and $H^n(G,\Z/p\Z)$ (where $p$ is a prime)
+	are computable in \sage. For example we can compute $H^{10}(A_5,\Z)$
+	and $H^{7}(A_5,\Z/5\Z)$ where $A_5$ is the alternating group of
+	order $120$.
 \begin{sagecode}
 \begin{sagecell}
 G = AlternatingGroup(5); G
@@ -178,221 +187,294 @@ G = AlternatingGroup(5); G
 Alternating group of order 5!/2 as a permutation group
 \end{sageout}
 \begin{sagecell}
-G = AlternatingGroup(5); G
+G.cohomology(10)
 \end{sagecell}
 \begin{sageout}
 Multiplicative Abelian group isomorphic to C2 x C2
 \end{sageout}
+\begin{sagecell}
+G.cohomology(7,5)
+\end{sagecell}
+\begin{sageout}
+Multiplicative Abelian group isomorphic to C5
+\end{sageout}
 \end{sagecode}
 \end{example}
 
-If $X$ is any abelian group, then
-$$
-	A = \Hom(\Z[G], X)
-$$
-is a $G$-module.  We call a module constructed in this way
-\emph{co-induced}.
+\subsection{The Main Theorem}
+
+\begin{definition}
+	If $X$ is any abelian group, then
+	$$
+		A = \Hom(\Z[G], X)
+	$$
+	is a $G$-module. We call a module constructed in this
+	way \emph{co-induced}.
+\end{definition}
+%TODO co-induced or coinduced?
+%TODO can we get rid of this definition
+%TODO and put "If A = Hom(Z[G],X) for some X"
+%TODO in the theorem and have a remark about
+%TODO how such A are called co-induced?
 
 The following theorem gives three properties of group cohomology,
 which uniquely determine group cohomology.
-\begin{theorem}
-Suppose $G$ is a finite group.  Then
-\begin{enumerate}
-\item We have $\H^0(G,A) = A^G$.
-\item If $A$ is a co-induced $G$-module, then $\H^n(G,A) = 0$ for all $n\geq 1$.
-\item If $0\to A \to B \to C \to 0$ is any exact sequence of
-$G$-modules, then there is a long exact sequence
-$$
- 0 \to \H^0(G,A) \to \H^0(G,B) \to \H^0(G,C) \to \H^1(G,A) \to \cdots
-$$
-$$
-   \cdots \to \H^{n}(G,A) \to \H^{n}(G,B) \to \H^{n}(G,C) \to \H^{n+1}(G,A) \to \cdots
-$$
-\end{enumerate}
-Moreover, the functor $\H^n(G,-)$ is uniquely determined by
-these three properties.
+\begin{theorem}\label{thm:cohomology}
+	Suppose $G$ is a finite group.  Then
+	\begin{enumerate}
+		\item
+			We have $\H^0(G,A) = A^G$.
+		\item
+			If $A$ is a co-induced $G$-module,
+			then $\H^n(G,A) = 0$ for all $n\geq 1$.
+		\item
+			If $0\to A \to B \to C \to 0$ is any exact sequence of
+			$G$-modules, then there is a long exact sequence
+	\end{enumerate}
+	$$
+	\begin{tikzcd}
+0 \rar & \H^0(G,A) \rar & \H^0(G,B) \rar & \H^0(G,C) \ar[out=-20, in=160]{dll}
+\\
+& \H^1(G,A) \rar & \H^1(G,B) \rar & \H^1(G,C) \ar[out=-20, in=160]{dl}
+\\
+& & \cdots \ar[out=-20, in=160]{dl}
+\\
+& \H^n(G,A) \rar & \H^n(G,B) \rar & \H^n(G,C) \ar[out=-20, in=160]{dll}
+\\
+& \H^{n+1}(G,A) \rar & \H^{n+1}(G,B) \rar & \H^{n+1}(G,C) \rar & \cdots
+	\end{tikzcd}
+	$$
+	Moreover, the functor $\H^n(G,-)$ is uniquely determined by
+	these three properties.
 \end{theorem}
+
 We will not prove this theorem.  For proofs see
 \cite[Atiyah-Wall]{cassels-frohlich} and
 \cite[Ch.~7]{serre:localfields}. The properties of the theorem
-uniquely determine group cohomology, so one should in theory be able
+uniquely the determine group cohomology, so one should in theory be able
 to use them to deduce anything that can be deduced about cohomology
 groups.  Indeed, in practice one frequently proves results about
 higher cohomology groups $\H^n(G,A)$ by writing down appropriate exact
 sequences, using explicit knowledge of $\H^0$, and chasing diagrams.
 
 \begin{remark}
-  Alternatively, we could view the defining properties of the theorem
-  as the definition of group cohomology, and could state a theorem
-  that asserts that group cohomology exists.
+	Alternatively, we could view the defining properties of the theorem
+	as the definition of group cohomology, and could state a theorem
+	that asserts that group cohomology exists.
 \end{remark}
 
 \begin{remark}
-  For those familiar with commutative and homological algebra, we have
-$$
-  \H^n(G,A) = \Ext^n_{\Z[G]}(\Z, A),
-$$
-where $\Z$ is the trivial $G$-module.
+	For those familiar with commutative and homological algebra, we have
+	$$
+		\H^n(G,A) = \Ext^n_{\Z[G]}(\Z, A),
+	$$
+	where $\Z$ is the trivial $G$-module.
 \end{remark}
 
 \begin{remark}
-  One can interpret $\H^2(G,A)$ as the group of equivalence classes of
-  extensions of $G$ by $A$, where an extension is an exact sequence
-  $$0\to A \to M \to G \to 1$$ such that the induced conjugation action
-  of $G$ on $A$ is the given action of~$G$ on~$A$.
-(Note that $G$ acts by conjugation, as $A$ is a normal
-subgroup since it is the kernel of a homomorphism.)
+	One can interpret $\H^2(G,A)$ as the group of equivalence classes of
+	extensions of $G$ by $A$, where an extension is an exact sequence
+	$$0\to A \to M \to G \to 1$$ such that the induced conjugation action
+	of $G$ on $A$ is the given action of~$G$ on~$A$.
+	(Note that $G$ acts by conjugation, as $A$ is a normal
+	subgroup since it is the kernel of a homomorphism.)
 \end{remark}
 
+\subsection{Example Application of the Theorem}
 
-\section{Example Application of the Theorem}
 For example, let's see what we get from the exact sequence
 $$
- 0 \to \Z \xrightarrow{m} \Z \to \Z/m\Z \to 0,
+	0 \to \Z \xrightarrow{m} \Z \to \Z/m\Z \to 0,
 $$
 where $m$ is a positive integer, and $\Z$ has the structure of
 trivial~$G$ module.  By definition we have
 $\H^0(G,\Z) = \Z$ and $\H^0(G,\Z/m\Z)=\Z/m\Z$.
 The long exact sequence begins
 $$
-  0 \to \Z \xra{m} \Z \to \Z/m\Z \to \H^1(G,\Z) \xra{m}
-\H^1(G,\Z) \to \H^1(G,\Z/m\Z)\to
-\H^2(G,\Z) \xra{m} \H^2(G,\Z) \to \cdots
+\begin{tikzcd}
+	0 \rar & \Z \rar{m} & \Z \rar & \Z/m\Z \ar[out=-20, in=160]{dll}
+	\\
+	& \H^1(G,\Z) \rar{[m]} & \H^1(G,\Z) \rar & \H^1(G,\Z/m\Z) \ar[out=-20, in=160]{dll}
+	\\
+	& \H^2(G,\Z) \rar{[m]} & \H^2(G,\Z) \rar & \H^2(G,\Z/m\Z) \rar & \cdots
+\end{tikzcd}
 $$
 From the first few terms of the sequence and the fact
-that $\Z$ surjects onto $\Z/m\Z$, we see that $[m]$
-on $\H^1(G,\Z)$ is injective.
-This is consistent with our observation above that
-$\H^1(G,\Z) = 0$. Using this vanishing and the right side of the
-exact sequence we obtain an isomorphism
+that $\Z$ surjects onto $\Z/m\Z$, we see that
+$[m]:\H^1(G,\Z) \to \H^1(G,\Z)$ is injective.
+This is consistent with Exercise~\ref{ex:H1hom} above that
+showed $\H^1(G,\Z) = 0$. Using this vanishing and the right side
+of the exact sequence we obtain an isomorphism
 $$
-\H^1(G,\Z/m\Z) \isom \H^2(G,\Z)[m].
+\H^1(G,\Z/m\Z) \isom \H^2(G,\Z)[m]
 $$
-As we observed above, when a group acts trivially the $\H^1$
+where $\H^2(G,\Z)[m]$ is the kernel of the map
+$[m]:\H^2(G,\Z) \to \H^2(G,\Z)$.
+By Exercise~\ref{ex:H1hom}, when a group acts trivially the $\H^1$
 is $\Hom$, so
 \begin{equation}\label{eqn:h2}
-  \H^2(G,\Z)[m] \isom \Hom(G,\Z/m\Z).
+	\H^2(G,\Z)[m] \isom \Hom(G,\Z/m\Z).
 \end{equation}
 One can prove that for any $n>0$ and any module~$A$ that the group
 $\H^n(G,A)$ has exponent dividing $\#G$ (see Remark~\ref{rmk:cores}).
+%TODO exponent?
 Thus (\ref{eqn:h2}) allows
 us to understand $\H^2(G,\Z)$, and this comprehension arose
-naturally from the properties that determine $\H^n$.
+naturally from the properties in Theorem~\ref{thm:cohomology}
+that determine the cohomology groups $\H^n$.
 
 
 
 \section{Inflation and Restriction}
-Suppose $H$ is a subgroup of a finite group~$G$ and $A$
-is a $G$-module.  For each~$n\geq 0$, there is a natural map
-$$
-  \res_H : \H^n(G,A) \to \H^n(H,A)
-$$
-called restriction.  Elements of $\H^n(G,A)$ can be viewed as classes
-of $n$-cocycles, which are certain maps $G \times \cdots \times G \to
-A$, and the restriction maps  restricts these cocycles to $H
-\times \cdots \times H$.
 
-If~$H$ is a normal subgroup of~$G$, there is also an inflation map
+Suppose $H$ is a subgroup of a finite group~$G$ and $A$
+is a $G$-module.
+
+For each~$n\geq 0$, there is a natural map
 $$
-\inf_H: \H^n(G/H, A^H) \to \H^n(G,A),
+	\res_H : \H^n(G,A) \to \H^n(H,A)
+$$
+called \emph{restriction}. Elements of $\H^n(G,A)$ can be
+viewed as classes of $n$-cocycles, which are certain maps
+$G \times \cdots \times G \to A$. In this view $\res_H$
+takes a map to its restriction $H \times \cdots \times H \to A$.
+This is equivalent to precomposing with the natural inclusion
+$H\times\cdots\times H \to G\times\cdots\times G$.
+
+If~$H$ is a normal subgroup of~$G$, there is also an \emph{inflation} map
+$$
+	\inf_H: \H^n(G/H, A^H) \to \H^n(G,A),
 $$
 given by taking a cocycle $f : G/H \times \cdots \times G/H \to A^H$
-and precomposing with the quotient map $G\to G/H$ to obtain a cocycle for $G$.
+and precomposing with the quotient map $G\to G/H$ to
+obtain a cocycle for $G$.
 
+%TODO why is it important that $A^H$ is there?
+
+The following proposition will be useful when proving
+the weak Mordell-Weil theorem.
 \begin{proposition}\label{prop:infres}
-Suppose $H$ is a normal subgroup of~$G$.
-Then there is an exact sequence
-$$
-  0 \to \H^1(G/H, A^H)\xra{\inf_H}  \H^1(G,A)\xra{\res_H} \H^1(H,A).
-$$
+	Suppose $H$ is a normal subgroup of~$G$.
+	Then there is an exact sequence
+	$$
+		0 \to \H^1(G/H, A^H)\xra{\inf_H}  \H^1(G,A)\xra{\res_H} \H^1(H,A).
+	$$
 \end{proposition}
 \begin{proof}
 Our proof follows \cite[pg.~117]{serre:localfields} closely.
 
-We see that $\res\circ \inf = 0$ by looking at cochains.  It remains
-to prove that $\inf_H$ is injective and that the image of $\inf_H$
+We see that $\res\circ \inf = 0$ since on cocycles the composition is
+defined by precomposing with $H\to G\to G/H$ which gives the trivial map.
+It remains to prove that $\inf_H$ is injective and that the image of $\inf_H$
 is the kernel of $\res_H$.
 \begin{enumerate}
-
-\item {\em That $\inf_H$ is injective:} Suppose $f:G/H\to A^H$ is a
-  cocycle whose image in $\H^1(G,A)$ is equivalent to~$0$ modulo
-  coboundaries.  Then there is an~$a\in A$ such that $f(\sigma) =
-  \sigma a - a$, where we identify~$f$ with the map $G\to A$ that is
-  constant on the costs of~$H$.  But $f$ depends only on the costs of
-  $\sigma$ modulo~$H$, so $\sigma a - a = \sigma \tau a - a$ for all
-  $\tau \in H$, i.e., $\tau a = a$ (as we see by adding $a$ to both
-  sides and multiplying by $\sigma^{-1}$).Thus $a\in A^H$, so $f$ is
-  equivalent to~$0$ in $\H^1(H,A^H)$.
+%TODO could use description environment but would bold words
+\item {\em That $\inf_H$ is injective:}
+	Suppose $f:G/H\to A^H$ is a cocycle whose image in $\H^1(G,A)$
+	is equivalent to~$0$ modulo coboundaries. Then there is an~$a\in A$
+	such that $f(\sigma) = \sigma a - a$, where we identify~$f$ with
+	the map $G\to A$ that is constant on the costs of~$H$. But $f$
+	depends only on the coset of $\sigma$ modulo~$H$, so
+	$\sigma a - a = \sigma \tau a - a$ for all $\tau \in H$, i.e.,
+	$\tau a = a$ (as we see by adding $a$ to both sides and multiplying
+	by $\sigma^{-1}$). Thus $a\in A^H$, so $f$ is equivalent to~$0$ in
+	$\H^1(G/H,A^H)$.
 
 \item {\em The image of $\inf_H$ contains the kernel of $\res_H$:}
-Suppose $f:G\to A$ is a cocycle whose
-restriction to $H$ is a coboundary, i.e., there is $a\in A$ such
-that $f(\tau) = \tau a - a$ for all $\tau \in H$.
-Subtracting the coboundary $g(\sigma) = \sigma a - a$ for $\sigma\in G$
-from~$f$, we may assume $f(\tau) = 0$ for all $\tau \in H$.
-Examing the equation $f(\sigma\tau) = f(\sigma) + \sigma f(\tau)$
-with $\tau\in H$ shows that $f$ is constant on the cosets of~$H$.
-Again using this formula, but with $\sigma\in H$ and $\tau\in G$, we see
-that
-$$
-  f(\tau) = f(\sigma \tau) = f(\sigma) + \sigma f(\tau) = \sigma f(\tau),
-$$
-so the image of~$f$ is contained in $A^H$.  Thus $f$ defines a cocycle
-$G/H \to A^H$, i.e., is in the image of $\inf_H$.
+	Suppose $f:G\to A$ is a cocycle whose
+	restriction to $H$ is a coboundary, i.e., there is $a\in A$ such
+	that $f(\tau) = \tau a - a$ for all $\tau \in H$.
+	Subtracting the coboundary $g(\sigma) = \sigma a - a$ for $\sigma\in G$
+	from~$f$, we may assume $f(\tau) = 0$ for all $\tau \in H$.
+	Examing the equation $f(\sigma\tau) = f(\sigma) + \sigma f(\tau)$
+	with $\tau\in H$ shows that $f$ is constant on the cosets of~$H$.
+	Again using this formula, but with $\sigma\in H$ and $\tau\in G$, we see
+	that
+	$$
+	  f(\tau) = f(\sigma \tau) = f(\sigma) + \sigma f(\tau) = \sigma f(\tau),
+	$$
+	so the image of~$f$ is contained in $A^H$.  Thus $f$ defines a cocycle
+	$G/H \to A^H$,~i.e., is in the image of $\inf_H$.
 \end{enumerate}
-
 \end{proof}
 
-This proposition will be useful when proving
-the weak Mordell-Weil theorem.
-
 \begin{example}
-The sequence of Proposition~\ref{prop:infres} need not be
-surjective on the right.  For example, suppose $H=A_3 \subset S_3$,
-and let $S_3$ act trivially on the cyclic group $C = \Z/3\Z$.
-Using the $\Hom$ interpretation of $\H^1$, we see
-that
-$\H^1(S_3/A_3, C) = \H^1(S_3, C) = 0$, but
-$\H^1(A_3, C)$ has order~$3$.
+	The sequence of Proposition~\ref{prop:infres} need not be
+	surjective on the right.  For example, suppose $H=A_3 \subset S_3$,
+	and let $S_3$ act trivially on the group $\Z/3\Z$.
+	Using the $\Hom$ interpretation of $\H^1$, we see
+	that
+	$\H^1(S_3/A_3, \Z/3\Z) = \H^1(S_3, \Z/3\Z) = 0$, but
+	$\H^1(A_3, \Z/3\Z)$ has order~$3$.
+	We can compute this example in \sage as follows.
+\begin{sagecode}
+\begin{sagecell}
+S3 = SymmetricGroup(3); S3
+\end{sagecell}
+\begin{sageout}
+Symmetric group of order 3! as a permutation group
+\end{sageout}
+\begin{sagecell}
+S3.cohomology(1,3)
+\end{sagecell}
+\begin{sageout}
+Trivial Abelian group
+\end{sageout}
+\begin{sagecell}
+A3 = AlternatingGroup(3); A3
+\end{sagecell}
+\begin{sageout}
+Symmetric group of order 3! as a permutation group
+\end{sageout}
+\begin{sagecell}
+A3.cohomology(1,3)
+\end{sagecell}
+\begin{sageout}
+Multiplicative Abelian group isomorphic to C3
+\end{sageout}
+\end{sagecode}
 \end{example}
 
 
 \begin{remark}
-On generalization of Proposition~\ref{prop:infres} is to
-a more complicated exact sequence involving the ``transgression map''
-tr:
-$$
-  0 \to \H^1(G/H, A^H)\xra{\inf_H} \H^1(G,A)\xra{\res_H} \H^1(H,A)^{G/H}
-\xra{{\rm tr}}  \H^2(G/H,A^H) \to \H^2(G,A).
-$$
-Another generalization of Proposition~\ref{prop:infres}
-is that if $\H^m(H,A) = 0$ for $1\leq m < n$, then
-there is an exact sequence
-$$
- 0 \to \H^n(G/H, A^H)\xra{\inf_H}  \H^n(G,A)\xra{\res_H} \H^n(H,A).
-$$
+	One generalization of Proposition~\ref{prop:infres} is to
+	a more complicated exact sequence involving the ``transgression map''
+	tr:
+	$$
+		0 \to \H^1(G/H, A^H)\xra{\inf_H} \H^1(G,A)\xra{\res_H} \H^1(H,A)^{G/H}
+		\xra{{\rm tr}}  \H^2(G/H,A^H) \to \H^2(G,A).
+	$$
+	Another generalization of Proposition~\ref{prop:infres}
+	is that if $\H^m(H,A) = 0$ for $1\leq m < n$, then
+	there is an exact sequence
+	$$
+		0 \to \H^n(G/H, A^H)\xra{\inf_H}  \H^n(G,A)\xra{\res_H} \H^n(H,A).
+	$$
 \end{remark}
 
+%TODO references?
+
 \begin{remark}\label{rmk:cores}
-  If $H$ is a not-necessarily-normal subgroup of~$G$, there are also
-  maps
-$$
- \cores_H: \H^n(H,A) \to \H^n(G,A)
-$$
-for each~$n$.  For $n=0$ this is the trace map $a\mapsto \sum_{\sigma
-  \in G/H} \sigma a$, but the definition for $n\geq 1$ is more involved.
-One has $\cores_H \circ \res_H = [\#(G/H)]$.
-Taking $H=1$ we see
-that for each $n\geq 1$ the group
-$\H^n(G,A)$ is annihilated by $\#G$.
+	If $H$ is a not-necessarily-normal subgroup of~$G$, there are also
+	maps
+	$$
+		\cores_H: \H^n(H,A) \to \H^n(G,A)
+	$$
+	for each~$n$.  For $n=0$ this is the trace map
+	$a\mapsto \sum_{\sigma \in G/H} \sigma a$, but the
+	definition for $n\geq 1$ is more involved. One has
+	$\cores_H \circ \res_H = [\#(G/H)]$. Taking $H=1$ this
+	implies that for each $n\geq 1$ the group
+	$\H^n(G,A)$ is annihilated by $[\#G]$.
 \end{remark}
 
 \section{Galois Cohomology}
+
 Suppose $L/K$ is a finite Galois extension of
 fields, and $A$ is a module for $\Gal(L/K)$.
 Put
 $$
- \H^n(L/K, A) = \H^n(\Gal(L/K), A).
+	\H^n(L/K, A) = \H^n(\Gal(L/K), A).
 $$
 
 Next suppose~$A$ is a module for the group $\Gal(K^{\sep}/K)$
@@ -401,8 +483,8 @@ $$A(L) = \{x \in A : \sigma(x) = x \text{ all } \sigma \in\Gal(K^{\sep}/L)\}.$$
 We think of $A(L)$ as the group of elements of~$A$ that are
 ``defined over~$L$''.
 For each~$n\geq 0$, put
- $$
-  \H^n(L/K, A) = \H^n(\Gal(L/K), A(L)).
+$$
+	\H^n(L/K, A) = \H^n(\Gal(L/K), A(L)).
 $$
 Also, put
 $$
