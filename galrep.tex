@@ -83,7 +83,7 @@ and do not include the distinguished point $\O$, which lies at
 infinity.
 
 \begin{remark}
-The command {\tt{EllipticCurve}} in \Sage
+The command {\tt{EllipticCurve}} in \sage
 can take as input a list {\tt{[a4,a6]}}
 of coefficients and returns an elliptic curve given
 by a Weirstrass equation with $a_1=a_2=a_3=0$ and
@@ -349,6 +349,7 @@ Swinnerton-Dyer conjecture (see \url{http://wstein.org/books/bsd/}).
 %TODO is there another book on bsd?
 
 \section[Galois Representations]{Galois Representations Attached to Elliptic Curves}
+
 Let~$E$ be an elliptic curve over a number field~$K$.
 In this section we attach representations of
 $G_K = \Gal(\Kbar/K)$ to~$E$, and use them to define an $L$-function
@@ -477,8 +478,8 @@ T.gens()
 \end{sagecode}
 \noindent
 Note that this matches with what we expected: we computed
-two generators for $E[2]$ corresponding to two generators of
-$\left(\ZZ/2\ZZ\right)^2$.
+two generators for $E[2]$ (the output of the last cell)
+corresponding to two generators of $\left(\ZZ/2\ZZ\right)^2$.
 
 \end{example}
 
