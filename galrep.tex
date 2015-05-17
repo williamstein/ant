@@ -53,6 +53,8 @@ E
 Elliptic Curve defined by y^2 = x^3 + x over
     Finite Field of size 7
 \end{sageout}
+\end{sagecode}
+\begin{sagecode}
 \begin{sagecell}
 E.plot(pointsize=60, gridlines=True)
 \end{sagecell}
@@ -70,6 +72,8 @@ E
 Elliptic Curve defined by y^2 = x^3 + x over
     Rational Field
 \end{sageout}
+\end{sagecode}
+\begin{sagecode}
 \begin{sagecell}
 E.plot()
 \end{sagecell}
@@ -126,6 +130,8 @@ E(0,2) + E(1,0)
 \begin{sageout}
 (3 : 4 : 1)
 \end{sageout}
+\end{sagecode}
+\begin{sagecode}
 \begin{sagecell} %skip
 
 G = E.plot()
@@ -362,11 +368,11 @@ There is a natural action of $G_K$ on the points of $E(\overline{K})$.
 Given a point $P=(a,b)\in E(\overline{K})$ we define $\sigma(P)$ to be
 the point $(\sigma(a),\sigma(b))$. Since~$E$ is defined over~$K$ the
 point~$\sigma(P)$ will again lie on~$E$ so the action is well
-defined. Since the group structure on~$E$ is defined by
-algebraic formulas with coefficients in~$K$ it follows that the
+defined. Note that the group structure on~$E$ is defined by
+algebraic formulas with coefficients in~$K$. It follows that the
 action commutes with point addition meaning that
 $\sigma(P+Q) = \sigma(P)+\sigma(Q)$. Now fix an integer $n$.
-From what we have seen, it is easy to show the subgroup
+From what we have seen, the subgroup
 $$
 E[n] = \{P \in E(\Kbar) : nP = \O\}
 $$
@@ -399,10 +405,31 @@ that $E(\C)_{\tor}$ is isomorphic
 to the quotient
 $$\H_1(E(\C),\Q)/\H_1(E(\C),\Z)$$
 of homology groups and that the homology of a curve
-of genus~$g$ is isomorphic to $\Z^{2g}$.  Then
+of genus~$g$ is isomorphic to $\Z^{2g}$.
+Then we have a non-canonical isomorphism
 $$
- E[n]\isom (\Q/\Z)^2[n] = (\Z/n\Z)^2.
+ E[n]\approx (\Q/\Z)^2[n] = (\Z/n\Z)^2.
 $$
+
+Technically the previous arguments have shown $E(\C)[n] \approx (\Z/n\Z)^2$.
+However, our definition of $E[n]$ used points in $E(\overline{K})$.
+So we need to show the points $E(\C)[n]$ are actually defined over
+$\overline{K}$. Note that $E(\C)[n]$ is finite and invariant under
+$\Aut(\C/\overline{K})$ for the same reason as $E[n]$ was invariant under
+$\Gal(\overline{K}/K)$ (point addition is defined by algebraic formulas with
+coefficients in $K$). It follows that $E(\C)[n]$ is indeed defined over 
+$E(\overline{K})$ so the arguments above show that
+$E[n] \approx \left(\Z/n\Z\right)^2$.
+
+\begin{remark}
+	Notice that the arguments above used many analytic facts about
+	geometry over $\C$ (e.g. homology, analytic structure) in order to
+	prove algebraic facts (e.g. the number of torsion points) about
+	$E(\overline{K})$. This is part of a more general concept denoted
+	\emph{Lefschetz principle} which generally relates geometry over an
+	algebraically closed field of characteristic $0$ to geometry over
+	$\C$. For more on this see \cite[Ch.~VI.6]{silverman:aec}.
+\end{remark}
 
 \begin{exercise}\label{QE[p]finitegaloisext}
 	Let $E$ be an elliptic curve defined over a number
@@ -531,7 +558,11 @@ GL(2,GF(7)).gap().CharacterTable().CharacterDegrees()
 \end{sageout}
 \end{sagecode}
 
-Instead of using the complex numbers, we use the $p$-adic numbers, as
+Instead of using the complex numbers, we use the
+\emph{$p$-adic numbers}\footnote{
+For a review of $p$-adic numbers and $p$-adic analysis
+see \cite{koblitz1996p}.
+}, as
 follows.  For each power $p^m$ of $p$, we have defined a homomorphism
 $$
   \rhobar_{E,p^m}: G_K \to \Aut(E[p^m]) \ncisom \GL_2(\Z/p^m\Z).
@@ -611,7 +642,7 @@ $\Re(s)>\alpha$, for some real number~$\alpha$.
 
 Recall that the Artin $L$-function from Section~\ref{sec:artin}
 (see Equation~\ref{eqn:artin}) extended to meromorphic function
-on the entire complex plane and it was conjectured that the $L$-function
+on the entire complex plane and we conjectured that the $L$-function
 of any continuous representation of $\Gal(\Qbar/\Q) \to \GL_n(\C)$ also
 extends to a meromorphic function on $\C$. We could ask the same
 question for the $L$-functions attached to elliptic curves. However,
