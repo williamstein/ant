@@ -426,9 +426,12 @@ See Exercise~\ref{ex:decompGpsConj}.
 \begin{exercise}\label{ex:decompGpsConj}
 Prove Lemma~\ref{decompGpsConj}.
 
-Hint: For $\sigma,\tau\in G$ you need to show $\tau D_\p \tau^{-1} = D_{\tau\p}$.
-Start by writing down what it means for $\sigma\in D_\p$
-and $\tau\sigma\tau^{-1}\in D_{\tau\p}$.
+\begin{hint}
+	For $\sigma,\tau\in G$ you need to show
+	$\tau D_\p \tau^{-1} = D_{\tau\p}$.
+	Start by writing down what it means for $\sigma\in D_\p$
+	and $\tau\sigma\tau^{-1}\in D_{\tau\p}$.
+\end{hint}
 
 %solution:
 %We have for each $\sigma, \tau \in G$, that
@@ -616,11 +619,13 @@ We summarize the discussion into the following theorem.
 	Prove that up to isomorphism there is
 	exactly one finite field of each degree.
 	
-	Hint: By Theorem~\ref{thm:galoisgroupfinitefield}
-	all elements in a finite field satisfy an equation
-	of the form $x^{p^f} - 1$ where $p$ is the
-	characteristic and $f$ is the degree over the
-	field $\F_p$.
+	\begin{hint}
+		By Theorem~\ref{thm:galoisgroupfinitefield}
+		all elements in a finite field satisfy an equation
+		of the form $x^{p^f} - 1$ where $p$ is the
+		characteristic and $f$ is the degree over the
+		field $\F_p$.
+	\end{hint}
 \end{exercise}
 
 
@@ -726,8 +731,10 @@ $$
 	$\sigma(a) \equiv a^p \pmod{\p}$ for all $a\in\O_K$
 	then $\sigma = \Frob_\p$.
 
-	Hint: First show $\sigma\in D_\p$, %TODO turn this into an environment
-	then argue as in the proof of Proposition~\ref{prop:charip}.
+	\begin{hint}
+		First show $\sigma\in D_\p$, then argue as in
+		the proof of Proposition~\ref{prop:charip}.
+	\end{hint}
 \end{exercise}
 
 
@@ -841,17 +848,21 @@ $$
 	homomorphism $\galq\to\GL_n(\C)$ with finite image.
 	
 	
-	Hint: Use Zorn's lemma to show that there are homomorphisms
-	$\galq\to\{\pm 1\}$ with finite image that are not continuous,
-	since they do not factor through the Galois group of any finite
-	Galois extension.
+	\begin{hint}
+		Use Zorn's lemma to show that there are homomorphisms
+		$\galq\to\{\pm 1\}$ with finite image that are not continuous,
+		since they do not factor through the Galois group of any
+		finite Galois extension.
+	\end{hint}
 	
-	More hints: The extension $\Q(\sqrt{d}, d \in \Q^*/(\Q^*)^2)$
-	is an extension of~$\Q$ with Galois group $X\ncisom \prod \F_2$.
-	The index-two open subgroups of~$X$ correspond to the quadratic
-	extensions of~$\Q$. However, Zorn's lemma implies that~$X$
-	contains many index-two subgroups that do not correspond to
-	quadratic extensions of~$\Q$.
+	\begin{hint}
+		The extension $\Q(\sqrt{d}, d \in \Q^*/(\Q^*)^2)$
+		is an extension of~$\Q$ with Galois group $X\ncisom \prod \F_2$.
+		The index-two open subgroups of~$X$ correspond to the quadratic
+		extensions of~$\Q$. However, Zorn's lemma implies that~$X$
+		contains many index-two subgroups that do not correspond to
+		quadratic extensions of~$\Q$.
+	\end{hint}
 \end{exercise}
 
 Fix a Galois representation~$\rho$ and let $K$ be the fixed field of
