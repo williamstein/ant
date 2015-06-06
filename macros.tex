@@ -374,7 +374,6 @@
 \newtheorem{remarks}[theorem]{Remarks}
 \newtheorem{example}[theorem]{Example}
 \newtheorem{comment}[theorem]{Comment}
-\newtheorem*{hint}{Hint}
 
 \numberwithin{equation}{section}
 \numberwithin{figure}{section}
@@ -432,6 +431,10 @@
       \end{list}
    }
 %end newenvironment
+
+\newenvironment{hint}
+{[\emph{Hint}:}
+{\!]}
 
 \newcommand{\hd}[1]{\vspace{1ex}\noindent{\bf #1} }
 \newcommand{\nf}[1]{\underline{#1}} 
