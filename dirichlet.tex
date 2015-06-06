@@ -578,7 +578,8 @@ Ring morphism:
   Defn: a |--> -0.629960524947 + 1.09112363597*I]
 \end{sageout}
 \begin{sagecell}
-phi = lambda z : [log(abs(sigma(z))) for sigma in S]
+def phi(z):
+    return [log(abs(sigma(z))) for sigma in S]
 phi(u)
 \end{sagecell}
 \begin{sageout}
@@ -626,7 +627,8 @@ a^3 + a
 \end{sageout}
 \begin{sagecell}
 S = K.places(prec=53)
-phi = lambda z : [log(abs(sigma(z))) for sigma in S]
+def phi(z):
+    return [log(abs(sigma(z))) for sigma in S]
 phi(u1)
 \end{sagecell}
 \begin{sageout}
@@ -695,7 +697,8 @@ a
 \end{sageout}
 \begin{sagecell}
 S = K.places(prec=53)
-phi = lambda z : [log(abs(sigma(z))) for sigma in S]
+def phi(z):
+    return [log(abs(sigma(z))) for sigma in S]
 phi(u1)
 \end{sagecell}
 \begin{sageout}
@@ -734,8 +737,8 @@ K.signature()
 U = K.unit_group(); U
 \end{sagecell}
 \begin{sageout}
-Unit group with structure C22 x Z x Z x Z x Z of Cyclotomic Field
-of order 11 and degree 10
+Unit group with structure C22 x Z x Z x Z x Z of \
+Cyclotomic Field of order 11 and degree 10
 \end{sageout}
 \begin{sagecell}
 u = U.1.value(); u
@@ -745,7 +748,8 @@ a^7 + a^6
 \end{sageout}
 \begin{sagecell}
 S = K.places(prec=20)
-phi = lambda z : [log(abs(sigma(z))) for sigma in S]
+def phi(z):
+    return [log(abs(sigma(z))) for sigma in S]
 phi(u)
 \end{sagecell}
 \begin{sageout}
