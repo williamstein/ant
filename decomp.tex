@@ -186,7 +186,7 @@ $$
 $$
 By unique factorization, since every $\p_j$ appears in the left hand
 side, we must have that for each~$j$ there is a~$\sigma$ with
-$\sigma(\p_i)=\p_j$, i.e. $G$ acts transitively on $S$.
+$\sigma(\p_i)=\p_j$, i.e., $G$ acts transitively on $S$.
 
 Choose some $j$ and suppose that $k\neq j$ is another index.  Because
 $G$ acts transitively, there exists $\sigma\in G$ such that
@@ -220,7 +220,7 @@ and a cubic field and its Galois closure.
 
 Suppose $K/\Q$ is a quadratic field.  Then $K$ is Galois, so for each prime $p\in\Z$ we have
 $2=efg$. There are exactly three possibilities:
-\begin{itemize}
+\begin{description}
 \item[\bf{Ramified:}] $e=2$, $f=g=1$: The prime $p$ \emph{ramifies} in
 $\O_K$, which means $p\O_K = \p^2$.  Let $\alpha$ be a generator for $\O_K$ and
 $h\in\Z[x]$ a minimal polynomial for $\alpha$.
@@ -240,7 +240,7 @@ as we will see illustrated below for a particular example.
 \item[\bf{Split:}] $e=f=1$, $g=2$: The prime $p$ \emph{splits} in $\O_K$,
 which means $p\O_K = \p_1\p_2$ with $\p_1\neq \p_2$.  This happens the other
 half of the time.
-\end{itemize}
+\end{description}
 
 \begin{example}\label{exam:decompQsqrt5}
 Let $K=\Q(\sqrt{5})$, so $\O_K=\Z[\gamma]$, where
@@ -308,7 +308,7 @@ $$
 \q\O_K = \p_1^{e_1}\cdots\p_g^{e_g}.
 $$
 Let $f_i$ be the degree of the extension of
-residue fields, i.e.
+residue fields, i.e.,
 $$
 f_i = [\O_K/\p_i : \O_L/\q].
 $$
@@ -356,8 +356,8 @@ Let $K/L/\Q$ be a tower of number fields. Let $p$ be a prime
 in $\Z$, $\q$ a prime in $\O_L$ lying over $p$, and $\p$ a prime
 in $\O_K$ lying over $\q$.
 \begin{enumerate}
-	\item[(a)] Show that $e$ is multiplicative, i.e. $e(\p/p)=e(\p/\q) \cdot e(\q/p)$.
-	\item[(b)] Show that $f$ is multiplicative, i.e. $f(\p/p)=f(\p/\q) \cdot f(\q/p)$.
+	\item[(a)] Show that $e$ is multiplicative, that is $e(\p/p)=e(\p/\q) \cdot e(\q/p)$.
+	\item[(b)] Show that $f$ is multiplicative, that is $f(\p/p)=f(\p/\q) \cdot f(\q/p)$.
 	\item[(c)] Let $g_L(p)$ be the number of primes of $\O_L$ lying over $p$.
 	Show that $g_K(p) = \sum\limits_{\q \text{ lies over } p} g_L(\q)$.
 \end{enumerate}
@@ -564,18 +564,17 @@ of Galois groups for finite fields.
 	and $\Frob_p(ab) = \Frob_p(a)\Frob_p(b)$.
 	
 	\item[(b)]
-	Suppose $k = \F_p$. Then show $\Frob_p = id$, i.e.
+	Suppose $k = \F_p$. Then show $\Frob_p = id$, i.e.,
 	$a^p = a$ for any $a\in\F_p$.
 	
 	\item[(c)]
-	Suppose $k = \F_{q}$ where $q=p^f$ for some positive
-	integer $f$. Show that $\Frob_p:k\to k$ is an automorphism.
+	Suppose $k = \F_{q}$ where $q=p^f$ for some $f\geq 1$. Show that $\Frob_p:k\to k$ is an automorphism.
 	
 	\item[(d)]
 	Continuing part (c), note that by
 	Exercise~\ref{ex:finitesubgroupoffieldcyclic}
 	$k^*$ is cyclic. Let $a\in k$ be a generator for
-	$k^*$. This means $a$ has order $p^f-1$ and $k = \F_p(a)$.
+	$k^*$, so $a$ has multiplicative order $p^f-1$ and $k = \F_p(a)$.
 	Show that
 	$$
 	\Frob_p^n(a) = a^{p^n} = a
@@ -588,16 +587,16 @@ of Galois groups for finite fields.
 \end{exercise}
 
 \begin{remark}
-	A field of positive characteristic where $\Frob_p$
-	is an automorphism is called a \emph{perfect} field.
 	Exercise~\ref{ex:frob} shows that all finite fields
-	are \emph{perfect}.
+	are \emph{perfect}. For more on perfect fields see
+	a standard abstract algebra text such as
+	\cite{dummit2004abstract}.
 \end{remark}
 
 By Exercise~\ref{ex:frob}(b,c) the map $\Frob_p$ is an
 automorphism of $k_\p$ fixing $\F_p$ and hence defines
 an element in $\Gal(k_{\p}/\F_p)$. Let $f = f_{\p/p}$ be the residue
-degree of $\p$, i.e. $f = [k_{\p}:\F_p]$.
+degree of $\p$, i.e., $f = [k_{\p}:\F_p]$.
 Exercise~\ref{ex:frob}(d) shows the order of $\Frob_p$ is~$f$.
 Since the order of the automorphism group of a field extension
 is at most the degree of the extension, we conclude that
@@ -759,7 +758,7 @@ symbol}.  It extends to a homomorphism from the free abelian
 group on unramified primes~$p$ to~$G$.
 Class field theory (for~$\Q$) sets up a natural bijection
 between abelian Galois extensions of $\Q$ and certain maps from
-certain subgroups of the group of fractional ideals for~$\Z$ (i.e. $\Q^*$).
+certain subgroups of the group of fractional ideals for~$\Z$ (i.e., $\Q^*$).
   We have
 just described one direction of this bijection, which associates to an
 abelian extension the Artin symbol (which is a homomorphism).
