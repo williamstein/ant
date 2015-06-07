@@ -1,9 +1,9 @@
 \chapter{Galois Cohomology}\label{ch:gc}
 
-Let $G$ be a group and suppose $G$ acts on another group $A$
+Let $G$ be a group and suppose $G$ acts on an abelian group $A$
 (defined below). In this chapter we will study groups attached
 to the action of $G$ on $A$. These are called \emph{cohomology~groups}
-and denoted by $H^n(G,A)$. The theory of these groups is referred
+and denoted by $\H^n(G,A)$. The theory of these groups is referred
 to as \emph{group cohomology}. In the later sections $G$ will represent
 the Galois group of a field extension. This is called
 \emph{Galois~cohomology}. Studying Galois cohomology helps us
@@ -11,19 +11,17 @@ understand the structure of Galois groups such as $\Gal(\Qbar/\Q)$.
 
 \section{Group Rings and Modules}
 
-Recall the definition of a module over a ring.
-In this section we will develop the analogous
-definition for a module over a group.
+In this section we define group modules, which are analogous
+to modules over a ring. For a review of the theory of modules
+over a ring see \cite[Ch.~10]{dummit2004abstract}.
 
 \begin{definition}\label{def:groupring}
-	Let $G$ be a finite group. The \emph{group ring} $\Z[G]$ of $G$
+	Let $G$ be any group. The \emph{group ring} $\Z[G]$ of $G$
 	is the free abelian group on the elements of $G$ equipped
 	with multiplication given by the group structure on~$G$.
 	Note that $\Z[G]$ is a commutative ring if and only if~$G$ is
-	commutative.
+	abelian.
 \end{definition}
-
-%TODO Why is G always finite?
 
 \begin{example}
 	For example, the group ring of the cyclic group
@@ -154,20 +152,21 @@ $$
 	B^1(G, A) = \{f_a :  a\in A\}.
 $$
 There are also explicit, and increasingly complicated, definitions of
-$\H^n(G,A)$ for each $n\geq 2$ in terms of certain maps $G \times
-\cdots \times G \to A$ modulo a subgroup, but we will not need this.
-%TODO reference for crossed homomorphisms?
+$\H^n(G,A)$ for each $n\geq 2$ in terms of \emph{crossed homomorphisms},
+which are certain maps $G \times \cdots \times G \to A$ modulo a subgroup.
+We will not need these maps, but for more information about them
+see \cite{cassels-frohlich}.
 
 \begin{exercise}\label{ex:H1hom}
 	Suppose $G$ acts trivially on $A$.
-	Show that $B^1(G,A)=0$ and $C^1(G,A) = \Hom(G,A)$.
-	In particular, this shows $H^1(G,\Z) = \Hom(G,A)$.
-	Deduce that if $A = \Z$ then $H^1(G,\Z) = 0$.
+	Show that $B^1(G,A)=0$ and $C^1(G,A) \cong \Hom(G,A)$.
+	In particular, this shows $\H^1(G,\Z) \cong \Hom(G,A)$.
+	Deduce that if $A = \Z$ then $\H^1(G,\Z) = 0$.
 	
 	Hint: For any $\sigma\in G$ we have
 	$f_a(\sigma) = \sigma(a) - a = a - a = 0$.
 	Also for any finite group $G$, show that $\Hom(G,\Z) = 0$.
-		
+
 %$\sigma a - a = a -a =0$ for any $a\in A$.
 %Also, $C^1(G,A) = \Hom(G,A)$.
 %If $A=\Z$, then since $G$ is finite there are no nonzero
@@ -178,7 +177,7 @@ $\H^n(G,A)$ for each $n\geq 2$ in terms of certain maps $G \times
 	The groups $H^n(G,\Z)$ and $H^n(G,\Z/p\Z)$ (where $p$ is a prime)
 	are computable in \sage. For example we can compute $H^{10}(A_5,\Z)$
 	and $H^{7}(A_5,\Z/5\Z)$ where $A_5$ is the alternating group of
-	order $120$.
+	order $120$ and $\Z/5\Z$ is given the trivial $A_5$-module structure.
 \begin{sagecode}
 \begin{sagecell}
 G = AlternatingGroup(5); G
@@ -251,7 +250,7 @@ which uniquely determine group cohomology.
 We will not prove this theorem.  For proofs see
 \cite[Atiyah-Wall]{cassels-frohlich} and
 \cite[Ch.~7]{serre:localfields}. The properties of the theorem
-uniquely the determine group cohomology, so one should in theory be able
+uniquely determine group cohomology, so one should in theory be able
 to use them to deduce anything that can be deduced about cohomology
 groups.  Indeed, in practice one frequently proves results about
 higher cohomology groups $\H^n(G,A)$ by writing down appropriate exact
@@ -336,7 +335,7 @@ $$
 $$
 called \emph{restriction}. Elements of $\H^n(G,A)$ can be
 viewed as classes of $n$-cocycles, which are certain maps
-$G \times \cdots \times G \to A$. In this view $\res_H$
+$G \times \cdots \times G \to A$. From this perspective $\res_H$
 takes a map to its restriction $H \times \cdots \times H \to A$.
 This is equivalent to precomposing with the natural inclusion
 $H\times\cdots\times H \to G\times\cdots\times G$.
@@ -364,7 +363,7 @@ the weak Mordell-Weil theorem.
 Our proof follows \cite[pg.~117]{serre:localfields} closely.
 
 We see that $\res\circ \inf = 0$ since on cocycles the composition is
-defined by precomposing with $H\to G\to G/H$ which gives the trivial map.
+defined by precomposing with $H\to G\to G/H$, which gives the trivial map.
 It remains to prove that $\inf_H$ is injective and that the image of $\inf_H$
 is the kernel of $\res_H$.
 \begin{enumerate}
@@ -424,7 +423,7 @@ Trivial Abelian group
 A3 = AlternatingGroup(3); A3
 \end{sagecell}
 \begin{sageout}
-Symmetric group of order 3! as a permutation group
+Alternating group of order 3!/2 as a permutation group
 \end{sageout}
 \begin{sagecell}
 A3.cohomology(1,3)
