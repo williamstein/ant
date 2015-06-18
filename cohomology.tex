@@ -469,16 +469,20 @@ Multiplicative Abelian group isomorphic to C3
 
 \section{Galois Cohomology}
 
-Suppose $L/K$ is a finite Galois extension of
-fields, and $A$ is a module for $\Gal(L/K)$.
+Suppose $L/K$ is a finite Galois extension
+(i.e. normal and separable)
+of fields, and $A$ is a $\Gal(L/K)$-module.
 Put
 $$
 	\H^n(L/K, A) = \H^n(\Gal(L/K), A).
 $$
 
-Next suppose~$A$ is a module for the group $\Gal(K^{\sep}/K)$
+Next suppose~$A$ is a $\Gal(K^{\sep}/K)$-module
 and for any extension~$L$ of~$K$, let
-$$A(L) = \{x \in A : \sigma(x) = x \text{ all } \sigma \in\Gal(K^{\sep}/L)\}.$$
+$$
+	A(L) = \{x \in A : \sigma(x) = x
+	\text{ for all } \sigma \in\Gal(K^{\sep}/L)\}.
+$$
 We think of $A(L)$ as the group of elements of~$A$ that are
 ``defined over~$L$''.
 For each~$n\geq 0$, put
@@ -490,7 +494,6 @@ $$
  \H^n(K,A) = \varinjlim_{L/K} \H^n(L/K,A(L)),
 $$
 where $L$ varies over all finite Galois extensions of $K$.
-(Recall: Galois means normal and separable.)
 %(There's much hidden in that direct limit.)
 
 \begin{example}
@@ -510,6 +513,7 @@ See \cite{serre:localfields}.  The main input to the proof is linear
 independence of automorphism and a clever little calculation.
 %It suffices to prove for every finite Galois extension
 %$L/K$ that $\H^1(L/K,L^*) = 0$.  ... (copy from Serre.)
+%TODO should this be copied?
 \end{proof}
 
 %%% Local Variables:
