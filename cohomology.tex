@@ -469,41 +469,86 @@ Multiplicative Abelian group isomorphic to C3
 
 \section{Galois Cohomology}
 
-Suppose $L/K$ is a finite Galois extension
-(i.e. normal and separable)
-of fields, and $A$ is a $\Gal(L/K)$-module.
+Suppose $L/K$ is a finite Galois extension of fields
+(recall that Galois means is normal and separable),
+and $A$ is a $\Gal(L/K)$-module.
 Put
 $$
 	\H^n(L/K, A) = \H^n(\Gal(L/K), A).
 $$
 
-Next suppose~$A$ is a $\Gal(K^{\sep}/K)$-module
-and for any extension~$L$ of~$K$, let
+Following Section~\ref{sec:artin}, we can put a topology
+on $\Gal(K^{\sep}/K)$ by taking as a basis of the origin,
+subgroups of the form $\Gal(K^{\sep}/L)$ where $L/K$
+is a finite Galois extension.
+
+\begin{exercise}
+	Let $H$ be a subgroup of $G = \Gal(K^{\sep}/K)$.
+	Show that $H$ is open if and only if $H$ is closed
+	and has finite index in $G$.
+	%TODO add hint?
+	%TODO H open then contains basis element which is finite
+	%TODO index and so compliment is finite union
+	%TODO closed and finite index, then compliment is finite union
+	%TODO of closed
+\end{exercise}
+
+\begin{definition}
+	Let $A$ be a $\Gal(K^{\sep}/K)$-module. We say that $A$
+	is a \emph{continuous} $\Gal(K^{\sep}/K)$-module if the map
+	$\Gal(K^{\sep}/K)\times A \to A$
+	(see Exercise~\ref{ex:equivalentdata}) is continuous when $A$
+	has the discrete topology.
+\end{definition}
+
+\begin{exercise}
+	Let $G = \Gal(K^{\sep}/K)$ and $A$ be a $G$-module.
+	Show that $A$ is a continuous $G$-module
+	if and only if for every $a\in A$ the subgroup
+	$$
+	G_a = \{\sigma\in G : \sigma(a) = a\}
+	$$
+	is open.
+\end{exercise}
+
+Now let $A$ be a continuous $\Gal(K^{\sep}/K)$-module. Let
 $$
-	A(L) = \{x \in A : \sigma(x) = x
+	A(L) = A^{\Gal(K^{\sep}/L)} = \{x \in A : \sigma(x) = x
 	\text{ for all } \sigma \in\Gal(K^{\sep}/L)\}.
 $$
-We think of $A(L)$ as the group of elements of~$A$ that are
-``defined over~$L$''.
-For each~$n\geq 0$, put
+and define
 $$
-	\H^n(L/K, A) = \H^n(\Gal(L/K), A(L)).
+	\H^n(K,A) = \varinjlim_{L/K} \H^n(L/K,A(L)),
 $$
-Also, put
-$$
- \H^n(K,A) = \varinjlim_{L/K} \H^n(L/K,A(L)),
-$$
-where $L$ varies over all finite Galois extensions of $K$.
-%(There's much hidden in that direct limit.)
+where the limit is taken over all finite Galois
+extensions $L/K$.
+
+It is not obvious that the groups $\H^n(K,A)$ are
+actually cohomology groups, i.e. they satisfy the
+conclusion of Theorem~\ref{thm:cohomology}. However
+one can show they have analogous properties, see
+\cite[Ch.~X.3]{serre:localfields} for references.
+
+%TODO show this limit agrees with check cohomology and cite result
+%TODO in Milne LEC?
 
 \begin{example}
-The following are examples of $\Gal(\Qbar/\Q)$-modules:
+The following are examples of continuous $\Gal(\Qbar/\Q)$-modules:
 $$
-  \Qbar,\quad \Qbar^*,\quad \Zbar,\quad\Zbar^*,\quad E(\Qbar),\quad
- E(\Qbar)[n], \quad {\rm Tate}_{\ell}(E),
+	\Qbar,
+	\quad \Qbar^*,
+	\quad \Zbar,
+	\quad\Zbar^*,
+	\quad E(\Qbar),
+	\quad
+	E(\Qbar)[n],
+	\quad {\rm Tate}_{\ell}(E),
 $$
-where $E$ is an elliptic curve over~$\Q$.
+where $E$ is an elliptic curve over~$\Q$. Can you identify the
+action for each module?
 \end{example}
+
+
 
 \begin{theorem}[Hilbert 90]\label{thm:h90}
 We have $\H^1(K,\Kbar^*) = 0$.
