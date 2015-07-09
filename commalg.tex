@@ -335,15 +335,17 @@ integer does.
 \begin{exercise}
 	Recall Smith normal form defined in Proposition~\ref{prop:smith}. With only minor modifications, then the proposition and proof will work over any principle ideal domain. Find and apply these modifications then find the Smith normal form of the matrix $\begin{pmatrix} 1 & 2 & 3 \\ 0 & 1+i & 2 \\ 0 & 1 & 5 \end{pmatrix}$.
 	
-	Hint: you can use \sage{} to verify your answer. However, you will need to make explicitly construct the Gaussian integers in order to input the matrix. You can do this by the following:
-\begin{sagecode}
-\begin{sagecell}
+	\begin{hint}
+		You can use \sage{} to verify your answer. However, you will need to make explicitly construct the Gaussian integers in order to input the matrix. You can do this by the following:
+		\begin{sagecode}
+		\begin{sagecell}
 K.<i> = QuadraticField(-1)
 R = K.maximal_order()
 M = matrix(R, 3, [1,2,3,0,1+i,2,0,1,5]); show(M)
 #show(M.smith_form()[0]) #uncomment for the answer
-\end{sagecell}
-\end{sagecode}
+		\end{sagecell}
+		\end{sagecode}
+	\end{hint}
 \end{exercise}
 
 \begin{exercise}
@@ -1320,7 +1322,9 @@ with no poles also have no poles.
 \begin{exercise}
 	Let $k = \F_p$ be the finite field with $p$ elements where $p$ is some prime. Find all automorphisms of $k(t)$. Note that an automorphism is completely characterized by its value on $t$. How many such automorphisms are there?
 	
-	Possible hint: For some people, it is easier to think about the equivalent question: What rational functions $f\in k(t)$ is the map $k(t)\to k(t)$ given by $t\mapsto f(t)$ an automorphism?
+	\begin{hint}
+		For some people, it is easier to think about the equivalent question: What rational functions $f\in k(t)$ is the map $k(t)\to k(t)$ given by $t\mapsto f(t)$ an automorphism?
+	\end{hint}
 \end{exercise}
 
 \section{Norms and Traces}
