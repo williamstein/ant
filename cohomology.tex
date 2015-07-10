@@ -565,21 +565,19 @@ $\Qbar^*(L) = L^*$.
 \begin{proof}
 	Our proof follows \cite[Pg.~150]{serre:localfields} closely.
 	
-	%Because $\H^1(K,\Kbar^*) = \varinjlim_{L/K} \H^1(L/K,L^*)$
+	Because $\H^1(K,\Kbar^*) = \varinjlim_{L/K} \H^1(L/K,L^*)$
 	It suffices to prove $\H^1(L/K,L^*) = 0$ for every finite
 	Galois extension $L/K$.
-	
-	Let $G = \Gal(L/K)$ and $f$ be a $1$-cocycle so that $f:G \to L^*$ such
-	that $f(\sigma\tau) = f(\sigma)\cdot\sigma(f(\tau))$. Here
-	``$\cdot$'' represents multiplication in $L^*$.
-	
+	Let $G = \Gal(L/K)$ and $f$ be a $1$-cocycle so that $f:G \to L^*$
+	such that $f(\sigma\tau) = f(\sigma)\cdot\sigma(f(\tau))$. Here
+	``~$\cdot$~'' represents multiplication in $L^*$.
 	A standard fact from Galois theory is that the elements of
 	$G$ are $L$ linearly independent. Hence we can find
 	some $c\in L$ such that
 	$$
 	b = \sum_{\tau\in G} f(\tau)\cdot\tau(c) \neq 0.
 	$$
-	Now apply $\sigma$ to both sides
+	Now apply $\sigma$ to both sides to get
 	\begin{align*}
 		\sigma(b)
 		&=
@@ -588,6 +586,10 @@ $\Qbar^*(L) = L^*$.
 		&=
 		\sum_{\tau\in G} f(\sigma)^{-1} \cdot f(\sigma\tau)
 		\cdot \sigma\tau(c)
+		\\
+		&=
+		f(\sigma)^{-1} \cdot \sum_{\tau\in G} f(\sigma\tau)
+		\cdot (\sigma\tau)(c)
 		\\
 		&=
 		f(\sigma)^{-1}\cdot b.
