@@ -162,7 +162,7 @@ invertible because each operation can be reversed using another row or
 column operation over the integers.
 
 To see that the proposition must be true, assume $A\neq 0$ and perform
-the following steps (compare \cite[pg.~459]{artin:algebra}):
+the following steps (compare \cite[Pg.~459]{artin:algebra}):
 \begin{enumerate}
 \item By permuting rows and columns, move a nonzero entry of $A$ with
   smallest absolute value to the upper left corner of $A$.  Now
@@ -335,20 +335,17 @@ integer does.
 \begin{exercise}
 	Recall Smith normal form defined in Proposition~\ref{prop:smith}. With only minor modifications, then the proposition and proof will work over any principle ideal domain. Find and apply these modifications then find the Smith normal form of the matrix $\begin{pmatrix} 1 & 2 & 3 \\ 0 & 1+i & 2 \\ 0 & 1 & 5 \end{pmatrix}$.
 
-	Hint: you can use \sage{} to verify your answer. However, you will need to make explicitly construct the Gaussian integers in order to input the matrix. You can do this by the following:
+	\begin{hint}
+		You can use \sage{} to verify your answer. However, you will need to make explicitly construct the Gaussian integers in order to input the matrix. You can do this by the following code.
+	\end{hint}
 	\begin{sagecode}
 	\begin{sagecell}
-	\begin{hint}
-		you can use \sage{} to verify your answer. However, you will need to make explicitly construct the Gaussian integers in order to input the matrix. You can do this by the following:
-		\begin{sagecode}
-		\begin{sagecell}
 K.<i> = QuadraticField(-1)
 R = K.maximal_order()
 M = matrix(R, 3, [1,2,3,0,1+i,2,0,1,5]); show(M)
 #show(M.smith_form()[0]) #uncomment for the answer
-		\end{sagecell}
-		\end{sagecode}
-	\end{hint}
+	\end{sagecell}
+	\end{sagecode}
 \end{exercise}
 
 \begin{exercise}
