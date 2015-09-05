@@ -3,7 +3,7 @@
 \section{Kummer Theory of Number Fields}\label{sec:kummernf}
 
 Suppose $K$ is a number field and fix a positive integer~$n$.
-Let $\mu_n$ denote the $n$th roots of unity as a group
+Let $\mu_n$ denote the $n$th roots of unity in $\Kbar$ as a group
 under multiplication. Consider the exact sequence
 $$
 	1 \to \mu_n \to \Kbar^* \xrightarrow{n} \Kbar^* \to 1
@@ -13,17 +13,18 @@ where $n$ denotes the map $a\mapsto a^n$.
 The corresponding long exact sequence from Theorem~\ref{thm:cohomology}
 is
 $$
-	1 \to \mu_n(K) \to K^* \xrightarrow{n} K^* \to \H^1(K,\mu_n) \to \H^1(K,\Kbar^*) =0,
+	1 \to \mu_n(K) \to K^* \xrightarrow{n} K^*
+	\to \H^1(K,\mu_n) \to \H^1(K,\Kbar^*) =0,
 $$
 where $\mu_n(K)$ is the $n$th roots of unity contained in $K$.
-Note $\H^1(K,\Kbar^*)=0$ by Theorem~\ref{thm:h90}.
+The last equality follows from Theorem~\ref{thm:h90}.
 
-Assume now that $K$ contains the group $\mu_n$ of $n$th roots of unity. Using Galois cohomology we obtain a relatively
-simple classification of all abelian extensions of~$K$ with
-cyclic Galois group of order dividing~$n$. Moreover, since the
-action of $\Gal(\Kbar/K)$ on $\mu_n$ is trivial, by our hypothesis
-that $\mu_n\subset K$, we see that
-%TODO add reference
+Assume now that the group $\mu_n$ is contained in $K$.
+Using Galois cohomology we obtain a relatively simple classification
+of all abelian extensions of~$K$ with cyclic Galois group of order
+dividing~$n$. Moreover, since the action of $\Gal(\Kbar/K)$ on
+$\mu_n$ is trivial, by our hypothesis that $\mu_n\subset K$,
+Exercise~\ref{ex:H1hom} implies
 $$
 	\H^1(K,\mu_n) = \Hom(\Gal(\Kbar/K),\mu_n).
 $$
@@ -37,113 +38,135 @@ $$
 $$
 By Galois theory, homomorphisms $\Gal(\Kbar/K)\to \mu_n$ (up to
 automorphisms of $\mu_n$) correspond to cyclic abelian extensions
-of~$K$ with Galois group a subgroup of the cyclic group $\mu_n$ of
-order~$n$.  Unwinding the definitions, what this says is that every
+of~$K$ with Galois group a subgroup of the cyclic group $\mu_n$.
+Unwinding the definitions, this says that every
 cyclic abelian extension of $K$ of degree dividing~$n$ is of the form
 $K(a^{1/n})$ for some element $a\in K$.
 
-One can prove via calculations with discriminants, etc. that
-$K(a^{1/n})$ is unramified outside $n$ and and the primes that divide
+One can prove via calculations that $K(a^{1/n})$ is unramified
+outside $n$ and the primes that divide
 $\Norm(a)$.  Moreover, and this is a much bigger result, one can
 combine this with facts about class groups and unit groups to prove
 the following theorem:
 \begin{theorem}\label{thm:maxunramfin}
-	Suppose $K$ is a number field with $\mu_n\subset K$, where $n$ is a
-	positive integer.  Then the maximal abelian exponent~$n$ extension $L$
-	of~$K$ unramified outside a finite set~$S$ of primes is of finite
-	degree.
+	Suppose $K$ is a number field with $\mu_n\subset K$, where $n$
+	is a positive integer. Let $L$ be the maximal extension of $K$
+	such that
+	\begin{enumerate}
+		\item[(i)] $\Gal(L/K)$ is abelian,
+		\item[(ii)] $n\cdot \Gal(L/K) = 0$, and
+		\item[(iii)] $L$ is unramified outside a finite set~$S$ of primes.
+	\end{enumerate}
+	Then $L/K$ is of finite degree.
 \end{theorem}
 \begin{proof}[Sketch of Proof]
-	We may enlarge~$S$, because if an extension is unramified outside
-	a set larger than~$S$, then it is unramified outside~$S$.
-	
-	??????????
-	
-	???????????????????
-	
-	??????
+	Note that we may enlarge $S$ as needed. To see this,
+	choose a finite set $S' \supseteq S$ and let $L'$ the
+	maximal extension with respect to $S'$ as in the
+	statement of the theorem. Because $L$ is unramified
+	outside of $S$, it is certainly unramified outside of
+	$S'$. By maximality of $L'$ this implies $L' \subseteq L$.
+	Therefore it's sufficient to show the larger extension
+	$L'/K$ is finite.
 	
 	We first argue that we can enlarge~$S$ so that the ring
 	$$
 		\O_{K,S} =
 			\{
-			a \in K^* : \ord_\p(a\O_K) \geq 0 \text{ for all } \p\not\in S
+			a \in K^* \colon \ord_\p(a\O_K) \geq 0 \text{ for all } \p\not\in S
 			\}
 			\union\{0\}
 	$$
 	is a principal ideal domain.
-	Note that for any~$S$, the ring $\O_{K,S}$ is a Dedekind domain.
-	Also, the condition $ \ord_\p(a\O_K) \geq 0$
+	One can show that for any~$S$, the ring $\O_{K,S}$ is a Dedekind domain.
+	%TODO possible exercise?
+	The condition $ \ord_\p(a\O_K) \geq 0$
 	means that in the prime ideal factorization of the fractional ideal
-	$a\O_K$, we have that~$\p$ occurs to a nonnegative power.  Thus we are
-	allowing denominators at the primes in~$S$.  Since the class group of
+	$a\O_K$, we have that~$\p$ occurs to a nonnegative power. Thus we are
+	allowing denominators at the primes in~$S$. Since the class group of
 	$\O_K$ is finite, there are primes $\p_1,\ldots, \p_r$ that generate
 	the class group as a group (for example, take all primes with norm up to
-	the Minkowski bound).  Enlarge~$S$ to contain the primes $\p_i$.
-	Note that the ideal $\p_i\O_{K,S}$ is the unit ideal (we have
-	$\p_i^m=(\alpha)$ for some $m\geq 1$;  then $1/\alpha \in \O_{K,S}$,
-	so $(\p_i\O_{K,S})^m$ is the unit ideal, hence $\p_i \O_{K,S}$
-	is the unit ideal by unique factorization in the Dedekind
-	domain $\O_{K,S}$).
-	Then $\O_{K,S}$ is a principal ideal domain, since every ideal
-	of $\O_{K,S}$ is equivalent modulo a principal ideal
-	to a product of ideals $\p_i\O_{K,S}$.   Note that we have used
-	that {\em the class group of $\O_K$ is finite}.
+	the Minkowski bound). Enlarge~$S$ to contain the primes $\p_i$.
+	
+	Note that we have used \emph{the class group of $\O_K$ is finite}.
+	
+	Next we want to show $\p_i\O_{K,S}$ is the unit ideal. To see this,
+	let $m$ be the order of $\p_i$ in the class group of $\O_{K}$ so that
+	$\p_i^m = (\alpha)$ for some $\alpha\in \O_{K}$. Note the factorization
+	of $\frac{1}{\alpha}\O_{K}$ is $\p_i^{-m}$ so by construction
+	$\frac{1}{\alpha}\in\O_{K,S}.$ Since
+	$\alpha\in \left(\p_i\O_{K,S}\right)^m$ this shows $(\p_i\O_{K,S})^m$
+	is the unit ideal. It follows from the unique factorization of ideals
+	in the Dedekind domain $\O_{K,S}$ that $\p_i\O_{K,S}$ is the unit ideal.
+	
+	Now we can show $\O_{K,S}$ is a principal ideal domain. Let $\P$
+	be a prime ideal of $\O_{K,S}$. Since the $\p_i$ generate
+	the class group of $\O_K$, the restriction of $\P$ to $\O_K$ is
+	equivalent modulo a principal ideal to a product of the primes
+	$\p_i$. Therefore $\P$ is equivalent modulo a principal ideal
+	to a product of ideals of the form $\p_i\O_{K,S}$. Because we showed
+	$\p_i\O_{K,S}$ was the unit ideal, this means $\P$ is principal.
 	
 	Next enlarge $S$ so that all primes over $n\O_K$ are in~$S$.
 	Note that $\O_{K,S}$ is still a PID.  Let
 	$$
 	 K(S,n) =
 	 	\{
-	 	a \in K^*/(K^*)^n : n \mid \ord_\p(a) \text{ for all } \p\not\in S
+	 	a \in K^*/(K^*)^n \colon n \mid \ord_\p(a) \text{ for all } \p\not\in S
 	 	\}.
 	$$
 	Then a refinement of the arguments at the beginning of
 	this section show that $L$ is generated by all $n$th roots
-	of the elements of $K(S,n)$.  It thus suffices to prove
-	that $K(S,n)$ is finite.
+	of the elements of $K(S,n)$ (specifically, their representatives in $K$).
+	Thus it suffices to prove that $K(S,n)$ is finite.
 	
-	There is a natural map
+	If $a \in \O_{K,S}^*$ then $\ord_\p(a)=0$ for all $\p\notin S$.
+	So there is a natural map
 	$$
-	\phi: \O_{K,S}^* \to K(S,n).
+		\phi: \O_{K,S}^* \to K(S,n)
 	$$
+	sending $a$ to it's residue class in $K^*/(K^*)^n$.
 	Suppose $a\in K^*$ is a representative of an element in $K(S,n)$.
 	The ideal $a \O_{K,S}$ has a factorization which is a product of $n$th
 	powers, so it is an $n$th power of an ideal. Since $\O_{K,S}$ is a PID,
 	there is $b\in \O_{K,S}$ and $u\in \O_{K,S}^*$ such that
 	$$
-	   a = b^n \cdot u.
+		a = b^n \cdot u.
 	$$
-	Thus $u\in \O_{K,S}^*$ maps to $[a] \in K(S,n)$.  Thus $\phi$
+	Thus $u\in \O_{K,S}^*$ maps to $[a] \in K(S,n)$. This shows $\phi$
 	is surjective.
 	
-	Recall that we proved {\em Dirichlet's unit theorem} (see
-	Theorem~\ref{thm:units}), which asserts that the group $\O_K^*$ is a
-	finitely generated abelian group of rank $r+s-1$.  More generally, we
+	Recall {\em Dirichlet's unit theorem} (Theorem~\ref{thm:units}),
+	which asserts that the group $\O_K^*$ is a finitely generated
+	abelian group of rank $r+s-1$.  More generally, we
 	now show that $\O_{K,S}^*$ is a finitely generated abelian group of
-	rank $r+s+\#S -1$.  Once we have shown this, then since $K(S,n)$ is torsion
-	group that is a quotient of a finitely generated group, we will conclude
-	that $K(S,n)$ is finite,
-	which will prove the theorem.
-	%TODO what is this?
-	\index{$S$-unit theorem}\index{Dirichlet!$S$-unit theorem}
+	rank $r+s+\#S -1$.
+	This result with above would imply $K(S,n)$ is a torsion group
+	which is a quotient of a finitely generated group and hence finite,
+	thus proving the theorem.
 	
-	Thus it remains to prove that $\O_{K,S}^*$ has rank $r+s-1 + \#S$.
-	Let $\p_1,\ldots, \p_n$ be the primes in~$S$.
-	Define a map $\phi: \O_{K,S}^* \to \Z^n$ by
+	\index{$S$-unit theorem}\index{Dirichlet!$S$-unit theorem}
+	The fact that $\O_{K,S}^*$ has rank $r+s-1 + \#S$ is sometimes
+	referred to as the \emph{$S$-unit theorem} or the
+	\emph{Dirichlet $S$-unit theorem}. To prove this theorem,
+	let $\p_1,\ldots, \p_m$ be the primes in~$S$
+	and define a map $\phi: \O_{K,S}^* \to \Z^m$ by
 	$$
-		\phi(u) = (\ord_{\p_1}(u), \ldots, \ord_{\p_n}(u)).
+		\phi(u) = (\ord_{\p_1}(u), \ldots, \ord_{\p_m}(u)).
 	$$
 	First we show that $\Ker(\phi) = \O_K^*$.  We have that
 	$u\in \Ker(\phi)$ if and only if $u \in \O_{K,S}^*$
 	and $\ord_{\p_i}(u) = 0$ for all $i$; but the latter condition
-	implies that $u$ is a unit at each prime in $S$, so $u\in \O_K^*$.
+	implies that $u$ is a unit at each prime in $S$. But
+	$u\in \O_{K,S}^*$ implies $\ord_{\p}(u) = 0$ for all $\p\notin S$,
+	so it follows that $\ord_{\p}(u)=0$ for all primes $\p$ in $\O_K$
+	and therefore $u\in \O_K^*$.
 	Thus we have an exact sequence
 	$$
-		1 \to \O_K^* \to \O_{K,S}^* \xrightarrow{\phi} \Z^n.
+		1 \to \O_K^* \to \O_{K,S}^* \xrightarrow{\phi} \Z^m.
 	$$
 	Next we show that the image of $\phi$ has finite index
-	in $\Z^n$.  Let $h$ be the class number of $\O_K$.
+	in $\Z^m$.  Let $h$ be the class number of $\O_K$.
 	For each $i$ there exists $\alpha_i \in \O_K$
 	such that $\p_i^h = (\alpha_i)$.  But $\alpha_i \in \O_{K,S}^*$
 	since $\ord_{\p}(\alpha_i) = 0$ for all $\p\not\in S$ (by unique
@@ -151,8 +174,8 @@ the following theorem:
 	$$
 		\phi(\alpha_i) = (0,\ldots, 0, h, 0,\ldots, 0).
 	$$
-	It follows that $(h\Z)^n \subset \Im(\phi)$, so
-	the image of $\phi$ has finite index in $\Z^n$.  It follows
+	It follows that $(h\Z)^m \subset \Im(\phi)$, so
+	the image of $\phi$ has finite index in $\Z^m$.  It follows
 	that $\O_{K,S}^*$ has rank equal to $r+s-1+\#S$.
 \end{proof}
 
@@ -174,6 +197,8 @@ Then we have an exact sequence
 $$
 	0 \to E[n](K) \to E(K) \xra{n} E(K) \to \H^1(K,E[n]) \to \H^1(K,E)[n] \to 0.
 $$
+Note the last term comes from replacing the codomain of
+$\H^1(K,E[n]) \to \H^1(K,E)$ by the kernel of $\H^1(K,E) \xra{n} \H^1(K,E)$.
 From this we obtain a short exact sequence
 \begin{equation}\label{eqn:ke1}
 	0 \to E(K)/n E(K) \to \H^1(K,E[n]) \to \H^1(K,E)[n] \to 0.
@@ -181,21 +206,33 @@ From this we obtain a short exact sequence
 
 Now assume, in analogy with Section~\ref{sec:kummernf}, that
 $E[n]\subset E(K)$, i.e., all $n$-torsion points are defined over~$K$.
-Then
+Then the Galois action on $E[n]$ is trivial so by
+exercise~\ref{ex:H1hom} we have
 $$
-	\H^1(K,E[n]) = \Hom(\Gal(\Kbar/K),(\Z/n\Z)^2),
+	\H^1(K,E[n]) = \Hom(\Gal(\Kbar/K),E[n]) \cong %TODO non-canonical iso
+	\Hom(\Gal(\Kbar/K),(\Z/n\Z)^2),
 $$
 and the sequence (\ref{eqn:ke1}) induces an inclusion
 \begin{equation}\label{eqn:injmw}
 	E(K)/n E(K) \hookrightarrow \Hom(\Gal(\Kbar/K),(\Z/n\Z)^2).
 \end{equation}
+
 Explicitly, this homomorphism sends a point $P$ to the homomorphism
 defined as follows: Choose $Q \in E(\Kbar)$ such that $nQ = P$; then
-send each $\sigma \in \Gal(\Kbar/K)$ to $\sigma(Q)-Q\in E[n]\isom
-(\Z/n\Z)^2$.  Given a point $P\in E(K)$, we obtain a homomorphism
+send each $\sigma \in \Gal(\Kbar/K)$ to $\sigma(Q)-Q\in E[n]$.
+
+\begin{exercise}
+	Consider the map $E(K) \to \Hom(\Gal(\Kbar/K),E[n])$ defined above.
+	First show this map is well defined, i.e., $\sigma(Q) - Q \in E[n]$.
+	Then show it does not depend on the choice of $P$ modulo $nE(K)$
+	so it in fact descends to a homomorphism on $E(K)/nE(K)$.
+\end{exercise}
+
+Because $E[n] \isom (\Z/n\Z)^2$, %TODO non-canonical iso
+given a point $P\in E(K)$, we obtain a homomorphism
 $\vphi : \Gal(\Kbar/K) \to (\Z/n\Z)^2$, whose kernel defines an
 abelian extension~$L$ of $K$ that has exponent~$n$.
-The amazing fact is that $L$ can be ramified at most at the primes
+The amazing fact is that $L$ can be ramified only at the primes
 of bad reduction for $E$ and the primes that divide~$n$.
 Thus we can apply theorem~\ref{thm:maxunramfin} to see that there are
 only finitely many such~$L$.
@@ -212,19 +249,26 @@ only finitely many such~$L$.
 	injective uses \emph{formal groups}, whose development is outside the
 	scope of this course.\footnote{For an introduction to
 	formal groups of elliptic curves see \cite[Ch. IV]{silverman:aec}.}
-	Next, as above, $\sigma(Q)-Q \in E(K)[n]$ for
+	Next fix any $Q$ as in the statement of the theorem.
+	Above we saw $\sigma(Q)-Q \in E[n]$ for
 	all $\sigma \in \Gal(\Kbar/K)$.  Let $I_\p\subset \Gal(L/K)$ be the
-	inertia group at $\p$.  Then by definition of interia group, $I_\p$
+	inertia group at $\p$. By definition of interia group, $I_\p$
 	acts trivially on $\tilde{E}(\O_K/\p)$.  Thus for each $\sigma \in
 	I_\p$ we have
 	$$
 		\pi(\sigma(Q) - Q) = \sigma(\pi(Q)) - \pi(Q) = \pi(Q) - \pi(Q) = 0.
 	$$
 	Since $\pi$ is injective, it follows that $\sigma(Q) = Q$ for $\sigma\in I_\p$,
-	i.e., that $Q$ is fixed under all $I_\p$.  This means that the subfield
-	of~$L$ generated by the coordinates of $Q$ is unramified at $\p$.
-	Repeating this argument with all choices of~$Q$ implies that $L$
-	is unramified at~$\p$.
+	i.e., that $Q$ is fixed under all $I_\p$.
+	Repeating for all $Q$ this shows $I_\p = 1$ so $L$ is unramified
+	at $\p$.
+
+	%Note that we technically only defined $\pi$ on $E(K)[n]$ and $\sigma(Q)-Q$ may not lie in $E(K)$. However, given a finite extension $K'/K$ and prime $\p'$ lying over $\p$, $E$ the reduction map $E(K') \to \tilde{E}(\O_{K'}/{\p'})$ is still injective. So we could apply the argument to the field $K'$ given by adjoining the coordinates of $Q$ to $K$.
+	%TODO fix $\sigma(Q) - Q$  in domain of $\pi$ since it's likely not in E(K)
+	%TODO unless we make assumption that E(K) contains E[n]. OR we state
+	%TODO the fact from formal groups for all fields and say E(L) to \tilde{E}(O_L)
+	%TODO is also injective on n torsion at any prime P/p (since these
+	%TODO will also be good reduction)
 \end{proof}
 
 
@@ -262,7 +306,7 @@ only finitely many such~$L$.
 	$$
 	The kernel of the restriction map
 	$\H^1(K,E[n])\to \H^1(L,E[n])$ is finite, since it is
-	isomorphic to the finite group cohomology group
+	isomorphic to the finite cohomology group
 	$\H^1(L/K, E[n](L))$.  By the argument of the previous
 	paragraph, the image of $E(K)/nE(K)$ in $\H^1(L,E[n])$
 	under

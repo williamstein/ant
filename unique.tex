@@ -168,6 +168,32 @@ condition that they be maximal is empty.
 	is not noetherian.
 \end{exercise}
 
+\begin{exercise*}\label{ex:dedekindlocal}
+	Show that Dedekind domains are closed under
+	localization. This means the following: given
+	any non-zero prime $\p$ in $R$, the \emph{localization}
+	$R_{\p}$ of $R$ at $\p$ is the ring formed by inverting all
+	elements of $R$ not contained in $\p$. Thus $R_{\p}$ is a
+	subring of the field of fractions $K$ of $R$ which contains
+	$R$. For example, $\ZZ_{(2)}$ is the localization of $\ZZ$
+	at the prime ideal $(2)$. Note $\ZZ_{(2)}$ contains
+	$\frac{1}{3}$ but not $\frac{1}{2}$.
+	This exercise will show $R_{\p}$ is again a Dedekind domain.
+	In general, any element of $R_{\p}$ can be written as a quotient
+	$\frac{a}{b}$ for some $a\in R$ and $b\in R\setminus \p$.
+	
+	\begin{hint}
+		It is a standard fact of localizations that
+		set of prime ideals in $R_{\p}$ is in bijection with the set
+		of prime ideals of $R$ contained in $P$. Use this to show
+		$R_{\p}$ is noetherian and all prime ideals of $R_{\p}$ are maximal.
+		It remains to show $R_{\p}$ is integrally closed. Let $\alpha\in K$
+		satisfy a monic polynomial with coefficients in $R_{\p}$. By
+		clearing denominators show that $s\alpha\in R$ for some
+		$s\in R\setminus \p$.
+	\end{hint}
+\end{exercise*}
+
 \begin{proposition}\iprop{$\O_K$ is Dedekind}
 The ring of integers $\O_K$ of a number field is a Dedekind domain.
 \end{proposition}
