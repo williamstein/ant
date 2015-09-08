@@ -30,7 +30,8 @@ $$
 $$
 Thus we obtain an exact sequence
 $$
-	1 \to \mu_n \to K^* \xrightarrow{n} K^* \to \Hom(\Gal(\Kbar/K),\mu_n) \to 1,
+	1 \to \mu_n \to K^* \xrightarrow{n} K^*
+	\to \Hom(\Gal(\Kbar/K),\mu_n) \to 1,
 $$
 or equivalently, an isomorphism
 $$
@@ -44,8 +45,8 @@ cyclic abelian extension of $K$ of degree dividing~$n$ is of the form
 $K(a^{1/n})$ for some element $a\in K$.
 
 One can prove via calculations that $K(a^{1/n})$ is unramified
-outside $n$ and the primes that divide
-$\Norm(a)$.  Moreover, and this is a much bigger result, one can
+outside $n$ and the primes that divide $\Norm(a)$.
+Moreover, and this is a much bigger result, one can
 combine this with facts about class groups and unit groups to prove
 the following theorem:
 \begin{theorem}\label{thm:maxunramfin}
@@ -263,12 +264,14 @@ only finitely many such~$L$.
 	Repeating for all $Q$ this shows $I_\p = 1$ so $L$ is unramified
 	at $\p$.
 
-	%Note that we technically only defined $\pi$ on $E(K)[n]$ and $\sigma(Q)-Q$ may not lie in $E(K)$. However, given a finite extension $K'/K$ and prime $\p'$ lying over $\p$, $E$ the reduction map $E(K') \to \tilde{E}(\O_{K'}/{\p'})$ is still injective. So we could apply the argument to the field $K'$ given by adjoining the coordinates of $Q$ to $K$.
-	%TODO fix $\sigma(Q) - Q$  in domain of $\pi$ since it's likely not in E(K)
-	%TODO unless we make assumption that E(K) contains E[n]. OR we state
-	%TODO the fact from formal groups for all fields and say E(L) to \tilde{E}(O_L)
-	%TODO is also injective on n torsion at any prime P/p (since these
-	%TODO will also be good reduction)
+	%TODO weave this into the proof following Silverman or
+	%TODO reword \pi ?
+	Note that we technically only defined $\pi$ on $E(K)[n]$ and
+	$\sigma(Q)-Q$ may not lie in $E(K)$. However, given a finite
+	extension $K'/K$ and prime $\p'$ lying over $\p$, $E$ the
+	reduction map $E(K') \to \tilde{E}(\O_{K'}/{\p'})$ is still injective.
+	So we could apply the argument to the field $K'$ given by adjoining
+	the coordinates of $Q$ to $K$.
 \end{proof}
 
 

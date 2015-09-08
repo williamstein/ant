@@ -345,7 +345,6 @@ given by taking a cocycle $f : G/H \times \cdots \times G/H \to A^H$
 and precomposing with the quotient map $G\to G/H$ to
 obtain a cocycle for $G$.
 
-%TODO too easy?
 \begin{exercise}
 	Show that if $A$ is a $G$-module then
 	$A^H$ is naturally a $G/H$-module for
@@ -467,7 +466,6 @@ Multiplicative Abelian group isomorphic to C3
 	$\cores_H \circ \res_H = [\#(G/H)]$. Taking $H=1$ this
 	implies that for each $n\geq 1$ the group
 	$\H^n(G,A)$ is annihilated by $[\#G]$.
-	%TODO point?
 \end{remark}
 
 \section{Galois Cohomology}
@@ -489,7 +487,13 @@ is a finite Galois extension.
 	Let $H$ be a subgroup of $G = \Gal(K^{\sep}/K)$.
 	Show that $H$ is open if and only if $H$ is closed
 	and has finite index in $G$.
-	%TODO add hint?
+	\begin{hint}
+		If $H$ is open then it contains a basis element $N$.
+		By definition of the basis described above, $N$ is
+		finite index in $G$. What does this say about
+		the index of $H$ in $G$? What about the compliment
+		of $H$?
+	\end{hint}
 	%TODO H open then contains basis element which is finite
 	%TODO index and so compliment is finite union
 	%TODO closed and finite index, then compliment is finite union
@@ -533,12 +537,12 @@ one can show they have analogous properties, see
 \begin{remark}
 	Those familiar with algebraic geometry should
 	compare the groups $\H^n(K,A)$ with the \v{C}ech
-	cohomology groups on the etale site over $\Spec K$.
+	cohomology groups on the \'{e}tale site over $\Spec K$.
 	One can show that \v{C}ech cohomology
-	(in a fairly general setting) agrees with
-	the derived functor groups of $A\mapsto A^G$,
-	see \cite[Ch.~10]{milne:etale}. Therefore
-	$\H^n(K,A)$ do indeed define a cohomology theory.
+	agrees with the derived functor groups of
+	$A\mapsto A^G$, see \cite[Ch.~10]{milne:etale}.
+	Therefore $\H^n(K,A)$ do indeed define a cohomology
+	theory.
 \end{remark}
 
 \begin{example}
@@ -547,10 +551,9 @@ $$
 	\Qbar,
 	\quad \Qbar^*,
 	\quad \Zbar,
-	\quad\Zbar^*,
+	\quad \Zbar^*,
 	\quad E(\Qbar),
-	\quad
-	E(\Qbar)[n],
+	\quad E(\Qbar)[n],
 	\quad {\rm Tate}_{\ell}(E),
 $$
 where $E$ is an elliptic curve over~$\Q$. Can you identify the
