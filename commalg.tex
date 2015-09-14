@@ -1165,6 +1165,21 @@ The subring $\Z$ of $\Z[i]$ is not an order, because $\Z$ does not
 have finite index in $\Z[i]$.  Also the subgroup $2\Z + i\Z$ of
 $\Z[i]$ is not an order because it is not a ring.  
 
+\begin{exercise}\label{ex:orderInQuadraticExts}
+	Let $K$ be a quadratic extension of $\QQ$
+	and $R$ be any order in $\O_K$.
+	Show that $\O_K/R$ is cyclic as an abelian group
+	and that there is a bijection between orders of
+	$\O_K$ containing $R$ and divisors of $[\O_K:R]$.
+\end{exercise}
+
+\begin{remark}
+	Exercise~\ref{ex:orderInQuadraticExts} is used in
+	elliptic curve cryptography to measure the number
+	of isogenies, see \cite[\S11.2]{Koblitz2011781}
+	for an example.
+\end{remark}
+
 We define the number field $\Q(i)$ and compute its
 ring of integers.
 \begin{sagecode}
