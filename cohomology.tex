@@ -17,7 +17,7 @@ over a ring see \cite[Ch.~10]{dummit2004abstract}.
 
 \begin{definition}\label{def:groupring}
 	Let $G$ be any group. The \emph{group ring} $\Z[G]$ of $G$
-	is the free abelian group on the elements of $G$ equipped
+	is the free abelian group (equivalently the free $\Z$-module) on the elements of $G$ equipped
 	with multiplication given by the group structure on~$G$.
 	Note that $\Z[G]$ is a commutative ring if and only if~$G$ is
 	abelian.
@@ -36,16 +36,16 @@ over a ring see \cite[Ch.~10]{dummit2004abstract}.
 	Since $a^3 = 1$
 	you might think that $\Z[C_3]$ is isomorphic to the ring $\Z[\zeta_3]$
 	of integers of $\Q(\zeta_3)$, but you would be wrong, since the ring
-	of integers is isomorphic to $\Z^2$ as abelian group, but $\Z[C_3]$
+	of integers is isomorphic to $\Z^2$ as an abelian group, but $\Z[C_3]$
 	is isomorphic to $\Z^3$ as abelian group. Note that $\Q(\zeta_3)$
 	is a quadratic extension of~$\Q$.
 \end{example}
 
 \begin{exercise}
 	Is $\Z[\zeta_3]$ isomorphic to the group ring of some group?
-	
-	Hint: Note that the rank of the group ring as an
-	abelian group is equal to the size of the group.
+
+	Hint: Note that the rank of the group ring as a
+	$\Z$-module is equal to the size of the group.
 	If $\Z[\zeta_3]$ was a group ring then it would
 	have to be isomorphic to $\Z[C_2]$.
 \end{exercise}
@@ -80,17 +80,25 @@ over a ring see \cite[Ch.~10]{dummit2004abstract}.
 	\begin{enumerate}
 		\item[(a)] A group homomorphism $G\to \Aut(A)$.
 		\item[(b)] A map $\rho:G\times A \to A$ such that
-			$\rho(g,a+b) = \rho(g,a) + \rho(g,b)$.
+			for all $g,h\in G$ and $a,b\in A$,
+			\begin{enumerate}
+				\item[(i)]
+					$\rho(g,a+b) = \rho(g,a) + \rho(g,b)$
+				\item[(ii)]
+					$\rho(e,a) = a$ where $e$ is the identity in $G$.
+				\item[(iii)]
+					$\rho(gh,a) = \rho(g,\rho(h,a))$
+			\end{enumerate}
 		\item[(c)] A ring homomorphism $\Z[G] \to \End(A)$.
-		\item[(d)] A map $\rho:G\times A \to A$ such that
-					$\rho(g,a+b) = \rho(g,a) + \rho(g,b)$.
+		\item[(d)] A map $\rho:\Z[G]\times A \to A$ with
+			the same properties listed in (b).
 	\end{enumerate}
 \end{exercise}
 
 \begin{remark}
-	In the previous exercise, part (a) is our definition
-	of a $G$-module and parts (c) and (d) are precisely
-	the data of a $\Z[G]$-module. This shows a $G$-module
+	In Exercise~\ref{ex:equivalentdata}, part (a) is our definition
+	of a $G$-module and parts (c) and (d) are
+	the data of a $\Z[G]$-module. This shows that a $G$-module
 	in the above sense is the same as a $\Z[G]$-module
 	in the usual module sense.
 \end{remark}
@@ -115,7 +123,7 @@ over a ring see \cite[Ch.~10]{dummit2004abstract}.
 	called ``free'' functors. If you are interested in
 	free objects, see if you can come up with a natural way
 	to add structure to other objects. Could you make a set
-	into a group? How about an abelian group?
+	into a group? How about a vector space?
 \end{remark}
 
 \section{Group Cohomology}
@@ -131,9 +139,6 @@ $$
 $$
 is the subgroup of elements of $A$ that are fixed by every element
 of~$G$.
-%TODO exercise to show H^0 can also be described as
-%TODO maps from 0-copies of G with some restriction on
-%TODO the action?
 
 The \emph{first cohomology group}
 $$
@@ -155,14 +160,14 @@ There are also explicit, and increasingly complicated, definitions of
 $\H^n(G,A)$ for each $n\geq 2$ in terms of \emph{crossed homomorphisms},
 which are certain maps $G \times \cdots \times G \to A$ modulo a subgroup.
 We will not need these maps, but for more information about them
-see \cite[Ch.~IV]{cassels-frohlich}.
+see \cite[Ch.~IV.2]{cassels-frohlich}.
 
 \begin{exercise}\label{ex:H1hom}
 	Suppose $G$ acts trivially on $A$.
 	Show that $B^1(G,A)=0$ and $C^1(G,A) \cong \Hom(G,A)$.
 	In particular, this shows $\H^1(G,\Z) \cong \Hom(G,A)$.
 	Deduce that if $A = \Z$ then $\H^1(G,\Z) = 0$.
-	
+
 	Hint: For any $\sigma\in G$ we have
 	$f_a(\sigma) = \sigma(a) - a = a - a = 0$.
 	Also for any finite group $G$, show that $\Hom(G,\Z) = 0$.
@@ -203,18 +208,10 @@ Multiplicative Abelian group isomorphic to C5
 \subsection{The Main Theorem}
 
 \begin{definition}
-	If $X$ is any abelian group, then
-	$$
-		A = \Hom(\Z[G], X)
-	$$
+	If $X$ is any abelian group, then $A = \Hom(\Z[G], X)$
 	is a $G$-module. We call a module constructed in this
-	way \emph{co-induced}.
+	way \emph{coinduced}.
 \end{definition}
-%TODO co-induced or coinduced?
-%TODO can we get rid of this definition
-%TODO and put "If A = Hom(Z[G],X) for some X"
-%TODO in the theorem and have a remark about
-%TODO how such A are called co-induced?
 
 The following theorem gives three properties of group cohomology,
 which uniquely determine group cohomology.
@@ -224,7 +221,7 @@ which uniquely determine group cohomology.
 		\item
 			We have $\H^0(G,A) = A^G$.
 		\item
-			If $A$ is a co-induced $G$-module,
+			If $A$ is a coinduced $G$-module,
 			then $\H^n(G,A) = 0$ for all $n\geq 1$.
 		\item
 			If $0\to A \to B \to C \to 0$ is any exact sequence of
@@ -315,8 +312,7 @@ is $\Hom$, so
 	\H^2(G,\Z)[m] \isom \Hom(G,\Z/m\Z).
 \end{equation}
 One can prove that for any $n>0$ and any module~$A$ that the group
-$\H^n(G,A)$ has exponent dividing $\#G$ (see Remark~\ref{rmk:cores}).
-%TODO exponent?
+$\H^n(G,A)$ has order dividing $\#G$ (see Remark~\ref{rmk:cores}).
 Thus (\ref{eqn:h2}) allows
 us to understand $\H^2(G,\Z)$, and this comprehension arose
 naturally from the properties in Theorem~\ref{thm:cohomology}
@@ -348,10 +344,16 @@ given by taking a cocycle $f : G/H \times \cdots \times G/H \to A^H$
 and precomposing with the quotient map $G\to G/H$ to
 obtain a cocycle for $G$.
 
-%TODO why is it important that $A^H$ is there?
+\begin{exercise}
+	Show that if $A$ is a $G$-module then
+	$A^H$ is naturally a $G/H$-module for
+	any normal subgroup $H$. Convince yourself
+	that $G/H$ does not in general naturally
+	act on all of $A$.
+\end{exercise}
 
 The following proposition will be useful when proving
-the weak Mordell-Weil theorem.
+the weak Mordell-Weil theorem (see Theorem~\ref{thm:weakMW}).
 \begin{proposition}\label{prop:infres}
 	Suppose $H$ is a normal subgroup of~$G$.
 	Then there is an exact sequence
@@ -360,15 +362,14 @@ the weak Mordell-Weil theorem.
 	$$
 \end{proposition}
 \begin{proof}
-Our proof follows \cite[pg.~117]{serre:localfields} closely.
+Our proof follows \cite[Pg.~117]{serre:localfields} closely.
 
 We see that $\res\circ \inf = 0$ since on cocycles the composition is
 defined by precomposing with $H\to G\to G/H$, which gives the trivial map.
 It remains to prove that $\inf_H$ is injective and that the image of $\inf_H$
-is the kernel of $\res_H$.
+contains the kernel of $\res_H$.
 \begin{enumerate}
-%TODO could use description environment but would bold words
-\item {\em That $\inf_H$ is injective:}
+\item {\em (That $\inf_H$ is injective):}
 	Suppose $f:G/H\to A^H$ is a cocycle whose image in $\H^1(G,A)$
 	is equivalent to~$0$ modulo coboundaries. Then there is an~$a\in A$
 	such that $f(\sigma) = \sigma a - a$, where we identify~$f$ with
@@ -379,7 +380,7 @@ is the kernel of $\res_H$.
 	by $\sigma^{-1}$). Thus $a\in A^H$, so $f$ is equivalent to~$0$ in
 	$\H^1(G/H,A^H)$.
 
-\item {\em The image of $\inf_H$ contains the kernel of $\res_H$:}
+\item {\em (The image of $\inf_H$ contains the kernel of $\res_H$):}
 	Suppose $f:G\to A$ is a cocycle whose
 	restriction to $H$ is a coboundary, i.e., there is $a\in A$ such
 	that $f(\tau) = \tau a - a$ for all $\tau \in H$.
@@ -449,9 +450,8 @@ Multiplicative Abelian group isomorphic to C3
 	$$
 		0 \to \H^n(G/H, A^H)\xra{\inf_H}  \H^n(G,A)\xra{\res_H} \H^n(H,A).
 	$$
+	For more information see \cite[Ch.~VII.6]{serre:localfields}.
 \end{remark}
-
-%TODO references?
 
 \begin{remark}\label{rmk:cores}
 	If $H$ is a not-necessarily-normal subgroup of~$G$, there are also
@@ -469,51 +469,136 @@ Multiplicative Abelian group isomorphic to C3
 
 \section{Galois Cohomology}
 
-Suppose $L/K$ is a finite Galois extension
-(i.e. normal and separable)
-of fields, and $A$ is a $\Gal(L/K)$-module.
+Suppose $L/K$ is a finite Galois extension of fields
+(recall that Galois here means is normal and separable),
+and $A$ is a $\Gal(L/K)$-module.
 Put
 $$
 	\H^n(L/K, A) = \H^n(\Gal(L/K), A).
 $$
 
-Next suppose~$A$ is a $\Gal(K^{\sep}/K)$-module
-and for any extension~$L$ of~$K$, let
+Following Section~\ref{sec:artin}, we can put a topology
+on $\Gal(K^{\sep}/K)$ by taking as a basis of the origin,
+subgroups of the form $\Gal(K^{\sep}/L)$ where $L/K$
+is a finite Galois extension.
+
+\begin{exercise}
+	Let $H$ be a subgroup of $G = \Gal(K^{\sep}/K)$.
+	Show that $H$ is open if and only if $H$ is closed
+	and has finite index in $G$.
+	\begin{hint}
+		If $H$ is open then it contains a basis element $N$.
+		By definition of the basis described above, $N$ is
+		finite index in $G$. What does this say about
+		the index of $H$ in $G$? What about the compliment
+		of $H$?
+	\end{hint}
+	%TODO H open then contains basis element which is finite
+	%TODO index and so compliment is finite union
+	%TODO closed and finite index, then compliment is finite union
+	%TODO of closed
+\end{exercise}
+
+\begin{definition}
+	Let $A$ be a $\Gal(K^{\sep}/K)$-module. We say that $A$
+	is a \emph{continuous} $\Gal(K^{\sep}/K)$-module if the map
+	$\Gal(K^{\sep}/K)\times A \to A$
+	(see Exercise~\ref{ex:equivalentdata}) is continuous when $A$
+	has the discrete topology.
+\end{definition}
+
+\begin{exercise}
+	Let $G = \Gal(K^{\sep}/K)$ and $A$ be a $G$-module.
+	Show that $A$ is a continuous $G$-module
+	if and only if the subgroup
+	$G_a = \{\sigma \in G : \sigma(a) = a\}$ is open
+	for every $a\in A$.
+\end{exercise}
+
+Now let $A$ be a continuous $\Gal(K^{\sep}/K)$-module. Let
 $$
-	A(L) = \{x \in A : \sigma(x) = x
+	A(L) = A^{\Gal(K^{\sep}/L)} = \{x \in A : \sigma(x) = x
 	\text{ for all } \sigma \in\Gal(K^{\sep}/L)\}.
 $$
-We think of $A(L)$ as the group of elements of~$A$ that are
-``defined over~$L$''.
-For each~$n\geq 0$, put
+and define
 $$
-	\H^n(L/K, A) = \H^n(\Gal(L/K), A(L)).
+	\H^n(K,A) = \varinjlim_{L/K} \H^n(L/K,A(L)),
 $$
-Also, put
-$$
- \H^n(K,A) = \varinjlim_{L/K} \H^n(L/K,A(L)),
-$$
-where $L$ varies over all finite Galois extensions of $K$.
-%(There's much hidden in that direct limit.)
+where the limit is taken over all finite Galois
+extensions $L/K$.
+
+It is not obvious that the groups $\H^n(K,A)$ are
+actually cohomology groups, i.e. they satisfy the
+conclusion of Theorem~\ref{thm:cohomology}. However
+one can show they have analogous properties, see
+\cite[Ch.~X.3]{serre:localfields} for references.
+
+\begin{remark}
+	Those familiar with algebraic geometry should
+	compare the groups $\H^n(K,A)$ with the \v{C}ech
+	cohomology groups on the \'{e}tale site over $\Spec K$.
+	One can show that \v{C}ech cohomology
+	agrees with the derived functor groups of
+	$A\mapsto A^G$, see \cite[Ch.~10]{milne:etale}.
+	Therefore $\H^n(K,A)$ do indeed define a cohomology
+	theory.
+\end{remark}
 
 \begin{example}
-The following are examples of $\Gal(\Qbar/\Q)$-modules:
+The following are examples of continuous $\Gal(\Qbar/\Q)$-modules:
 $$
-  \Qbar,\quad \Qbar^*,\quad \Zbar,\quad\Zbar^*,\quad E(\Qbar),\quad
- E(\Qbar)[n], \quad {\rm Tate}_{\ell}(E),
+	\Qbar,
+	\quad \Qbar^*,
+	\quad \Zbar,
+	\quad \Zbar^*,
+	\quad E(\Qbar),
+	\quad E(\Qbar)[n],
+	\quad {\rm Tate}_{\ell}(E),
 $$
-where $E$ is an elliptic curve over~$\Q$.
+where $E$ is an elliptic curve over~$\Q$. Can you identify the
+action for each module $A$? What about $A(L)$ for any finite
+Galois extension $L/\Q$. It is important to notice
+$\Qbar^*(L) = L^*$.
 \end{example}
 
 \begin{theorem}[Hilbert 90]\label{thm:h90}
-We have $\H^1(K,\Kbar^*) = 0$.
+	We have $\H^1(K,\Kbar^*) = 0$.
 \end{theorem}
 \begin{proof}
-See \cite{serre:localfields}.  The main input to the proof is linear
-independence of automorphism and a clever little calculation.
-%It suffices to prove for every finite Galois extension
-%$L/K$ that $\H^1(L/K,L^*) = 0$.  ... (copy from Serre.)
-%TODO should this be copied?
+	Our proof follows \cite[Pg.~150]{serre:localfields} closely.
+
+	Because $\H^1(K,\Kbar^*) = \varinjlim_{L/K} \H^1(L/K,L^*)$
+	It suffices to prove $\H^1(L/K,L^*) = 0$ for every finite
+	Galois extension $L/K$.
+	Let $G = \Gal(L/K)$ and $f$ be a $1$-cocycle so that $f:G \to L^*$
+	such that $f(\sigma\tau) = f(\sigma)\cdot\sigma(f(\tau))$. Here
+	``~$\cdot$~'' represents multiplication in $L^*$.
+	A standard fact from Galois theory is that the elements of
+	$G$ are $L$ linearly independent. Hence we can find
+	some $c\in L$ such that
+	$$
+	b = \sum_{\tau\in G} f(\tau)\cdot\tau(c) \neq 0.
+	$$
+	Now apply $\sigma$ to both sides to get
+	\begin{align*}
+		\sigma(b)
+		&=
+		\sum_{\tau\in G} \sigma(f(\tau)) \cdot \sigma\tau(c)
+		\\
+		&=
+		\sum_{\tau\in G} f(\sigma)^{-1} \cdot f(\sigma\tau)
+		\cdot \sigma\tau(c)
+		\\
+		&=
+		f(\sigma)^{-1} \cdot \sum_{\tau\in G} f(\sigma\tau)
+		\cdot (\sigma\tau)(c)
+		\\
+		&=
+		f(\sigma)^{-1}\cdot b.
+	\end{align*}
+	This shows $f$ is a coboundary. Specifically, it shows
+	$f = f_{b^{-1}}$ in the notation we used to define
+	coboundaries above.
 \end{proof}
 
 %%% Local Variables:
