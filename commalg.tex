@@ -1092,7 +1092,7 @@ x^6 - 200
 	\begin{enumerate}
 	\item Is $\alpha$ an algebraic integer?
 	\item Explicitly write down the minimal polynomial of $\alpha$
-	as an element of $\QQ[x]$.
+	as an element of $\Q[x]$.
 	\end{enumerate}
 \end{exercise}
 
@@ -1102,11 +1102,11 @@ x^6 - 200
 \subsection{Number fields, rings of integers, and orders}
 \begin{definition}[Number field]
   A \defn{number field} is a field~$K$ that contains the rational
-  numbers $\QQ$ such that the degree $[K:\Q] = \dim_\Q(K)$ is finite.
+  numbers $\Q$ such that the degree $[K:\Q] = \dim_\Q(K)$ is finite.
 \end{definition}
 
 If $K$ is a number field, then by the primitive element theorem there
-is an $\alpha \in K$ so that $K = \QQ(\alpha)$.  Let $f(x) \in \QQ[x]$
+is an $\alpha \in K$ so that $K = \Q(\alpha)$.  Let $f(x) \in \Q[x]$
 be the minimal polynomial of $\alpha$.  Fix a choice of algebraic
 closure $\Qbar$ of $\Q$.  Associated to each of the $\deg(f)$ roots
 $\alpha'\in\Qbar$ of $f$, we obtain a field embedding $K\hra \Qbar$
@@ -1171,7 +1171,7 @@ have finite index in $\Z[i]$.  Also the subgroup $2\Z + i\Z$ of
 $\Z[i]$ is not an order because it is not a ring.  
 
 \begin{exercise}\label{ex:orderInQuadraticExts}
-	Let $K$ be a quadratic extension of $\QQ$
+	Let $K$ be a quadratic extension of $\Q$
 	and $R$ be any order in $\O_K$.
 	Show that $\O_K/R$ is cyclic as an abelian group
 	and that there is a bijection between orders of
@@ -1310,10 +1310,10 @@ integral and $d\alpha\in \O_K$.  This proves that $\Q\O_K = K$.
 	number field, i.e. orders in the ring of integers of the
 	given number field.
 	\begin{enumerate}
-	\item The ring $R = \ZZ[i]$ in the number field $\QQ(i)$.
-	\item The ring $R = \ZZ[i/2]$ in the number field $\QQ(i)$.
-	\item The ring $R = \ZZ[17i]$ in the number field $\QQ(i)$.
-	\item The ring $R = \ZZ[i]$ in the number field $\QQ(\sqrt[4]{-1})$.
+	\item The ring $R = \ZZ[i]$ in the number field $\Q(i)$.
+	\item The ring $R = \ZZ[i/2]$ in the number field $\Q(i)$.
+	\item The ring $R = \ZZ[17i]$ in the number field $\Q(i)$.
+	\item The ring $R = \ZZ[i]$ in the number field $\Q(\sqrt[4]{-1})$.
 	\end{enumerate}
 \end{exercise}
 
@@ -1553,7 +1553,7 @@ finitely generated as a ring over $\Z$.  By Theorem~\ref{thm:hilbert},
 \section{Recognizing Algebraic Numbers using LLL}\label{sec:LLL}
 
 Suppose we somehow compute a decimal approximation $\alpha$
-to some rational number $\beta \in \QQ$ and from this wish
+to some rational number $\beta \in \Q$ and from this wish
 to recover $\beta$.  For concreteness, say
 $$\beta= 22/389 = 0.05655526992287917737789203084832904884318766066838046\ldots$$
 and we compute
