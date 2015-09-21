@@ -77,27 +77,32 @@ over a ring see \cite[Ch.~10]{dummit2004abstract}.
 	Show the following are equivalent sets of data.
 	Specifically, given any one of the following objects,
 	there is a natural way to construct another.
-	\begin{enumerate}
-		\item[(a)] A group homomorphism $G\to \Aut(A)$.
-		\item[(b)] A map $\rho:G\times A \to A$ such that
+	\begin{enumerate}[label=(\alph*)]
+		\item\label{itm:actionashom} A group homomorphism $G\to \Aut(A)$.
+		\item\label{itm:actionasmap}
+			A map $\rho:G\times A \to A$ such that
 			for all $g,h\in G$ and $a,b\in A$,
-			\begin{enumerate}
-				\item[(i)]
+			\begin{enumerate}[label=(\roman*)]
+				\item
 					$\rho(g,a+b) = \rho(g,a) + \rho(g,b)$
-				\item[(ii)]
+				\item
 					$\rho(e,a) = a$ where $e$ is the identity in $G$.
-				\item[(iii)]
+				\item
 					$\rho(gh,a) = \rho(g,\rho(h,a))$
 			\end{enumerate}
-		\item[(c)] A ring homomorphism $\Z[G] \to \End(A)$.
-		\item[(d)] A map $\rho:\Z[G]\times A \to A$ with
-			the same properties listed in (b).
+		\item\label{itm:actionasringhom}
+			A ring homomorphism $\Z[G] \to \End(A)$.
+		\item\label{itm:actionasringmap}
+			A map $\rho:\Z[G]\times A \to A$ with
+			the same properties listed in \ref{itm:actionasmap}.
 	\end{enumerate}
 \end{exercise}
 
 \begin{remark}
-	In Exercise~\ref{ex:equivalentdata}, part (a) is our definition
-	of a $G$-module and parts (c) and (d) are
+	In Exercise~\ref{ex:equivalentdata}, part \ref{itm:actionashom}
+	is our definition
+	of a $G$-module and parts \ref{itm:actionasringhom}
+	and \ref{itm:actionasringmap} are
 	the data of a $\Z[G]$-module. This shows that a $G$-module
 	in the above sense is the same as a $\Z[G]$-module
 	in the usual module sense.
