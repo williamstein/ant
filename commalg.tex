@@ -148,7 +148,7 @@ $$
 \begin{proof}[Proof of Proposition~\ref{prop:smith}]  The matrix $P$ will be a product of matrices that define elementary
   row operations and $Q$ will be a product corresponding to elementary
   column operations.  The elementary row and column operations over
-  $\ZZ$ are as follows:
+  $\Z$ are as follows:
 \begin{enumerate}
 \item{}{[\bf Add multiple]} Add an integer multiple of one row to another (or a multiple
 of one column to another).
@@ -1310,10 +1310,10 @@ integral and $d\alpha\in \O_K$.  This proves that $\Q\O_K = K$.
 	number field, i.e. orders in the ring of integers of the
 	given number field.
 	\begin{enumerate}
-	\item The ring $R = \ZZ[i]$ in the number field $\Q(i)$.
-	\item The ring $R = \ZZ[i/2]$ in the number field $\Q(i)$.
-	\item The ring $R = \ZZ[17i]$ in the number field $\Q(i)$.
-	\item The ring $R = \ZZ[i]$ in the number field $\Q(\sqrt[4]{-1})$.
+	\item The ring $R = \Z[i]$ in the number field $\Q(i)$.
+	\item The ring $R = \Z[i/2]$ in the number field $\Q(i)$.
+	\item The ring $R = \Z[17i]$ in the number field $\Q(i)$.
+	\item The ring $R = \Z[i]$ in the number field $\Q(\sqrt[4]{-1})$.
 	\end{enumerate}
 \end{exercise}
 
@@ -1596,7 +1596,7 @@ N(1/3 + 3^(1/4), digits=50)
 \end{sageout}
 \end{sagecode}
 Now suppose you very much want to find the (rescaled) 
-minimal polynomial $f(x) \in \ZZ[x]$
+minimal polynomial $f(x) \in \Z[x]$
 of $\beta$ just given this numerical approximation $\alpha$.
 This is of great value even without proof, since often in practice
 once you know a potential minimal polynomial you can
@@ -1780,7 +1780,7 @@ The LLL definition and algorithm has many application in
 number theory, e.g., to cracking lattice-based cryptosystems,
 to enumerating all short vectors in a lattice, to finding relations
 between decimal approximations to complex numbers, to very
-fast univariate polynomial factorization in $\ZZ[x]$ and more
+fast univariate polynomial factorization in $\Z[x]$ and more
 generally in $K[x]$ where $K$ is a number fields, and to
 computation of kernels and images of integer matrices.  LLL
 can also be used to solve the problem of recognizing algebraic
@@ -1791,13 +1791,13 @@ to some algebraic number $\beta$, and to for simplicity
 assume that $\alpha\in\R$ (the general case of $\alpha \in \C$
 is described in \cite{cohen:course_ant}). 
 We finish by explaining how to use LLL to find a polynomial 
-$f(x) \in \ZZ[x]$ such that $f(\alpha)$ is small, hence
+$f(x) \in \Z[x]$ such that $f(\alpha)$ is small, hence
 has a shot at being the minimal polynomial of $\beta$. 
 
 Given a real number decimal approximation $\alpha$, an
 integer $d$ (the degree), and an integer $K$ (a function
 of the precision to which $\alpha$ is known), the following
-steps produce a polynomial $f(x) \in \ZZ[x]$ of degree 
+steps produce a polynomial $f(x) \in \Z[x]$ of degree 
 at most $d$ such that $f(\alpha)$ is small.  
 \begin{enumerate}
 \item Form the lattice in $\R^{d+2}$ with basis the rows
@@ -1810,7 +1810,7 @@ K, \lfloor K\alpha \rfloor, \lfloor K\alpha^2 \rfloor,
 (Note this matrix is $(d+1) \times (d+2)$ so the lattice
 is not of full rank in $\R^{d+2}$, which isn't a problem,
 since the LLL definition also makes sense for less vectors.)
-\item Compute an LLL reduced basis for the $\ZZ$-span of the rows
+\item Compute an LLL reduced basis for the $\Z$-span of the rows
 of $A$, and let $B$ be the corresponding matrix. 
 Let $b_1 = (a_0, a_1, \ldots, a_{d+1})$ be the first
 row of $B$ and notice that $B$ is obtained from $A$
