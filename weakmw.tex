@@ -142,9 +142,7 @@ the following theorem:
 	abelian group of rank $r+s-1$.  More generally, we
 	now show that $\O_{K,S}^*$ is a finitely generated abelian group of
 	rank $r+s+\#S -1$.
-	This result with above would imply $K(S,n)$ is a torsion group
-	which is a quotient of a finitely generated group and hence finite,
-	thus proving the theorem.
+	Because we showed $\phi$ is surjective this would imply $K(S,n)$ is finitely generated. Since $K(S,n)$ is also a torsion group it must be finite which proves the theorem.
 	
 	\index{$S$-unit theorem}\index{Dirichlet!$S$-unit theorem}
 	The fact that $\O_{K,S}^*$ has rank $r+s-1 + \#S$ is sometimes
@@ -222,11 +220,12 @@ Explicitly, this homomorphism sends a point $P$ to the homomorphism
 defined as follows: Choose $Q \in E(\Kbar)$ such that $nQ = P$; then
 send each $\sigma \in \Gal(\Kbar/K)$ to $\sigma(Q)-Q\in E[n]$.
 
-\begin{exercise}
+\begin{exercise}\label{ex:sigmaQ-QinEn}
 	Consider the map $E(K) \to \Hom(\Gal(\Kbar/K),E[n])$ defined above.
-	First show this map is well defined, i.e., $\sigma(Q) - Q \in E[n]$.
+	First show this map is well defined, i.e., $\sigma(Q) - Q \in E[n]$
+	for every $\sigma\in \Gal(\Kbar/K)$.
 	Then show it does not depend on the choice of $P$ modulo $nE(K)$
-	so it in fact descends to a homomorphism on $E(K)/nE(K)$.
+	so it indeed descends to a homomorphism on $E(K)/nE(K)$.
 \end{exercise}
 
 Because $E[n] \isom (\Z/n\Z)^2$, %TODO non-canonical iso
@@ -239,41 +238,40 @@ Thus we can apply theorem~\ref{thm:maxunramfin} to see that there are
 only finitely many such~$L$.
 
 \begin{theorem}\label{thm:mwunram}
-	If $P\in E(K)$ is a point, then the field~$L$ obtained by adjoining to $K$
-	all coordinates of all choices of $Q=\frac{1}{n}P$ is unramified
-	outside $n$ and the primes of bad reduction for~$E$.
+	Let $P\in E(K)$ and $L$ be the field obtained by adjoining the
+	coordinates of all points $Q \in E(\Kbar)$ such that $nQ = P$.
+	Then $L/K$ is unramified outside the set of primes
+	dividing $n$ and primes of bad reduction for~$E$.
 \end{theorem}
 \begin{proof}[Sketch of Proof]
-	First one proves that if $\p \nmid n$ is a prime of good reduction
-	for~$E$, then the natural reduction map $\pi: E(K)[n] \to
-	\tilde{E}(\O_K/\p)$ is injective.  The argument that~$\pi$ is
-	injective uses \emph{formal groups}, whose development is outside the
-	scope of this course.\footnote{For an introduction to
-	formal groups of elliptic curves see \cite[Ch. IV]{silverman:aec}.}
-	Next fix any $Q$ as in the statement of the theorem.
-	Above we saw $\sigma(Q)-Q \in E[n]$ for
-	all $\sigma \in \Gal(\Kbar/K)$.  Let $I_\p\subset \Gal(L/K)$ be the
-	inertia group at $\p$. By definition of interia group, $I_\p$
-	acts trivially on $\tilde{E}(\O_K/\p)$.  Thus for each $\sigma \in
-	I_\p$ we have
+	This sketch closely follows \cite[Prop.~VIII.1.5b]{silverman:aec}.
+
+	Fix a prime $\p$ of $K$ such that $\p \nmid n$ and $E$ has good
+	reduction at $\p$. Let $\q$ be a prime of $L$ lying over $\p$.	
+	Note that $\q$ is again a prime of good reduction for~$E$
+	since we may use the same Weierstrass equation for $E$ as an
+	elliptic curve over $L$.
+
+	First one proves that for any extension $K'/K$ and any prime $\p'$ of $K'$
+	such that $\p' \nmid n$ and $\p'$ is a prime of good reduction for~$E/K'$,
+	the natural reduction map $\pi: E(K')[n] \to \tilde{E}(\O_{K'}/\p')$
+	is injective. The argument that~$\pi$ is injective uses
+	\emph{formal groups}, whose development is outside the
+	scope of this course.\footnote{For a proof using formal groups see 
+	\cite[Prop.~VII.3.1b]{silverman:aec}.}
+
+	Next, fix some $Q \in E[n]$ such that $nQ = P$.
+	From Exercise~\ref{ex:sigmaQ-QinEn} we have that $\sigma(Q)-Q\in E[n]$ for
+	all $\sigma \in \Gal(\Kbar/K)$. Let $I_\q\subset \Gal(L/K)$
+	be the inertia group for $\q/\p$. The action of $I_\q$ is trivial on 
+	$\tilde{E}(\O_L/\q)$ so for each $\sigma \in I_\q$ we have
 	$$
 		\pi(\sigma(Q) - Q) = \sigma(\pi(Q)) - \pi(Q) = \pi(Q) - \pi(Q) = 0.
 	$$
-	Since $\pi$ is injective, it follows that $\sigma(Q) = Q$ for $\sigma\in I_\p$,
-	i.e., that $Q$ is fixed under all $I_\p$.
-	Repeating for all $Q$ this shows $I_\p = 1$ so $L$ is unramified
-	at $\p$.
-
-	%TODO weave this into the proof following Silverman or
-	%TODO reword \pi ?
-	Note that we technically only defined $\pi$ on $E(K)[n]$ and
-	$\sigma(Q)-Q$ may not lie in $E(K)$. However, given a finite
-	extension $K'/K$ and prime $\p'$ lying over $\p$, $E$ the
-	reduction map $E(K') \to \tilde{E}(\O_{K'}/{\p'})$ is still injective.
-	So we could apply the argument to the field $K'$ given by adjoining
-	the coordinates of $Q$ to $K$.
+	Since $\pi$ is injective, it follows that $\sigma(Q) = Q$ for $\sigma\in I_\q$,
+	i.e., that $Q$ is fixed under $I_\q$. Repeating this argument for
+	each $Q$ implies $I_\q$ is trivial and hence $\q/\p$ is unramified.
 \end{proof}
-
 
 \begin{theorem}[Weak Mordell-Weil]\label{thm:weakMW}
 	Let $E$ be an elliptic curve over a number field~$K$, and
