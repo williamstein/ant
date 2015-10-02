@@ -77,27 +77,32 @@ over a ring see \cite[Ch.~10]{dummit2004abstract}.
 	Show the following are equivalent sets of data.
 	Specifically, given any one of the following objects,
 	there is a natural way to construct another.
-	\begin{enumerate}
-		\item[(a)] A group homomorphism $G\to \Aut(A)$.
-		\item[(b)] A map $\rho:G\times A \to A$ such that
+	\begin{enumerate}[label=(\alph*)]
+		\item\label{itm:actionashom} A group homomorphism $G\to \Aut(A)$.
+		\item\label{itm:actionasmap}
+			A map $\rho:G\times A \to A$ such that
 			for all $g,h\in G$ and $a,b\in A$,
-			\begin{enumerate}
-				\item[(i)]
+			\begin{enumerate}[label=(\roman*)]
+				\item
 					$\rho(g,a+b) = \rho(g,a) + \rho(g,b)$
-				\item[(ii)]
+				\item
 					$\rho(e,a) = a$ where $e$ is the identity in $G$.
-				\item[(iii)]
+				\item
 					$\rho(gh,a) = \rho(g,\rho(h,a))$
 			\end{enumerate}
-		\item[(c)] A ring homomorphism $\Z[G] \to \End(A)$.
-		\item[(d)] A map $\rho:\Z[G]\times A \to A$ with
-			the same properties listed in (b).
+		\item\label{itm:actionasringhom}
+			A ring homomorphism $\Z[G] \to \End(A)$.
+		\item\label{itm:actionasringmap}
+			A map $\rho:\Z[G]\times A \to A$ with
+			the same properties listed in \ref{itm:actionasmap}.
 	\end{enumerate}
 \end{exercise}
 
 \begin{remark}
-	In Exercise~\ref{ex:equivalentdata}, part (a) is our definition
-	of a $G$-module and parts (c) and (d) are
+	In Exercise~\ref{ex:equivalentdata}, part \ref{itm:actionashom}
+	is our definition
+	of a $G$-module and parts \ref{itm:actionasringhom}
+	and \ref{itm:actionasringmap} are
 	the data of a $\Z[G]$-module. This shows that a $G$-module
 	in the above sense is the same as a $\Z[G]$-module
 	in the usual module sense.
@@ -312,7 +317,7 @@ is $\Hom$, so
 	\H^2(G,\Z)[m] \isom \Hom(G,\Z/m\Z).
 \end{equation}
 One can prove that for any $n>0$ and any module~$A$ that the group
-$\H^n(G,A)$ has order dividing $\#G$ (see Remark~\ref{rmk:cores}).
+$\H^n(G,A)$ has exponent dividing $\#G$ (see Remark~\ref{rmk:cores}).
 Thus (\ref{eqn:h2}) allows
 us to understand $\H^2(G,\Z)$, and this comprehension arose
 naturally from the properties in Theorem~\ref{thm:cohomology}
@@ -347,9 +352,10 @@ obtain a cocycle for $G$.
 \begin{exercise}
 	Show that if $A$ is a $G$-module then
 	$A^H$ is naturally a $G/H$-module for
-	any normal subgroup $H$. Convince yourself
-	that $G/H$ does not in general naturally
-	act on all of $A$.
+	any normal subgroup $H$.
+	Then give an example in which $G$ acts non-trivially on $A$
+	but the only action of $G/H$ on $A$ is trivial.
+	%Z/6Z acts non-trivially on Z/4Z but the only Z/3Z action is trivial
 \end{exercise}
 
 The following proposition will be useful when proving
@@ -362,7 +368,7 @@ the weak Mordell-Weil theorem (see Theorem~\ref{thm:weakMW}).
 	$$
 \end{proposition}
 \begin{proof}
-Our proof follows \cite[Pg.~117]{serre:localfields} closely.
+Our proof follows \cite[pg.~117]{serre:localfields} closely.
 
 We see that $\res\circ \inf = 0$ since on cocycles the composition is
 defined by precomposing with $H\to G\to G/H$, which gives the trivial map.
@@ -528,9 +534,9 @@ where the limit is taken over all finite Galois
 extensions $L/K$.
 
 It is not obvious that the groups $\H^n(K,A)$ are
-actually cohomology groups, i.e. they satisfy the
+actually cohomology groups, i.e., they satisfy the
 conclusion of Theorem~\ref{thm:cohomology}. However
-one can show they have analogous properties, see
+one can show they have analogous properties; see
 \cite[Ch.~X.3]{serre:localfields} for references.
 
 \begin{remark}
@@ -557,7 +563,7 @@ $$
 $$
 where $E$ is an elliptic curve over~$\Q$. Can you identify the
 action for each module $A$? What about $A(L)$ for any finite
-Galois extension $L/\Q$. It is important to notice
+Galois extension $L/\Q$. It is important to notice that
 $\Qbar^*(L) = L^*$.
 \end{example}
 
@@ -565,7 +571,7 @@ $\Qbar^*(L) = L^*$.
 	We have $\H^1(K,\Kbar^*) = 0$.
 \end{theorem}
 \begin{proof}
-	Our proof follows \cite[Pg.~150]{serre:localfields} closely.
+	Our proof follows \cite[pg.~150]{serre:localfields} closely.
 
 	Because $\H^1(K,\Kbar^*) = \varinjlim_{L/K} \H^1(L/K,L^*)$
 	It suffices to prove $\H^1(L/K,L^*) = 0$ for every finite
