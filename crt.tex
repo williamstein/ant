@@ -434,21 +434,18 @@ of the basis for $\O_K$.
    [1, x, x^2]
 \end{verbatim}
 Thus PARI finds the lift $-(\sqrt[3]{2})^2$, and we finish by
-verifying that this lift is correct.  I couldn't figure out how to
-test for ideal membership in PARI, so here we just check that the
-prime ideal plus the element is not the unit ideal, which since the
-ideal is prime, implies membership.
+verifying that this lift is correct. The
+{\tt idealval} function returns the number of times
+a prime appears in the factorization of an ideal. We will use it
+to check that $-(\sqrt[3]{2})^2 - \sqrt[3]{2}$ is contained in
+the prime above $3$ and $-(\sqrt[3]{2})^2 - 1$ is contained in
+the prime above $5$.
 \begin{verbatim}
-   ? idealadd(k, i[1,1], -x^2 - x)
-   [3 1 2]
-   [0 1 0]
-   [0 0 1]
-   ? idealadd(k, j[1,1], -x^2-1)
-   [5 2 1]
-   [0 1 0]
-   [0 0 1]
+   ? idealval(k,-x^2 - x,i[1,1])
+   1
+   ? idealval(k,-x^2 - 1,j[1,1])
+   1
 \end{verbatim}
-
 
 
 %%% Local Variables: 
