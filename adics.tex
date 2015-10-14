@@ -248,7 +248,7 @@ If we normalize $\mu$ by putting
 $$
  \mu(\O) = 1
  $$
- we have $\mu_0 = 1$, hence $\mu_1 = q$, and in general $$\mu_n =
+ we have $\mu_0 = 1$, hence $\mu_1 = q^{-1}$, and in general $$\mu_n =
  q^{-n}.$$
  
  Conversely, without the theory of Haar measure, we could {\em define}
@@ -283,7 +283,7 @@ The normalized valuation is $v=\absspc' = \absspc^2$.  Note that
 $\absspc'{p} = 1/p^2$, or $\ord_v(p)=2$ instead of $1$.
 
 Finally suppose that $K=\Q_p(\sqrt{q})$ where $x^2-q$
-has not root mod $p$.  Then the residue class field 
+has no root mod $p$.  Then the residue class field 
 degree is $2$, and the normalized valuation must
 satisfy $\abs{\sqrt{q}} = 1/p^2$.
 \end{example}
@@ -343,8 +343,7 @@ $$
   the group of $1$-units, i.e., those units $\eps\in U$ with
   $\abs{\eps-1}<1$, so
   $$U_1 = 1 + \pi\O.$$
-  The set $U$ is the open ball about $0$ of
-  radius $1$, so is open, and because the metric is nonarchimedean $U$
+  The set $U$ is the intersection of $\O$ and the ball about $1$ of radius $1$, so is open, and because the metric is discrete $U$
   is also closed.  Likewise, $U_1$ is both open and closed.
 
   The quotient $K^*/U = \{ \pi^n \cdot U : n \in \Z\}$ is isomorphic to the additive group $\Z^+$
@@ -355,7 +354,7 @@ $$
 
 The quotient
  $U/U_1$ is isomorphic to the multiplicative group $\F^*$ of the
- nonzero elements of the residue class field, where the finite gorup
+ nonzero elements of the residue class field, where the finite group
  $\F^*$ has the discrete topology.  
 Note that $\F^*$ is cyclic
  of order $q-1$, and Hensel's lemma implies that $K^*$ contains a
