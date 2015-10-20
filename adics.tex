@@ -37,20 +37,18 @@ $$
 and $\p_v = (\pi)$ as an $\O_v$-ideal.
 \end{lemma}
 \begin{proof}
-  We may view $\O_v$ as the set of equivalence classes of Cauchy
+  Since $\absspc{}$ is discrete, we may view $\O_v$ as the set of equivalence classes of Cauchy
   sequences $(a_n)$ in $K$ such that $a_n\in \O$ for $n$ sufficiently
-  large.  For any $\eps$, given such a sequence $(a_n)$, there is $N$
+  large, and similarly $\p_v$ as the set of equivalence classes of Cauchy sequences $(a_n)$ in $K$ such that $a_n \in \p_v$ for $n$ sufficiently large, hence all a multiple of $\pi$ (we can set to $0$
+  a finite number of terms of the sequence without changing the
+  equivalence class of the sequence). For any $\eps$, given a sequence $(a_n) \in \O_v$, there is $N$
   such that for $n,m\geq N$, we have $\abs{a_n-a_m}<\eps$.  In
   particular, we can choose $N$ such that $n,m\geq N$ implies that
   $a_n\con a_m\pmod{\p}$.  Let $\vphi((a_n)) = a_N\pmod{\p}$, which is
   well-defined.  The map $\vphi$ is surjective because the constant
   sequences are in $\O_v$.  Its kernel is the set of Cauchy sequences
   whose elements are eventually all in $\p$, which is exactly $\p_v$.
-  This proves the first part of the lemma.  The second part is true
-  because any element of $\p_v$ is a sequence all of whose terms are
-  eventually in $\p$, hence all a multiple of $\pi$ (we can set to $0$
-  a finite number of terms of the sequence without changing the
-  equivalence class of the sequence).
+  This proves the first part of the lemma.  
 \end{proof}
 
 {\em Assume for the rest of this section that $K$ is complete with
@@ -401,7 +399,7 @@ only connected sets are points).
 \begin{proof}
   The proof is the same as that of
   Proposition~\ref{prop:disconnected}.  The point is that the
-  non-archimedean triangle inequality forces the complement an open
+  non-archimedean triangle inequality forces the complement of an open
   disc to be open, hence any set with at least two distinct elements
   ``falls apart'' into a disjoint union of two disjoint open subsets.
 \end{proof}
