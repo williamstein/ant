@@ -39,6 +39,11 @@ $$
      is small when $\abs{\eps}$ and $\abs{\delta}$ are
 small (for fixed $a, b$).
 \end{proof}
+\begin{exercise}\label{ex:topology1}
+Prove the previous lemma, i.e., prove that the operations sum, product, 
+and reciprocal are continuous.
+\end{exercise}
+
 
 \begin{lemma}\label{lem:absvalconv}
 Suppose two valuations $\absspc_1$ and $\absspc_2$ on the same
@@ -246,6 +251,11 @@ as giving for every prime power $p^r$ an element $a_r\in \Z/p^r\Z$
 such that if $s\leq r$ then $a_s$ is the reduction of $a_r$ modulo
 $p^s$.  The field $\Q_p$ is then the field of fractions of $\Z_p$.
 
+\begin{exercise} \label{ex:topology2}
+Prove that the field $\Q_p$ of $p$-adic numbers is uncountable.
+\end{exercise} 
+
+
 We begin with the definition of the $N$-adic numbers for any positive
 integer~$N$.  Section~\ref{sec:tenadic} is about the $N$-adics in the
 special case $N=10$; these are fun because they can be represented as
@@ -349,10 +359,29 @@ We can finally define the $N$-adic numbers.
   completion of~$\Q$ with respect to the metric $d_N$.
 \end{definition}
 The set $\Q_N$ is a ring\index{ring!of $N$-adic numbers|nn}, 
-but it need not be a field as you will show in Exercises~\ref{ex:padic4} and 
+but it need not be a field as you will show in Exercises~\ref{ex:topology3} and 
 \ref{ex:padic3}. It is a field if and only if $N$ is prime.
 Also, $\Q_N$ has a ``bizarre'' topology,
 as we will see in Section~\ref{sec:qnweird}.  
+
+\begin{exercise}\label{ex:topology3}
+Let $N>1$ be an integer.  
+\begin{enumerate}
+\item Prove that $\Q_N$ is equipped with a natural ring structure.
+\item If $N$ is prime, prove that $\Q_N$ is a field.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}\label{ex:topology4}
+\begin{enumerate}
+\item Let $p$ and $q$ be distinct primes.  Prove that 
+$\Q_{pq} \isom \Q_p \cross \Q_q$.
+\item Is $\Q_{p^2}$ isomorphic to either of $\Q_p\cross \Q_p$ or $\Q_p$?
+\end{enumerate}
+
+\end{exercise}
+
+
 
 \subsubsection{The $10$-adic Numbers}
 \label{sec:tenadic}
@@ -374,6 +403,15 @@ $$
 $$
 One can prove (see Exercise~\ref{ex:padic1}) that this series
 converges in $\Q_{10}$ to some element $\alpha\in\Q_{10}$.
+
+\begin{exercise}\label{ex:topology5}
+Let $N>1$ be an integer.  Prove that the series
+$$
+  \sum_{n=1}^{\infty} (-1)^{n+1}n! = 1! - 2! + 3! - 4! + 5! - 6! + \cdots.
+$$
+converges in $\Q_N$.
+\end{exercise}
+
 
 What is $\alpha$?  How can we write it down?  First note that for all
 $M\geq 5$, the terms of the sum are divisible by~$10$, so the difference
@@ -424,6 +462,25 @@ $x = 1$, $y=2$, and $z=\ldots60569$.   Here~$z$ is a cube
 root of $9$ in $\Z_{10}$.  Note that it takes some work to prove that there
 is a cube root of $9$ in $\Z_{10}$ (see Exercise~\ref{ex:padic2}).
 
+\begin{exercise} \label{ex:topology6}
+  Prove that $9$ has a cube root in $\Q_{10}$ using the following
+  strategy (this is a special case of Hensel's Lemma, which you can
+  read about in an appendix to Cassel's article).
+
+\begin{enumerate}
+\item Show that there is an element $\alpha\in\Z$ such that $\alpha^3\con 9\pmod{10^3}$. 
+\item Suppose $n\geq 3$. 
+Use induction to show that if $\alpha_1\in\Z$ and 
+$\alpha^3\con 9\pmod{10^n}$,  then there exists $\alpha_2\in\Z$ such 
+that $\alpha_2^3\con 9\pmod{10^{n+1}}$.
+(Hint: Show that there is an integer~$b$ such that
+$(\alpha_1 + b\cdot 10^{n})^3 \con 9\pmod{10^{n+1}}$.)
+\item Conclude that $9$ has a cube root in $\Q_{10}$.
+\end{enumerate}
+\end{exercise}
+
+
+
 \subsection{The Field of $p$-adic Numbers}\index{$p$-adic field}
 The ring $\Q_{10}$ of $10$-adic numbers is isomorphic to
 $\Q_{\hspace{.2ex}2}\cross\Q_{\hspace{.2ex}5}$ (see Exercise~\ref{ex:padic3}), so it is not a
@@ -440,6 +497,18 @@ $$
   \frac{a_{-\!d}}{p^{d}} + \cdots + \frac{a_{-1}}{p} + a_0 + a_1 p + a_2 p^2 + a_3 p^3 + \cdots
 $$
 where $0\leq a_i < p$ for each~$i$.     
+
+\begin{exercise} \label{ex:topology7}
+Compute the first~$5$ digits of the $10$-adic expansions of the following
+rational numbers:
+$$ 
+ \frac{13}{2}, \quad \frac{1}{389}, \quad \frac{17}{19}, 
+ \quad \text{ the 4 square roots of $41$}.
+$$
+\end{exercise}
+
+
+
 
 \subsection{The Topology of $\Q_N$ (is Weird)}\label{sec:qnweird}
 \begin{definition}[Connected]\label{def:connected}\index{connected|nn}
@@ -487,6 +556,13 @@ $$
 $$
 Thus the complement of $B(x,r)$ is a union of open balls.
 \end{proof}
+\begin{exercise}\label{ex:topology8}
+Prove that the polynomial $f(x)=x^3 - 3x^2 + 2x + 5$ 
+has all its roots in $\Q_5$, and find the $5$-adic valuations
+of each of these roots.  (You might need to use
+Hensel's lemma, which we don't discuss in detail
+in this book. See \cite[App.~C]{cassels:global}.)
+\end{exercise} 
 
 The lemmas imply that $\Q_N$ is \defn{totally disconnected},\index{totally disconnected} 
 \index{N@$N$-adic!totally disconnected}
@@ -686,6 +762,45 @@ We have $b_1 = 2$, $b_2 = 4/5$, $b_3 = 0$, $b_4 = -8/17$,
 $b_5 = -8/11$, $b_6 = -56/55$.  None of the $b_i$ work for $i<6$,
 but $b_6$ works.
 \end{example} 
+
+\begin{exercise}\label{ex:topology9}
+  In this problem you will compute an example of weak
+  approximation, like I did in the Example~\ref{ex:weakapprox}.  Let
+  $K=\Q$, let $\absspc_7$ be the $7$-adic absolute value, let
+  $\absspc_{11}$ be the $11$-adic absolute value, and let
+  $\absspc_{\infty}$ be the usual archimedean absolute value.  Find an
+  element $b\in \Q$ such that $\abs{b-a_i}_i<\frac{1}{10}$, where $a_7
+  = 1$, $a_{11} = 2$, and $a_{\infty} = -2004$.
+\end{exercise}
+
+\begin{exercise}\label{ex:topology10}
+Find the $3$-adic expansion to precision 4 of each root of the following polynomial over $\Q_3$:
+$$
+  f = x^3 - 3x^2 + 2x + 3 \in \Q_3[x].
+$$
+Your solution should conclude with three expressions of the form 
+$$a_0 + a_1\cdot 3 + a_2\cdot 3^2 + a_3 \cdot 3^3 + O(3^4).$$
+\end{exercise}
+
+\begin{exercise}\label{ex:topology11}
+  Prove that every finite extension of
+  $\Q_p$ ``comes from'' an extension of~$\Q$, in the following sense.
+  Given an irreducible polynomial $f\in\Q_p[x]$ there exists an
+  irreducible polynomial $g\in \Q[x]$ such that the fields
+  $\Q_p[x]/(f)$ and $\Q_p[x]/(g)$ are isomorphic.  [Hint: Choose each
+  coefficient of $g$ to be sufficiently close to the corresponding
+  coefficient of $f$, then use Hensel's lemma to show that $g$ has a
+  root in $\Q_p[x]/(f)$.]
+\end{exercise}
+
+\begin{exercise}\label{ex:topology12}
+Suppose that $K$ is a finite extension of $\Q_p$ and $L$
+is a finite extension of $\Q_q$, with $p\neq q$ and assume
+that $K$ and $L$ have the same degree.  Prove that
+there is a polynomial $g\in \Q[x]$ such that $\Q_p[x]/(g)\isom K$
+and $\Q_q[x]/(g)\isom L$.  [Hint: Combine your solution to exercise \ref{ex:topology11} with the weak approximation theorem.]
+\end{exercise}
+
 
 
 
