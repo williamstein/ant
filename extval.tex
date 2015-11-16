@@ -1,7 +1,7 @@
 \chapter{Extensions and Normalizations of Valuations}
 \section{Extensions of Valuations}
 In this section we continue to tacitly assume that all valuations are
-nontrivial.  We do not assume all our valuations satisfy the triangle
+nontrivial.  We do not assume all our valuations satisfy the triangle inequality.
 
 
 Suppose $K\subset L$ is a finite extension of fields, and that $\absspc{}$ and $\normspc{}$
@@ -90,11 +90,11 @@ $\norm{a}_0 = \abs{c}$; to see this take $c$ to be a $c_i$
 in the expression $a=\sum_{i=1}^N c_i b_i$ with $\abs{c_i}\geq \abs{c_j}$
 for any~$j$.  Hence $\norm{a/c}_0 = 1$, so $a/c\in S$ and
 $$
-0 \leq \delta \leq \frac{\norm{a/c}}{\norm{a/c}_0} \leq \Delta.
+0 \leq \delta < \frac{\norm{a/c}}{\norm{a/c}_0} \leq \Delta.
 $$
 Then by homogeneity
 $$
-0 \leq \delta \leq \frac{\norm{a}}{\norm{a}_0} \leq \Delta.
+0 \leq \delta < \frac{\norm{a}}{\norm{a}_0} \leq \Delta.
 $$
 Suppose now that $\norm{a}\leq 1$.  Then $\norm{a}_0\leq \delta^{-1}$, so 
 \begin{align*}
@@ -169,7 +169,7 @@ But now
 $$
 \Norm_{L/K}(a) = \sigma_1(a) \cdot \sigma_2(a) \cdots \sigma_N(a)
 $$
-for $a\in K$, where $\sigma_1,\ldots, \sigma_N\in \Gal(M/K)$ extend the embeddings
+for $a\in L$, where $\sigma_1,\ldots, \sigma_N\in \Gal(M/K)$ extend the embeddings
 of $L$ into $M$.
 Hence 
 \begin{align*}
@@ -189,7 +189,7 @@ $$
 for any $b_1,\ldots, b_N\in K$ not all $0$.
 \end{corollary}
 \begin{proof}
-  For $\abs{\sum_{n=1}^N b_n w_n}$ and $\max{\abs{b_n}}$ are two norms
+  For $\norm{\sum_{n=1}^N b_n w_n}$ and $\max{\abs{b_n}}$ are two norms
   on $L$ considered as a vector space over $K$.  
 
 I don't believe this
@@ -217,7 +217,7 @@ with respect to the extended valuation.
 By the proceeding corollary it has the topology of a finite-dimensional
 vector space over $K$. (The problem with the proof of the previous
 corollary is not an issue, because we can replace the extended valuation
-by an inequivalent one that satisfies the triangle inequality and
+by an equivalent one that satisfies the triangle inequality and
 induces the same topology.)
 \end{proof}
 
@@ -246,7 +246,7 @@ the product topology.
   $$
   \lambda_j : L \to K_v\tensor_K L \to L_j
   $$
-  are injections.   Hence we get an extension $\normspc_j$ of $\absspc$ to $L$ by putting 
+  are injections.   Hence we get an extension $\normspc_j$ of $\absspc$ to $L_j$ by putting 
 $$
 \norm{b}_j = \abs{\lambda_j(b)}_j^*.
 $$
@@ -308,6 +308,17 @@ $$
 in $K_v[x]$, where the $g_j$ are irreducible.  Then $L_j = K_v(b_j)$, where
 $b_j$ is a root of $g_j$.
 \end{corollary}
+
+\begin{exercise}\label{ex:extval1}
+Let $K$ be the number field $\Q(\sqrt[5]{2})$.
+\begin{enumerate}
+\item In how many ways does the $2$-adic valuation $\absspc_2$ on $\Q$
+extend to a valuation on $K$?
+\item Let $v=\absspc$ be a valuation on $K$ that extends $\absspc_2$.
+Let $K_v$ be the completion of $K$ with respect to $v$.
+What is the residue class field $\F$ of $K_v$?
+\end{enumerate}
+\end{exercise}
 
 \section{Extensions of Normalized Valuations}
 Let $K$ be a complete field with valuation $\absspc$.  
@@ -454,8 +465,8 @@ normalized valuation $\normspc_j$ on $L_j$ is $\abs{a} =
 values of both sides of (\ref{eqn:normprod}).
 \end{proof}
 
-What next?!  We'll building up to giving a new proof of finiteness of
-the class group that uses that the class group naturally has the
+What's next?!  We're building up to give a new proof of finiteness of
+the class group, which uses that the class group naturally has the
 discrete topology and is the continuous image of a compact group.
 
 
