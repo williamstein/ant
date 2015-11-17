@@ -15,14 +15,14 @@ valuations.
 \begin{lemma}\label{lem:absbig}\ilem{valuations such that $\abs{a}>1$}
 Let $a\in K$ be a nonzero element of a global field $K$.  Then
 there are only finitely many inequivalent valuations $\absspc$
-of $K$ for which 
+of $K$ for which
 $$
   \abs{a} > 1.
 $$
 \end{lemma}
 \begin{proof}
   If $K=\Q$ or $\F(t)$ then the lemma follows by Ostrowski's
-  classification of all the valuations on~$K$ (see 
+  classification of all the valuations on~$K$ (see
 Theorem~\ref{thm:ostrowski}). For example,
   when $a=\frac{n}{d}\in\Q$, with $n,d\in \Z$, then the valuations
   where we could have $\abs{a}>1$ are the archimedean one, or the
@@ -105,7 +105,7 @@ we will now see.
 \begin{theorem}[Product Formula]\label{thm:product_formula}\ithm{product formula}
 Let $a\in K$ be a nonzero element of a global field~$K$.
 Let $\absspc_v$ run through the normalized valuations
-of $K$.  Then $\abs{a}_v=1$ for almost all $v$, and 
+of $K$.  Then $\abs{a}_v=1$ for almost all $v$, and
 $$
 \prod_{\text{\rm all }v} \abs{a}_v = 1\qquad{\text{\rm (the product
     formula).}}
@@ -141,17 +141,17 @@ as claimed.
   Prove that the product formula holds for $\F(t)$ similar to the
   proof we gave in class using Ostrowski's theorem for $\Q$.  You may
   use the analogue of Ostrowski's theorem for $\F(t)$, which you had
-  on the previous homework assignment ~\ref{ex:valuations2}.  (Don't give a measure-theoretic
-  proof.)
+  on the previous homework assignment~\ref{ex:valuations2}.
+  (Don't give a measure-theoretic proof.)
 \end{exercise}
 
-If $v$ is a valuation on a field $K$, recall that 
+If $v$ is a valuation on a field $K$, recall that
 we let $K_v$ denote the completion of $K$ with respect to $v$. Also when
 $v$ is non-archimedean, let
 $$
   \O_v = \O_{K,v} = \{x \in K_v : \abs{x} \leq 1\}
 $$
-be the ring of integers of the completion. 
+be the ring of integers of the completion.
 
 \begin{definition}[Almost All]
 We say a condition holds for \defn{almost all} elements
@@ -159,12 +159,12 @@ of a set if it holds for all but finitely many elements.
 \end{definition}
 
 We will use the following lemma later (see Lemma~\ref{lem:adelext}) to
-prove that formation of the adeles of a global field 
-is compatible with base change. 
+prove that formation of the adeles of a global field
+is compatible with base change.
 \begin{lemma} \label{lem:ints_adeles}\ilem{matching integers}
 Let $\omega_1,\ldots, \omega_n$ be a basis for $L/K$,
 where $L$ is a finite separable extension of the global field
-$K$ of degree~$n$. 
+$K$ of degree~$n$.
 Then for almost all normalized non-archimedean valuations $v$ on $K$ we
 have
 \begin{equation}\label{eqn:sum_int}
@@ -174,19 +174,19 @@ have
 \end{equation}
 where $w_1,\ldots, w_g$ are the extensions of $v$
 to $L$.   Here we have identified $a\in L$ with
-its canonical image in $K_v\tensor_K L$, and the direct 
+its canonical image in $K_v\tensor_K L$, and the direct
 sum on the left is the sum taken inside the tensor
 product (so directness means that the intersections are
-trivial). 
+trivial).
 \end{lemma}
 \begin{proof}
   The proof proceeds in two steps.  First we deduce easily from
-  Lemma~\ref{lem:absbig} that for almost all $v$ the left hand side 
+  Lemma~\ref{lem:absbig} that for almost all $v$ the left hand side
 of (\ref{eqn:sum_int}) is
   contained in the right hand side.  Then we use a trick involving
   discriminants to show the opposite inclusion for all but finitely
   many primes.
-  
+
   Since $\O_v\subset \O_{w_i}$ for all $i$, the left hand side of
   (\ref{eqn:sum_int}) is contained in the right hand side if
   $\abs{\omega_i}_{w_j}\leq 1$ for $1\leq i\leq n$ and $1\leq j\leq
@@ -196,7 +196,7 @@ of (\ref{eqn:sum_int}) is
   corresponding to ``denominators'' of some $\omega_i$, and now only
   consider~$v$ such that $\omega_1,\ldots, \omega_n \in \O_{w}$ for
   all $w\mid v$.
-  
+
   For any elements $a_1,\ldots, a_n \in K_v\tensor_K L$, consider the
   discriminant
   $$
@@ -204,7 +204,7 @@ of (\ref{eqn:sum_int}) is
   $$
   where the trace is induced from the $L/K$ trace.
   Since each $\omega_i$ is in each $\O_w$, for $w\mid v$, the
-  traces $\Tr(\omega_i,\omega_j)$ lie in $\O_v$, so
+  traces $\Tr(\omega_i \omega_j)$ lie in $\O_v$, so
   $$d = D(\omega_1,\ldots, \omega_n)\in \O_v.$$
   Also note that $d\in
   K$ since each $\omega_i$ is in $L$.  Now suppose that
@@ -214,7 +214,7 @@ of (\ref{eqn:sum_int}) is
   $$
   with $a_i \in K_v$.  Then by properties of determinants for any
   $m$ with $1\leq m\leq n$, we have
-  \begin{equation}\label{eqn:discsquare} 
+  \begin{equation}\label{eqn:discsquare}
   D(\omega_1,\ldots, \omega_{m-1}, \alpha, \omega_{m+1}, \ldots, \omega_n)
     = a_m^2 D(\omega_1,\ldots, \omega_n).
   \end{equation}
@@ -306,7 +306,7 @@ The following measure will be extremely important in deducing
 topological properties of the ideles, which will be used in
 proving finiteness of class groups.  See, e.g., the
 proof of Lemma~\ref{lem:bignorm}, which is a key input
-to the proof of strong approximation (Theorem~\ref{thm:strong}).  
+to the proof of strong approximation (Theorem~\ref{thm:strong}).
 \begin{definition}[Product Measure]\label{defn:prodmeasure}
   For all $\lambda\in\Lambda$, suppose $\mu_\lambda$ is a measure on
   $X_\lambda$ with $\mu_\lambda(Y_\lambda) = 1$ when $Y_\lambda$ is
@@ -333,7 +333,7 @@ non-archimedean, let $\O_v$ denote the ring of integers of $K_v$.
   underlying topological space is the restricted topological product
   of the $K_v$ with respect to the $\O_v$, and where addition and
   multiplication are defined componentwise:
-\begin{equation}\label{eqn:adelearith} 
+\begin{equation}\label{eqn:adelearith}
 (\bx \by)_v = \bx_v \by_v \qquad
 (\bx + \by)_v = \bx_v + \by_v\qquad
 \text{for }\bx, \by\in\AA_K.
@@ -343,22 +343,22 @@ It is readily verified that (i) this definition makes sense, i.e., if
 $\bx, \by\in \AA_K$, then $\bx\by$ and $\bx+\by$, whose components are
 given by (\ref{eqn:adelearith}), are also in $\AA_K$, and (ii) that
 addition and multiplication are continuous in the $\AA_K$-topology, so
-$\AA_K$ is a topological ring, as asserted.  
+$\AA_K$ is a topological ring, as asserted.
 Also,
 Lemma~\ref{lem:res_compact} implies that $\AA_K$ is locally compact
 because the $K_v$ are locally compact
-(Corollary~\ref{cor:locally_compact}), and the $\O_v$ are 
+(Corollary~\ref{cor:locally_compact}), and the $\O_v$ are
 compact (Theorem~\ref{thm:compact}).
 
 There is a natural continuous ring inclusion
-\begin{equation}\label{eqn:princ_inc} 
+\begin{equation}\label{eqn:princ_inc}
 K\hra \AA_K
 \end{equation}
 that sends $x\in K$ to the adele every one of whose components is $x$.
 This is an adele because $x\in \O_v$ for almost all $v$, by
 Lemma~\ref{lem:absbig}.  The map is injective because each map $K\to
 K_v$ is an inclusion.
- 
+
 \begin{definition}[Principal Adeles]
   The image of (\ref{eqn:princ_inc}) is the ring of \defn{principal
     adeles}.
@@ -413,9 +413,9 @@ product of the $L_{w_1} \oplus \cdots \oplus L_{w_g}$
 with respect to the $\O_{w_1} \oplus \cdots \oplus \O_{w_g}$.
 But this is canonically isomorphic to the restricted product
 of all completions $L_w$ with respect to $\O_w$, which
-is the right hand side of (\ref{eqn:baseext}).  This 
+is the right hand side of (\ref{eqn:baseext}).  This
 establishes an isomorphism between the two sides of (\ref{eqn:baseext})
-as topological spaces.  The map is also a ring homomorphism, so 
+as topological spaces.  The map is also a ring homomorphism, so
 the two sides are algebraically isomorphic, as claimed.
 \end{proof}
 
@@ -423,8 +423,8 @@ the two sides are algebraically isomorphic, as claimed.
 Let $\AA_K^+$ denote the topological group obtained from the
 additive structure on $\AA_K$.  Suppose $L$ is a finite seperable
 extension of $K$.
- Then 
-$$ 
+ Then
+$$
   \AA_L^+ = \AA_K^+ \oplus \cdots \oplus \AA_K^+,
 \qquad ([L:K] \text{ summands}).
 $$
@@ -438,20 +438,20 @@ of $\AA_L^+$ is isomorphic as a topological group to $\AA_K^+$
 (the isomorphism is multiplication by $1/\omega$).  By
 Lemma~\ref{lem:adelext}, we have isomorphisms
 $$
-\AA_L^+ = \AA_K^+ \tensor_K L 
+\AA_L^+ = \AA_K^+ \tensor_K L
    \isom \omega_1\cdot \AA_K^+ \oplus \cdots \oplus \omega_n \cdot \AA_K^+
-   \isom \AA_K^+ \oplus \cdots \oplus \AA_K^+. 
+   \isom \AA_K^+ \oplus \cdots \oplus \AA_K^+.
 $$
 If $a \in L$, write $a=\sum b_i \omega_i$, with $b_i \in K$.
-Then $a$ maps via the above map to 
+Then $a$ maps via the above map to
 $$x = (\omega_1\cdot \{b_1\},\ldots, \omega_n \cdot \{b_n\}),$$
 where $\{b_i\}$ denotes the principal adele defined by $b_i$.
 Under the final map, $x$ maps to the tuple
-$$(b_1,\ldots, b_n) \in K\oplus \cdots \oplus K \subset 
+$$(b_1,\ldots, b_n) \in K\oplus \cdots \oplus K \subset
 \AA_K^+ \oplus \cdots \oplus \AA_K^+.$$
 The dimensions of $L$ and of $K\oplus \cdots \oplus K$ over
-$K$ are the same, so 
-this proves the final claim of the corollary. 
+$K$ are the same, so
+this proves the final claim of the corollary.
 \end{proof}
 
 \begin{theorem}\label{thm:adelequo}\ithm{compact quotient of adeles}
@@ -459,13 +459,13 @@ this proves the final claim of the corollary.
   $\AA_K^+/K^+$ of additive groups is compact in the quotient
   topology.
 \end{theorem}
-At this point Cassels remarks 
+At this point Cassels remarks
 \begin{quote}``It is impossible to conceive of any other uniquely
 defined topology on $K$.  This metamathematical reason is more
 persuasive than the argument that follows!''
 \end{quote}
 \begin{proof}
-Corollary~\ref{cor:addstruct}, with $K$ for $L$ and $\Q$ or 
+Corollary~\ref{cor:addstruct}, with $K$ for $L$ and $\Q$ or
 $\F(t)$ for $K$, shows that it is enough to verify
 the theorem for $\Q$ or $\F(t)$, and we shall do it
 here for $\Q$.
@@ -477,7 +477,7 @@ $\alpha\in\Q^+$, then $U+\alpha$ is an open subset of $\AA_\Q^+$
 whose intersection with $\Q^+$ is $\{\alpha\}$.)
 We take for $U$ the set of $\bx=\{x_v\}_v \in \AA_\Q^+$ with
 $$
- \abs{x_\infty}_\infty < 1 
+ \abs{x_\infty}_\infty < 1
 \qquad\text{and}\qquad \abs{x_p}_p \leq 1 \quad \text{(all $p$)},
 $$
 where $\absspc_p$ and $\absspc_\infty$ are respectively the
@@ -486,12 +486,12 @@ If $b\in \Q\cap U$, then in the first place $b\in \Z$
 because $\abs{b}_p\leq 1$ for all $p$, and then $b=0$
 because $\abs{b}_\infty<1$.  This proves that $K^+$
 is discrete in $\AA_\Q^+$.  (If we leave out one valuation,
-as we will see later (Theorem~\ref{thm:strong}), this theorem is 
+as we will see later (Theorem~\ref{thm:strong}), this theorem is
 false---what goes wrong with the proof just given?)
 
 Next we prove that the quotient $\AA_\Q^+/\Q^+$ is compact.
 Let $W\subset \AA_\Q^+$ consist of the $\bx=\{x_v\}_v\in \AA_\Q^+$
-with 
+with
 $$
   \abs{x_\infty}_\infty \leq \frac{1}{2}\qquad\text{and}\qquad
    \abs{x_p}_p \leq 1\qquad\text{for all primes $p$}.
@@ -509,30 +509,30 @@ $$
   r_p = \frac{z_p}{p^{n_p}}
 \qquad \text{with} \quad z_p \in \Z \quad \text{and} \quad n_p \in \Z_{\geq 0}
 $$
-such that 
+such that
 $$
   \abs{y_p - r_p}_p \leq 1,
 $$
-and 
+and
 $$
   r_p = 0 \qquad \text{almost all $p$}.
 $$
 More precisely, for the finitely
 many $p$ such that $$y_p = \sum_{n\geq -\abs{s}} a_np^n \not\in\Z_p,$$ choose
 $r_p$ to be a rational number that is the value of an appropriate truncation
-of the $p$-adic expansion of $y_p$, and 
+of the $p$-adic expansion of $y_p$, and
 when $y_p\in \Z_p$ just choose $r_p = 0$.
 Hence $r=\sum_{p} r_p\in\Q$ is well defined.
-The $r_q$ for $q\neq p$ do not mess up the inequality 
+The $r_q$ for $q\neq p$ do not mess up the inequality
 $\abs{y_p - r}_p \leq 1$ since the
 valuation $\absspc_p$ is non-archimedean and the $r_q$ do not have any $p$ in
 their denominator:
-$$\abs{y_p  - r}_p 
+$$\abs{y_p  - r}_p
    = \abs{y_p - r_p - \sum_{q\neq p} r_q}_p
    \leq \max\left(\abs{y_p - r_p}_p, \abs{\sum_{q\neq p} r_q}_p\right)
    \leq \max(1,1) = 1.
 $$
-Now choose $s\in\Z$ such that 
+Now choose $s\in\Z$ such that
 $$
   \abs{y_\infty - r-s} \leq \frac{1}{2}.
 $$
@@ -545,15 +545,15 @@ Hence the continuous map $W\to \AA_\Q^+/\Q^+$ induced by the quotient
 map $\AA_\Q^+ \to \AA_\Q^+/\Q^+$ is surjective.  But $W$ is compact
 (being the topological product of the compact spaces
 $\abs{x_\infty}_\infty\leq 1/2$ and the $\Z_p$ for all $p$), hence
-$\AA_\Q^+/\Q^+$ is also compact. 
+$\AA_\Q^+/\Q^+$ is also compact.
 \end{proof}
 
-\begin{exercise}\label{ex:adeles2} 
+\begin{exercise}\label{ex:adeles2}
   Prove Theorem~\ref{thm:adelequo}, that ``The global field $K$
   is discrete in $\AA_K$ and the quotient $\AA_K^+/K^+$ of additive
   groups is compact in the quotient topology.'' in the case when $K$
-  is a finite extension of $\F(t)$, where $\F$ is a finite field. 
-\end{exercise} 
+  is a finite extension of $\F(t)$, where $\F$ is a finite field.
+\end{exercise}
 
 
 \begin{corollary}\label{cor:subsetW}\icor{compact subset of adeles}
@@ -587,7 +587,7 @@ induced by the Haar measure on $\AA_K^+$.
 This statement is independent of the particular choice
 of the multiplicative constant in the Haar measure
 on $\AA_K^+$.  We do not here go into the question of
-finding the measure $\AA_K^+/K^+$ in terms of our 
+finding the measure $\AA_K^+/K^+$ in terms of our
 explicitly given Haar measure.  (See Tate's thesis,
 \cite[Chapter XV]{cassels-frohlich}.)
 \end{remark}
@@ -635,26 +635,26 @@ following discussion will help clarify what is going on.
 
 The real numbers $\R^+$ under addition is a locally compact
 topological group.  Normalized Haar measure $\mu$ has the property
-that $\mu([a,b]) = b-a$, where $a\leq b$ are real numbers and 
+that $\mu([a,b]) = b-a$, where $a\leq b$ are real numbers and
 $[a,b]$ is the closed interval from $a$ to $b$.  The subset
 $\Z^+$ of $\R^+$ is discrete, and the quotient $S^1 = \R^+/\Z^+$
 is a compact topological group, which thus
-has a Haar measure.  Let $\overline{\mu}$ be the Haar measure 
+has a Haar measure.  Let $\overline{\mu}$ be the Haar measure
 on $S^1$ normalized so that  the natural quotient $\pi:\R^+\to S^1$
 preserves the measure, in the sense that if $X\subset \R^+$
-is a measurable set that maps injectively into $S^1$, then 
+is a measurable set that maps injectively into $S^1$, then
 $\mu(X) = \overline{\mu}(\pi(X))$.  This determine
-$\overline{\mu}$ and we have $\overline{\mu}(S^1)=1$ since 
+$\overline{\mu}$ and we have $\overline{\mu}(S^1)=1$ since
 $X=[0,1)$ is a measurable set that maps bijectively onto
 $S^1$ and has measure~$1$.  The situation for the map
-$\AA_K \to \AA_K/K^+$ is pretty much the same.  
+$\AA_K \to \AA_K/K^+$ is pretty much the same.
 
 
 \begin{lemma}\label{lem:bignorm}
   There is a constant $C>0$ that depends only on the global field $K$
   with the following property:
 
-Whenever $\bx=\{x_v\}_v \in \AA_K$ is such that 
+Whenever $\bx=\{x_v\}_v \in \AA_K$ is such that
 \begin{equation}\label{eqn:bignorm}
 \prod_v \abs{x_v}_v > C,
 \end{equation}
@@ -703,7 +703,7 @@ The set $T$ of $\bt=\{t_v\}_v\in \AA_K^+$ such that
   \abs{t_v}_v &\leq \frac{1}{2}\sqrt{\abs{x_v}_v} \,\qquad\text{if $v$ is complex archimedean},\\
   \abs{t_v}_v &\leq \abs{x_v}_v \quad\,\qquad \text{if $v$ is non-archimedean}
 \end{align*}
-has measure 
+has measure
 \begin{equation}\label{eqn:tbigger}
  c_1 \cdot \prod_{v} \abs{x_v}_v > c_1 \cdot C = c_0.
 \end{equation}
@@ -711,13 +711,13 @@ has measure
 the $\abs{x_v}_v$'s in the product must be squared.)
 
 %% (Note: The reason for the square root for the complex archimedean valuations
-%% is that the normalized Haar measure on~$\C$ is the usual 
+%% is that the normalized Haar measure on~$\C$ is the usual
 %% Lebesgue measure on~$\C$, and the disc in $\C$ of radius
-%% $(m_v/2)\cdot \sqrt{\abs{x_v}_v}$ 
+%% $(m_v/2)\cdot \sqrt{\abs{x_v}_v}$
 %% has measure $(m_v\sqrt{\abs{x_v}_v})^2$ times the
 %% measure ($=\pi/4$) of the disk of radius $1/2$ in $\C$.)
 
-Because of (\ref{eqn:tbigger}), in 
+Because of (\ref{eqn:tbigger}), in
 the quotient map $\AA_K^+ \to \AA_K^+/K^+$
 there
 must be a pair of distinct points of $T$ that have
@@ -725,14 +725,14 @@ the same image in $\AA_K^+/K^+$, say
 $$
    \bt' = \{t'_v\}_v \in T\quad\text{and}\quad \bt'' = \{t''_v\}_v\in T
 $$
-and 
+and
 $$
   a = \bt' - \bt'' \in K^+
 $$
 is nonzero.
-Then 
-$$  \abs{a}_v = \abs{t'_v - t''_v}_v 
-         \leq 
+Then
+$$  \abs{a}_v = \abs{t'_v - t''_v}_v
+         \leq
 \begin{cases}
 \abs{t'_v} + \abs{t''_v} \leq 2\cdot \frac{1}{2}\abs{x_v}_v \leq \abs{x_v}_v &
     \text{if $v$ is real archimedean, or}\\
@@ -743,7 +743,7 @@ $$
 for all $v$.  In the case of complex archimedean $v$, we must be
 careful because the normalized valuation $\absspc_v$ is the {\em
   square} of the usual archimedean complex valuation $\absspc_\infty$
-on $\C$, so e.g., it does not satisfy the triangle inequality.  
+on $\C$, so e.g., it does not satisfy the triangle inequality.
 In particular, the quantity $\abs{t_v'-t''_v}_v$ is at most
 the square of the maximum distance between two points in the disc in
 $\C$ of radius $\frac{1}{2}\sqrt{\abs{x_v}_v}$, where by distance we
@@ -755,7 +755,7 @@ the lemma.
 
 \begin{corollary}\label{cor:small_a}
 Let $v_0$ be a normalized valuation and let $\delta_v>0$ be given
-for all $v\neq v_0$ with $\delta_v = 1$ for almost all $v$.  Then 
+for all $v\neq v_0$ with $\delta_v = 1$ for almost all $v$.  Then
 there is a nonzero $a\in K$ with
 $$
   \abs{a}_v \leq \delta_v\qquad\text{(all $v\neq v_0$)}.
@@ -797,7 +797,7 @@ This proof was suggested by Prof. Kneser at the Cassels-Frohlich
 conference.
 
 Recall that if $\bx =\{x_v\}_v\in \AA_{K,v_0}$ then a basis of open
-sets about $\bx$ is the collection of products 
+sets about $\bx$ is the collection of products
 $$\prod_{v\in S} B(x_v,\eps_v) \times \prod_{v\not\in S,\,\, v\neq v_0} \O_v,$$
 where $B(x_v,\eps_v)$ is an open ball in $K_v$ about $x_v$, and
 $S$ runs through finite sets of normalized valuations (not including
@@ -818,12 +818,12 @@ is of the form
   \mathbf{z} = \by + c, \qquad \by\in W, \quad c\in K.
 \end{equation}
 By Corollary~\ref{cor:small_a}, there is a nonzero $a\in K$ such
-that 
+that
 \begin{align*}
   \abs{a}_v &< \frac{1}{\delta_v}\cdot \eps\qquad \text{ for }v\in S,\\
   \abs{a}_v &\leq \frac{1}{\delta_v} \qquad\,\quad \text{ for } v\not\in S,\, v\neq v_0.
 \end{align*}
-Hence on putting $\mathbf{z} = \frac{1}{a}\cdot \bx$ 
+Hence on putting $\mathbf{z} = \frac{1}{a}\cdot \bx$
 in (\ref{eqn:wsum}) and multiplying by $a$, we see that
 every $\bx\in \AA_K$ is of the shape
 $$
@@ -831,7 +831,7 @@ $$
 $$
 where $a\cdot W$ is the set of $a\by$ for $\by\in W$.
 If now we let $\bx$ have components the given $x_v$ at $v\in S$,
-and (say) $0$ elsewhere, then $b=\bx-\bw$ has the properties required. 
+and (say) $0$ elsewhere, then $b=\bx-\bw$ has the properties required.
 \end{proof}
 
 \begin{remark}
@@ -844,7 +844,7 @@ In the next chapter we'll introduce the ideles $\AA_K^*$.  Finally,
 we'll relate ideles to ideals, and use everything so far to give a new
 interpretation of class groups and their finiteness.
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "ant"
-%%% End: 
+%%% End:
