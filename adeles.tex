@@ -137,7 +137,13 @@ $\abs{p}_q = 1$.  Thus
 $$\prod_v \abs{p}_v = p \cdot \frac{1}{p} \cdot 1 \cdot 1 \cdot 1 \cdots = 1,$$
 as claimed.
 \end{proof}
-
+\begin{exercise}\label{ex:adeles1}
+  Prove that the product formula holds for $\F(t)$ similar to the
+  proof we gave in class using Ostrowski's theorem for $\Q$.  You may
+  use the analogue of Ostrowski's theorem for $\F(t)$, which you had
+  on the previous homework assignment ~\ref{ex:valuations2}.  (Don't give a measure-theoretic
+  proof.)
+\end{exercise}
 
 If $v$ is a valuation on a field $K$, recall that 
 we let $K_v$ denote the completion of $K$ with respect to $v$. Also when
@@ -198,7 +204,7 @@ of (\ref{eqn:sum_int}) is
   $$
   where the trace is induced from the $L/K$ trace.
   Since each $\omega_i$ is in each $\O_w$, for $w\mid v$, the
-  traces lie in $\O_v$, so
+  traces $\Tr(\omega_i,\omega_j)$ lie in $\O_v$, so
   $$d = D(\omega_1,\ldots, \omega_n)\in \O_v.$$
   Also note that $d\in
   K$ since each $\omega_i$ is in $L$.  Now suppose that
@@ -213,7 +219,7 @@ of (\ref{eqn:sum_int}) is
     = a_m^2 D(\omega_1,\ldots, \omega_n).
   \end{equation}
   The left hand side of (\ref{eqn:discsquare}) is in $\O_v$, so the
-  right hand side is well, i.e.,
+  right hand side is as well, i.e.,
   $$
   a_m^2 \cdot d \in \O_v, \qquad\text{(for }m=1,\ldots, n\text{)},
   $$
@@ -259,7 +265,7 @@ to define adeles (see Definition~\ref{def:adele}).
 
 
 \begin{corollary}\label{lem:xs}\icor{topology on adeles}
-  Let $S$ be a finite subset of $\Lambda$, and let $X_S$ be the set of
+  Let $S$ be a finite subset of $\Lambda$, including at least all $\lambda$ for which $Y_\lambda$ is not defined, and let $X_S$ be the set of
   $\bx\in X$ with $x_\lambda\in Y_\lambda$ for all $\lambda\not\in S$,
   i.e.,
   $$
@@ -360,7 +366,7 @@ K_v$ is an inclusion.
 It will cause no trouble to identify $K$ with the principal adeles, so
 we shall speak of~$K$ as a subring of $\AA_K$.
 
-Formation of the adeles is compatibility with base change, in the
+Formation of the adeles is compatible with base change, in the
 following sense.
 \begin{lemma}\label{lem:adelext}\ilem{base extension of adeles}
   Suppose $L$ is a finite (separable) extension of the global field
@@ -399,12 +405,12 @@ We proved before (Theorem~\ref{thm:extensions}) that
   Lemma~\ref{lem:ints_adeles}), the above identification identifies
   (\ref{eqn:intsum}) with
 $$
- \O_{L_{w_1}} \oplus \cdots \oplus \O_{L_{w_g}},
+ \O_{w_1} \oplus \cdots \oplus \O_{w_g},
 $$
 for almost all~$v$.
 Thus the left hand side of (\ref{eqn:baseext}) is the restricted
 product of the $L_{w_1} \oplus \cdots \oplus L_{w_g}$
-with respect to the $\O_{L_{w_1}} \oplus \cdots \oplus \O_{L_{w_g}}$.
+with respect to the $\O_{w_1} \oplus \cdots \oplus \O_{w_g}$.
 But this is canonically isomorphic to the restricted product
 of all completions $L_w$ with respect to $\O_w$, which
 is the right hand side of (\ref{eqn:baseext}).  This 
@@ -528,7 +534,7 @@ $$\abs{y_p  - r}_p
 $$
 Now choose $s\in\Z$ such that 
 $$
-  \abs{b_\infty - r-s} \leq \frac{1}{2}.
+  \abs{y_\infty - r-s} \leq \frac{1}{2}.
 $$
 Then $a=r+s$ and $\bx = \by - a$ do what is required,
 since $\by - a = \by - r - s$ has the desired property
@@ -541,6 +547,14 @@ map $\AA_\Q^+ \to \AA_\Q^+/\Q^+$ is surjective.  But $W$ is compact
 $\abs{x_\infty}_\infty\leq 1/2$ and the $\Z_p$ for all $p$), hence
 $\AA_\Q^+/\Q^+$ is also compact. 
 \end{proof}
+
+\begin{exercise}\label{ex:adeles2} 
+  Prove Theorem~\ref{thm:adelequo}, that ``The global field $K$
+  is discrete in $\AA_K$ and the quotient $\AA_K^+/K^+$ of additive
+  groups is compact in the quotient topology.'' in the case when $K$
+  is a finite extension of $\F(t)$, where $\F$ is a finite field. 
+\end{exercise} 
+
 
 \begin{corollary}\label{cor:subsetW}\icor{compact subset of adeles}
 There is a subset $W$ of $\AA_K$ defined by inequalities of the
@@ -599,7 +613,7 @@ finite measure.
   multiplication by $a\in K$ takes $K^+\subset \AA_K^+$ into $K^+$, so
   gives a well-defined bijection of $\AA_K^+/K^+$ onto $\AA_K^+/K^+$
   which magnifies the measure by the factor $\prod\abs{a}_v$.  Hence
-  $\prod\abs{a}_v=1$ Corollary~\ref{cor:finitemeasure}.  (The point is
+  $\prod\abs{a}_v=1$ by Corollary~\ref{cor:finitemeasure}.  (The point is
   that if $\mu$ is the measure of $\AA_K^+/K^+$, then $\mu =
   \prod\abs{a}_v \cdot \mu$, so because $\mu$ is finite we must have
   $\prod\abs{a}_v = 1$.)

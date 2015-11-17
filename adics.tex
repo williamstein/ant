@@ -37,9 +37,9 @@ $$
 and $\p_v = (\pi)$ as an $\O_v$-ideal.
 \end{lemma}
 \begin{proof}
-  We may view $\O_v$ as the set of equivalence classes of Cauchy
+  Since we are assuming that $\abs{\cdot}$ is discrete, we may view $\O_v$ as the set of equivalence classes of Cauchy
   sequences $(a_n)$ in $K$ such that $a_n\in \O$ for $n$ sufficiently
-  large.  For any $\eps$, given such a sequence $(a_n)$, there is $N$
+  large, and similarly $\p_v$ as those such that $a_n \in \p$ for $n$ sufficiently large.  For any $\eps$, given such a sequence $(a_n)$, there is $N$
   such that for $n,m\geq N$, we have $\abs{a_n-a_m}<\eps$.  In
   particular, we can choose $N$ such that $n,m\geq N$ implies that
   $a_n\con a_m\pmod{\p}$.  Let $\vphi((a_n)) = a_N\pmod{\p}$, which is
@@ -248,7 +248,7 @@ If we normalize $\mu$ by putting
 $$
  \mu(\O) = 1
  $$
- we have $\mu_0 = 1$, hence $\mu_1 = q$, and in general $$\mu_n =
+ we have $\mu_0 = 1$, hence $\mu_1 = q^{-1}$, and in general $$\mu_n =
  q^{-n}.$$
  
  Conversely, without the theory of Haar measure, we could {\em define}
@@ -280,13 +280,14 @@ $\abs{\sqrt{p}}^2 = \abs{p} = 1/p$.  Since $\pi=\sqrt{p}$
 for $K$, this valuation is not normalized.  (Note that
 the ord of $\pi=\sqrt{p}$ is $1/2$.)
 The normalized valuation is $v=\absspc' = \absspc^2$.  Note that 
-$\absspc'{p} = 1/p^2$, or $\ord_v(p)=2$ instead of $1$.
+$\abs{p}' = 1/p^2$, or $\ord_v(p)=2$ instead of $1$.
 
 Finally suppose that $K=\Q_p(\sqrt{q})$ where $x^2-q$
-has not root mod $p$.  Then the residue class field 
+has no root mod $p$.  Then the residue class field 
 degree is $2$, and the normalized valuation must
 satisfy $\abs{\sqrt{q}} = 1/p^2$.
 \end{example}
+
 
 The following proposition makes clear why this is the best choice of
 normalization.
@@ -310,6 +311,20 @@ $$
 Here we have $\mu(\pi^n\cdot \O) = q^{-n}$ by the discussion
 before Definition~\ref{defn:normalized}.
 \end{proof}
+
+\begin{exercise}\label{ex:adics1}
+\begin{enumerate}
+\item Find the normalized Haar measure of the following subset of 
+$\Q_7^+$:
+$$
+U = B\left(28,\frac{1}{50}\right) = 
+\left\lbrace x\in \Q_7 : \abs{x-28} < \frac{1}{50}\right\rbrace.
+$$
+\item
+Find the normalized Haar measure of the subset $\Z_7^*$ of
+$\Q_7^*$.
+\end{enumerate} 
+\end{exercise} 
 
 We can express the result of the theorem in a more suggestive way.
 Let $b\in K$ with $b\neq 0$, and let $\mu$ be a Haar measure on $K^+$
@@ -343,9 +358,7 @@ $$
   the group of $1$-units, i.e., those units $\eps\in U$ with
   $\abs{\eps-1}<1$, so
   $$U_1 = 1 + \pi\O.$$
-  The set $U$ is the open ball about $0$ of
-  radius $1$, so is open, and because the metric is nonarchimedean $U$
-  is also closed.  Likewise, $U_1$ is both open and closed.
+  The set $U$ is open because of the discreteness of the metric, and $U$ is closed because $U = \O \setminus \p$ and we already proved that $\O$ is closed and $\p$ is open in this case.  Likewise, $U_1$ is both open and closed.
 
   The quotient $K^*/U = \{ \pi^n \cdot U : n \in \Z\}$ is isomorphic to the additive group $\Z^+$
 of integers with the discrete topology, where the map is 
@@ -355,7 +368,7 @@ $$
 
 The quotient
  $U/U_1$ is isomorphic to the multiplicative group $\F^*$ of the
- nonzero elements of the residue class field, where the finite gorup
+ nonzero elements of the residue class field $\F = \O/\p$, where the finite group
  $\F^*$ has the discrete topology.  
 Note that $\F^*$ is cyclic
  of order $q-1$, and Hensel's lemma implies that $K^*$ contains a
@@ -401,7 +414,7 @@ only connected sets are points).
 \begin{proof}
   The proof is the same as that of
   Proposition~\ref{prop:disconnected}.  The point is that the
-  non-archimedean triangle inequality forces the complement an open
+  non-archimedean triangle inequality forces the complement of an open
   disc to be open, hence any set with at least two distinct elements
   ``falls apart'' into a disjoint union of two disjoint open subsets.
 \end{proof}

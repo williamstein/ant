@@ -52,11 +52,18 @@ $$
 $$
 \end{definition}
 
+\begin{exercise}{ex:normed1}
+Suppose $\normspc_1$ and $\normspc_2$ are 
+equivalent norms on a finite-dimensional vector space
+$V$ over a field $K$ (with valuation $\absspc$). 
+Carefully prove that the topology induced by $\normspc_1$
+is the same as that induced by $\normspc_2$.
+\end{exercise}
+
+
 \begin{lemma}\label{lem:ext_unique}\ilem{any two norms equivalent}
 Suppose that $K$ is a field that is complete with respect to a valuation
 $\absspc{}$ and that $V$ is a finite dimensional~$K$ vector space.  
-Continue to assume, as mentioned above, that $K$ is complete
-with respect to $\absspc{}$.
 Then any two norms on $V$ are equivalent.
 \end{lemma}
 \begin{remark}
@@ -125,7 +132,7 @@ where $c_2 = 1/\delta$, which proves the theorem.
 \end{proof}
 
 
-\section{Tensor Products}
+\section{Tensor Products} \label{sec:tensor}
 We need only a special case of the tensor product construction.
 Let~$A$ and~$B$ be commutative rings containing a field~$K$ and suppose that~$B$ is of finite dimension~$N$ over~$K$, say, with basis 
 $$
@@ -165,6 +172,15 @@ $$
   C = A\tensor_K B
 $$
 since~$C$ is, in fact, a special case of the ring tensor product.
+
+\begin{exercise}\label{ex:normed2}
+Prove that the ring $C$ defined in Section~\ref{sec:tensor} really is the tensor
+product of $A$ and $B$, i.e., that it satisfies the defining universal
+mapping property for tensor products.  Part of this problem is for you
+to look up a functorial definition of tensor product.
+\end{exercise}
+
+
 
 Let us now suppose, further, that~$A$ is a topological ring, i.e., has
 a topology with respect to which addition and multiplication are
@@ -310,6 +326,29 @@ over the field~$A$, or factoring the defining polynomial of~$A$
 over~$B$.
 \end{example}
 
+\begin{exercise}\label{ex:normed3}
+Find a zero divisor pair in $\Q(\sqrt{5})\tensor_\Q\Q(\sqrt{5})$.
+\end{exercise}
+
+\begin{exercise}\label{ex:normed4}
+\begin{enumerate}
+\item Is $\Q(\sqrt{5})\tensor_\Q\Q(\sqrt{-5})$ a field?
+\item Is $\Q(\sqrt[4]{5})\tensor_\Q\Q(\sqrt[4]{-5})\tensor_\Q\Q(\sqrt{-1})$ a field?
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}\label{ex:normed5}
+  Suppose $\zeta_5$ denotes a primitive $5$th root of unity.  For
+  any prime $p$, consider the tensor product $\Q_p \tensor_\Q
+  \Q(\zeta_5) = K_1\oplus \cdots \oplus K_{n(p)}$.  Find a simple
+  formula for the number $n(p)$ of fields appearing in the
+  decomposition of the tensor product $\Q_p \tensor_\Q \Q(\zeta_5)$.
+  To get full credit on this problem your formula must be correct, but
+  you do {\em not} have to prove that it is correct.
+\end{exercise}
+
+
+
 \begin{corollary}\label{cor:fcp}\icor{tensor products and characteristic polynomials}
   Let $a\in B$ be any element and let $f(x)\in K[x]$ be the
   characteristic polynomials of $a$ over $K$ and let $g_j(x)\in A[x]$
@@ -339,6 +378,14 @@ composed of basis of the individual extensions $K_j$ of $A$.  The
   whose characteristic polynomials is one of the $g_j(X)$.  Taking
   the product gives the claimed identity (\ref{eqn:fcp}).
 \end{proof}
+
+\begin{exercise}\label{ex:normed6}
+Suppose $K$ and $L$ are number fields (i.e., finite
+extensions of $\Q$).  Is it possible for the tensor
+product $K\tensor_\Q L$ to contain a nilpotent element? 
+(A nonzero element $a$ in a ring $R$ is \defn{nilpotent} if 
+there exists $n>1$ such that $a^n=0$.)
+\end{exercise}
 
 \begin{corollary}\icor{completion, norms, and traces}
 \icor{norms, traces, and completions}
