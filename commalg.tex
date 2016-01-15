@@ -1539,11 +1539,21 @@ coefficient of $x^{\deg(f)-1}$ is $-\tr(\ell_a)$.
 	to $L$.
 \end{proof}
 
-It is important in Proposition~\ref{prop:normtracesigma} that
-the product and sum be over {\em all} the images $\sigma_i(a)$,
-not over just the distinct images.  For example, if $a=1\in L$, then
-$\Tr_{L/K}(a) = [L:K]$, whereas the sum of the distinct conjugates
-of $a$ is $1$.
+\begin{warning}
+	It is important in Proposition~\ref{prop:normtracesigma} that
+	the product and sum be over {\em all} the images $\sigma_i(a)$,
+	not over just the distinct images.  For example, if $a=1\in L$, then
+	$\Tr_{L/K}(a) = [L:K]$, whereas the sum of the distinct conjugates
+	of $a$ is $1$.
+\end{warning}
+
+\begin{remark}
+	Let $K\subset L$ be an extension of number fields.  If
+	$\alpha\in \O_L$, then the formula of
+	Proposition~\ref{prop:normtracesigma} implies that the norm and trace
+	down to~$K$ of $\alpha$ is an element of~$\O_K$, because the sum and
+	product of algebraic integers is an algebraic integer.
+\end{remark}
 
 The following corollary asserts that the norm and trace behave well in
 towers.
@@ -1575,12 +1585,6 @@ towers.
 	of~$\sigma$ to~$M$.  For the second statement, both sides are the
 	sum of the $\sigma_i(a)$.
 \end{proof}
-
-Let $K\subset L\subset M$ be as in Corollary~\ref{cor:compatower}.  If
-$\alpha\in M$, then the formula of
-Proposition~\ref{prop:normtracesigma} implies that the norm and trace
-down to~$L$ of $\alpha$ is an element of~$\O_L$, because the sum and
-product of algebraic integers is an algebraic integer.
 
 \begin{proposition}\label{prop:ok_lattice}\iprop{$\O_K$ is a lattice}
 	Let~$K$ be a number field.  The ring of integers $\O_K$ is a
