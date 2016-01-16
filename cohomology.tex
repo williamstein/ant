@@ -170,17 +170,22 @@ see \cite[Ch.~IV.2]{cassels-frohlich}.
 \begin{exercise}\label{ex:H1hom}
 	Suppose $G$ acts trivially on $A$.
 	Show that $B^1(G,A)=0$ and $C^1(G,A) \cong \Hom(G,A)$.
-	In particular, this shows $\H^1(G,\Z) \cong \Hom(G,A)$.
+	In particular, this shows $\H^1(G,A) \cong \Hom(G,A)$.
 	Deduce that if $A = \Z$ then $\H^1(G,\Z) = 0$.
+	Here $\Hom(G,A)$ represents the set of group homomorphisms
+	from $G$ to $A$. It comes with a natural group structure
+	given by $(f_1+f_2)(a) = f_1(a)+f_2(a)$.
 
-	Hint: For any $\sigma\in G$ we have
-	$f_a(\sigma) = \sigma(a) - a = a - a = 0$.
-	Also for any finite group $G$, show that $\Hom(G,\Z) = 0$.
-
-%$\sigma a - a = a -a =0$ for any $a\in A$.
-%Also, $C^1(G,A) = \Hom(G,A)$.
-%If $A=\Z$, then since $G$ is finite there are no nonzero
-%homomorphisms $G\to \Z$, so $\H^1(G,\Z)=0$.
+	\begin{hint}
+		For any $\sigma\in G$ we have
+		$f_a(\sigma) = \sigma(a) - a = a - a = 0$.
+		Also for any finite group $G$, show that $\Hom(G,\Z) = 0$.
+	\end{hint}
+% solution:
+% $\sigma a - a = a -a =0$ for any $a\in A$.
+% Also, $C^1(G,A) = \Hom(G,A)$.
+% If $A=\Z$, then since $G$ is finite there are no nonzero
+% homomorphisms $G\to \Z$, so $\H^1(G,\Z)=0$.
 \end{exercise}
 
 \begin{example}
@@ -214,9 +219,36 @@ Multiplicative Abelian group isomorphic to C5
 
 \begin{definition}
 	If $X$ is any abelian group, then $A = \Hom(\Z[G], X)$
-	is a $G$-module. We call a module constructed in this
-	way \emph{coinduced}.
+	is a $G$-module, see Exercise~\ref{excer:group-action-on-homs}.
+	We call a module constructed in this way \emph{coinduced}.
 \end{definition}
+
+\begin{exercise}\label{excer:group-action-on-homs}
+	Let $X$ be any abelian group. Show that $A = \Hom(\Z[G],X)$
+	is a $G$-module with the action induced by $(g\cdot f)(h) = f(hg)$
+	for all $g\in G$, $f\in \Hom(\Z[G],X)$, and $h\in \Z[G]$.
+\end{exercise}
+%\begin{solution}
+%	Note
+%	$$
+%		(g \cdot f)\left(\sum n_hh\right) = \sum n_hf(hg)
+%	$$
+%	It's an additive homomorphism
+%	$$
+%		g\cdot (f_1+f_2)(h) = (f_1+f_2)(hg) = f_1(hg) + f_2(hg)
+%		= (g\cdot f_1 + g\cdot f_2)(h).
+%	$$
+%	If $g$ is the identity then clearly
+%	$$
+%		g\cdot f = f.
+%	$$
+%	And it's associative
+%	$$
+%		(g_1g_2 \cdot f)(h) = f(hg_1g_2)
+%		= (g_2\cdot f)(hg_1) = (g_1\cdot (g_2\cdot f))(h)
+%	$$
+%\end{solution}
+
 
 The following theorem gives three properties of group cohomology,
 which uniquely determine group cohomology.
@@ -379,7 +411,7 @@ contains the kernel of $\res_H$.
 	Suppose $f:G/H\to A^H$ is a cocycle whose image in $\H^1(G,A)$
 	is equivalent to~$0$ modulo coboundaries. Then there is an~$a\in A$
 	such that $f(\sigma) = \sigma a - a$, where we identify~$f$ with
-	the map $G\to A$ that is constant on the costs of~$H$. But $f$
+	the map $G\to A$ that is constant on the cosets of~$H$. But $f$
 	depends only on the coset of $\sigma$ modulo~$H$, so
 	$\sigma a - a = \sigma \tau a - a$ for all $\tau \in H$, i.e.,
 	$\tau a = a$ (as we see by adding $a$ to both sides and multiplying
@@ -492,17 +524,23 @@ is a finite Galois extension.
 	Let $H$ be a subgroup of $G = \Gal(K^{\sep}/K)$.
 	Show that $H$ is open if and only if $H$ is closed
 	and has finite index in $G$.
+
 	\begin{hint}
 		If $H$ is open then it contains a basis element $N$.
 		By definition of the basis described above, $N$ is
 		finite index in $G$. What does this say about
-		the index of $H$ in $G$? What about the compliment
+		the index of $H$ in $G$? What about the complement
 		of $H$?
 	\end{hint}
-	%TODO H open then contains basis element which is finite
-	%TODO index and so compliment is finite union
-	%TODO closed and finite index, then compliment is finite union
-	%TODO of closed
+	% solution:
+	% If H open then contains basis element N which is finite
+	% index and open. Note all cosets of N are also open because
+	% multiplication by elements is homeomorphism. It follows the complement
+	% of N is finite union of open things, hence N is also closed.
+	% This also shows G/N is discrete, so H is closed and finite index.
+	%
+	% If H is closed and finite index, then do the same trick as
+	% above by considering cosets and multiplication maps.
 \end{exercise}
 
 \begin{definition}
