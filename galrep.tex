@@ -43,7 +43,7 @@ advantages to other equations for curves (e.g., Edwards coordinates --
 see work of Bernstein and Lange in \cite{bernstein2007inverted}).
 
 Using \sage we plot an elliptic curve over the finite field
-$\F_7$ and an elliptic curve curve defined over $\Q$.
+$\F_7$ and an elliptic curve defined over $\Q$.
 \begin{sagecode} %skip
 \begin{sagecell}
 E = EllipticCurve(GF(7), [1,0])
@@ -173,7 +173,7 @@ to prove the general Mordell-Weil theorem, see
 
 \begin{exercise}\label{ex:ec2torsion}
 	Let $E$ be an elliptic curve given by a
-	Weirstrass equation such as (\ref{weq}).
+	Weirstrass equation such as (\ref{weq}) with $a_1=a_3=0$.
 	Show that the points of order two are exactly
 	the points on $E$ with $y$-coordinate equal to
 	$0$.
@@ -393,7 +393,7 @@ $\rhobar_{E,n}$ would not be very interesting.
 For any positive integer~$n$, the group $E[n]$ is isomorphic as an
 abstract abelian group to $(\Z/n\Z)^2$.  There are various
 related ways to see why this is true. One is to use the Weierstrass
-$\wp$-theory to parametrize $E(\C)$ by the the complex numbers, i.e.,
+$\wp$-theory to parametrize $E(\C)$ by the complex numbers, i.e.,
 to find an isomorphism $\C/\Lambda \isom E(\C)$, where $\Lambda$ is a
 lattice in $\C$ and the isomorphism is given by $z\mapsto
 (\wp(z),\wp'(z))$ with respect to an appropriate choice of coordinates

@@ -2,13 +2,11 @@
 %% Copyright: William Stein, 2007.
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \documentclass[11pt]{book}
 
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage[all]{xy}
-%\usepackage{sagetex} %see macros about \sage
 \usepackage{sage}
 \usepackage{tikz}
 
@@ -25,6 +23,8 @@
 \title{\Huge\bf\sc Algebraic Number Theory,\\a Computational Approach}
 \author{William Stein}
 
+%\includeonly{factoring}
+
 \begin{document}
 \maketitle
 \newpage
@@ -34,11 +34,9 @@
 \include{preface}
 \include{intro}
 
-%\part{Algebraic Number Fields}
-
 \include{commalg}
 \include{unique}
-%\include{computing}
+\include{computing}
 \include{factoring}
 \include{crt}
 \include{disc}
@@ -48,24 +46,10 @@
 \include{galrep}
 \include{cohomology}
 \include{weakmw}
-\include{bsd}
-
-%\part{Adelic Viewpoint}
-%\include{valuations}
-%\include{topology}
-%\include{adics}
-%\include{normed}
-%\include{extval}
-%\include{adeles}
-%\include{ideles}
-%\include{ex1}
-%\include{ex2}
 
 \bibliography{biblio}
 \label{page:end}
 
 \newcommand{\nn}[1]{{\bf #1}}
-%\printindex
 
 \end{document}
-

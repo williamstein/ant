@@ -40,7 +40,8 @@ way to factor large prime numbers.''
 &
 \begin{minipage}{2in}
 \mbox{}\vspace{3ex}
-\includegraphics[width=1in]{gates}
+\includegraphics[width=1in]{Bill_Gates_June_2015}
+%https://commons.wikimedia.org/wiki/File:Bill_Gates_June_2015.jpg
 \end{minipage}
 \\
 \end{tabular}
@@ -95,10 +96,6 @@ the elements of $\pi^{-1}(p\Z)$ are the prime ideals of $\O_K$ that
 contain~$p$, i.e., the primes that divide $p\O_K$.
 This chapter is about how to compute the $\p_i$ and $e_i$.
 
-
-
-
-
 \begin{remark}
   More technically, in algebraic geometry one defines the inverse
   image of the point $p\Z$ to be the spectrum of the tensor product
@@ -109,7 +106,21 @@ $$
 $$
 \end{remark}
 
-
+\begin{exercise}
+  Which of the following rings have infinitely
+  many prime ideals?
+  \begin{multicols}{2}
+  \begin{enumerate}
+    \item[$\bullet$] The integers $\Z$.
+    \item[$\bullet$] The ring $\Z[x]$ of polynomials over $\Z$.
+    \item[$\bullet$] The quotient ring $\C[x]/(x^{2005}-1)$.
+    \item[$\bullet$] The ring $(\Z/6\Z)[x]$ of polynomials over the ring $\Z/6\Z$.
+    \item[$\bullet$] The quotient ring $\Z/n\Z$, for a fixed positive integer~$n$.
+    \item[$\bullet$] The rational numbers~$\Q$.
+    \item[$\bullet$] The polynomial ring $\Q[x,y,z]$ in three variables.
+  \end{enumerate}
+  \end{multicols}
+\end{exercise}
 
 \subsection{Examples}
 The following \sage session shows the commands needed to compute
@@ -598,7 +609,7 @@ of the theory behind the general algorithms for computing a
 $p$-maximal order $\O$ in $\O_K$.  The main input is the following
 theorem:
 \begin{theorem}[Pohst-Zassenhaus]
-Let $\O$ be an order in the the ring of integers $\O_K$ of a number field, let $p\in\Z$ be a prime,
+Let $\O$ be an order in the ring of integers $\O_K$ of a number field, let $p\in\Z$ be a prime,
 and let
 $$I_p = \{x \in \O : x^m \in p\O \text{ for some $m\geq 1$}\} \subset \O$$
 be the radical of $p\O$, which is an ideal of $\O$.
